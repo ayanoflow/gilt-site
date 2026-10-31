@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GILT — Финтех-агрегатор банковских услуг, РКО и займов</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: {
+                            950: '#050706',
+                            900: '#0a0e0c',
+                            800: '#121815',
+                            700: '#1c2521',
+                            600: '#28342f'
+                        },
+                        lime: {
+                            DEFAULT: '#ccff00',
+                            400: '#d9ff33',
+                            500: '#ccff00',
+                            600: '#a3d900'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { background-color: #050706; color: #e5e7eb; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        .bg-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(204, 255, 0, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(204, 255, 0, 0.03) 1px, transparent 1px); }
+        .glass-card { background: rgba(18, 24, 21, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(254, 254, 254, 0.08); }
+        .glass-card:hover { border-color: rgba(204, 255, 0, 0.35); box-shadow: 0 0 25px rgba(204, 255, 0, 0.08); }
+        .text-gradient-lime { background: linear-gradient(135deg, #ccff00 0%, #8ac700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050706; }
+        ::-webkit-scrollbar-thumb { background: #1c2521; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ccff00; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .animate-ticker { display: flex; width: 200%; animation: ticker 25s linear infinite; }
+        .animate-ticker:hover { animation-play-state: paused; }
+        input[type=range] { -webkit-appearance: none; background: #1c2521; border-radius: 8px; height: 6px; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 22px; width: 22px; border-radius: 50%; background: #ccff00; cursor: pointer; box-shadow: 0 0 12px rgba(204, 255, 0, 0.8); border: 2px solid #050706; }
+    </style>
+</head>
+<body class="bg-obsidian-950 text-gray-200 antialiased selection:bg-lime selection:text-black">
+        <!-- HEADER -->
+        <header class="sticky top-0 z-50 backdrop-blur-xl border-b border-white/5 bg-obsidian-950/85 transition-all">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-lime flex items-center justify-center font-mono font-extrabold text-black text-xl shadow-lg shadow-lime/20 group-hover:scale-105 transition-transform">G</div>
+                    <div class="flex flex-col">
+                        <span class="font-mono text-2xl font-black tracking-wider text-white flex items-center gap-1">GILT<span class="text-lime">.</span></span>
+                        <span class="text-[10px] uppercase font-mono tracking-widest text-lime/80 -mt-1">FINTECH HUB</span>
+                    </div>
+                </a>
+
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                    <a href="#showcase" class="hover:text-lime transition-colors flex items-center gap-1.5"><i class="fa-solid fa-layer-group text-xs text-lime"></i> Витрина</a>
+                    <a href="#calculator" class="hover:text-lime transition-colors flex items-center gap-1.5"><i class="fa-solid fa-calculator text-xs text-lime"></i> Калькулятор</a>
+                    <a href="#steps" class="hover:text-lime transition-colors flex items-center gap-1.5"><i class="fa-solid fa-route text-xs text-lime"></i> Этапы</a>
+                    <a href="#benefits" class="hover:text-lime transition-colors flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-xs text-lime"></i> Плюсы</a>
+                    <a href="#faq" class="hover:text-lime transition-colors flex items-center gap-1.5"><i class="fa-solid fa-circle-question text-xs text-lime"></i> FAQ</a>
+                </nav>
+
+                <div class="hidden md:flex items-center gap-4">
+                    <button onclick="openConfigModal()" class="p-2.5 rounded-xl glass-card text-gray-300 hover:text-lime transition-all text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-gear"></i> Интеграции
+                    </button>
+                    <a href="#showcase" class="px-5 py-2.5 rounded-xl bg-lime text-black font-semibold text-sm hover:bg-lime-400 transition-all shadow-lg shadow-lime/20 flex items-center gap-2">
+                        <span>Подобрать продукт</span> <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-300 hover:text-lime">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <div id="mobileMenu" class="hidden md:hidden border-b border-white/10 bg-obsidian-900/95 backdrop-blur-2xl px-4 py-6 space-y-4">
+                <a href="#showcase" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-lime"><i class="fa-solid fa-layer-group text-lime mr-2"></i> Витрина услуг</a>
+                <a href="#calculator" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-lime"><i class="fa-solid fa-calculator text-lime mr-2"></i> Калькулятор</a>
+                <a href="#steps" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-lime"><i class="fa-solid fa-route text-lime mr-2"></i> Как работает</a>
+                <a href="#benefits" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-lime"><i class="fa-solid fa-shield-halved text-lime mr-2"></i> Преимущества</a>
+                <a href="#faq" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-lime"><i class="fa-solid fa-circle-question text-lime mr-2"></i> FAQ</a>
+                <div class="pt-4 border-t border-white/10 flex flex-col gap-3">
+                    <button onclick="toggleMobileMenu(); openConfigModal();" class="w-full py-2.5 rounded-xl glass-card text-center text-sm font-semibold text-lime">
+                        <i class="fa-solid fa-gear mr-2"></i>Настройки интеграций
+        <!-- HERO SECTION -->
+        <section class="relative pt-12 pb-16 md:pt-24 md:pb-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card text-xs font-mono text-lime border border-lime/20">
+                        <span class="w-2 h-2 rounded-full bg-lime animate-pulse"></span>
+                        Умный финансовый агрегатор v2.4
+                    </div>
+                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
+                        Финтех нового поколения: <br><span class="text-gradient-lime">РКО, Кредиты & Займы</span>
+                    </h1>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Сравните предложения от более чем 50 банков и лицензированных МФО. Подайте единую онлайн-заявку с повышенным шансом одобрения.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#showcase" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-lime text-black font-bold text-base hover:bg-lime-400 transition-all shadow-xl shadow-lime/25 flex items-center justify-center gap-3">
+                            <span>Сравнить тарифы</span> <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="#calculator" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card font-semibold text-base hover:bg-white/5 transition-all text-center">
+                            Калькулятор
+                        </a>
+                    </div>
+                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-white/10 max-w-lg mx-auto lg:mx-0">
+                        <div>
+                            <div class="font-mono text-2xl sm:text-3xl font-extrabold text-white">98.4%</div>
+                            <div class="text-xs text-gray-400 mt-1">Одобрений</div>
+                        </div>
+                        <div>
+                            <div class="font-mono text-2xl sm:text-3xl font-extrabold text-lime">3 мин</div>
+                            <div class="text-xs text-gray-400 mt-1">Решение</div>
+                        </div>
+                        <div>
+                            <div class="font-mono text-2xl sm:text-3xl font-extrabold text-white">50+</div>
+                            <div class="text-xs text-gray-400 mt-1">Партнеров</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <span class="font-mono text-xs text-lime">GILT_LIVE_SCORING</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-2xl bg-obsidian-900 border border-lime/20 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-lime/10 flex items-center justify-center text-lime"><i class="fa-solid fa-briefcase"></i></div>
+                                    <div><div class="text-sm font-semibold text-white">РКО Бизнес</div><div class="text-xs text-gray-400">Альфа-Банк • 0₽/мес</div></div>
+                                </div>
+                                <span class="px-2.5 py-1 rounded bg-lime/20 text-lime font-mono text-xs font-bold">99%</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-obsidian-900 border border-white/5 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400"><i class="fa-solid fa-bolt"></i></div>
+                                    <div><div class="text-sm font-semibold text-white">Займ под 0%</div><div class="text-xs text-gray-400">Займер • до 30 000 ₽</div></div>
+                                </div>
+                                <span class="px-2.5 py-1 rounded bg-white/10 text-gray-300 font-mono text-xs">Мгновенно</span>
+                            </div>
+        <!-- TICKER -->
+        <section class="py-5 border-y border-white/5 bg-obsidian-900/50 overflow-hidden">
+            <div class="animate-ticker text-gray-400 font-mono text-sm tracking-wider uppercase font-semibold">
+                <div class="flex items-center gap-12 whitespace-nowrap pr-12">
+                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Т-Банк</span>
+                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Альфа-Банк</span>
+                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Сбербанк</span>
+                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Точка</span>
+                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>ВТБ</span>
+                    <span><i class="fa-solid fa-bolt text-lime mr-2"></i>Займер</span>
+                    <span><i class="fa-solid fa-bolt text-lime mr-2"></i>Webbankir</span>
+                </div>
+                <div class="flex items-center gap-12 whitespace-nowrap pr-12">
+                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Т-Банк</span>
+                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Альфа-Банк</span>
+                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Сбербанк</span>
+                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Точка</span>
+                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>ВТБ</span>
+                    <span><i class="fa-solid fa-bolt text-lime mr-2"></i>Займер</span>
+                    <span><i class="fa-solid fa-bolt text-lime mr-2"></i>Webbankir</span>
+                </div>
+        <!-- CALCULATOR SECTION -->
+        <section id="calculator" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-xs font-mono uppercase tracking-widest text-lime">Интерактивный расчет</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Калькулятор выгоды</h2>
+                <p class="text-gray-400 mt-4 text-base">Оцените примерный ежемесячный платеж или экономию на обслуживании бизнеса в несколько кликов</p>
+            </div>
+
+            <div class="glass-card p-6 sm:p-10 rounded-3xl max-w-4xl mx-auto border border-white/10 shadow-2xl">
+                <!-- Mode Switcher -->
+                <div class="flex p-1 bg-obsidian-900 rounded-xl border border-white/5 mb-8 max-w-md mx-auto">
+                    <button id="calcModeCredit" onclick="setCalcMode('credit')" class="flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all bg-lime text-black shadow">
+                        Кредиты & Займы
+                    </button>
+                    <button id="calcModeRko" onclick="setCalcMode('rko')" class="flex-1 py-2.5 rounded-lg text-sm font-semibold text-gray-400 hover:text-white transition-all">
+                        РКО для Бизнеса
+                    </button>
+                </div>
+
+                <div class="grid md:grid-cols-12 gap-8 items-center">
+                    <div class="md:col-span-7 space-y-6">
+                        <!-- Amount Slider -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-medium text-gray-300" id="calcAmountLabel">Сумма кредита / займа</label>
+                                <span class="font-mono text-lime font-bold text-lg" id="calcAmountValue">300 000 ₽</span>
+                            </div>
+                            <input type="range" id="calcAmount" min="5000" max="3000000" step="5000" value="300000" oninput="updateCalculator()" class="w-full">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1 font-mono">
+                                <span id="calcMinAmount">5 000 ₽</span>
+                                <span id="calcMaxAmount">3 000 000 ₽</span>
+                            </div>
+                        </div>
+
+                        <!-- Term Slider -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-medium text-gray-300" id="calcTermLabel">Срок погашения</label>
+                                <span class="font-mono text-lime font-bold text-lg" id="calcTermValue">12 мес.</span>
+                            </div>
+                            <input type="range" id="calcTerm" min="1" max="60" step="1" value="12" oninput="updateCalculator()" class="w-full">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1 font-mono">
+                                <span id="calcMinTerm">1 мес.</span>
+                                <span id="calcMaxTerm">60 мес.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-5">
+                        <div class="p-6 rounded-2xl bg-obsidian-900 border border-lime/20 text-center space-y-4 shadow-xl">
+                            <div class="text-xs uppercase tracking-wider font-mono text-gray-400" id="calcResultTitle">Примерный платеж / мес</div>
+                            <div class="text-3xl sm:text-4xl font-extrabold font-mono text-lime" id="calcMonthlyResult">27 500 ₽</div>
+                            
+                            <div class="pt-4 border-t border-white/10 space-y-2 text-xs text-gray-400 text-left">
+                                <div class="flex justify-between">
+                                    <span>Предполагаемая ставка:</span>
+                                    <span class="font-mono text-white" id="calcRateText">от 5.5% / год</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Вероятность одобрения:</span>
+                                    <span class="font-mono text-lime font-bold">Высокая (~96%)</span>
+        <!-- SHOWCASE / VITRINA -->
+        <section id="showcase" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-widest text-lime">Каталог выгодных офферов</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Витрина банков & МФО</h2>
+                </div>
+                
+                <!-- Controls: Filter & Sort -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="relative">
+                        <select id="sortOffers" onchange="filterAndRenderOffers()" class="bg-obsidian-900 border border-white/10 text-xs text-gray-300 rounded-xl px-4 py-2.5 outline-none focus:border-lime">
+                            <option value="popular">Сначала популярные</option>
+                            <option value="rate">По наименьшей ставке</option>
+                            <option value="amount">По максимальной сумме</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-white/5" id="categoryTabs">
+                <button onclick="setCategory('all')" data-cat="all" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-semibold bg-lime text-black shadow-lg">Все предложения</button>
+                <button onclick="setCategory('rko')" data-cat="rko" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-semibold glass-card text-gray-300 hover:text-white">РКО для Бизнеса</button>
+                <button onclick="setCategory('micro')" data-cat="micro" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-semibold glass-card text-gray-300 hover:text-white">Займы 0%</button>
+                <button onclick="setCategory('cards')" data-cat="cards" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-semibold glass-card text-gray-300 hover:text-white">Кредитные карты</button>
+                <button onclick="setCategory('cash')" data-cat="cash" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-semibold glass-card text-gray-300 hover:text-white">Кредиты наличными</button>
+            </div>
+
+            <!-- Dynamic Offers Grid -->
+            <div id="offersGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Offers rendered via JS -->
+            </div>
+        </section>
+
+        <!-- REGISTRATION STEPS -->
+        <section id="steps" class="py-20 border-t border-white/5 bg-obsidian-900/40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-mono uppercase tracking-widest text-lime">Простой процесс</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">4 шага к получению денег</h2>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="glass-card p-6 rounded-3xl relative border border-white/10 group hover:-translate-y-2 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-2xl bg-lime/10 border border-lime/30 text-lime font-mono font-bold text-xl flex items-center justify-center mb-6">01</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Выбор предложения</h3>
+                        <p class="text-sm text-gray-400">Используйте калькулятор и фильтры витрины для подбора лучших условий.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl relative border border-white/10 group hover:-translate-y-2 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-2xl bg-lime/10 border border-lime/30 text-lime font-mono font-bold text-xl flex items-center justify-center mb-6">02</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Заполнение анкеты</h3>
+                        <p class="text-sm text-gray-400">Укажите имя и контактный телефон в короткой интерактивной форме.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl relative border border-white/10 group hover:-translate-y-2 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-2xl bg-lime/10 border border-lime/30 text-lime font-mono font-bold text-xl flex items-center justify-center mb-6">03</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Быстрый скоринг</h3>
+                        <p class="text-sm text-gray-400">Алгоритмы GILT мгновенно отправляют заявку в выбранную организацию.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-3xl relative border border-white/10 group hover:-translate-y-2 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-2xl bg-lime/10 border border-lime/30 text-lime font-mono font-bold text-xl flex items-center justify-center mb-6">04</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Выдача средств</h3>
+                        <p class="text-sm text-gray-400">Получите деньги на карту, расчетный счет или курьером за несколько минут.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BENTO ADVANTAGES -->
+        <section id="benefits" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-mono uppercase tracking-widest text-lime">Почему мы</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Преимущества сервиса GILT</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-6">
+                <!-- Large card 1 -->
+                <div class="lg:col-span-2 glass-card p-8 rounded-3xl border border-white/10 relative overflow-hidden">
+                    <div class="w-12 h-12 rounded-xl bg-lime text-black flex items-center justify-center text-xl mb-6 shadow-lg shadow-lime/20"><i class="fa-solid fa-brain"></i></div>
+                    <h3 class="text-2xl font-bold text-white mb-3">AI-Скоринг и персонализация</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-lg">Система анализирует более 40 параметров вашей заявки и подбирает именно те банки и МФО, где шанс одобрения стремится к 100%.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card p-8 rounded-3xl border border-white/10">
+                    <div class="w-12 h-12 rounded-xl bg-lime/10 text-lime flex items-center justify-center text-xl mb-6 border border-lime/20"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-3">256-bit Защита данных</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Все данные передаются по защищенным каналам с соблюдением требований 152-ФЗ РФ.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-3xl border border-white/10">
+                    <div class="w-12 h-12 rounded-xl bg-lime/10 text-lime flex items-center justify-center text-xl mb-6 border border-lime/20"><i class="fa-solid fa-tags"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-3">0% Скрытых комиссий</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Наш агрегатор абсолютно бесплатен для пользователей. Вы получаете официальные условия банков.</p>
+                </div>
+
+                <!-- Large card 4 -->
+                <div class="lg:col-span-2 glass-card p-8 rounded-3xl border border-white/10">
+                    <div class="w-12 h-12 rounded-xl bg-lime text-black flex items-center justify-center text-xl mb-6 shadow-lg shadow-lime/20"><i class="fa-solid fa-[#00ff99] fa-bolt"></i></div>
+        <!-- FAQ SECTION -->
+        <section id="faq" class="py-20 border-t border-white/5 bg-obsidian-900/40">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-xs font-mono uppercase tracking-widest text-lime">Частые вопросы</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Вопросы и ответы</h2>
+                </div>
+
+                <div class="space-y-4" id="faqAccordion">
+                    <div class="glass-card rounded-2xl border border-white/10 overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center hover:text-lime transition-colors">
+                            <span>Как работает сервис GILT?</span>
+                            <i class="fa-solid fa-chevron-down text-lime transition-transform duration-300"></i>
+                        </button>
+                        <div class="px-6 pb-6 text-sm text-gray-400 hidden">
+                            GILT агрегирует предложения ведущих финансовых организаций и банков РФ. Вы выбираете нужный тариф, отправляете заявку, и наша система передает ее напрямую в банк для быстрой обработки.
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl border border-white/10 overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center hover:text-lime transition-colors">
+                            <span>Берет ли GILT комиссию за подбор?</span>
+                            <i class="fa-solid fa-chevron-down text-lime transition-transform duration-300"></i>
+                        </button>
+                        <div class="px-6 pb-6 text-sm text-gray-400 hidden">
+                            Нет, сервис полностью бесплатен для пользователей. Мы получаем партнерское вознаграждение от банков и МФО за привлечение клиентов.
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl border border-white/10 overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center hover:text-lime transition-colors">
+                            <span>Как настроить Google Таблицу для управления офферами?</span>
+                            <i class="fa-solid fa-chevron-down text-lime transition-transform duration-300"></i>
+                        </button>
+                        <div class="px-6 pb-6 text-sm text-gray-400 hidden">
+                            Создайте таблицу в Google Sheets, нажмите "Файл" -> "Поделиться" -> "Опубликовать в веб", выберите формат CSV и скопируйте ссылку. Вставьте эту ссылку в панели "Интеграции" сайта GILT.
+                        </div>
+                    </div>
+
+                    <div class="glass-card rounded-2xl border border-white/10 overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center hover:text-lime transition-colors">
+                            <span>Как настроить отправку заявок в Telegram?</span>
+                            <i class="fa-solid fa-chevron-down text-lime transition-transform duration-300"></i>
+                        </button>
+                        <div class="px-6 pb-6 text-sm text-gray-400 hidden">
+                            Создайте бота через @BotFather в Telegram, получите Bot Token. Добавьте бота в ваш чат/канал и узнайте Chat ID (например, через @userinfobot). Укажите эти параметры в кнопке "Интеграции".
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="border-t border-white/10 bg-obsidian-950 py-12 text-sm text-gray-500">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-lime flex items-center justify-center font-mono font-bold text-black">G</div>
+                        <span class="font-mono text-xl font-bold text-white">GILT<span class="text-lime">.</span></span>
+                    </div>
+                    <div class="text-xs text-center md:text-right">
+                        © 2026 GILT Fintech Aggregator. Все права защищены.
+                    </div>
+                </div>
+                <div class="text-[11px] leading-relaxed text-gray-600 border-t border-white/5 pt-6">
+                    Дисклеймер: Сайт GILT не является финансовым учреждением, банком или микрофинансовой организацией. Сервис оказывает информационно-агрегаторские услуги по подбору банковских продуктов. Все товарные знаки и логотипы принадлежат их законным правообладателям. Условия финансовой услуги уточняйте на официальных сайтах партнеров.
+                </div>
+    <!-- APPLY MODAL -->
+    <div id="applyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="glass-card max-w-md w-full p-6 sm:p-8 rounded-3xl border border-white/10 relative shadow-2xl animate-in fade-in zoom-in duration-200">
+            <button onclick="closeApplyModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="mb-6">
+                <span class="text-xs font-mono uppercase text-lime tracking-widest">Онлайн-заявка</span>
+                <h3 class="text-2xl font-bold text-white mt-1" id="modalOfferTitle">Оформление оффера</h3>
+                <p class="text-xs text-gray-400 mt-1" id="modalOfferSub">Быстрая отправка в банковскую систему</p>
+            </div>
+
+            <form id="applyForm" onsubmit="submitApplication(event)" class="space-y-4">
+                <input type="hidden" id="modalOfferName" value="">
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Ваше имя *</label>
+                    <input type="text" id="applicantName" required placeholder="Александр И." class="w-full bg-obsidian-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-lime">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Телефон *</label>
+                    <input type="tel" id="applicantPhone" required placeholder="+7 (999) 000-00-00" class="w-full bg-obsidian-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-lime">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Город проживания / ведения бизнеса</label>
+                    <input type="text" id="applicantCity" placeholder="Москва" class="w-full bg-obsidian-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-lime">
+                </div>
+
+                <div class="flex items-start gap-2 pt-2">
+                    <input type="checkbox" id="consentCheck" required class="mt-1 accent-lime rounded">
+                    <label for="consentCheck" class="text-[11px] text-gray-400">Согласен на обработку персональных данных и передачу заявки партнерам</label>
+                </div>
+
+                <button type="submit" id="submitBtn" class="w-full py-4 rounded-xl bg-lime text-black font-bold text-sm hover:bg-lime-400 transition-all shadow-lg shadow-lime/20 flex items-center justify-center gap-2">
+                    <span>Отправить заявку</span>
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CONFIG MODAL (Integrations Settings) -->
+    <div id="configModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="glass-card max-w-lg w-full p-6 sm:p-8 rounded-3xl border border-white/10 relative shadow-2xl">
+            <button onclick="closeConfigModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="mb-6">
+                <span class="text-xs font-mono uppercase text-lime tracking-widest">Панель разработчика</span>
+                <h3 class="text-2xl font-bold text-white mt-1">Настройки интеграций</h3>
+                <p class="text-xs text-gray-400 mt-1">Подключите Telegram Bot API и Google Sheets CSV</p>
+            </div>
+
+            <div class="space-y-4 text-xs">
+                <div>
+                    <label class="block font-medium text-gray-300 mb-1">Telegram Bot Token</label>
+                    <input type="text" id="cfgBotToken" placeholder="123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ" class="w-full bg-obsidian-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-lime font-mono">
+                </div>
+
+                <div>
+                    <label class="block font-medium text-gray-300 mb-1">Telegram Chat ID</label>
+                    <input type="text" id="cfgChatId" placeholder="-100123456789 или 987654321" class="w-full bg-obsidian-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-lime font-mono">
+                </div>
+
+                <div>
+                    <label class="block font-medium text-gray-300 mb-1">Google Sheets CSV URL</label>
+                    <input type="url" id="cfgCsvUrl" placeholder="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv" class="w-full bg-obsidian-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-lime font-mono">
+                </div>
+
+                <div class="p-4 rounded-xl bg-obsidian-900 border border-white/5 space-y-2">
+                    <div class="font-bold text-white">Статус интеграций:</div>
+                    <div id="cfgStatusText" class="text-gray-400 font-mono">Ожидание сохраненных данных...</div>
+                </div>
+    <script>
+        const DEFAULT_OFFERS = [
+            { id: 1, title: "Альфа-Банк РКО", category: "rko", bank: "Альфа-Банк", badge: "Выбор бизнеса", rate: "0%", rateNum: 0, amount: "до 10 000 000 ₽", amountNum: 10000000, term: "Бессрочно", perk: "0 ₽ обслуживание + 300 000 ₽ на рекламу", popularity: 99, link: "#" },
+            { id: 2, title: "Точка Банк РКО", category: "rko", bank: "Банк Точка", badge: "Быстрый старт", rate: "0%", rateNum: 0, amount: "Без ограничений", amountNum: 50000000, term: "Бессрочно", perk: "Бесплатное открытие за 20 минут", popularity: 97, link: "#" },
+            { id: 3, title: "Займ 0% Онлайн", category: "micro", bank: "Займер", badge: "0% Первым клиентам", rate: "0%", rateNum: 0, amount: "до 30 000 ₽", amountNum: 30000, term: "до 30 дней", perk: "Мгновенно на карту 24/7 без справок", popularity: 98, link: "#" },
+            { id: 4, title: "Быстрый Кэш", category: "micro", bank: "Webbankir", badge: "Одобрение 98%", rate: "0%", rateNum: 0, amount: "до 35 000 ₽", amountNum: 35000, term: "до 30 дней", perk: "Перевод за 1 минуту по СБП", popularity: 95, link: "#" },
+            { id: 5, title: "Т-Банк Платинум", category: "cards", bank: "Т-Банк", badge: "120 дней 0%", rate: "от 12%", rateNum: 12, amount: "до 1 000 000 ₽", amountNum: 1000000, term: "Кредитная карта", perk: "Кэшбэк до 30% рублевыми бонусами", popularity: 96, link: "#" },
+            { id: 6, title: "Кредит Наличными", category: "cash", bank: "ВТБ", badge: "Низкая ставка", rate: "от 4.5%", rateNum: 4.5, amount: "до 5 000 000 ₽", amountNum: 5000000, term: "до 7 лет", perk: "Решение по паспорту за 2 минуты", popularity: 94, link: "#" }
+        ];
+
+        let currentOffers = [...DEFAULT_OFFERS];
+        let currentCategory = 'all';
+        let calcMode = 'credit';
+
+        const STORAGE_KEY_TOKEN = 'gilt_tg_token';
+        const STORAGE_KEY_CHAT = 'gilt_tg_chat';
+        const STORAGE_KEY_CSV = 'gilt_csv_url';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initIntegrations();
+            loadOffersFromCsv();
+            updateCalculator();
+        });
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function toggleFaq(btn) {
+            const content = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+    </script>
+
+        // INTEGRATIONS CONFIG
+        function initIntegrations() {
+            document.getElementById('cfgBotToken').value = localStorage.getItem(STORAGE_KEY_TOKEN) || '';
+            document.getElementById('cfgChatId').value = localStorage.getItem(STORAGE_KEY_CHAT) || '';
+            document.getElementById('cfgCsvUrl').value = localStorage.getItem(STORAGE_KEY_CSV) || '';
+            updateConfigStatus();
+        }
+
+        function saveIntegrationsConfig() {
+            localStorage.setItem(STORAGE_KEY_TOKEN, document.getElementById('cfgBotToken').value.trim());
+            localStorage.setItem(STORAGE_KEY_CHAT, document.getElementById('cfgChatId').value.trim());
+            localStorage.setItem(STORAGE_KEY_CSV, document.getElementById('cfgCsvUrl').value.trim());
+            updateConfigStatus();
+            alert('Настройки сохранены!');
+            loadOffersFromCsv();
+            closeConfigModal();
+        }
+
+        function resetIntegrationsConfig() {
+            if (confirm('Сбросить все настройки?')) {
+                localStorage.removeItem(STORAGE_KEY_TOKEN);
+                localStorage.removeItem(STORAGE_KEY_CHAT);
+                localStorage.removeItem(STORAGE_KEY_CSV);
+                initIntegrations();
+                currentOffers = [...DEFAULT_OFFERS];
+                filterAndRenderOffers();
+            }
+        }
+
+        function updateConfigStatus() {
+            const token = localStorage.getItem(STORAGE_KEY_TOKEN);
+            const chat = localStorage.getItem(STORAGE_KEY_CHAT);
+            const csv = localStorage.getItem(STORAGE_KEY_CSV);
+            const statusEl = document.getElementById('cfgStatusText');
+
+            let msg = [];
+            msg.push(token && chat ? "✅ Telegram Bot подключен" : "⚠️ Telegram Bot не настроен");
+            msg.push(csv ? "✅ Google Sheets CSV подключен" : "ℹ️ Используются стандартные офферы");
+            statusEl.innerHTML = msg.join("<br>");
+        }
+
+        function openConfigModal() { document.getElementById('configModal').classList.remove('hidden'); }
+        function closeConfigModal() { document.getElementById('configModal').classList.add('hidden'); }
+
+        // CSV FETCH & PARSER
+        async function loadOffersFromCsv() {
+            const csvUrl = localStorage.getItem(STORAGE_KEY_CSV);
+            if (!csvUrl) { currentOffers = [...DEFAULT_OFFERS]; filterAndRenderOffers(); return; }
+
+            try {
+                const res = await fetch(csvUrl);
+                const text = await res.text();
+                const parsed = parseCsv(text);
+                currentOffers = (parsed && parsed.length > 0) ? parsed : [...DEFAULT_OFFERS];
+            } catch (err) {
+                currentOffers = [...DEFAULT_OFFERS];
+            }
+            filterAndRenderOffers();
+        }
+
+        function parseCsv(text) {
+            const lines = text.split('\n').map(l => l.trim()).filter(l => l);
+            if (lines.length < 2) return null;
+            const headers = lines[0].split(',').map(h => h.replace(/^"(.*)"$/, '$1').trim().toLowerCase());
+            const result = [];
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || lines[i].split(',');
+                if (!values) continue;
+                const obj = {};
+                headers.forEach((h, idx) => {
+                    let val = values[idx] ? values[idx].trim() : '';
+                    obj[h] = val.replace(/^"(.*)"$/, '$1');
+                });
+                if (obj.title && obj.bank) {
+                    result.push({
+                        id: i,
+                        title: obj.title,
+                        category: obj.category || 'cash',
+                        bank: obj.bank,
+                        badge: obj.badge || 'Популярное',
+                        rate: obj.rate || 'от 0%',
+                        rateNum: parseFloat(obj.rate) || 0,
+                        amount: obj.amount || 'до 500 000 ₽',
+                        amountNum: parseFloat(obj.amount_num) || 500000,
+                        term: obj.term || 'до 12 мес.',
+                        perk: obj.perk || 'Быстрое решение',
+                        popularity: parseInt(obj.popularity) || 90,
+        // SHOWCASE & FILTERING
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.className = "cat-btn px-5 py-2.5 rounded-xl text-xs font-semibold bg-lime text-black shadow-lg";
+                } else {
+                    btn.className = "cat-btn px-5 py-2.5 rounded-xl text-xs font-semibold glass-card text-gray-300 hover:text-white";
+                }
+            });
+            filterAndRenderOffers();
+        }
+
+        function filterAndRenderOffers() {
+            const grid = document.getElementById('offersGrid');
+            const sortVal = document.getElementById('sortOffers').value;
+
+            let filtered = currentOffers.filter(item => currentCategory === 'all' || item.category === currentCategory);
+
+            if (sortVal === 'rate') filtered.sort((a, b) => a.rateNum - b.rateNum);
+            else if (sortVal === 'amount') filtered.sort((a, b) => b.amountNum - a.amountNum);
+            else filtered.sort((a, b) => b.popularity - a.popularity);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 glass-card rounded-3xl">
+                        <i class="fa-solid fa-folder-open text-4xl text-gray-600 mb-3"></i>
+                        <p class="text-gray-400 text-sm">В данной категории нет офферов</p>
+                    </div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(offer => `
+                <div class="glass-card rounded-3xl p-6 border border-white/10 flex flex-col justify-between hover:border-lime/40 transition-all duration-300 group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2.5 py-1 rounded-md bg-lime/10 text-lime border border-lime/20 text-[11px] font-mono font-bold">${offer.badge}</span>
+                            <span class="text-xs text-gray-400 font-mono">${offer.bank}</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-lime transition-colors">${offer.title}</h3>
+                        <div class="grid grid-cols-2 gap-3 py-3 border-y border-white/5 mb-4 text-xs font-mono">
+                            <div><span class="text-gray-500 block">Ставка</span><span class="text-lime font-bold text-sm">${offer.rate}</span></div>
+                            <div><span class="text-gray-500 block">Сумма</span><span class="text-white font-bold text-sm">${offer.amount}</span></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mb-6 flex items-start gap-2">
+                            <i class="fa-solid fa-circle-check text-lime mt-0.5"></i>
+                            <span>${offer.perk}</span>
+        // CALCULATOR LOGIC
+        function setCalcMode(mode) {
+            calcMode = mode;
+            const btnCredit = document.getElementById('calcModeCredit');
+            const btnRko = document.getElementById('calcModeRko');
+
+            if (mode === 'credit') {
+                btnCredit.className = "flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all bg-lime text-black shadow";
+                btnRko.className = "flex-1 py-2.5 rounded-lg text-sm font-semibold text-gray-400 hover:text-white transition-all";
+                document.getElementById('calcAmountLabel').innerText = "Сумма кредита / займа";
+                document.getElementById('calcTermLabel').innerText = "Срок погашения";
+                document.getElementById('calcMinAmount').innerText = "5 000 ₽";
+                document.getElementById('calcMaxAmount').innerText = "3 000 000 ₽";
+                document.getElementById('calcAmount').min = 5000;
+                document.getElementById('calcAmount').max = 3000000;
+                document.getElementById('calcAmount').step = 5000;
+                document.getElementById('calcAmount').value = 300000;
+                document.getElementById('calcResultTitle').innerText = "Примерный платеж / мес";
+            } else {
+                btnRko.className = "flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all bg-lime text-black shadow";
+                btnCredit.className = "flex-1 py-2.5 rounded-lg text-sm font-semibold text-gray-400 hover:text-white transition-all";
+                document.getElementById('calcAmountLabel').innerText = "Месячный оборот бизнеса";
+                document.getElementById('calcTermLabel').innerText = "Количество платежек / мес";
+                document.getElementById('calcMinAmount').innerText = "50 000 ₽";
+                document.getElementById('calcMaxAmount').innerText = "10 000 000 ₽";
+                document.getElementById('calcAmount').min = 50000;
+                document.getElementById('calcAmount').max = 10000000;
+                document.getElementById('calcAmount').step = 50000;
+                document.getElementById('calcAmount').value = 1000000;
+                document.getElementById('calcResultTitle').innerText = "Экономия на РКО в месяц";
+            }
+            updateCalculator();
+        }
+
+        function updateCalculator() {
+            const amount = parseInt(document.getElementById('calcAmount').value);
+            const term = parseInt(document.getElementById('calcTerm').value);
+
+            document.getElementById('calcAmountValue').innerText = amount.toLocaleString('ru-RU') + ' ₽';
+            document.getElementById('calcTermValue').innerText = term + ' мес.';
+
+            if (calcMode === 'credit') {
+                const annualRate = 0.08;
+                const monthlyRate = annualRate / 12;
+                const monthlyPayment = Math.round((amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -term)));
+                document.getElementById('calcMonthlyResult').innerText = monthlyPayment.toLocaleString('ru-RU') + ' ₽';
+                document.getElementById('calcRateText').innerText = 'от 5.5% / год';
+            } else {
+                const saving = Math.round((amount * 0.003) + (term * 25));
+                document.getElementById('calcMonthlyResult').innerText = saving.toLocaleString('ru-RU') + ' ₽';
+                document.getElementById('calcRateText').innerText = '0 ₽ открытие';
+            }
+        }
+
+                        </p>
+                    </div>
+                    <button onclick="openApplyModal('${offer.title.replace(/'/g, "\\'")}', '${offer.bank.replace(/'/g, "\\'")}')" class="w-full py-3 rounded-xl bg-lime text-black font-bold text-xs hover:bg-lime-400 transition-all text-center shadow-lg shadow-lime/15">
+                        Оформить заявку
+                    </button>
+                </div>
+            `).join('');
+        }
+
+                        link: obj.link || '#'
+                    });
+                }
+            }
+            return result;
+        }
+
+
+                <div class="flex items-center gap-3 pt-2">
+                    <button onclick="saveIntegrationsConfig()" class="flex-1 py-3.5 rounded-xl bg-lime text-black font-bold hover:bg-lime-400 transition-all text-center">
+                        Сохранить настройки
+                    </button>
+                    <button onclick="resetIntegrationsConfig()" class="py-3.5 px-4 rounded-xl glass-card text-gray-400 hover:text-red-400 transition-all">
+                        Сброс
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            </div>
+        </footer>
+
+                    <h3 class="text-2xl font-bold text-white mb-3">Мгновенный деплой и управление</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Управляйте карточками банков прямо из привычной Google Таблицы, а все заявки клиентов моментально приходят в ваш Telegram-чат.</p>
+                </div>
+            </div>
+        </section>
+
+                                </div>
+                            </div>
+
+                            <button onclick="openApplyModal('Калькулятор выгоды', 'Индивидуальный расчет')" class="w-full py-3.5 rounded-xl bg-lime text-black font-bold text-sm hover:bg-lime-400 transition-all shadow-lg shadow-lime/20">
+                                Получить решение за 3 мин
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+            </div>
+        </section>
+
+                            <div class="p-4 rounded-2xl bg-obsidian-900 border border-white/5 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400"><i class="fa-solid fa-credit-card"></i></div>
+                                    <div><div class="text-sm font-semibold text-white">Кредитная карта</div><div class="text-xs text-gray-400">Т-Банк • 120 дней 0%</div></div>
+                                </div>
+                                <span class="px-2.5 py-1 rounded bg-white/10 text-gray-300 font-mono text-xs">Кэшбэк</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+                    </button>
+                    <a href="#showcase" onclick="toggleMobileMenu()" class="w-full py-3 rounded-xl bg-lime text-black font-bold text-center text-sm">
+                         Подобрать продукт
+                    </a>
+                </div>
+            </div>
+        </header>
+
+    <div id="app-root" class="relative z-10 bg-grid">
+        <!-- SECTIONS HERE -->
+    </div>
+</body>
+</html>
