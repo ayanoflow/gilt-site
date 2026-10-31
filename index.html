@@ -92,6 +92,7 @@
       font-weight: 600;
       opacity: 0.88;
       transition: 0.2s;
+      cursor: pointer;
     }
     .nav-center a:hover, .nav-right a.nav-link:hover {
       color: var(--lime);
@@ -123,7 +124,6 @@
     }
     .soc-icon svg { width: 18px; height: 18px; fill: currentColor; }
 
-    /* Секретная шестеренка — скрыта от обычных посетителей! */
     #secretAdminBtn {
       display: none;
       border-color: var(--lime);
@@ -345,15 +345,14 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 28px;
       max-width: 920px;
-      margin: 0 auto 44px;
+      margin: 0 auto 48px;
     }
 
-    /* 4 ИКОНКИ КАТЕГОРИЙ ПОД Т-БАНКОМ И АЛЬФОЙ */
     .cat-hub-title {
       text-align: center;
       font-family: 'Unbounded', sans-serif;
       font-size: 20px;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
       color: var(--text-white);
     }
     .cat-hub-grid {
@@ -422,8 +421,8 @@
       text-transform: uppercase;
     }
 
-    /* КАРТОЧКИ ПРОДУКТОВ */
-    .mfo-grid, .modal-cards-grid {
+    /* КАРТОЧКИ ПРОДУКТОВ В МОДАЛЬНОМ ОКНЕ */
+    .modal-cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
       gap: 22px;
@@ -599,7 +598,7 @@
       padding-top: 20px;
     }
 
-    /* ================= МОДАЛЬНЫЕ ОКНА (КАТАЛОГ КАТЕГОРИЙ + СЕКРЕТНАЯ АДМИНКА) ================= */
+    /* ================= МОДАЛЬНЫЕ ОКНА ================= */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -720,7 +719,7 @@
         <li><a href="#steps">Этапы</a></li>
         <li><a href="#rko">Регистрация ИП</a></li>
         <li><a href="#categories-hub">Карты и РКО</a></li>
-        <li><a href="#mfo">МФО</a></li>
+        <li><a onclick="openCategoryCatalog('mfo')">МФО</a></li>
       </ul>
 
       <div class="nav-right">
@@ -733,7 +732,6 @@
           <a id="headerMailLink" href="mailto:zeusmail@bk.ru" class="soc-icon" title="Электронная почта">
             <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
           </a>
-          <!-- Шестеренка скрыта от чужих глаз! Появляется только для владельца -->
           <button id="secretAdminBtn" onclick="openModal('adminModal')" class="soc-icon" title="Закрытая панель владельца">⚙️</button>
         </div>
       </div>
@@ -745,7 +743,7 @@
       <a href="#steps" onclick="toggleMobileNav()">Этапы</a>
       <a href="#rko" onclick="toggleMobileNav()">Регистрация ИП</a>
       <a href="#categories-hub" onclick="toggleMobileNav()">Дебетовые / Кредитные карты / РКО</a>
-      <a href="#mfo" onclick="toggleMobileNav()">МФО</a>
+      <a href="#" onclick="toggleMobileNav(); openCategoryCatalog('mfo'); return false;">МФО</a>
       <a href="#" onclick="toggleMobileNav(); openModal('privacyModal'); return false;">Политика конфиденциальности</a>
       <a href="#contacts" onclick="toggleMobileNav()">Контакты</a>
     </div>
@@ -878,18 +876,6 @@
     </div>
   </section>
 
-  <!-- ================= МИКРОФИНАНСОВЫЕ ОРГАНИЗАЦИИ (МФО НА СТРАНИЦЕ) ================= -->
-  <section id="mfo">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Микрофинансовые организации (МФО)</h2>
-        <p class="section-sub">Моментальное рассмотрение анкеты и перевод средств онлайн</p>
-      </div>
-
-      <div class="mfo-grid" id="mfoContainer"></div>
-    </div>
-  </section>
-
   <!-- ================= ПОЧЕМУ СТОИТ ВЫБРАТЬ ИМЕННО НАС ================= -->
   <section id="why">
     <div class="container">
@@ -1006,7 +992,7 @@
     </div>
   </div>
 
-  <!-- ================= СЕКРЕТНЫЙ ЛИЧНЫЙ КАБИНЕТ ВЛАДЕЛЬЦА (СКРЫТ ОТ ПОСЕТИТЕЛЕЙ) ================= -->
+  <!-- ================= СЕКРЕТНЫЙ ЛИЧНЫЙ КАБИНЕТ ВЛАДЕЛЬЦА ================= -->
   <div class="modal-backdrop" id="adminModal">
     <div class="modal-window">
       <button class="modal-close" onclick="closeModal('adminModal')">×</button>
@@ -1015,7 +1001,6 @@
         Эта панель скрыта от обычных посетителей. Здесь ты управляешь всеми карточками (Дебетовые, Кредитные, РКО, МФО), картинками, контактами и авто-публикацией на GitHub.
       </p>
 
-      <!-- Контакты и GitHub авто-публикация -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; background: #090D14; border: 1px solid var(--border); padding: 16px; border-radius: 14px; margin-bottom: 18px;">
         <div>
           <label style="font-size: 11px; color: var(--lime); font-weight: 700;">Твой Telegram (ссылка):</label>
@@ -1035,7 +1020,6 @@
         </div>
       </div>
 
-      <!-- Список карточек -->
       <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">
         Список карточек (Категория: debit / credit / rko / mfo | Название | Ссылка на картинку | Твоя реф. ссылка):
       </div>
@@ -1053,10 +1037,9 @@
 
   <!-- ================= СКРИПТ ДАННЫХ И ЛОГИКИ ================= -->
   <script>
-    // ПИН-КОД ВЛАДЕЛЬЦА ДЛЯ ВХОДА В НАСТРОЙКИ (Shift + A или 5 кликов по логотипу GILT):
     const OWNER_PIN = "7777";
 
-    // КОНТАКТЫ САЙТА (START_CONTACTS_JSON)
+    // (START_CONTACTS_JSON)
     const SITE_CONTACTS = {
       tg: "https://t.me/accountzeus",
       mail: "zeusmail@bk.ru",
@@ -1064,7 +1047,7 @@
     };
     // (END_CONTACTS_JSON)
 
-    // БАЗА ВСЕХ КАРТОЧЕК ПО 4 КАТЕГОРИЯМ (START_ITEMS_JSON)
+    // (START_ITEMS_JSON)
     const DEFAULT_ITEMS = [
       // === 1. РКО И РЕГИСТРАЦИЯ ИП (cat: "rko") ===
       {
@@ -1176,7 +1159,7 @@
         url: "#"
       },
 
-      // === 4. МФО (13 КАРТОЧЕК ИЗ РЕФЕРЕНСА, cat: "mfo") ===
+      // === 4. МФО (13 КАРТОЧЕК ВНУТРИ МОДАЛЬНОГО ОКНА, cat: "mfo") ===
       {
         id: "zaimer",
         cat: "mfo",
@@ -1352,14 +1335,10 @@
     let items = JSON.parse(localStorage.getItem('gilt_v2_items')) || [...DEFAULT_ITEMS];
     let contacts = JSON.parse(localStorage.getItem('gilt_v2_contacts')) || { ...SITE_CONTACTS };
 
-    // Отрисовка карточек на странице
     function renderCards() {
       const ipHtml = items.filter(i => i.cat === 'rko').slice(0, 2).map(cardTemplate).join('');
-      const mfoHtml = items.filter(i => i.cat === 'mfo').map(cardTemplate).join('');
       document.getElementById('ipContainer').innerHTML = ipHtml;
-      document.getElementById('mfoContainer').innerHTML = mfoHtml;
 
-      // Применяем контакты
       document.getElementById('headerTgLink').href = contacts.tg;
       document.getElementById('footerTgBtn').href = contacts.tg;
       document.getElementById('headerMailLink').href = 'mailto:' + contacts.mail;
@@ -1390,7 +1369,6 @@
       `;
     }
 
-    // ОТКРЫТИЕ ВНУТРЕННЕГО ОКНА ПО 4 КАТЕГОРИЯМ (Дебетовые, Кредитные, РКО, МФО)
     function openCategoryCatalog(cat) {
       const titles = {
         debit: { t: "💳 Дебетовые карты", s: "Бесплатные карты с максимальным кэшбэком и доходом на остаток" },
@@ -1412,13 +1390,11 @@
       openModal('catalogModal');
     }
 
-    // Слайдер первого экрана
     function changeSlide(idx) {
       document.querySelectorAll('.slide').forEach((s, i) => s.classList.toggle('active', i === idx));
       document.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
     }
 
-    // Мобильное меню и модалки
     function toggleMobileNav() {
       document.getElementById('mobileNav').classList.toggle('open');
     }
@@ -1429,7 +1405,6 @@
       document.getElementById(id).classList.remove('open');
     }
 
-    // ================= СЕКРЕТНЫЙ ДОСТУП К НАСТРОЙКАМ ТОЛЬКО ДЛЯ ВЛАДЕЛЬЦА =================
     let logoTapCount = 0;
     let logoTapTimer = null;
 
@@ -1460,7 +1435,6 @@
       }
     });
 
-    // ================= УПРАВЛЕНИЕ В ЗАКРЫТОЙ АДМИНКЕ =================
     function renderAdminInputs() {
       document.getElementById('admTg').value = contacts.tg || '';
       document.getElementById('admMail').value = contacts.mail || '';
@@ -1477,7 +1451,7 @@
             <option value="mfo" ${item.cat==='mfo'?'selected':''}>МФО</option>
           </select>
           <input type="text" class="admin-input" data-field="title" data-idx="${idx}" value="${item.title}" placeholder="Название банка">
-          <input type="url" class="admin-input" data-field="img" data-idx="${idx}" value="${item.img || ''}" placeholder="Картинка (URL, если есть)">
+          <input type="url" class="admin-input" data-field="img" data-idx="${idx}" value="${item.img || ''}" placeholder="Картинка (URL)">
           <input type="url" class="admin-input" data-field="url" data-idx="${idx}" value="${item.url}" placeholder="Твоя реф. ссылка">
         </div>
       `).join('');
@@ -1540,7 +1514,6 @@
       }
     }
 
-    // АВТО-ПУБЛИКАЦИЯ НАПРЯМУЮ В GITHUB РЕПОЗИТОРИЙ (ayanoflow/gilt-site)
     async function pushToGitHubDirect() {
       collectAdminData();
       renderCards();
@@ -1557,15 +1530,13 @@
       const path = "index.html";
 
       try {
-        // 1. Получаем текущий index.html с GitHub
         const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
           headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github.v3+json" }
         });
-        if (!getRes.ok) throw new Error("Проверь правильность GitHub Token (нужны права repo / contents)");
+        if (!getRes.ok) throw new Error("Проверь правильность GitHub Token (нужны права repo)");
         const fileData = await getRes.json();
         const currentHtml = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
 
-        // 2. Заменяем JSON-блоки контактов и карточек внутри кода
         let updatedHtml = currentHtml.replace(
           /\/\/ \(START_CONTACTS_JSON\)[\s\S]*?\/\/ \(END_CONTACTS_JSON\)/,
           `// (START_CONTACTS_JSON)\n    const SITE_CONTACTS = ${JSON.stringify(contacts, null, 6)};\n    // (END_CONTACTS_JSON)`
@@ -1574,7 +1545,6 @@
           `// (START_ITEMS_JSON)\n    const DEFAULT_ITEMS = ${JSON.stringify(items, null, 6)};\n    // (END_ITEMS_JSON)`
         );
 
-        // 3. Отправляем обновленный файл обратно в ветку main
         const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
           method: "PUT",
           headers: {
@@ -1597,7 +1567,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Проверка секретного входа ?admin=gilt
       const params = new URLSearchParams(window.location.search);
       if (params.get('admin') === 'gilt' || localStorage.getItem('gilt_owner_unlocked') === 'true') {
         document.getElementById('secretAdminBtn').style.display = 'inline-flex';
