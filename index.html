@@ -1,793 +1,1179 @@
 <!DOCTYPE html>
-<html lang="ru" class="scroll-smooth">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GILT — Финтех-агрегатор банковских услуг, РКО и займов</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        obsidian: {
-                            950: '#050706',
-                            900: '#0a0e0c',
-                            800: '#121815',
-                            700: '#1c2521',
-                            600: '#28342f'
-                        },
-                        lime: {
-                            DEFAULT: '#ccff00',
-                            400: '#d9ff33',
-                            500: '#ccff00',
-                            600: '#a3d900'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        mono: ['Space Grotesk', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        body { background-color: #050706; color: #e5e7eb; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-        .bg-grid { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(204, 255, 0, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(204, 255, 0, 0.03) 1px, transparent 1px); }
-        .glass-card { background: rgba(18, 24, 21, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(254, 254, 254, 0.08); }
-        .glass-card:hover { border-color: rgba(204, 255, 0, 0.35); box-shadow: 0 0 25px rgba(204, 255, 0, 0.08); }
-        .text-gradient-lime { background: linear-gradient(135deg, #ccff00 0%, #8ac700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050706; }
-        ::-webkit-scrollbar-thumb { background: #1c2521; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #ccff00; }
-        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .animate-ticker { display: flex; width: 200%; animation: ticker 25s linear infinite; }
-        .animate-ticker:hover { animation-play-state: paused; }
-        input[type=range] { -webkit-appearance: none; background: #1c2521; border-radius: 8px; height: 6px; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 22px; width: 22px; border-radius: 50%; background: #ccff00; cursor: pointer; box-shadow: 0 0 12px rgba(204, 255, 0, 0.8); border: 2px solid #050706; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>GILT — Регистрация ИП, РКО и МФО онлайн без визита в ФНС</title>
+  <meta name="description" content="Получите профессиональную юридическую помощь и станьте предпринимателем без похода в ФНС уже сегодня! Регистрация ИП в банке-партнере и подбор МФО.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #090D14;
+      --bg-card: #111722;
+      --bg-card-hover: #161F2E;
+      --border: rgba(255, 255, 255, 0.09);
+      --lime: #CCFF00;
+      --lime-hover: #b8e600;
+      --lime-glow: rgba(204, 255, 0, 0.25);
+      --text-white: #F8FAFC;
+      --text-gray: #94A3B8;
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 5%, rgba(204, 255, 0, 0.07) 0%, transparent 35%),
+        radial-gradient(circle at 85% 25%, rgba(204, 255, 0, 0.04) 0%, transparent 40%);
+      color: var(--text-white);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ================= ШАПКА (КАК В РЕФЕРЕНСЕ) ================= */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 13, 20, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 78px;
+      gap: 16px;
+    }
+    .logo {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--lime);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--lime);
+      box-shadow: 0 0 12px var(--lime);
+    }
+    .nav-center, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      list-style: none;
+    }
+    .nav-center a, .nav-right a.nav-link {
+      color: var(--text-white);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0.88;
+      transition: 0.2s;
+    }
+    .nav-center a:hover, .nav-right a.nav-link:hover {
+      color: var(--lime);
+      opacity: 1;
+    }
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .soc-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-white);
+      text-decoration: none;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .soc-icon:hover {
+      border-color: var(--lime);
+      color: var(--lime);
+      transform: translateY(-2px);
+    }
+    .soc-icon svg { width: 18px; height: 18px; fill: currentColor; }
+
+    .burger {
+      display: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-white);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+      padding: 20px;
+      background: #0d131d;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      color: var(--text-white);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* ================= ПЕРВЫЙ ЭКРАН: СЛАЙДЕР НА 2 ЭКРАНА (КАК В ПРИМЕРЕ) ================= */
+    .hero-section {
+      padding: 40px 0 30px;
+    }
+    .hero-slider {
+      position: relative;
+      background: linear-gradient(135deg, #131B29 0%, #0C111A 100%);
+      border: 1px solid rgba(204, 255, 0, 0.22);
+      border-radius: 26px;
+      overflow: hidden;
+      min-height: 440px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      padding: 56px 64px;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+      animation: fadeIn 0.4s ease;
+    }
+    .slide.active {
+      display: grid;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide-tag {
+      display: inline-block;
+      background: rgba(204, 255, 0, 0.14);
+      color: var(--lime);
+      border: 1px solid rgba(204, 255, 0, 0.35);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .slide h1, .slide h2 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(24px, 3.2vw, 38px);
+      line-height: 1.22;
+      margin-bottom: 20px;
+      color: var(--text-white);
+    }
+    .slide p {
+      color: var(--text-gray);
+      font-size: 16px;
+      line-height: 1.65;
+      margin-bottom: 30px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--lime);
+      color: #090D14;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 16px 32px;
+      border-radius: 14px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 25px var(--lime-glow);
+      transition: 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--lime-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 32px rgba(204, 255, 0, 0.45);
+    }
+    .slide-visual {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 34px;
+      text-align: center;
+      position: relative;
+    }
+    .visual-big {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 46px;
+      font-weight: 800;
+      color: var(--lime);
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+    .slider-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .slider-dot {
+      width: 36px;
+      height: 6px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.16);
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .slider-dot.active {
+      background: var(--lime);
+      width: 56px;
+    }
+    .slider-arrow {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-white);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .slider-arrow:hover { border-color: var(--lime); color: var(--lime); }
+
+    /* ================= ОБЩИЕ ЗАГОЛОВКИ СЕКЦИЙ ================= */
+    section { padding: 56px 0; }
+    .section-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 44px;
+    }
+    .section-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(22px, 2.8vw, 34px);
+      margin-bottom: 10px;
+      color: var(--text-white);
+    }
+    .section-sub {
+      color: var(--text-gray);
+      font-size: 16px;
+    }
+
+    /* ================= ЭТАПЫ РЕГИСТРАЦИИ (4 ШАГА) ================= */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+    .step-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      position: relative;
+      transition: 0.25s;
+    }
+    .step-item:hover {
+      border-color: var(--lime);
+      transform: translateY(-4px);
+    }
+    .step-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(204, 255, 0, 0.12);
+      border: 1px solid rgba(204, 255, 0, 0.4);
+      color: var(--lime);
+      font-family: 'Unbounded', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .step-item h3 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+    .step-item p {
+      color: var(--text-gray);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    /* ================= КАРТОЧКИ БАНКОВ И МФО (КАК В РЕФЕРЕНСЕ ST300) ================= */
+    .rko-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .mfo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+      gap: 22px;
+    }
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: 0.25s;
+    }
+    .product-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--lime);
+      transform: translateY(-5px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+    }
+    .card-thumb {
+      height: 155px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .card-thumb-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      text-align: center;
+      z-index: 2;
+      text-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    }
+    .card-thumb-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(9, 13, 20, 0.78);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--lime);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 8px;
+      backdrop-filter: blur(6px);
+    }
+    .card-body {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+    .card-name {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 16px;
+      line-height: 1.35;
+      margin-bottom: 8px;
+      color: var(--text-white);
+    }
+    .card-sub {
+      font-size: 14px;
+      color: var(--lime);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .card-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--lime);
+      color: #090D14;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 14px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: 0.2s;
+    }
+    .card-btn:hover {
+      background: var(--lime-hover);
+      box-shadow: 0 0 20px var(--lime-glow);
+    }
+
+    /* ================= ПОЧЕМУ СТОИТ ВЫБРАТЬ ИМЕННО НАС (6 ПУНКТОВ) ================= */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .why-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .why-check {
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      border-radius: 12px;
+      background: rgba(204, 255, 0, 0.12);
+      border: 1px solid rgba(204, 255, 0, 0.35);
+      color: var(--lime);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .why-card h3 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    .why-card p {
+      font-size: 14px;
+      color: var(--text-gray);
+      line-height: 1.55;
+    }
+
+    /* ================= ПОДВАЛ / КОНТАКТЫ И ДИСКЛЕЙМЕР (КАК В РЕФЕРЕНСЕ) ================= */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 56px 0 44px;
+      margin-top: 30px;
+      background: #06090E;
+    }
+    .footer-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+    .footer-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 20px;
+      color: var(--lime);
+      margin-bottom: 14px;
+    }
+    .footer-contacts {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 20px 0 26px;
+    }
+    .disclaimer {
+      font-size: 12px;
+      color: var(--text-gray);
+      line-height: 1.65;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+
+    /* ================= МОДАЛЬНЫЕ ОКНА (ЛИЧНЫЙ КАБИНЕТ ССЫЛОК И ПОЛИТИКА) ================= */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-window {
+      background: #111722;
+      border: 1px solid rgba(204, 255, 0, 0.35);
+      border-radius: 22px;
+      max-width: 780px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 32px;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-gray);
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .admin-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .admin-input {
+      width: 100%;
+      padding: 10px 14px;
+      background: #090D14;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-white);
+      font-size: 13px;
+    }
+    .admin-input:focus { border-color: var(--lime); outline: none; }
+
+    /* ================= АДАПТИВ ДЛЯ ТЕЛЕФОНОВ И ПЛАНШЕТОВ ================= */
+    @media (max-width: 992px) {
+      .nav-center, .nav-right { display: none; }
+      .burger { display: inline-block; }
+      .slide.active { grid-template-columns: 1fr; padding: 36px 28px; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .rko-grid, .steps-grid, .why-grid { grid-template-columns: 1fr; }
+      .slide.active { padding: 28px 20px; }
+      .btn-primary { width: 100%; }
+      .admin-row { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-<body class="bg-obsidian-950 text-gray-200 antialiased selection:bg-lime selection:text-black">
-        <!-- HEADER -->
-        <header class="sticky top-0 z-50 backdrop-blur-xl border-b border-white/5 bg-obsidian-950/85 transition-all">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-                <a href="#" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 rounded-xl bg-lime flex items-center justify-center font-mono font-extrabold text-black text-xl shadow-lg shadow-lime/20 group-hover:scale-105 transition-transform">G</div>
-                    <div class="flex flex-col">
-                        <span class="font-mono text-2xl font-black tracking-wider text-white flex items-center gap-1">GILT<span class="text-lime">.</span></span>
-                        <span class="text-[10px] uppercase font-mono tracking-widest text-lime/80 -mt-1">FINTECH HUB</span>
-                    </div>
-                </a>
+<body>
 
-                <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-                    <a href="#showcase" class="hover:text-lime transition-colors flex items-center gap-1.5"><i class="fa-solid fa-layer-group text-xs text-lime"></i> Витрина</a>
-                    <a href="#calculator" class="hover:text-lime transition-colors flex items-center gap-1.5"><i class="fa-solid fa-calculator text-xs text-lime"></i> Калькулятор</a>
-                    <a href="#steps" class="hover:text-lime transition-colors flex items-center gap-1.5"><i class="fa-solid fa-route text-xs text-lime"></i> Этапы</a>
-                    <a href="#benefits" class="hover:text-lime transition-colors flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-xs text-lime"></i> Плюсы</a>
-                    <a href="#faq" class="hover:text-lime transition-colors flex items-center gap-1.5"><i class="fa-solid fa-circle-question text-xs text-lime"></i> FAQ</a>
-                </nav>
+  <!-- ================= ШАПКА САЙТА ================= -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo"><span class="logo-dot"></span>GILT</a>
 
-                <div class="hidden md:flex items-center gap-4">
-                    <button onclick="openConfigModal()" class="p-2.5 rounded-xl glass-card text-gray-300 hover:text-lime transition-all text-xs flex items-center gap-2">
-                        <i class="fa-solid fa-gear"></i> Интеграции
-                    </button>
-                    <a href="#showcase" class="px-5 py-2.5 rounded-xl bg-lime text-black font-semibold text-sm hover:bg-lime-400 transition-all shadow-lg shadow-lime/20 flex items-center gap-2">
-                        <span>Подобрать продукт</span> <i class="fa-solid fa-arrow-right text-xs"></i>
-                    </a>
-                </div>
+      <ul class="nav-center">
+        <li><a href="#steps">Этапы</a></li>
+        <li><a href="#mfo">МФО</a></li>
+        <li><a href="#rko">Регистрация ИП</a></li>
+      </ul>
 
-                <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-300 hover:text-lime">
-                    <i class="fa-solid fa-bars text-2xl"></i>
-                </button>
-            </div>
-
-            <div id="mobileMenu" class="hidden md:hidden border-b border-white/10 bg-obsidian-900/95 backdrop-blur-2xl px-4 py-6 space-y-4">
-                <a href="#showcase" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-lime"><i class="fa-solid fa-layer-group text-lime mr-2"></i> Витрина услуг</a>
-                <a href="#calculator" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-lime"><i class="fa-solid fa-calculator text-lime mr-2"></i> Калькулятор</a>
-                <a href="#steps" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-lime"><i class="fa-solid fa-route text-lime mr-2"></i> Как работает</a>
-                <a href="#benefits" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-lime"><i class="fa-solid fa-shield-halved text-lime mr-2"></i> Преимущества</a>
-                <a href="#faq" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-lime"><i class="fa-solid fa-circle-question text-lime mr-2"></i> FAQ</a>
-                <div class="pt-4 border-t border-white/10 flex flex-col gap-3">
-                    <button onclick="toggleMobileMenu(); openConfigModal();" class="w-full py-2.5 rounded-xl glass-card text-center text-sm font-semibold text-lime">
-                        <i class="fa-solid fa-gear mr-2"></i>Настройки интеграций
-        <!-- HERO SECTION -->
-        <section class="relative pt-12 pb-16 md:pt-24 md:pb-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card text-xs font-mono text-lime border border-lime/20">
-                        <span class="w-2 h-2 rounded-full bg-lime animate-pulse"></span>
-                        Умный финансовый агрегатор v2.4
-                    </div>
-                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
-                        Финтех нового поколения: <br><span class="text-gradient-lime">РКО, Кредиты & Займы</span>
-                    </h1>
-                    <p class="text-lg text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        Сравните предложения от более чем 50 банков и лицензированных МФО. Подайте единую онлайн-заявку с повышенным шансом одобрения.
-                    </p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                        <a href="#showcase" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-lime text-black font-bold text-base hover:bg-lime-400 transition-all shadow-xl shadow-lime/25 flex items-center justify-center gap-3">
-                            <span>Сравнить тарифы</span> <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                        <a href="#calculator" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card font-semibold text-base hover:bg-white/5 transition-all text-center">
-                            Калькулятор
-                        </a>
-                    </div>
-                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-white/10 max-w-lg mx-auto lg:mx-0">
-                        <div>
-                            <div class="font-mono text-2xl sm:text-3xl font-extrabold text-white">98.4%</div>
-                            <div class="text-xs text-gray-400 mt-1">Одобрений</div>
-                        </div>
-                        <div>
-                            <div class="font-mono text-2xl sm:text-3xl font-extrabold text-lime">3 мин</div>
-                            <div class="text-xs text-gray-400 mt-1">Решение</div>
-                        </div>
-                        <div>
-                            <div class="font-mono text-2xl sm:text-3xl font-extrabold text-white">50+</div>
-                            <div class="text-xs text-gray-400 mt-1">Партнеров</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-5">
-                    <div class="glass-card p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden">
-                        <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
-                            <div class="flex items-center gap-2">
-                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            </div>
-                            <span class="font-mono text-xs text-lime">GILT_LIVE_SCORING</span>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="p-4 rounded-2xl bg-obsidian-900 border border-lime/20 flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-xl bg-lime/10 flex items-center justify-center text-lime"><i class="fa-solid fa-briefcase"></i></div>
-                                    <div><div class="text-sm font-semibold text-white">РКО Бизнес</div><div class="text-xs text-gray-400">Альфа-Банк • 0₽/мес</div></div>
-                                </div>
-                                <span class="px-2.5 py-1 rounded bg-lime/20 text-lime font-mono text-xs font-bold">99%</span>
-                            </div>
-                            <div class="p-4 rounded-2xl bg-obsidian-900 border border-white/5 flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400"><i class="fa-solid fa-bolt"></i></div>
-                                    <div><div class="text-sm font-semibold text-white">Займ под 0%</div><div class="text-xs text-gray-400">Займер • до 30 000 ₽</div></div>
-                                </div>
-                                <span class="px-2.5 py-1 rounded bg-white/10 text-gray-300 font-mono text-xs">Мгновенно</span>
-                            </div>
-        <!-- TICKER -->
-        <section class="py-5 border-y border-white/5 bg-obsidian-900/50 overflow-hidden">
-            <div class="animate-ticker text-gray-400 font-mono text-sm tracking-wider uppercase font-semibold">
-                <div class="flex items-center gap-12 whitespace-nowrap pr-12">
-                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Т-Банк</span>
-                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Альфа-Банк</span>
-                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Сбербанк</span>
-                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Точка</span>
-                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>ВТБ</span>
-                    <span><i class="fa-solid fa-bolt text-lime mr-2"></i>Займер</span>
-                    <span><i class="fa-solid fa-bolt text-lime mr-2"></i>Webbankir</span>
-                </div>
-                <div class="flex items-center gap-12 whitespace-nowrap pr-12">
-                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Т-Банк</span>
-                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Альфа-Банк</span>
-                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Сбербанк</span>
-                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>Точка</span>
-                    <span><i class="fa-solid fa-building-columns text-lime mr-2"></i>ВТБ</span>
-                    <span><i class="fa-solid fa-bolt text-lime mr-2"></i>Займер</span>
-                    <span><i class="fa-solid fa-bolt text-lime mr-2"></i>Webbankir</span>
-                </div>
-        <!-- CALCULATOR SECTION -->
-        <section id="calculator" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-12">
-                <span class="text-xs font-mono uppercase tracking-widest text-lime">Интерактивный расчет</span>
-                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Калькулятор выгоды</h2>
-                <p class="text-gray-400 mt-4 text-base">Оцените примерный ежемесячный платеж или экономию на обслуживании бизнеса в несколько кликов</p>
-            </div>
-
-            <div class="glass-card p-6 sm:p-10 rounded-3xl max-w-4xl mx-auto border border-white/10 shadow-2xl">
-                <!-- Mode Switcher -->
-                <div class="flex p-1 bg-obsidian-900 rounded-xl border border-white/5 mb-8 max-w-md mx-auto">
-                    <button id="calcModeCredit" onclick="setCalcMode('credit')" class="flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all bg-lime text-black shadow">
-                        Кредиты & Займы
-                    </button>
-                    <button id="calcModeRko" onclick="setCalcMode('rko')" class="flex-1 py-2.5 rounded-lg text-sm font-semibold text-gray-400 hover:text-white transition-all">
-                        РКО для Бизнеса
-                    </button>
-                </div>
-
-                <div class="grid md:grid-cols-12 gap-8 items-center">
-                    <div class="md:col-span-7 space-y-6">
-                        <!-- Amount Slider -->
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <label class="text-sm font-medium text-gray-300" id="calcAmountLabel">Сумма кредита / займа</label>
-                                <span class="font-mono text-lime font-bold text-lg" id="calcAmountValue">300 000 ₽</span>
-                            </div>
-                            <input type="range" id="calcAmount" min="5000" max="3000000" step="5000" value="300000" oninput="updateCalculator()" class="w-full">
-                            <div class="flex justify-between text-xs text-gray-500 mt-1 font-mono">
-                                <span id="calcMinAmount">5 000 ₽</span>
-                                <span id="calcMaxAmount">3 000 000 ₽</span>
-                            </div>
-                        </div>
-
-                        <!-- Term Slider -->
-                        <div>
-                            <div class="flex justify-between items-center mb-2">
-                                <label class="text-sm font-medium text-gray-300" id="calcTermLabel">Срок погашения</label>
-                                <span class="font-mono text-lime font-bold text-lg" id="calcTermValue">12 мес.</span>
-                            </div>
-                            <input type="range" id="calcTerm" min="1" max="60" step="1" value="12" oninput="updateCalculator()" class="w-full">
-                            <div class="flex justify-between text-xs text-gray-500 mt-1 font-mono">
-                                <span id="calcMinTerm">1 мес.</span>
-                                <span id="calcMaxTerm">60 мес.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="md:col-span-5">
-                        <div class="p-6 rounded-2xl bg-obsidian-900 border border-lime/20 text-center space-y-4 shadow-xl">
-                            <div class="text-xs uppercase tracking-wider font-mono text-gray-400" id="calcResultTitle">Примерный платеж / мес</div>
-                            <div class="text-3xl sm:text-4xl font-extrabold font-mono text-lime" id="calcMonthlyResult">27 500 ₽</div>
-                            
-                            <div class="pt-4 border-t border-white/10 space-y-2 text-xs text-gray-400 text-left">
-                                <div class="flex justify-between">
-                                    <span>Предполагаемая ставка:</span>
-                                    <span class="font-mono text-white" id="calcRateText">от 5.5% / год</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Вероятность одобрения:</span>
-                                    <span class="font-mono text-lime font-bold">Высокая (~96%)</span>
-        <!-- SHOWCASE / VITRINA -->
-        <section id="showcase" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
-                <div>
-                    <span class="text-xs font-mono uppercase tracking-widest text-lime">Каталог выгодных офферов</span>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Витрина банков & МФО</h2>
-                </div>
-                
-                <!-- Controls: Filter & Sort -->
-                <div class="flex flex-wrap items-center gap-3">
-                    <div class="relative">
-                        <select id="sortOffers" onchange="filterAndRenderOffers()" class="bg-obsidian-900 border border-white/10 text-xs text-gray-300 rounded-xl px-4 py-2.5 outline-none focus:border-lime">
-                            <option value="popular">Сначала популярные</option>
-                            <option value="rate">По наименьшей ставке</option>
-                            <option value="amount">По максимальной сумме</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Filter Tabs -->
-            <div class="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-white/5" id="categoryTabs">
-                <button onclick="setCategory('all')" data-cat="all" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-semibold bg-lime text-black shadow-lg">Все предложения</button>
-                <button onclick="setCategory('rko')" data-cat="rko" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-semibold glass-card text-gray-300 hover:text-white">РКО для Бизнеса</button>
-                <button onclick="setCategory('micro')" data-cat="micro" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-semibold glass-card text-gray-300 hover:text-white">Займы 0%</button>
-                <button onclick="setCategory('cards')" data-cat="cards" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-semibold glass-card text-gray-300 hover:text-white">Кредитные карты</button>
-                <button onclick="setCategory('cash')" data-cat="cash" class="cat-btn px-5 py-2.5 rounded-xl text-xs font-semibold glass-card text-gray-300 hover:text-white">Кредиты наличными</button>
-            </div>
-
-            <!-- Dynamic Offers Grid -->
-            <div id="offersGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Offers rendered via JS -->
-            </div>
-        </section>
-
-        <!-- REGISTRATION STEPS -->
-        <section id="steps" class="py-20 border-t border-white/5 bg-obsidian-900/40">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <span class="text-xs font-mono uppercase tracking-widest text-lime">Простой процесс</span>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">4 шага к получению денег</h2>
-                </div>
-
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="glass-card p-6 rounded-3xl relative border border-white/10 group hover:-translate-y-2 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-2xl bg-lime/10 border border-lime/30 text-lime font-mono font-bold text-xl flex items-center justify-center mb-6">01</div>
-                        <h3 class="text-lg font-bold text-white mb-2">Выбор предложения</h3>
-                        <p class="text-sm text-gray-400">Используйте калькулятор и фильтры витрины для подбора лучших условий.</p>
-                    </div>
-                    <div class="glass-card p-6 rounded-3xl relative border border-white/10 group hover:-translate-y-2 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-2xl bg-lime/10 border border-lime/30 text-lime font-mono font-bold text-xl flex items-center justify-center mb-6">02</div>
-                        <h3 class="text-lg font-bold text-white mb-2">Заполнение анкеты</h3>
-                        <p class="text-sm text-gray-400">Укажите имя и контактный телефон в короткой интерактивной форме.</p>
-                    </div>
-                    <div class="glass-card p-6 rounded-3xl relative border border-white/10 group hover:-translate-y-2 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-2xl bg-lime/10 border border-lime/30 text-lime font-mono font-bold text-xl flex items-center justify-center mb-6">03</div>
-                        <h3 class="text-lg font-bold text-white mb-2">Быстрый скоринг</h3>
-                        <p class="text-sm text-gray-400">Алгоритмы GILT мгновенно отправляют заявку в выбранную организацию.</p>
-                    </div>
-                    <div class="glass-card p-6 rounded-3xl relative border border-white/10 group hover:-translate-y-2 transition-all duration-300">
-                        <div class="w-12 h-12 rounded-2xl bg-lime/10 border border-lime/30 text-lime font-mono font-bold text-xl flex items-center justify-center mb-6">04</div>
-                        <h3 class="text-lg font-bold text-white mb-2">Выдача средств</h3>
-                        <p class="text-sm text-gray-400">Получите деньги на карту, расчетный счет или курьером за несколько минут.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- BENTO ADVANTAGES -->
-        <section id="benefits" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-xs font-mono uppercase tracking-widest text-lime">Почему мы</span>
-                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Преимущества сервиса GILT</h2>
-            </div>
-
-            <div class="grid lg:grid-cols-3 gap-6">
-                <!-- Large card 1 -->
-                <div class="lg:col-span-2 glass-card p-8 rounded-3xl border border-white/10 relative overflow-hidden">
-                    <div class="w-12 h-12 rounded-xl bg-lime text-black flex items-center justify-center text-xl mb-6 shadow-lg shadow-lime/20"><i class="fa-solid fa-brain"></i></div>
-                    <h3 class="text-2xl font-bold text-white mb-3">AI-Скоринг и персонализация</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed max-w-lg">Система анализирует более 40 параметров вашей заявки и подбирает именно те банки и МФО, где шанс одобрения стремится к 100%.</p>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="glass-card p-8 rounded-3xl border border-white/10">
-                    <div class="w-12 h-12 rounded-xl bg-lime/10 text-lime flex items-center justify-center text-xl mb-6 border border-lime/20"><i class="fa-solid fa-shield-halved"></i></div>
-                    <h3 class="text-xl font-bold text-white mb-3">256-bit Защита данных</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Все данные передаются по защищенным каналам с соблюдением требований 152-ФЗ РФ.</p>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="glass-card p-8 rounded-3xl border border-white/10">
-                    <div class="w-12 h-12 rounded-xl bg-lime/10 text-lime flex items-center justify-center text-xl mb-6 border border-lime/20"><i class="fa-solid fa-tags"></i></div>
-                    <h3 class="text-xl font-bold text-white mb-3">0% Скрытых комиссий</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Наш агрегатор абсолютно бесплатен для пользователей. Вы получаете официальные условия банков.</p>
-                </div>
-
-                <!-- Large card 4 -->
-                <div class="lg:col-span-2 glass-card p-8 rounded-3xl border border-white/10">
-                    <div class="w-12 h-12 rounded-xl bg-lime text-black flex items-center justify-center text-xl mb-6 shadow-lg shadow-lime/20"><i class="fa-solid fa-[#00ff99] fa-bolt"></i></div>
-        <!-- FAQ SECTION -->
-        <section id="faq" class="py-20 border-t border-white/5 bg-obsidian-900/40">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <span class="text-xs font-mono uppercase tracking-widest text-lime">Частые вопросы</span>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Вопросы и ответы</h2>
-                </div>
-
-                <div class="space-y-4" id="faqAccordion">
-                    <div class="glass-card rounded-2xl border border-white/10 overflow-hidden">
-                        <button onclick="toggleFaq(this)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center hover:text-lime transition-colors">
-                            <span>Как работает сервис GILT?</span>
-                            <i class="fa-solid fa-chevron-down text-lime transition-transform duration-300"></i>
-                        </button>
-                        <div class="px-6 pb-6 text-sm text-gray-400 hidden">
-                            GILT агрегирует предложения ведущих финансовых организаций и банков РФ. Вы выбираете нужный тариф, отправляете заявку, и наша система передает ее напрямую в банк для быстрой обработки.
-                        </div>
-                    </div>
-
-                    <div class="glass-card rounded-2xl border border-white/10 overflow-hidden">
-                        <button onclick="toggleFaq(this)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center hover:text-lime transition-colors">
-                            <span>Берет ли GILT комиссию за подбор?</span>
-                            <i class="fa-solid fa-chevron-down text-lime transition-transform duration-300"></i>
-                        </button>
-                        <div class="px-6 pb-6 text-sm text-gray-400 hidden">
-                            Нет, сервис полностью бесплатен для пользователей. Мы получаем партнерское вознаграждение от банков и МФО за привлечение клиентов.
-                        </div>
-                    </div>
-
-                    <div class="glass-card rounded-2xl border border-white/10 overflow-hidden">
-                        <button onclick="toggleFaq(this)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center hover:text-lime transition-colors">
-                            <span>Как настроить Google Таблицу для управления офферами?</span>
-                            <i class="fa-solid fa-chevron-down text-lime transition-transform duration-300"></i>
-                        </button>
-                        <div class="px-6 pb-6 text-sm text-gray-400 hidden">
-                            Создайте таблицу в Google Sheets, нажмите "Файл" -> "Поделиться" -> "Опубликовать в веб", выберите формат CSV и скопируйте ссылку. Вставьте эту ссылку в панели "Интеграции" сайта GILT.
-                        </div>
-                    </div>
-
-                    <div class="glass-card rounded-2xl border border-white/10 overflow-hidden">
-                        <button onclick="toggleFaq(this)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center hover:text-lime transition-colors">
-                            <span>Как настроить отправку заявок в Telegram?</span>
-                            <i class="fa-solid fa-chevron-down text-lime transition-transform duration-300"></i>
-                        </button>
-                        <div class="px-6 pb-6 text-sm text-gray-400 hidden">
-                            Создайте бота через @BotFather в Telegram, получите Bot Token. Добавьте бота в ваш чат/канал и узнайте Chat ID (например, через @userinfobot). Укажите эти параметры в кнопке "Интеграции".
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FOOTER -->
-        <footer class="border-t border-white/10 bg-obsidian-950 py-12 text-sm text-gray-500">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-lime flex items-center justify-center font-mono font-bold text-black">G</div>
-                        <span class="font-mono text-xl font-bold text-white">GILT<span class="text-lime">.</span></span>
-                    </div>
-                    <div class="text-xs text-center md:text-right">
-                        © 2026 GILT Fintech Aggregator. Все права защищены.
-                    </div>
-                </div>
-                <div class="text-[11px] leading-relaxed text-gray-600 border-t border-white/5 pt-6">
-                    Дисклеймер: Сайт GILT не является финансовым учреждением, банком или микрофинансовой организацией. Сервис оказывает информационно-агрегаторские услуги по подбору банковских продуктов. Все товарные знаки и логотипы принадлежат их законным правообладателям. Условия финансовой услуги уточняйте на официальных сайтах партнеров.
-                </div>
-    <!-- APPLY MODAL -->
-    <div id="applyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
-        <div class="glass-card max-w-md w-full p-6 sm:p-8 rounded-3xl border border-white/10 relative shadow-2xl animate-in fade-in zoom-in duration-200">
-            <button onclick="closeApplyModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <div class="mb-6">
-                <span class="text-xs font-mono uppercase text-lime tracking-widest">Онлайн-заявка</span>
-                <h3 class="text-2xl font-bold text-white mt-1" id="modalOfferTitle">Оформление оффера</h3>
-                <p class="text-xs text-gray-400 mt-1" id="modalOfferSub">Быстрая отправка в банковскую систему</p>
-            </div>
-
-            <form id="applyForm" onsubmit="submitApplication(event)" class="space-y-4">
-                <input type="hidden" id="modalOfferName" value="">
-
-                <div>
-                    <label class="block text-xs font-medium text-gray-300 mb-1">Ваше имя *</label>
-                    <input type="text" id="applicantName" required placeholder="Александр И." class="w-full bg-obsidian-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-lime">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-medium text-gray-300 mb-1">Телефон *</label>
-                    <input type="tel" id="applicantPhone" required placeholder="+7 (999) 000-00-00" class="w-full bg-obsidian-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-lime">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-medium text-gray-300 mb-1">Город проживания / ведения бизнеса</label>
-                    <input type="text" id="applicantCity" placeholder="Москва" class="w-full bg-obsidian-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-lime">
-                </div>
-
-                <div class="flex items-start gap-2 pt-2">
-                    <input type="checkbox" id="consentCheck" required class="mt-1 accent-lime rounded">
-                    <label for="consentCheck" class="text-[11px] text-gray-400">Согласен на обработку персональных данных и передачу заявки партнерам</label>
-                </div>
-
-                <button type="submit" id="submitBtn" class="w-full py-4 rounded-xl bg-lime text-black font-bold text-sm hover:bg-lime-400 transition-all shadow-lg shadow-lime/20 flex items-center justify-center gap-2">
-                    <span>Отправить заявку</span>
-                    <i class="fa-solid fa-paper-plane text-xs"></i>
-                </button>
-            </form>
+      <div class="nav-right">
+        <a href="#" onclick="openModal('privacyModal'); return false;" class="nav-link">Политика конфиденциальности</a>
+        <a href="#contacts" class="nav-link">Контакты</a>
+        <div class="socials">
+          <a id="headerTgLink" href="https://t.me/accountzeus" target="_blank" rel="nofollow" class="soc-icon" title="Telegram">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.74 7.58-3.27 3.61-1.51 4.35-1.77 4.84-1.78.11 0 .35.03.5.16.13.1.17.24.18.34.02.08.02.24.01.38z"/></svg>
+          </a>
+          <a id="headerMailLink" href="mailto:zeusmail@bk.ru" class="soc-icon" title="Электронная почта">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+          <button onclick="openModal('adminModal')" class="soc-icon" title="Кабинет твоих реферальных ссылок">⚙️</button>
         </div>
+      </div>
+
+      <button class="burger" onclick="toggleMobileNav()">☰</button>
     </div>
 
-    <!-- CONFIG MODAL (Integrations Settings) -->
-    <div id="configModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
-        <div class="glass-card max-w-lg w-full p-6 sm:p-8 rounded-3xl border border-white/10 relative shadow-2xl">
-            <button onclick="closeConfigModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#steps" onclick="toggleMobileNav()">Этапы</a>
+      <a href="#mfo" onclick="toggleMobileNav()">МФО</a>
+      <a href="#rko" onclick="toggleMobileNav()">Регистрация ИП</a>
+      <a href="#" onclick="toggleMobileNav(); openModal('privacyModal'); return false;">Политика конфиденциальности</a>
+      <a href="#contacts" onclick="toggleMobileNav()">Контакты</a>
+      <a href="#" onclick="toggleMobileNav(); openModal('adminModal'); return false;" style="color: var(--lime);">⚙️ Личный кабинет ссылок</a>
+    </div>
+  </header>
 
-            <div class="mb-6">
-                <span class="text-xs font-mono uppercase text-lime tracking-widest">Панель разработчика</span>
-                <h3 class="text-2xl font-bold text-white mt-1">Настройки интеграций</h3>
-                <p class="text-xs text-gray-400 mt-1">Подключите Telegram Bot API и Google Sheets CSV</p>
-            </div>
-
-            <div class="space-y-4 text-xs">
-                <div>
-                    <label class="block font-medium text-gray-300 mb-1">Telegram Bot Token</label>
-                    <input type="text" id="cfgBotToken" placeholder="123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ" class="w-full bg-obsidian-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-lime font-mono">
-                </div>
-
-                <div>
-                    <label class="block font-medium text-gray-300 mb-1">Telegram Chat ID</label>
-                    <input type="text" id="cfgChatId" placeholder="-100123456789 или 987654321" class="w-full bg-obsidian-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-lime font-mono">
-                </div>
-
-                <div>
-                    <label class="block font-medium text-gray-300 mb-1">Google Sheets CSV URL</label>
-                    <input type="url" id="cfgCsvUrl" placeholder="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv" class="w-full bg-obsidian-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-lime font-mono">
-                </div>
-
-                <div class="p-4 rounded-xl bg-obsidian-900 border border-white/5 space-y-2">
-                    <div class="font-bold text-white">Статус интеграций:</div>
-                    <div id="cfgStatusText" class="text-gray-400 font-mono">Ожидание сохраненных данных...</div>
-                </div>
-    <script>
-        const DEFAULT_OFFERS = [
-            { id: 1, title: "Альфа-Банк РКО", category: "rko", bank: "Альфа-Банк", badge: "Выбор бизнеса", rate: "0%", rateNum: 0, amount: "до 10 000 000 ₽", amountNum: 10000000, term: "Бессрочно", perk: "0 ₽ обслуживание + 300 000 ₽ на рекламу", popularity: 99, link: "#" },
-            { id: 2, title: "Точка Банк РКО", category: "rko", bank: "Банк Точка", badge: "Быстрый старт", rate: "0%", rateNum: 0, amount: "Без ограничений", amountNum: 50000000, term: "Бессрочно", perk: "Бесплатное открытие за 20 минут", popularity: 97, link: "#" },
-            { id: 3, title: "Займ 0% Онлайн", category: "micro", bank: "Займер", badge: "0% Первым клиентам", rate: "0%", rateNum: 0, amount: "до 30 000 ₽", amountNum: 30000, term: "до 30 дней", perk: "Мгновенно на карту 24/7 без справок", popularity: 98, link: "#" },
-            { id: 4, title: "Быстрый Кэш", category: "micro", bank: "Webbankir", badge: "Одобрение 98%", rate: "0%", rateNum: 0, amount: "до 35 000 ₽", amountNum: 35000, term: "до 30 дней", perk: "Перевод за 1 минуту по СБП", popularity: 95, link: "#" },
-            { id: 5, title: "Т-Банк Платинум", category: "cards", bank: "Т-Банк", badge: "120 дней 0%", rate: "от 12%", rateNum: 12, amount: "до 1 000 000 ₽", amountNum: 1000000, term: "Кредитная карта", perk: "Кэшбэк до 30% рублевыми бонусами", popularity: 96, link: "#" },
-            { id: 6, title: "Кредит Наличными", category: "cash", bank: "ВТБ", badge: "Низкая ставка", rate: "от 4.5%", rateNum: 4.5, amount: "до 5 000 000 ₽", amountNum: 5000000, term: "до 7 лет", perk: "Решение по паспорту за 2 минуты", popularity: 94, link: "#" }
-        ];
-
-        let currentOffers = [...DEFAULT_OFFERS];
-        let currentCategory = 'all';
-        let calcMode = 'credit';
-
-        const STORAGE_KEY_TOKEN = 'gilt_tg_token';
-        const STORAGE_KEY_CHAT = 'gilt_tg_chat';
-        const STORAGE_KEY_CSV = 'gilt_csv_url';
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initIntegrations();
-            loadOffersFromCsv();
-            updateCalculator();
-        });
-
-        function toggleMobileMenu() {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
-        }
-
-        function toggleFaq(btn) {
-            const content = btn.nextElementSibling;
-            const icon = btn.querySelector('i');
-            content.classList.toggle('hidden');
-            icon.classList.toggle('rotate-180');
-        }
-    </script>
-
-        // INTEGRATIONS CONFIG
-        function initIntegrations() {
-            document.getElementById('cfgBotToken').value = localStorage.getItem(STORAGE_KEY_TOKEN) || '';
-            document.getElementById('cfgChatId').value = localStorage.getItem(STORAGE_KEY_CHAT) || '';
-            document.getElementById('cfgCsvUrl').value = localStorage.getItem(STORAGE_KEY_CSV) || '';
-            updateConfigStatus();
-        }
-
-        function saveIntegrationsConfig() {
-            localStorage.setItem(STORAGE_KEY_TOKEN, document.getElementById('cfgBotToken').value.trim());
-            localStorage.setItem(STORAGE_KEY_CHAT, document.getElementById('cfgChatId').value.trim());
-            localStorage.setItem(STORAGE_KEY_CSV, document.getElementById('cfgCsvUrl').value.trim());
-            updateConfigStatus();
-            alert('Настройки сохранены!');
-            loadOffersFromCsv();
-            closeConfigModal();
-        }
-
-        function resetIntegrationsConfig() {
-            if (confirm('Сбросить все настройки?')) {
-                localStorage.removeItem(STORAGE_KEY_TOKEN);
-                localStorage.removeItem(STORAGE_KEY_CHAT);
-                localStorage.removeItem(STORAGE_KEY_CSV);
-                initIntegrations();
-                currentOffers = [...DEFAULT_OFFERS];
-                filterAndRenderOffers();
-            }
-        }
-
-        function updateConfigStatus() {
-            const token = localStorage.getItem(STORAGE_KEY_TOKEN);
-            const chat = localStorage.getItem(STORAGE_KEY_CHAT);
-            const csv = localStorage.getItem(STORAGE_KEY_CSV);
-            const statusEl = document.getElementById('cfgStatusText');
-
-            let msg = [];
-            msg.push(token && chat ? "✅ Telegram Bot подключен" : "⚠️ Telegram Bot не настроен");
-            msg.push(csv ? "✅ Google Sheets CSV подключен" : "ℹ️ Используются стандартные офферы");
-            statusEl.innerHTML = msg.join("<br>");
-        }
-
-        function openConfigModal() { document.getElementById('configModal').classList.remove('hidden'); }
-        function closeConfigModal() { document.getElementById('configModal').classList.add('hidden'); }
-
-        // CSV FETCH & PARSER
-        async function loadOffersFromCsv() {
-            const csvUrl = localStorage.getItem(STORAGE_KEY_CSV);
-            if (!csvUrl) { currentOffers = [...DEFAULT_OFFERS]; filterAndRenderOffers(); return; }
-
-            try {
-                const res = await fetch(csvUrl);
-                const text = await res.text();
-                const parsed = parseCsv(text);
-                currentOffers = (parsed && parsed.length > 0) ? parsed : [...DEFAULT_OFFERS];
-            } catch (err) {
-                currentOffers = [...DEFAULT_OFFERS];
-            }
-            filterAndRenderOffers();
-        }
-
-        function parseCsv(text) {
-            const lines = text.split('\n').map(l => l.trim()).filter(l => l);
-            if (lines.length < 2) return null;
-            const headers = lines[0].split(',').map(h => h.replace(/^"(.*)"$/, '$1').trim().toLowerCase());
-            const result = [];
-            for (let i = 1; i < lines.length; i++) {
-                const values = lines[i].match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || lines[i].split(',');
-                if (!values) continue;
-                const obj = {};
-                headers.forEach((h, idx) => {
-                    let val = values[idx] ? values[idx].trim() : '';
-                    obj[h] = val.replace(/^"(.*)"$/, '$1');
-                });
-                if (obj.title && obj.bank) {
-                    result.push({
-                        id: i,
-                        title: obj.title,
-                        category: obj.category || 'cash',
-                        bank: obj.bank,
-                        badge: obj.badge || 'Популярное',
-                        rate: obj.rate || 'от 0%',
-                        rateNum: parseFloat(obj.rate) || 0,
-                        amount: obj.amount || 'до 500 000 ₽',
-                        amountNum: parseFloat(obj.amount_num) || 500000,
-                        term: obj.term || 'до 12 мес.',
-                        perk: obj.perk || 'Быстрое решение',
-                        popularity: parseInt(obj.popularity) || 90,
-        // SHOWCASE & FILTERING
-        function setCategory(cat) {
-            currentCategory = cat;
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                if (btn.dataset.cat === cat) {
-                    btn.className = "cat-btn px-5 py-2.5 rounded-xl text-xs font-semibold bg-lime text-black shadow-lg";
-                } else {
-                    btn.className = "cat-btn px-5 py-2.5 rounded-xl text-xs font-semibold glass-card text-gray-300 hover:text-white";
-                }
-            });
-            filterAndRenderOffers();
-        }
-
-        function filterAndRenderOffers() {
-            const grid = document.getElementById('offersGrid');
-            const sortVal = document.getElementById('sortOffers').value;
-
-            let filtered = currentOffers.filter(item => currentCategory === 'all' || item.category === currentCategory);
-
-            if (sortVal === 'rate') filtered.sort((a, b) => a.rateNum - b.rateNum);
-            else if (sortVal === 'amount') filtered.sort((a, b) => b.amountNum - a.amountNum);
-            else filtered.sort((a, b) => b.popularity - a.popularity);
-
-            if (filtered.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-full text-center py-12 glass-card rounded-3xl">
-                        <i class="fa-solid fa-folder-open text-4xl text-gray-600 mb-3"></i>
-                        <p class="text-gray-400 text-sm">В данной категории нет офферов</p>
-                    </div>`;
-                return;
-            }
-
-            grid.innerHTML = filtered.map(offer => `
-                <div class="glass-card rounded-3xl p-6 border border-white/10 flex flex-col justify-between hover:border-lime/40 transition-all duration-300 group">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-2.5 py-1 rounded-md bg-lime/10 text-lime border border-lime/20 text-[11px] font-mono font-bold">${offer.badge}</span>
-                            <span class="text-xs text-gray-400 font-mono">${offer.bank}</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-lime transition-colors">${offer.title}</h3>
-                        <div class="grid grid-cols-2 gap-3 py-3 border-y border-white/5 mb-4 text-xs font-mono">
-                            <div><span class="text-gray-500 block">Ставка</span><span class="text-lime font-bold text-sm">${offer.rate}</span></div>
-                            <div><span class="text-gray-500 block">Сумма</span><span class="text-white font-bold text-sm">${offer.amount}</span></div>
-                        </div>
-                        <p class="text-xs text-gray-400 mb-6 flex items-start gap-2">
-                            <i class="fa-solid fa-circle-check text-lime mt-0.5"></i>
-                            <span>${offer.perk}</span>
-        // CALCULATOR LOGIC
-        function setCalcMode(mode) {
-            calcMode = mode;
-            const btnCredit = document.getElementById('calcModeCredit');
-            const btnRko = document.getElementById('calcModeRko');
-
-            if (mode === 'credit') {
-                btnCredit.className = "flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all bg-lime text-black shadow";
-                btnRko.className = "flex-1 py-2.5 rounded-lg text-sm font-semibold text-gray-400 hover:text-white transition-all";
-                document.getElementById('calcAmountLabel').innerText = "Сумма кредита / займа";
-                document.getElementById('calcTermLabel').innerText = "Срок погашения";
-                document.getElementById('calcMinAmount').innerText = "5 000 ₽";
-                document.getElementById('calcMaxAmount').innerText = "3 000 000 ₽";
-                document.getElementById('calcAmount').min = 5000;
-                document.getElementById('calcAmount').max = 3000000;
-                document.getElementById('calcAmount').step = 5000;
-                document.getElementById('calcAmount').value = 300000;
-                document.getElementById('calcResultTitle').innerText = "Примерный платеж / мес";
-            } else {
-                btnRko.className = "flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all bg-lime text-black shadow";
-                btnCredit.className = "flex-1 py-2.5 rounded-lg text-sm font-semibold text-gray-400 hover:text-white transition-all";
-                document.getElementById('calcAmountLabel').innerText = "Месячный оборот бизнеса";
-                document.getElementById('calcTermLabel').innerText = "Количество платежек / мес";
-                document.getElementById('calcMinAmount').innerText = "50 000 ₽";
-                document.getElementById('calcMaxAmount').innerText = "10 000 000 ₽";
-                document.getElementById('calcAmount').min = 50000;
-                document.getElementById('calcAmount').max = 10000000;
-                document.getElementById('calcAmount').step = 50000;
-                document.getElementById('calcAmount').value = 1000000;
-                document.getElementById('calcResultTitle').innerText = "Экономия на РКО в месяц";
-            }
-            updateCalculator();
-        }
-
-        function updateCalculator() {
-            const amount = parseInt(document.getElementById('calcAmount').value);
-            const term = parseInt(document.getElementById('calcTerm').value);
-
-            document.getElementById('calcAmountValue').innerText = amount.toLocaleString('ru-RU') + ' ₽';
-            document.getElementById('calcTermValue').innerText = term + ' мес.';
-
-            if (calcMode === 'credit') {
-                const annualRate = 0.08;
-                const monthlyRate = annualRate / 12;
-                const monthlyPayment = Math.round((amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -term)));
-                document.getElementById('calcMonthlyResult').innerText = monthlyPayment.toLocaleString('ru-RU') + ' ₽';
-                document.getElementById('calcRateText').innerText = 'от 5.5% / год';
-            } else {
-                const saving = Math.round((amount * 0.003) + (term * 25));
-                document.getElementById('calcMonthlyResult').innerText = saving.toLocaleString('ru-RU') + ' ₽';
-                document.getElementById('calcRateText').innerText = '0 ₽ открытие';
-            }
-        }
-
-                        </p>
-                    </div>
-                    <button onclick="openApplyModal('${offer.title.replace(/'/g, "\\'")}', '${offer.bank.replace(/'/g, "\\'")}')" class="w-full py-3 rounded-xl bg-lime text-black font-bold text-xs hover:bg-lime-400 transition-all text-center shadow-lg shadow-lime/15">
-                        Оформить заявку
-                    </button>
-                </div>
-            `).join('');
-        }
-
-                        link: obj.link || '#'
-                    });
-                }
-            }
-            return result;
-        }
-
-
-                <div class="flex items-center gap-3 pt-2">
-                    <button onclick="saveIntegrationsConfig()" class="flex-1 py-3.5 rounded-xl bg-lime text-black font-bold hover:bg-lime-400 transition-all text-center">
-                        Сохранить настройки
-                    </button>
-                    <button onclick="resetIntegrationsConfig()" class="py-3.5 px-4 rounded-xl glass-card text-gray-400 hover:text-red-400 transition-all">
-                        Сброс
-                    </button>
-                </div>
-            </div>
+  <!-- ================= ПЕРВЫЙ ЭКРАН: СЛАЙДЕР 1 И 2 (КАК В РЕФЕРЕНСЕ) ================= -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-slider">
+        <!-- СЛАЙД 1 -->
+        <div class="slide active" id="slide-0">
+          <div>
+            <span class="slide-tag">GILT • ОНЛАЙН-СЕРВИС</span>
+            <h1>Получите профессиональную юридическую помощь и станьте предпринимателем без похода в ФНС уже сегодня!</h1>
+            <p>Дистанционная подача документов без госпошлины 0 ₽. Поможем открыть расчетный счет и зарегистрировать бизнес в кратчайшие сроки.</p>
+            <a href="#rko" class="btn-primary">К УСЛУГАМ ↓</a>
+          </div>
+          <div class="slide-visual">
+            <div class="visual-big">0 ₽</div>
+            <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">Госпошлина и подготовка</div>
+            <p style="font-size: 14px; margin-bottom: 0;">Полное дистанционное оформление по Паспорту, ИНН и СНИЛС за 3–4 рабочих дня</p>
+          </div>
         </div>
+
+        <!-- СЛАЙД 2 -->
+        <div class="slide" id="slide-1">
+          <div>
+            <span class="slide-tag">GILT • КОНСАЛТИНГ</span>
+            <h2>Юридическая поддержка для бизнеса</h2>
+            <p>Мы предлагаем комплексные юридические услуги для вашего бизнеса. Наша команда профессионалов поможет разобраться в сложных вопросах, связанных с банковскими продуктами и консалтингом, обеспечивая надежность и защиту ваших интересов. Обратитесь к нам, чтобы получить квалифицированную помощь!</p>
+            <a href="#rko" class="btn-primary">К УСЛУГАМ ↓</a>
+          </div>
+          <div class="slide-visual">
+            <div class="visual-big">24/7</div>
+            <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">Персональный менеджер</div>
+            <p style="font-size: 14px; margin-bottom: 0;">Бесплатная консультация и сопровождение на всех этапах регистрации бизнеса и подбора финансирования</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slider-controls">
+        <button class="slider-arrow" onclick="changeSlide(0)">‹</button>
+        <button class="slider-dot active" id="dot-0" onclick="changeSlide(0)"></button>
+        <button class="slider-dot" id="dot-1" onclick="changeSlide(1)"></button>
+        <button class="slider-arrow" onclick="changeSlide(1)">›</button>
+      </div>
     </div>
+  </section>
 
-            </div>
-        </footer>
+  <!-- ================= ЭТАПЫ РЕГИСТРАЦИИ (4 ШАГА ИЗ РЕФЕРЕНСА) ================= -->
+  <section id="steps">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Этапы регистрации</h2>
+        <p class="section-sub">Этап регистрации пройдет всего в 4 шага!</p>
+      </div>
 
-                    <h3 class="text-2xl font-bold text-white mb-3">Мгновенный деплой и управление</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Управляйте карточками банков прямо из привычной Google Таблицы, а все заявки клиентов моментально приходят в ваш Telegram-чат.</p>
-                </div>
-            </div>
-        </section>
+      <div class="steps-grid">
+        <div class="step-item">
+          <div class="step-circle">1</div>
+          <h3>Заявка на открытие</h3>
+          <p>Вам понадобится всего лишь ПАСПОРТ, ИНН И СНИЛС. Заявку подаете самостоятельно и дистанционно, без похода в ФНС (Федеральная налоговая служба)</p>
+        </div>
 
-                                </div>
-                            </div>
+        <div class="step-item">
+          <div class="step-circle">2</div>
+          <h3>Подготовка документов</h3>
+          <p>Мы самостоятельно подадим документы для регистрации в ФНС</p>
+        </div>
 
-                            <button onclick="openApplyModal('Калькулятор выгоды', 'Индивидуальный расчет')" class="w-full py-3.5 rounded-xl bg-lime text-black font-bold text-sm hover:bg-lime-400 transition-all shadow-lg shadow-lime/20">
-                                Получить решение за 3 мин
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="step-item">
+          <div class="step-circle">3</div>
+          <h3>Звонок от менеджера</h3>
+          <p>С вами свяжется индивидуальный менеджер для того чтобы обсудить условия и подписать документы</p>
+        </div>
 
-            </div>
-        </section>
-
-                            <div class="p-4 rounded-2xl bg-obsidian-900 border border-white/5 flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400"><i class="fa-solid fa-credit-card"></i></div>
-                                    <div><div class="text-sm font-semibold text-white">Кредитная карта</div><div class="text-xs text-gray-400">Т-Банк • 120 дней 0%</div></div>
-                                </div>
-                                <span class="px-2.5 py-1 rounded bg-white/10 text-gray-300 font-mono text-xs">Кэшбэк</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-                    </button>
-                    <a href="#showcase" onclick="toggleMobileMenu()" class="w-full py-3 rounded-xl bg-lime text-black font-bold text-center text-sm">
-                         Подобрать продукт
-                    </a>
-                </div>
-            </div>
-        </header>
-
-    <div id="app-root" class="relative z-10 bg-grid">
-        <!-- SECTIONS HERE -->
+        <div class="step-item">
+          <div class="step-circle">4</div>
+          <h3>Открытие</h3>
+          <p>3-4 рабочих дня и вы получите сообщение от ФНС на Вашу электронную почту!</p>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <!-- ================= РЕГИСТРАЦИЯ ИП В БАНКЕ-ПАРТНЕРЕ ================= -->
+  <section id="rko">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Регистрация ИП в банке-партнере</h2>
+        <p class="section-sub">Бесплатное открытие расчетного счета и регистрация бизнеса онлайн</p>
+      </div>
+
+      <div class="rko-grid" id="rkoContainer"></div>
+    </div>
+  </section>
+
+  <!-- ================= МИКРОФИНАНСОВЫЕ ОРГАНИЗАЦИИ (МФО — 13 КАРТОЧЕК) ================= -->
+  <section id="mfo">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Микрофинансовые организации (МФО)</h2>
+        <p class="section-sub">Моментальное рассмотрение анкеты и перевод средств онлайн</p>
+      </div>
+
+      <div class="mfo-grid" id="mfoContainer"></div>
+    </div>
+  </section>
+
+  <!-- ================= ПОЧЕМУ СТОИТ ВЫБРАТЬ ИМЕННО НАС (6 ПУНКТОВ) ================= -->
+  <section id="why">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Почему стоит выбрать именно нас:</h2>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-check">✓</div>
+          <div>
+            <h3>Регистрация делается дистанционно</h3>
+            <p>Вам не придется идти в МФЦ И ФНС для подачи заявки, достаточно иметь только ПАСПОРТ и СНИЛС</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-check">✓</div>
+          <div>
+            <h3>Профессиональные юристы</h3>
+            <p>Широкий круг знаний по юридическим требованиям для регистрации вашего бизнеса</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-check">✓</div>
+          <div>
+            <h3>Бесплатная консультация</h3>
+            <p>Консультация по вашим вопросам - чтобы обсудить потребности вашей бизнес-регистрации</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-check">✓</div>
+          <div>
+            <h3>Сопровождение на всех этапах</h3>
+            <p>Мы подходим к каждому клиенту индивидуально и сопровождаем на любом этапе подачи заявки, чтобы помочь решить все его вопросы</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-check">✓</div>
+          <div>
+            <h3>Полностью бесплатно</h3>
+            <p>Консультация по вашим вопросам и подготовка документов — БЕСПЛАТНО</p>
+          </div>
+        </div>
+
+        <div class="why-card">
+          <div class="why-check">✓</div>
+          <div>
+            <h3>Быстрая регистрация</h3>
+            <p>Регистрация после подачи происходит за 3-4 рабочих дня</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ПОДВАЛ (КОНТАКТЫ И ДИСКЛЕЙМЕР ИЗ РЕФЕРЕНСА) ================= -->
+  <footer class="footer" id="contacts">
+    <div class="container">
+      <div class="footer-box">
+        <div class="footer-title">GILT — Контакты и правовая информация</div>
+        <p style="font-size: 15px;">Мы всегда стремимся подружиться с нашими клиентами, звоните и пишите нам по любым вопросам.</p>
+
+        <div class="footer-contacts">
+          <a id="footerTgBtn" href="https://t.me/accountzeus" target="_blank" rel="nofollow" class="btn-primary">Написать в Telegram</a>
+          <a id="footerMailBtn" href="mailto:zeusmail@bk.ru" class="btn-primary" style="background: transparent; color: var(--text-white); border: 1px solid var(--border); box-shadow: none;">Написать на почту</a>
+        </div>
+
+        <div class="disclaimer">
+          Это бесплатный информационный сервис, предоставляющий контент и справочную информацию о расчетных счетах, кредитных картах, кредитах, автокредитах, ипотечных и прочих займах и кредитах. Используя его вы сможете быстро решить свои финансовые вопросы, затратив минимум своего личного времени.<br><br>
+          Все товарные знаки и логотипы, представленные на этом сайте, являются собственностью соответствующих владельцев и взяты из публичных источников. Их появление на этом сайте не подразумевает одобрение ими нашего продукта.<br><br>
+          <b>Отказ от ответственности:</b><br>
+          Сервис не является кредитором или ипотечным/кредитным брокером и не предоставляет финансовые услуги прямо или косвенно через представителей или агентов. Не осуществляет выдачу каких-либо видов кредита. Не несет ответственности за точность информации, предоставленной банками по тарифам, кредитным ставкам, переплатам, а также за любую другую информацию.<br><br>
+          Оценивайте свои финансовые возможности и риски. Изучите все условия кредита (займа). Реклама. Рекламодатель: ООО "МБ Маркетплейс". ИНН 7727618949
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= ПОПАП: ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ================= -->
+  <div class="modal-backdrop" id="privacyModal">
+    <div class="modal-window">
+      <button class="modal-close" onclick="closeModal('privacyModal')">×</button>
+      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 16px; color: var(--lime);">Политика конфиденциальности</h3>
+      <div style="font-size: 14px; color: var(--text-gray); line-height: 1.65;">
+        <p>Настоящая Политика конфиденциальности регулирует порядок обработки и защиты информации о физических и юридических лицах, пользующихся информационным сервисом GILT.</p><br>
+        <p>1. Сервис GILT носит исключительно информационно-справочный характер и перенаправляет пользователей на официальные страницы банков-партнеров и микрофинансовых организаций.</p><br>
+        <p>2. Сервис не собирает и не хранит паспортные или платежные данные пользователей. Все анкеты заполняются пользователем непосредственно на защищенных ресурсах выбранных финансовых организаций.</p><br>
+        <p>3. По всем вопросам вы можете связаться с администрацией сайта через Telegram или электронную почту, указанные в разделе Контакты.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ПОПАП: ЛИЧНЫЙ КАБИНЕТ ТВОИХ РЕФЕРАЛЬНЫХ ССЫЛОК ================= -->
+  <div class="modal-backdrop" id="adminModal">
+    <div class="modal-window">
+      <button class="modal-close" onclick="closeModal('adminModal')">×</button>
+      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 6px; color: var(--lime);">⚙️ Личный кабинет реферальных ссылок</h3>
+      <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 20px;">
+        Здесь ты можешь вставить ссылку на свою Google Таблицу (CSV) ИЛИ поменять любую реферальную ссылку прямо в списке ниже.
+      </p>
+
+      <div style="background: #090D14; border: 1px solid var(--border); padding: 16px; border-radius: 14px; margin-bottom: 20px;">
+        <label style="font-size: 12px; font-weight: 700; display: block; margin-bottom: 8px; color: var(--lime);">Вариант 1: Ссылка на опубликованную Google Таблицу (.csv)</label>
+        <input type="url" id="sheetCsvInput" class="admin-input" placeholder="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv">
+      </div>
+
+      <div style="max-height: 320px; overflow-y: auto; padding-right: 6px; margin-bottom: 20px;" id="adminLinksList"></div>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <button class="btn-primary" onclick="saveAdminSettings()">Сохранить ссылки</button>
+        <button class="btn-primary" style="background: rgba(255,255,255,0.08); color: #fff; box-shadow: none;" onclick="exportConfigCode()">📋 Скопировать готовый код для GitHub</button>
+        <button class="btn-primary" style="background: transparent; color: #f87171; border: 1px solid #f87171; box-shadow: none;" onclick="resetAdminSettings()">Сброс</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= СКРИПТ ВСЕХ КАРТОЧЕК ИЗ РЕФЕРЕНСА И ЛОГИКИ ================= -->
+  <script>
+    // Вставьте сюда ссылку на вашу Google Таблицу (CSV), чтобы она работала у всех посетителей сайта:
+    const PERMANENT_GOOGLE_SHEET_CSV = "";
+
+    // Все 2 банка и 13 МФО точь-в-точь из референса zeusrko.tilda.ws
+    const DEFAULT_ITEMS = [
+      // БАНКИ РКО
+      {
+        id: "tbank",
+        cat: "rko",
+        badge: "ПЕРВЫЙ ВАРИАНТ",
+        shortLogo: "Т-БАНК",
+        color: "linear-gradient(135deg, #FFDD2D 0%, #F59E0B 100%)",
+        textColor: "#000",
+        title: "Открыть счет в ТБанке (ПЕРВЫЙ ВАРИАНТ)",
+        price: "Обслуживание 0/месяц р.",
+        btn: "Заказать",
+        url: "https://www.tbank.ru/business/registration-ip/"
+      },
+      {
+        id: "alfa",
+        cat: "rko",
+        badge: "ВТОРОЙ ВАРИАНТ",
+        shortLogo: "АЛЬФА-БАНК",
+        color: "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)",
+        textColor: "#fff",
+        title: "Открыть счет в Альфе (ВТОРОЙ ВАРИАНТ)",
+        price: "Обслуживание 0/месяц р.",
+        btn: "Заказать",
+        url: "https://trk.ppdu.ru/click/aGbkLIo0?erid=2SDnjeyjBZq&sub1=site&siteId=20402"
+      },
+
+      // 13 МФО ИЗ РЕФЕРЕНСА
+      {
+        id: "zaimer",
+        cat: "mfo",
+        badge: "МФО",
+        shortLogo: "ЗАЙМЕР",
+        color: "linear-gradient(135deg, #10B981 0%, #047857 100%)",
+        textColor: "#fff",
+        title: "Займер",
+        price: "Обслуживание 0 - 7900 р.",
+        btn: "ПОЛУЧИТЬ",
+        url: "https://agents.finuslugi.ru/go?erid=2W5zFJKcsyK&subid1=site"
+      },
+      {
+        id: "webbankir",
+        cat: "mfo",
+        badge: "МФО",
+        shortLogo: "WEBBANKIR",
+        color: "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)",
+        textColor: "#fff",
+        title: "WebBankir (Веб-Банкир)",
+        price: "Обслуживание 0 - 500 р.",
+        btn: "ПОЛУЧИТЬ",
+        url: "https://agents.finuslugi.ru/go?erid=2W5zFGcJ3a9&subid1=site"
+      },
+      {
+        id: "srochno",
+        cat: "mfo",
+        badge: "МФО",
+        shortLogo: "СРОЧНОДЕНЬГИ",
+        color: "linear-gradient(135deg, #84CC16 0%, #4D7C0F 100%)",
+        textColor: "#fff",
+        title: "СрочноДеньги",
+        price: "Обслуживание 0 - 9900 р.",
+        btn: "ПОЛУЧИТЬ",
+        url: "https://agents.finuslugi.ru/go?erid=2W5zFJzAtnD&subid1=site"
+      },
+      {
+        id: "credit7",
+        cat: "mfo",
+        badge: "МФО",
+        shortLogo: "CREDIT 7",
+        color: "linear-gradient(135deg, #6366F1 0%, #4338CA 100%)",
+        textColor: "#fff",
+        title: "Credit7 (Кредит7)",
+        price: "Обслуживание 0-4990 р.",
+        btn: "ПОЛУЧИТЬ",
+        url: "https://agents.finuslugi.ru/go?erid=2W5zFHQFznm&subid1=site"
+      },
+      {
+        id: "maxcredit",
+        cat: "mfo",
+        badge: "МФО",
+        shortLogo: "MAX.CREDIT",
+        color: "linear-gradient(135deg, #EC4899 0%, #BE185D 100%)",
+        textColor: "#fff",
+        title: "Макс Кредит (Max.Credit)",
+        price: "Обслуживание 0-4990 р.",
+        btn: "ПОЛУЧИТЬ",
+        url: "https://t.fincpanetwork.ru/click/63301/106/?erid=LjN8KN99W&sub1=site"
+      },
+      {
+        id: "umnal",
+        cat: "mfo",
+        badge: "МФО",
+        shortLogo: "УМНЫЕ НАЛИЧНЫЕ",
+        color: "linear-gradient(135deg, #8B5CF6 0%, #5B21B6 100%)",
+        textColor: "#fff",
+        title: "Умные Наличные",
+        price: "Обслуживание 0-4990 р.",
+        btn: "ПОЛУЧИТЬ",
+        url: "https://t.fincpanetwork.ru/click/63301/241/?erid=LjN8K54Q9&sub1=site"
+      },
+      {
+        id: "belka",
+        cat: "mfo",
+        badge: "МФО",
+        shortLogo: "БЕЛКА КРЕДИТ",
+        color: "linear-gradient(135deg, #F97316 0%, #C2410C 100%)",
+        textColor: "#fff",
+        title: "Белка Кредит",
+        price: "Обслуживание 0-4990 р.",
+        btn: "ПОЛУЧИТЬ",
+        url: "https://t.fincpanetwork.ru/click/63301/918/?erid=2W5zFK43c2V&sub1=site"
+      },
+      {
+        id: "oneclick",
+        cat: "mfo",
+        badge: "МФО",
+        shortLogo: "ONE CLICK MONEY",
+        color: "linear-gradient(135deg, #14B8A6 0%, #0F766E 100%)",
+        textColor: "#fff",
+        title: "One Click Money",
+        price: "Обслуживание 0-4990 р.",
+        btn: "ПОЛУЧИТЬ",
+        url: "https://t.fincpanetwork.ru/click/63301/99/?erid=2W5zFFukZyS&sub1=site"
+      },
+      {
+        id: "dengisrazu",
+        cat: "mfo",
+        badge: "МФО",
+        shortLogo: "ДЕНЬГИ СРАЗУ",
+        color: "linear-gradient(135deg, #EAB308 0%, #A16207 100%)",
+        textColor: "#fff",
+        title: "Деньги Сразу",
+        price: "Обслуживание 0-4990 р.",
+        btn: "ПОЛУЧИТЬ",
+        url: "https://t.fincpanetwork.ru/click/63301/11/?erid=2W5zFJg738c&sub1=site"
+      },
+      {
+        id: "moneyman",
+        cat: "mfo",
+        badge: "МФО",
+        shortLogo: "MONEY MAN",
+        color: "linear-gradient(135deg, #22C55E 0%, #15803D 100%)",
+        textColor: "#fff",
+        title: "Money Man",
+        price: "Обслуживание 0-4990 р.",
+        btn: "ПОЛУЧИТЬ",
+        url: "https://t.fincpanetwork.ru/click/63301/101/?erid=2W5zFGYnHe8&sub1=site"
+      },
+      {
+        id: "adengi",
+        cat: "mfo",
+        badge: "МФО",
+        shortLogo: "А-ДЕНЬГИ",
+        color: "linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)",
+        textColor: "#fff",
+        title: "А-Деньги",
+        price: "Обслуживание 0-4990 р.",
+        btn: "ПОЛУЧИТЬ",
+        url: "https://t.fincpanetwork.ru/click/63301/91/?erid=2W5zFHUbgxG&sub1=site"
+      },
+      {
+        id: "migcredit",
+        cat: "mfo",
+        badge: "МФО",
+        shortLogo: "МИГ КРЕДИТ",
+        color: "linear-gradient(135deg, #06B6D4 0%, #0E7490 100%)",
+        textColor: "#fff",
+        title: "Миг Кредит",
+        price: "Обслуживание 0-4990 р.",
+        btn: "ПОЛУЧИТЬ",
+        url: "https://t.fincpanetwork.ru/click/63301/450/?erid=2W5zFHt2Zms&sub1=site"
+      },
+      {
+        id: "turbozaim",
+        cat: "mfo",
+        badge: "МФО",
+        shortLogo: "ТУРБОЗАЙМ",
+        color: "linear-gradient(135deg, #3B82F6 0%, #1E3A8A 100%)",
+        textColor: "#fff",
+        title: "ТУРБОЗАЙМ",
+        price: "Обслуживание 0-4990 р.",
+        btn: "ПОЛУЧИТЬ",
+        url: "https://t.fincpanetwork.ru/click/63301/14?erid=2W5zFHvzYLZ&sub1=site"
+      }
+    ];
+
+    let items = JSON.parse(localStorage.getItem('gilt_custom_items')) || [...DEFAULT_ITEMS];
+
+    function renderCards() {
+      const rkoHtml = items.filter(i => i.cat === 'rko').map(cardTemplate).join('');
+      const mfoHtml = items.filter(i => i.cat === 'mfo').map(cardTemplate).join('');
+      document.getElementById('rkoContainer').innerHTML = rkoHtml;
+      document.getElementById('mfoContainer').innerHTML = mfoHtml;
+      renderAdminInputs();
+    }
+
+    function cardTemplate(item) {
+      return `
+        <div class="product-card">
+          <a href="${item.url}" target="_blank" rel="nofollow noopener" style="text-decoration: none; color: inherit;">
+            <div class="card-thumb" style="background: ${item.color || 'linear-gradient(135deg, #1E293B, #0F172A)'}; color: ${item.textColor || '#fff'};">
+              <span class="card-thumb-badge">${item.badge || 'ПАРТНЕР'}</span>
+              <div class="card-thumb-title">${item.shortLogo || item.title}</div>
+            </div>
+          </a>
+          <div class="card-body">
+            <div>
+              <div class="card-name">${item.title}</div>
+              <div class="card-sub">${item.price}</div>
+            </div>
+            <a href="${item.url}" target="_blank" rel="nofollow noopener" class="card-btn">${item.btn}</a>
+          </div>
+        </div>
+      `;
+    }
+
+    // Слайдер первого экрана
+    function changeSlide(idx) {
+      document.querySelectorAll('.slide').forEach((s, i) => s.classList.toggle('active', i === idx));
+      document.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+
+    // Мобильное меню и модалки
+    function toggleMobileNav() {
+      document.getElementById('mobileNav').classList.toggle('open');
+    }
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+
+    // Личный кабинет ссылок
+    function renderAdminInputs() {
+      const container = document.getElementById('adminLinksList');
+      document.getElementById('sheetCsvInput').value = localStorage.getItem('gilt_sheet_csv') || PERMANENT_GOOGLE_SHEET_CSV;
+      container.innerHTML = items.map((item, idx) => `
+        <div class="admin-row">
+          <div style="font-size: 13px; font-weight: 600;">${item.title}</div>
+          <input type="url" class="admin-input" data-idx="${idx}" value="${item.url}" placeholder="https://...">
+        </div>
+      `).join('');
+    }
+
+    function saveAdminSettings() {
+      const csvVal = document.getElementById('sheetCsvInput').value.trim();
+      localStorage.setItem('gilt_sheet_csv', csvVal);
+
+      document.querySelectorAll('#adminLinksList .admin-input').forEach(inp => {
+        const idx = parseInt(inp.dataset.idx, 10);
+        if (items[idx] && inp.value.trim() !== '') {
+          items[idx].url = inp.value.trim();
+        }
+      });
+
+      localStorage.setItem('gilt_custom_items', JSON.stringify(items));
+      if (csvVal) {
+        loadFromCsv(csvVal);
+      } else {
+        renderCards();
+      }
+      closeModal('adminModal');
+      alert('Ссылки успешно обновлены!');
+    }
+
+    function resetAdminSettings() {
+      if (confirm('Вернуть исходные ссылки по умолчанию?')) {
+        localStorage.removeItem('gilt_custom_items');
+        localStorage.removeItem('gilt_sheet_csv');
+        items = [...DEFAULT_ITEMS];
+        renderCards();
+      }
+    }
+
+    function exportConfigCode() {
+      saveAdminSettings();
+      navigator.clipboard.writeText(JSON.stringify(items, null, 2));
+      alert('Массив DEFAULT_ITEMS с твоими новыми ссылками скопирован в буфер обмена!');
+    }
+
+    async function loadFromCsv(csvUrl) {
+      try {
+        const res = await fetch(csvUrl);
+        const text = await res.text();
+        const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+        if (lines.length > 1) {
+          const parsed = [];
+          for (let i = 1; i < lines.length; i++) {
+            const cols = lines[i].split(',');
+            if (cols.length >= 5) {
+              parsed.push({
+                id: 'csv_' + i,
+                cat: (cols[0] || 'mfo').trim().toLowerCase(),
+                badge: (cols[1] || 'ПАРТНЕР').trim(),
+                shortLogo: (cols[2] || '').trim(),
+                title: (cols[2] || '').trim(),
+                price: (cols[3] || 'Обслуживание 0 р.').trim(),
+                btn: (cols[4] || 'ПОЛУЧИТЬ').trim(),
+                url: (cols[5] || '#').trim(),
+                color: 'linear-gradient(135deg, #1E293B 0%, #0F172A 100%)',
+                textColor: '#CCFF00'
+              });
+            }
+          }
+          if (parsed.length > 0) {
+            items = parsed;
+          }
+        }
+      } catch (e) {
+        console.warn('Ошибка чтения CSV:', e);
+      }
+      renderCards();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedCsv = localStorage.getItem('gilt_sheet_csv') || PERMANENT_GOOGLE_SHEET_CSV;
+      if (savedCsv) {
+        loadFromCsv(savedCsv);
+      } else {
+        renderCards();
+      }
+    });
+  </script>
 </body>
 </html>
