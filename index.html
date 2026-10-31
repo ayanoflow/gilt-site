@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>GILT — Регистрация ИП, РКО и МФО онлайн без визита в ФНС</title>
-  <meta name="description" content="Получите профессиональную юридическую помощь и станьте предпринимателем без похода в ФНС уже сегодня! Регистрация ИП в банке-партнере и подбор МФО.">
+  <title>GILT — Регистрация ИП, РКО, Карты и МФО онлайн</title>
+  <meta name="description" content="Получите профессиональную юридическую помощь и станьте предпринимателем без похода в ФНС уже сегодня! Регистрация ИП, РКО, дебетовые и кредитные карты, МФО.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@600;700;800&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@
       padding: 0 20px;
     }
 
-    /* ================= ШАПКА (КАК В РЕФЕРЕНСЕ) ================= */
+    /* ================= ШАПКА ================= */
     .header {
       position: sticky;
       top: 0;
@@ -69,6 +69,8 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      user-select: none;
+      cursor: pointer;
     }
     .logo-dot {
       width: 10px;
@@ -121,6 +123,13 @@
     }
     .soc-icon svg { width: 18px; height: 18px; fill: currentColor; }
 
+    /* Секретная шестеренка — скрыта от обычных посетителей! */
+    #secretAdminBtn {
+      display: none;
+      border-color: var(--lime);
+      color: var(--lime);
+    }
+
     .burger {
       display: none;
       background: var(--bg-card);
@@ -149,17 +158,15 @@
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
-    /* ================= ПЕРВЫЙ ЭКРАН: СЛАЙДЕР НА 2 ЭКРАНА (КАК В ПРИМЕРЕ) ================= */
-    .hero-section {
-      padding: 40px 0 30px;
-    }
+    /* ================= ПЕРВЫЙ ЭКРАН: СЛАЙДЕР ================= */
+    .hero-section { padding: 40px 0 30px; }
     .hero-slider {
       position: relative;
       background: linear-gradient(135deg, #131B29 0%, #0C111A 100%);
       border: 1px solid rgba(204, 255, 0, 0.22);
       border-radius: 26px;
       overflow: hidden;
-      min-height: 440px;
+      min-height: 430px;
       display: flex;
       align-items: center;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
@@ -167,15 +174,13 @@
     .slide {
       display: none;
       width: 100%;
-      padding: 56px 64px;
+      padding: 54px 60px;
       grid-template-columns: 1.2fr 0.8fr;
       gap: 40px;
       align-items: center;
-      animation: fadeIn 0.4s ease;
+      animation: fadeIn 0.35s ease;
     }
-    .slide.active {
-      display: grid;
-    }
+    .slide.active { display: grid; }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
@@ -235,7 +240,6 @@
       border-radius: 22px;
       padding: 34px;
       text-align: center;
-      position: relative;
     }
     .visual-big {
       font-family: 'Unbounded', sans-serif;
@@ -261,10 +265,7 @@
       cursor: pointer;
       transition: 0.2s;
     }
-    .slider-dot.active {
-      background: var(--lime);
-      width: 56px;
-    }
+    .slider-dot.active { background: var(--lime); width: 56px; }
     .slider-arrow {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -277,12 +278,12 @@
     }
     .slider-arrow:hover { border-color: var(--lime); color: var(--lime); }
 
-    /* ================= ОБЩИЕ ЗАГОЛОВКИ СЕКЦИЙ ================= */
-    section { padding: 56px 0; }
+    /* ================= СЕКЦИИ ================= */
+    section { padding: 52px 0; }
     .section-header {
       text-align: center;
       max-width: 760px;
-      margin: 0 auto 44px;
+      margin: 0 auto 40px;
     }
     .section-title {
       font-family: 'Unbounded', sans-serif;
@@ -306,7 +307,6 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 28px 24px;
-      position: relative;
       transition: 0.25s;
     }
     .step-item:hover {
@@ -339,17 +339,93 @@
       line-height: 1.55;
     }
 
-    /* ================= КАРТОЧКИ БАНКОВ И МФО (КАК В РЕФЕРЕНСЕ ST300) ================= */
+    /* ================= КАРТОЧКИ ИП + 4 ИКОНКИ КАТЕГОРИЙ НИЖЕ ================= */
     .rko-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 28px;
       max-width: 920px;
+      margin: 0 auto 44px;
+    }
+
+    /* 4 ИКОНКИ КАТЕГОРИЙ ПОД Т-БАНКОМ И АЛЬФОЙ */
+    .cat-hub-title {
+      text-align: center;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 20px;
+      margin-bottom: 22px;
+      color: var(--text-white);
+    }
+    .cat-hub-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1060px;
       margin: 0 auto;
     }
-    .mfo-grid {
+    .cat-hub-card {
+      background: linear-gradient(145deg, #151D2B 0%, #0E141F 100%);
+      border: 1px solid rgba(204, 255, 0, 0.25);
+      border-radius: 22px;
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-hub-card:hover {
+      border-color: var(--lime);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 35px rgba(204, 255, 0, 0.18);
+      background: linear-gradient(145deg, #1A2436 0%, #111827 100%);
+    }
+    .cat-hub-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      background: rgba(204, 255, 0, 0.12);
+      border: 1px solid rgba(204, 255, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: var(--lime);
+      box-shadow: 0 0 20px rgba(204, 255, 0, 0.12);
+    }
+    .cat-hub-name {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+    .cat-hub-desc {
+      font-size: 13px;
+      color: var(--text-gray);
+      line-height: 1.4;
+    }
+    .cat-hub-open {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: rgba(204, 255, 0, 0.14);
+      color: var(--lime);
+      font-family: 'Unbounded', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* КАРТОЧКИ ПРОДУКТОВ */
+    .mfo-grid, .modal-cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
       gap: 22px;
     }
     .product-card {
@@ -369,7 +445,7 @@
       box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
     }
     .card-thumb {
-      height: 155px;
+      height: 150px;
       position: relative;
       display: flex;
       align-items: center;
@@ -377,20 +453,31 @@
       padding: 20px;
       border-bottom: 1px solid var(--border);
       overflow: hidden;
+      background-size: cover;
+      background-position: center;
+    }
+    .card-thumb img.card-custom-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
     }
     .card-thumb-title {
       font-family: 'Unbounded', sans-serif;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 800;
       text-align: center;
       z-index: 2;
-      text-shadow: 0 4px 16px rgba(0,0,0,0.5);
+      text-shadow: 0 4px 16px rgba(0,0,0,0.65);
     }
     .card-thumb-badge {
       position: absolute;
       top: 12px;
       right: 12px;
-      background: rgba(9, 13, 20, 0.78);
+      z-index: 3;
+      background: rgba(9, 13, 20, 0.82);
       border: 1px solid rgba(255,255,255,0.15);
       color: var(--lime);
       font-size: 11px;
@@ -439,7 +526,7 @@
       box-shadow: 0 0 20px var(--lime-glow);
     }
 
-    /* ================= ПОЧЕМУ СТОИТ ВЫБРАТЬ ИМЕННО НАС (6 ПУНКТОВ) ================= */
+    /* ================= ПОЧЕМУ СТОИТ ВЫБРАТЬ НАС (6 ПУНКТОВ) ================= */
     .why-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -479,7 +566,7 @@
       line-height: 1.55;
     }
 
-    /* ================= ПОДВАЛ / КОНТАКТЫ И ДИСКЛЕЙМЕР (КАК В РЕФЕРЕНСЕ) ================= */
+    /* ================= ПОДВАЛ ================= */
     .footer {
       border-top: 1px solid var(--border);
       padding: 56px 0 44px;
@@ -512,12 +599,13 @@
       padding-top: 20px;
     }
 
-    /* ================= МОДАЛЬНЫЕ ОКНА (ЛИЧНЫЙ КАБИНЕТ ССЫЛОК И ПОЛИТИКА) ================= */
+    /* ================= МОДАЛЬНЫЕ ОКНА (КАТАЛОГ КАТЕГОРИЙ + СЕКРЕТНАЯ АДМИНКА) ================= */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.82);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.84);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       z-index: 999;
       display: none;
       align-items: center;
@@ -526,37 +614,74 @@
     }
     .modal-backdrop.open { display: flex; }
     .modal-window {
-      background: #111722;
-      border: 1px solid rgba(204, 255, 0, 0.35);
-      border-radius: 22px;
-      max-width: 780px;
+      background: #0E141F;
+      border: 1px solid rgba(204, 255, 0, 0.38);
+      border-radius: 24px;
+      max-width: 1020px;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
-      padding: 32px;
+      padding: 34px;
       position: relative;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7);
+      animation: fadeIn 0.25s ease;
     }
     .modal-close {
       position: absolute;
-      top: 18px;
-      right: 20px;
-      background: none;
-      border: none;
-      color: var(--text-gray);
-      font-size: 26px;
+      top: 20px;
+      right: 22px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--text-white);
+      font-size: 24px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    .modal-close:hover { border-color: var(--lime); color: var(--lime); }
+
+    .modal-cat-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-tab-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-white);
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .modal-tab-btn.active {
+      background: var(--lime);
+      color: #090D14;
+      border-color: var(--lime);
+      box-shadow: 0 0 18px var(--lime-glow);
+    }
+
     .admin-row {
       display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 12px;
+      grid-template-columns: 120px 180px 1fr 1fr;
+      gap: 10px;
       align-items: center;
       padding: 10px 0;
       border-bottom: 1px solid var(--border);
     }
     .admin-input {
       width: 100%;
-      padding: 10px 14px;
+      padding: 10px 12px;
       background: #090D14;
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -565,19 +690,20 @@
     }
     .admin-input:focus { border-color: var(--lime); outline: none; }
 
-    /* ================= АДАПТИВ ДЛЯ ТЕЛЕФОНОВ И ПЛАНШЕТОВ ================= */
+    /* ================= АДАПТИВ ================= */
     @media (max-width: 992px) {
       .nav-center, .nav-right { display: none; }
       .burger { display: inline-block; }
       .slide.active { grid-template-columns: 1fr; padding: 36px 28px; }
-      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid, .cat-hub-grid { grid-template-columns: repeat(2, 1fr); }
       .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .admin-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
-      .rko-grid, .steps-grid, .why-grid { grid-template-columns: 1fr; }
+      .rko-grid, .steps-grid, .cat-hub-grid, .why-grid { grid-template-columns: 1fr; }
       .slide.active { padding: 28px 20px; }
       .btn-primary { width: 100%; }
-      .admin-row { grid-template-columns: 1fr; }
+      .modal-window { padding: 22px 16px; }
     }
   </style>
 </head>
@@ -586,12 +712,15 @@
   <!-- ================= ШАПКА САЙТА ================= -->
   <header class="header">
     <div class="container header-inner">
-      <a href="#" class="logo"><span class="logo-dot"></span>GILT</a>
+      <div class="logo" onclick="handleLogoSecretTap()" title="GILT">
+        <span class="logo-dot"></span>GILT
+      </div>
 
       <ul class="nav-center">
         <li><a href="#steps">Этапы</a></li>
-        <li><a href="#mfo">МФО</a></li>
         <li><a href="#rko">Регистрация ИП</a></li>
+        <li><a href="#categories-hub">Карты и РКО</a></li>
+        <li><a href="#mfo">МФО</a></li>
       </ul>
 
       <div class="nav-right">
@@ -604,7 +733,8 @@
           <a id="headerMailLink" href="mailto:zeusmail@bk.ru" class="soc-icon" title="Электронная почта">
             <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
           </a>
-          <button onclick="openModal('adminModal')" class="soc-icon" title="Кабинет твоих реферальных ссылок">⚙️</button>
+          <!-- Шестеренка скрыта от чужих глаз! Появляется только для владельца -->
+          <button id="secretAdminBtn" onclick="openModal('adminModal')" class="soc-icon" title="Закрытая панель владельца">⚙️</button>
         </div>
       </div>
 
@@ -613,15 +743,15 @@
 
     <div class="mobile-nav" id="mobileNav">
       <a href="#steps" onclick="toggleMobileNav()">Этапы</a>
-      <a href="#mfo" onclick="toggleMobileNav()">МФО</a>
       <a href="#rko" onclick="toggleMobileNav()">Регистрация ИП</a>
+      <a href="#categories-hub" onclick="toggleMobileNav()">Дебетовые / Кредитные карты / РКО</a>
+      <a href="#mfo" onclick="toggleMobileNav()">МФО</a>
       <a href="#" onclick="toggleMobileNav(); openModal('privacyModal'); return false;">Политика конфиденциальности</a>
       <a href="#contacts" onclick="toggleMobileNav()">Контакты</a>
-      <a href="#" onclick="toggleMobileNav(); openModal('adminModal'); return false;" style="color: var(--lime);">⚙️ Личный кабинет ссылок</a>
     </div>
   </header>
 
-  <!-- ================= ПЕРВЫЙ ЭКРАН: СЛАЙДЕР 1 И 2 (КАК В РЕФЕРЕНСЕ) ================= -->
+  <!-- ================= ПЕРВЫЙ ЭКРАН: СЛАЙДЕР ================= -->
   <section class="hero-section">
     <div class="container">
       <div class="hero-slider">
@@ -630,7 +760,7 @@
           <div>
             <span class="slide-tag">GILT • ОНЛАЙН-СЕРВИС</span>
             <h1>Получите профессиональную юридическую помощь и станьте предпринимателем без похода в ФНС уже сегодня!</h1>
-            <p>Дистанционная подача документов без госпошлины 0 ₽. Поможем открыть расчетный счет и зарегистрировать бизнес в кратчайшие сроки.</p>
+            <p>Дистанционная подача документов без госпошлины 0 ₽. Поможем открыть расчетный счет, подобрать карты и зарегистрировать бизнес в кратчайшие сроки.</p>
             <a href="#rko" class="btn-primary">К УСЛУГАМ ↓</a>
           </div>
           <div class="slide-visual">
@@ -665,7 +795,7 @@
     </div>
   </section>
 
-  <!-- ================= ЭТАПЫ РЕГИСТРАЦИИ (4 ШАГА ИЗ РЕФЕРЕНСА) ================= -->
+  <!-- ================= ЭТАПЫ РЕГИСТРАЦИИ (4 ШАГА) ================= -->
   <section id="steps">
     <div class="container">
       <div class="section-header">
@@ -701,7 +831,7 @@
     </div>
   </section>
 
-  <!-- ================= РЕГИСТРАЦИЯ ИП В БАНКЕ-ПАРТНЕРЕ ================= -->
+  <!-- ================= РЕГИСТРАЦИЯ ИП + 4 ИКОНКИ КАТЕГОРИЙ НИЖЕ ================= -->
   <section id="rko">
     <div class="container">
       <div class="section-header">
@@ -709,11 +839,46 @@
         <p class="section-sub">Бесплатное открытие расчетного счета и регистрация бизнеса онлайн</p>
       </div>
 
-      <div class="rko-grid" id="rkoContainer"></div>
+      <!-- Карточки Т-Банк и Альфа -->
+      <div class="rko-grid" id="ipContainer"></div>
+
+      <!-- 4 ИКОНКИ КАТЕГОРИЙ (ОТКРЫВАЮТ ВНУТРЕННЕЕ ОКНО НА САЙТЕ) -->
+      <div id="categories-hub" style="padding-top: 16px;">
+        <h3 class="cat-hub-title">Все финансовые продукты и сервисы (нажмите для выбора):</h3>
+        <div class="cat-hub-grid">
+          <div class="cat-hub-card" onclick="openCategoryCatalog('debit')">
+            <div class="cat-hub-icon">💳</div>
+            <div class="cat-hub-name">Дебетовые карты</div>
+            <div class="cat-hub-desc">Бесплатное обслуживание, повышенный кэшбэк и процент на остаток</div>
+            <span class="cat-hub-open">Открыть каталог →</span>
+          </div>
+
+          <div class="cat-hub-card" onclick="openCategoryCatalog('credit')">
+            <div class="cat-hub-icon">💎</div>
+            <div class="cat-hub-name">Кредитные карты</div>
+            <div class="cat-hub-desc">Льготный период без процентов, снятие наличных и быстрое одобрение</div>
+            <span class="cat-hub-open">Открыть каталог →</span>
+          </div>
+
+          <div class="cat-hub-card" onclick="openCategoryCatalog('rko')">
+            <div class="cat-hub-icon">🏦</div>
+            <div class="cat-hub-name">РКО для бизнеса</div>
+            <div class="cat-hub-desc">Расчетные счета для ИП и ООО, эквайринг и бесплатная бухгалтерия</div>
+            <span class="cat-hub-open">Открыть каталог →</span>
+          </div>
+
+          <div class="cat-hub-card" onclick="openCategoryCatalog('mfo')">
+            <div class="cat-hub-icon">⚡</div>
+            <div class="cat-hub-name">МФО и Займы</div>
+            <div class="cat-hub-desc">Моментальное зачисление на карту за 5 минут, первый займ под 0%</div>
+            <span class="cat-hub-open">Открыть каталог →</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ================= МИКРОФИНАНСОВЫЕ ОРГАНИЗАЦИИ (МФО — 13 КАРТОЧЕК) ================= -->
+  <!-- ================= МИКРОФИНАНСОВЫЕ ОРГАНИЗАЦИИ (МФО НА СТРАНИЦЕ) ================= -->
   <section id="mfo">
     <div class="container">
       <div class="section-header">
@@ -725,7 +890,7 @@
     </div>
   </section>
 
-  <!-- ================= ПОЧЕМУ СТОИТ ВЫБРАТЬ ИМЕННО НАС (6 ПУНКТОВ) ================= -->
+  <!-- ================= ПОЧЕМУ СТОИТ ВЫБРАТЬ ИМЕННО НАС ================= -->
   <section id="why">
     <div class="container">
       <div class="section-header">
@@ -784,7 +949,7 @@
     </div>
   </section>
 
-  <!-- ================= ПОДВАЛ (КОНТАКТЫ И ДИСКЛЕЙМЕР ИЗ РЕФЕРЕНСА) ================= -->
+  <!-- ================= ПОДВАЛ ================= -->
   <footer class="footer" id="contacts">
     <div class="container">
       <div class="footer-box">
@@ -797,7 +962,7 @@
         </div>
 
         <div class="disclaimer">
-          Это бесплатный информационный сервис, предоставляющий контент и справочную информацию о расчетных счетах, кредитных картах, кредитах, автокредитах, ипотечных и прочих займах и кредитах. Используя его вы сможете быстро решить свои финансовые вопросы, затратив минимум своего личного времени.<br><br>
+          Это бесплатный информационный сервис, предоставляющий контент и справочную информацию о расчетных счетах, дебетовых и кредитных картах, кредитах, автокредитах, ипотечных и прочих займах. Используя его вы сможете быстро решить свои финансовые вопросы, затратив минимум своего личного времени.<br><br>
           Все товарные знаки и логотипы, представленные на этом сайте, являются собственностью соответствующих владельцев и взяты из публичных источников. Их появление на этом сайте не подразумевает одобрение ими нашего продукта.<br><br>
           <b>Отказ от ответственности:</b><br>
           Сервис не является кредитором или ипотечным/кредитным брокером и не предоставляет финансовые услуги прямо или косвенно через представителей или агентов. Не осуществляет выдачу каких-либо видов кредита. Не несет ответственности за точность информации, предоставленной банками по тарифам, кредитным ставкам, переплатам, а также за любую другую информацию.<br><br>
@@ -807,9 +972,29 @@
     </div>
   </footer>
 
-  <!-- ================= ПОПАП: ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ================= -->
-  <div class="modal-backdrop" id="privacyModal">
+  <!-- ================= ВНУТРЕННЕЕ ОКНО КАТАЛОГА (4 КАТЕГОРИИ: ДЕБЕТОВЫЕ, КРЕДИТНЫЕ, РКО, МФО) ================= -->
+  <div class="modal-backdrop" id="catalogModal" onclick="if(event.target===this) closeModal('catalogModal')">
     <div class="modal-window">
+      <button class="modal-close" onclick="closeModal('catalogModal')">×</button>
+      <h3 id="catalogModalTitle" style="font-family: 'Unbounded', sans-serif; font-size: 24px; margin-bottom: 6px; color: var(--lime);">Каталог предложений</h3>
+      <p id="catalogModalSub" style="font-size: 14px; color: var(--text-gray); margin-bottom: 20px;">Выберите подходящий банк или организацию и нажмите кнопку оформления</p>
+
+      <!-- Переключатель между 4 окнами прямо внутри модалки -->
+      <div class="modal-cat-tabs">
+        <button class="modal-tab-btn" id="mtab-debit" onclick="openCategoryCatalog('debit')">💳 Дебетовые карты</button>
+        <button class="modal-tab-btn" id="mtab-credit" onclick="openCategoryCatalog('credit')">💎 Кредитные карты</button>
+        <button class="modal-tab-btn" id="mtab-rko" onclick="openCategoryCatalog('rko')">🏦 РКО и ИП</button>
+        <button class="modal-tab-btn" id="mtab-mfo" onclick="openCategoryCatalog('mfo')">⚡ МФО и Займы</button>
+      </div>
+
+      <!-- Сетка карточек выбранной категории -->
+      <div class="modal-cards-grid" id="catalogModalGrid"></div>
+    </div>
+  </div>
+
+  <!-- ================= ПОПАП: ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ================= -->
+  <div class="modal-backdrop" id="privacyModal" onclick="if(event.target===this) closeModal('privacyModal')">
+    <div class="modal-window" style="max-width: 680px;">
       <button class="modal-close" onclick="closeModal('privacyModal')">×</button>
       <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 16px; color: var(--lime);">Политика конфиденциальности</h3>
       <div style="font-size: 14px; color: var(--text-gray); line-height: 1.65;">
@@ -821,43 +1006,73 @@
     </div>
   </div>
 
-  <!-- ================= ПОПАП: ЛИЧНЫЙ КАБИНЕТ ТВОИХ РЕФЕРАЛЬНЫХ ССЫЛОК ================= -->
+  <!-- ================= СЕКРЕТНЫЙ ЛИЧНЫЙ КАБИНЕТ ВЛАДЕЛЬЦА (СКРЫТ ОТ ПОСЕТИТЕЛЕЙ) ================= -->
   <div class="modal-backdrop" id="adminModal">
     <div class="modal-window">
       <button class="modal-close" onclick="closeModal('adminModal')">×</button>
-      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 6px; color: var(--lime);">⚙️ Личный кабинет реферальных ссылок</h3>
-      <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 20px;">
-        Здесь ты можешь вставить ссылку на свою Google Таблицу (CSV) ИЛИ поменять любую реферальную ссылку прямо в списке ниже.
+      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 6px; color: var(--lime);">🔒 Закрытая панель владельца GILT</h3>
+      <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 18px;">
+        Эта панель скрыта от обычных посетителей. Здесь ты управляешь всеми карточками (Дебетовые, Кредитные, РКО, МФО), картинками, контактами и авто-публикацией на GitHub.
       </p>
 
-      <div style="background: #090D14; border: 1px solid var(--border); padding: 16px; border-radius: 14px; margin-bottom: 20px;">
-        <label style="font-size: 12px; font-weight: 700; display: block; margin-bottom: 8px; color: var(--lime);">Вариант 1: Ссылка на опубликованную Google Таблицу (.csv)</label>
-        <input type="url" id="sheetCsvInput" class="admin-input" placeholder="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv">
+      <!-- Контакты и GitHub авто-публикация -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; background: #090D14; border: 1px solid var(--border); padding: 16px; border-radius: 14px; margin-bottom: 18px;">
+        <div>
+          <label style="font-size: 11px; color: var(--lime); font-weight: 700;">Твой Telegram (ссылка):</label>
+          <input type="text" id="admTg" class="admin-input" placeholder="https://t.me/username">
+        </div>
+        <div>
+          <label style="font-size: 11px; color: var(--lime); font-weight: 700;">Твоя Почта (email):</label>
+          <input type="text" id="admMail" class="admin-input" placeholder="mail@example.com">
+        </div>
+        <div>
+          <label style="font-size: 11px; color: var(--lime); font-weight: 700;">Google Таблица (.csv ссылка):</label>
+          <input type="url" id="sheetCsvInput" class="admin-input" placeholder="https://docs.google.com/.../pub?output=csv">
+        </div>
+        <div>
+          <label style="font-size: 11px; color: var(--lime); font-weight: 700;">GitHub Personal Token (для авто-сохранения):</label>
+          <input type="password" id="admGhToken" class="admin-input" placeholder="ghp_...">
+        </div>
       </div>
 
-      <div style="max-height: 320px; overflow-y: auto; padding-right: 6px; margin-bottom: 20px;" id="adminLinksList"></div>
+      <!-- Список карточек -->
+      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">
+        Список карточек (Категория: debit / credit / rko / mfo | Название | Ссылка на картинку | Твоя реф. ссылка):
+      </div>
+      <div style="max-height: 310px; overflow-y: auto; padding-right: 6px; margin-bottom: 18px;" id="adminLinksList"></div>
 
-      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-        <button class="btn-primary" onclick="saveAdminSettings()">Сохранить ссылки</button>
-        <button class="btn-primary" style="background: rgba(255,255,255,0.08); color: #fff; box-shadow: none;" onclick="exportConfigCode()">📋 Скопировать готовый код для GitHub</button>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button class="btn-primary" onclick="saveAdminSettings()">💾 Сохранить в браузере</button>
+        <button class="btn-primary" style="background: #10B981; color: #fff; box-shadow: none;" onclick="pushToGitHubDirect()">🚀 Опубликовать на GitHub для всех</button>
+        <button class="btn-primary" style="background: rgba(255,255,255,0.08); color: #fff; box-shadow: none;" onclick="addNewOfferRow()">+ Добавить банк/карту</button>
         <button class="btn-primary" style="background: transparent; color: #f87171; border: 1px solid #f87171; box-shadow: none;" onclick="resetAdminSettings()">Сброс</button>
       </div>
+      <div id="ghStatusMsg" style="margin-top: 12px; font-size: 13px; color: var(--lime);"></div>
     </div>
   </div>
 
-  <!-- ================= СКРИПТ ВСЕХ КАРТОЧЕК ИЗ РЕФЕРЕНСА И ЛОГИКИ ================= -->
+  <!-- ================= СКРИПТ ДАННЫХ И ЛОГИКИ ================= -->
   <script>
-    // Вставьте сюда ссылку на вашу Google Таблицу (CSV), чтобы она работала у всех посетителей сайта:
-    const PERMANENT_GOOGLE_SHEET_CSV = "";
+    // ПИН-КОД ВЛАДЕЛЬЦА ДЛЯ ВХОДА В НАСТРОЙКИ (Shift + A или 5 кликов по логотипу GILT):
+    const OWNER_PIN = "7777";
 
-    // Все 2 банка и 13 МФО точь-в-точь из референса zeusrko.tilda.ws
+    // КОНТАКТЫ САЙТА (START_CONTACTS_JSON)
+    const SITE_CONTACTS = {
+      tg: "https://t.me/accountzeus",
+      mail: "zeusmail@bk.ru",
+      csv: ""
+    };
+    // (END_CONTACTS_JSON)
+
+    // БАЗА ВСЕХ КАРТОЧЕК ПО 4 КАТЕГОРИЯМ (START_ITEMS_JSON)
     const DEFAULT_ITEMS = [
-      // БАНКИ РКО
+      // === 1. РКО И РЕГИСТРАЦИЯ ИП (cat: "rko") ===
       {
-        id: "tbank",
+        id: "tbank_rko",
         cat: "rko",
         badge: "ПЕРВЫЙ ВАРИАНТ",
         shortLogo: "Т-БАНК",
+        img: "",
         color: "linear-gradient(135deg, #FFDD2D 0%, #F59E0B 100%)",
         textColor: "#000",
         title: "Открыть счет в ТБанке (ПЕРВЫЙ ВАРИАНТ)",
@@ -866,10 +1081,11 @@
         url: "https://www.tbank.ru/business/registration-ip/"
       },
       {
-        id: "alfa",
+        id: "alfa_rko",
         cat: "rko",
         badge: "ВТОРОЙ ВАРИАНТ",
         shortLogo: "АЛЬФА-БАНК",
+        img: "",
         color: "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)",
         textColor: "#fff",
         title: "Открыть счет в Альфе (ВТОРОЙ ВАРИАНТ)",
@@ -878,12 +1094,95 @@
         url: "https://trk.ppdu.ru/click/aGbkLIo0?erid=2SDnjeyjBZq&sub1=site&siteId=20402"
       },
 
-      // 13 МФО ИЗ РЕФЕРЕНСА
+      // === 2. ДЕБЕТОВЫЕ КАРТЫ (cat: "debit") ===
+      {
+        id: "tbank_black",
+        cat: "debit",
+        badge: "ДЕБЕТОВАЯ КАРТА",
+        shortLogo: "Т-БАНК BLACK",
+        img: "",
+        color: "linear-gradient(135deg, #FFDD2D 0%, #CA8A04 100%)",
+        textColor: "#000",
+        title: "Дебетовая карта Т-Банк Black",
+        price: "Кэшбэк до 30% рублями • 0 ₽",
+        btn: "Оформить карту",
+        url: "#"
+      },
+      {
+        id: "alfa_debit",
+        cat: "debit",
+        badge: "ДЕБЕТОВАЯ КАРТА",
+        shortLogo: "АЛЬФА-КАРТА",
+        img: "",
+        color: "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)",
+        textColor: "#fff",
+        title: "Альфа-Карта с суперкэшбэком",
+        price: "Обслуживание 0 ₽ навсегда",
+        btn: "Оформить карту",
+        url: "#"
+      },
+      {
+        id: "vtb_debit",
+        cat: "debit",
+        badge: "ДЕБЕТОВАЯ КАРТА",
+        shortLogo: "ВТБ КАРТА",
+        img: "",
+        color: "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)",
+        textColor: "#fff",
+        title: "Карта для жизни ВТБ",
+        price: "Кэшбэк рублями • 0 ₽",
+        btn: "Оформить карту",
+        url: "#"
+      },
+
+      // === 3. КРЕДИТНЫЕ КАРТЫ (cat: "credit") ===
+      {
+        id: "tbank_plat",
+        cat: "credit",
+        badge: "КРЕДИТНАЯ КАРТА",
+        shortLogo: "Т-БАНК PLATINUM",
+        img: "",
+        color: "linear-gradient(135deg, #334155 0%, #0F172A 100%)",
+        textColor: "#CCFF00",
+        title: "Кредитная карта Т-Банк Платинум",
+        price: "До 1 000 000 ₽ • беспроцентный период",
+        btn: "Оформить карту",
+        url: "#"
+      },
+      {
+        id: "alfa_credit",
+        cat: "credit",
+        badge: "КРЕДИТНАЯ КАРТА",
+        shortLogo: "АЛЬФА КРЕДИТКА",
+        img: "",
+        color: "linear-gradient(135deg, #DC2626 0%, #7F1D1D 100%)",
+        textColor: "#fff",
+        title: "Кредитная карта Альфа-Банк",
+        price: "Льготный период • снятие наличных",
+        btn: "Оформить карту",
+        url: "#"
+      },
+      {
+        id: "sber_credit",
+        cat: "credit",
+        badge: "КРЕДИТНАЯ КАРТА",
+        shortLogo: "СБЕРКАРТА",
+        img: "",
+        color: "linear-gradient(135deg, #16A34A 0%, #065F46 100%)",
+        textColor: "#fff",
+        title: "Кредитная СберКарта",
+        price: "120 дней без % • 0 ₽ обслуживание",
+        btn: "Оформить карту",
+        url: "#"
+      },
+
+      // === 4. МФО (13 КАРТОЧЕК ИЗ РЕФЕРЕНСА, cat: "mfo") ===
       {
         id: "zaimer",
         cat: "mfo",
         badge: "МФО",
         shortLogo: "ЗАЙМЕР",
+        img: "",
         color: "linear-gradient(135deg, #10B981 0%, #047857 100%)",
         textColor: "#fff",
         title: "Займер",
@@ -896,6 +1195,7 @@
         cat: "mfo",
         badge: "МФО",
         shortLogo: "WEBBANKIR",
+        img: "",
         color: "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)",
         textColor: "#fff",
         title: "WebBankir (Веб-Банкир)",
@@ -908,6 +1208,7 @@
         cat: "mfo",
         badge: "МФО",
         shortLogo: "СРОЧНОДЕНЬГИ",
+        img: "",
         color: "linear-gradient(135deg, #84CC16 0%, #4D7C0F 100%)",
         textColor: "#fff",
         title: "СрочноДеньги",
@@ -920,6 +1221,7 @@
         cat: "mfo",
         badge: "МФО",
         shortLogo: "CREDIT 7",
+        img: "",
         color: "linear-gradient(135deg, #6366F1 0%, #4338CA 100%)",
         textColor: "#fff",
         title: "Credit7 (Кредит7)",
@@ -932,6 +1234,7 @@
         cat: "mfo",
         badge: "МФО",
         shortLogo: "MAX.CREDIT",
+        img: "",
         color: "linear-gradient(135deg, #EC4899 0%, #BE185D 100%)",
         textColor: "#fff",
         title: "Макс Кредит (Max.Credit)",
@@ -944,6 +1247,7 @@
         cat: "mfo",
         badge: "МФО",
         shortLogo: "УМНЫЕ НАЛИЧНЫЕ",
+        img: "",
         color: "linear-gradient(135deg, #8B5CF6 0%, #5B21B6 100%)",
         textColor: "#fff",
         title: "Умные Наличные",
@@ -956,6 +1260,7 @@
         cat: "mfo",
         badge: "МФО",
         shortLogo: "БЕЛКА КРЕДИТ",
+        img: "",
         color: "linear-gradient(135deg, #F97316 0%, #C2410C 100%)",
         textColor: "#fff",
         title: "Белка Кредит",
@@ -968,6 +1273,7 @@
         cat: "mfo",
         badge: "МФО",
         shortLogo: "ONE CLICK MONEY",
+        img: "",
         color: "linear-gradient(135deg, #14B8A6 0%, #0F766E 100%)",
         textColor: "#fff",
         title: "One Click Money",
@@ -980,6 +1286,7 @@
         cat: "mfo",
         badge: "МФО",
         shortLogo: "ДЕНЬГИ СРАЗУ",
+        img: "",
         color: "linear-gradient(135deg, #EAB308 0%, #A16207 100%)",
         textColor: "#fff",
         title: "Деньги Сразу",
@@ -992,6 +1299,7 @@
         cat: "mfo",
         badge: "МФО",
         shortLogo: "MONEY MAN",
+        img: "",
         color: "linear-gradient(135deg, #22C55E 0%, #15803D 100%)",
         textColor: "#fff",
         title: "Money Man",
@@ -1004,6 +1312,7 @@
         cat: "mfo",
         badge: "МФО",
         shortLogo: "А-ДЕНЬГИ",
+        img: "",
         color: "linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)",
         textColor: "#fff",
         title: "А-Деньги",
@@ -1016,6 +1325,7 @@
         cat: "mfo",
         badge: "МФО",
         shortLogo: "МИГ КРЕДИТ",
+        img: "",
         color: "linear-gradient(135deg, #06B6D4 0%, #0E7490 100%)",
         textColor: "#fff",
         title: "Миг Кредит",
@@ -1028,6 +1338,7 @@
         cat: "mfo",
         badge: "МФО",
         shortLogo: "ТУРБОЗАЙМ",
+        img: "",
         color: "linear-gradient(135deg, #3B82F6 0%, #1E3A8A 100%)",
         textColor: "#fff",
         title: "ТУРБОЗАЙМ",
@@ -1036,24 +1347,36 @@
         url: "https://t.fincpanetwork.ru/click/63301/14?erid=2W5zFHvzYLZ&sub1=site"
       }
     ];
+    // (END_ITEMS_JSON)
 
-    let items = JSON.parse(localStorage.getItem('gilt_custom_items')) || [...DEFAULT_ITEMS];
+    let items = JSON.parse(localStorage.getItem('gilt_v2_items')) || [...DEFAULT_ITEMS];
+    let contacts = JSON.parse(localStorage.getItem('gilt_v2_contacts')) || { ...SITE_CONTACTS };
 
+    // Отрисовка карточек на странице
     function renderCards() {
-      const rkoHtml = items.filter(i => i.cat === 'rko').map(cardTemplate).join('');
+      const ipHtml = items.filter(i => i.cat === 'rko').slice(0, 2).map(cardTemplate).join('');
       const mfoHtml = items.filter(i => i.cat === 'mfo').map(cardTemplate).join('');
-      document.getElementById('rkoContainer').innerHTML = rkoHtml;
+      document.getElementById('ipContainer').innerHTML = ipHtml;
       document.getElementById('mfoContainer').innerHTML = mfoHtml;
+
+      // Применяем контакты
+      document.getElementById('headerTgLink').href = contacts.tg;
+      document.getElementById('footerTgBtn').href = contacts.tg;
+      document.getElementById('headerMailLink').href = 'mailto:' + contacts.mail;
+      document.getElementById('footerMailBtn').href = 'mailto:' + contacts.mail;
+
       renderAdminInputs();
     }
 
     function cardTemplate(item) {
+      const imgTag = item.img ? `<img src="${item.img}" alt="${item.title}" class="card-custom-img">` : '';
       return `
         <div class="product-card">
           <a href="${item.url}" target="_blank" rel="nofollow noopener" style="text-decoration: none; color: inherit;">
             <div class="card-thumb" style="background: ${item.color || 'linear-gradient(135deg, #1E293B, #0F172A)'}; color: ${item.textColor || '#fff'};">
+              ${imgTag}
               <span class="card-thumb-badge">${item.badge || 'ПАРТНЕР'}</span>
-              <div class="card-thumb-title">${item.shortLogo || item.title}</div>
+              ${!item.img ? `<div class="card-thumb-title">${item.shortLogo || item.title}</div>` : ''}
             </div>
           </a>
           <div class="card-body">
@@ -1061,10 +1384,32 @@
               <div class="card-name">${item.title}</div>
               <div class="card-sub">${item.price}</div>
             </div>
-            <a href="${item.url}" target="_blank" rel="nofollow noopener" class="card-btn">${item.btn}</a>
+            <a href="${item.url}" target="_blank" rel="nofollow noopener" class="card-btn">${item.btn || 'Оформить'}</a>
           </div>
         </div>
       `;
+    }
+
+    // ОТКРЫТИЕ ВНУТРЕННЕГО ОКНА ПО 4 КАТЕГОРИЯМ (Дебетовые, Кредитные, РКО, МФО)
+    function openCategoryCatalog(cat) {
+      const titles = {
+        debit: { t: "💳 Дебетовые карты", s: "Бесплатные карты с максимальным кэшбэком и доходом на остаток" },
+        credit: { t: "💎 Кредитные карты", s: "Карты с длительным беспроцентным периодом и быстрым решением по паспорту" },
+        rko: { t: "🏦 Расчетно-кассовое обслуживание (РКО и ИП)", s: "Бесплатная регистрация бизнеса и открытие счета без визита в ФНС" },
+        mfo: { t: "⚡ Микрофинансовые организации (МФО)", s: "Моментальное зачисление на любую карту онлайн за 5 минут" }
+      };
+
+      const info = titles[cat] || titles.debit;
+      document.getElementById('catalogModalTitle').innerText = info.t;
+      document.getElementById('catalogModalSub').innerText = info.s;
+
+      document.querySelectorAll('.modal-tab-btn').forEach(b => b.classList.remove('active'));
+      const activeTab = document.getElementById('mtab-' + cat);
+      if (activeTab) activeTab.classList.add('active');
+
+      const filtered = items.filter(i => i.cat === cat);
+      document.getElementById('catalogModalGrid').innerHTML = filtered.map(cardTemplate).join('');
+      openModal('catalogModal');
     }
 
     // Слайдер первого экрана
@@ -1084,95 +1429,180 @@
       document.getElementById(id).classList.remove('open');
     }
 
-    // Личный кабинет ссылок
+    // ================= СЕКРЕТНЫЙ ДОСТУП К НАСТРОЙКАМ ТОЛЬКО ДЛЯ ВЛАДЕЛЬЦА =================
+    let logoTapCount = 0;
+    let logoTapTimer = null;
+
+    function unlockAdminPanel() {
+      const pin = prompt("Введите PIN-код владельца сайта GILT:");
+      if (pin === OWNER_PIN) {
+        localStorage.setItem('gilt_owner_unlocked', 'true');
+        document.getElementById('secretAdminBtn').style.display = 'inline-flex';
+        openModal('adminModal');
+      } else if (pin !== null) {
+        alert("Неверный PIN-код!");
+      }
+    }
+
+    function handleLogoSecretTap() {
+      logoTapCount++;
+      clearTimeout(logoTapTimer);
+      logoTapTimer = setTimeout(() => { logoTapCount = 0; }, 1500);
+      if (logoTapCount >= 5) {
+        logoTapCount = 0;
+        unlockAdminPanel();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.shiftKey && (e.key === 'A' || e.key === 'a' || e.key === 'Ф' || e.key === 'ф')) {
+        unlockAdminPanel();
+      }
+    });
+
+    // ================= УПРАВЛЕНИЕ В ЗАКРЫТОЙ АДМИНКЕ =================
     function renderAdminInputs() {
+      document.getElementById('admTg').value = contacts.tg || '';
+      document.getElementById('admMail').value = contacts.mail || '';
+      document.getElementById('sheetCsvInput').value = contacts.csv || '';
+      document.getElementById('admGhToken').value = localStorage.getItem('gilt_gh_token') || '';
+
       const container = document.getElementById('adminLinksList');
-      document.getElementById('sheetCsvInput').value = localStorage.getItem('gilt_sheet_csv') || PERMANENT_GOOGLE_SHEET_CSV;
       container.innerHTML = items.map((item, idx) => `
         <div class="admin-row">
-          <div style="font-size: 13px; font-weight: 600;">${item.title}</div>
-          <input type="url" class="admin-input" data-idx="${idx}" value="${item.url}" placeholder="https://...">
+          <select class="admin-input" data-field="cat" data-idx="${idx}">
+            <option value="debit" ${item.cat==='debit'?'selected':''}>Дебетовые</option>
+            <option value="credit" ${item.cat==='credit'?'selected':''}>Кредитные</option>
+            <option value="rko" ${item.cat==='rko'?'selected':''}>РКО / ИП</option>
+            <option value="mfo" ${item.cat==='mfo'?'selected':''}>МФО</option>
+          </select>
+          <input type="text" class="admin-input" data-field="title" data-idx="${idx}" value="${item.title}" placeholder="Название банка">
+          <input type="url" class="admin-input" data-field="img" data-idx="${idx}" value="${item.img || ''}" placeholder="Картинка (URL, если есть)">
+          <input type="url" class="admin-input" data-field="url" data-idx="${idx}" value="${item.url}" placeholder="Твоя реф. ссылка">
         </div>
       `).join('');
     }
 
-    function saveAdminSettings() {
-      const csvVal = document.getElementById('sheetCsvInput').value.trim();
-      localStorage.setItem('gilt_sheet_csv', csvVal);
+    function collectAdminData() {
+      contacts.tg = document.getElementById('admTg').value.trim() || SITE_CONTACTS.tg;
+      contacts.mail = document.getElementById('admMail').value.trim() || SITE_CONTACTS.mail;
+      contacts.csv = document.getElementById('sheetCsvInput').value.trim();
 
-      document.querySelectorAll('#adminLinksList .admin-input').forEach(inp => {
-        const idx = parseInt(inp.dataset.idx, 10);
-        if (items[idx] && inp.value.trim() !== '') {
-          items[idx].url = inp.value.trim();
+      const ghToken = document.getElementById('admGhToken').value.trim();
+      if (ghToken) localStorage.setItem('gilt_gh_token', ghToken);
+
+      document.querySelectorAll('#adminLinksList [data-idx]').forEach(el => {
+        const idx = parseInt(el.dataset.idx, 10);
+        const field = el.dataset.field;
+        if (items[idx]) {
+          items[idx][field] = el.value.trim();
+          if (field === 'title' && !items[idx].shortLogo) {
+            items[idx].shortLogo = el.value.trim().toUpperCase();
+          }
         }
       });
 
-      localStorage.setItem('gilt_custom_items', JSON.stringify(items));
-      if (csvVal) {
-        loadFromCsv(csvVal);
-      } else {
-        renderCards();
-      }
-      closeModal('adminModal');
-      alert('Ссылки успешно обновлены!');
+      localStorage.setItem('gilt_v2_items', JSON.stringify(items));
+      localStorage.setItem('gilt_v2_contacts', JSON.stringify(contacts));
+    }
+
+    function saveAdminSettings() {
+      collectAdminData();
+      renderCards();
+      alert('Настройки сохранены!');
+    }
+
+    function addNewOfferRow() {
+      collectAdminData();
+      items.unshift({
+        id: "custom_" + Date.now(),
+        cat: "debit",
+        badge: "НОВОЕ",
+        shortLogo: "БАНК",
+        img: "",
+        color: "linear-gradient(135deg, #1E293B 0%, #0F172A 100%)",
+        textColor: "#CCFF00",
+        title: "Новый банк / карта",
+        price: "Обслуживание 0 ₽",
+        btn: "Оформить",
+        url: "https://"
+      });
+      renderAdminInputs();
     }
 
     function resetAdminSettings() {
-      if (confirm('Вернуть исходные ссылки по умолчанию?')) {
-        localStorage.removeItem('gilt_custom_items');
-        localStorage.removeItem('gilt_sheet_csv');
+      if (confirm('Вернуть заводские настройки?')) {
+        localStorage.removeItem('gilt_v2_items');
+        localStorage.removeItem('gilt_v2_contacts');
         items = [...DEFAULT_ITEMS];
+        contacts = { ...SITE_CONTACTS };
         renderCards();
       }
     }
 
-    function exportConfigCode() {
-      saveAdminSettings();
-      navigator.clipboard.writeText(JSON.stringify(items, null, 2));
-      alert('Массив DEFAULT_ITEMS с твоими новыми ссылками скопирован в буфер обмена!');
-    }
-
-    async function loadFromCsv(csvUrl) {
-      try {
-        const res = await fetch(csvUrl);
-        const text = await res.text();
-        const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
-        if (lines.length > 1) {
-          const parsed = [];
-          for (let i = 1; i < lines.length; i++) {
-            const cols = lines[i].split(',');
-            if (cols.length >= 5) {
-              parsed.push({
-                id: 'csv_' + i,
-                cat: (cols[0] || 'mfo').trim().toLowerCase(),
-                badge: (cols[1] || 'ПАРТНЕР').trim(),
-                shortLogo: (cols[2] || '').trim(),
-                title: (cols[2] || '').trim(),
-                price: (cols[3] || 'Обслуживание 0 р.').trim(),
-                btn: (cols[4] || 'ПОЛУЧИТЬ').trim(),
-                url: (cols[5] || '#').trim(),
-                color: 'linear-gradient(135deg, #1E293B 0%, #0F172A 100%)',
-                textColor: '#CCFF00'
-              });
-            }
-          }
-          if (parsed.length > 0) {
-            items = parsed;
-          }
-        }
-      } catch (e) {
-        console.warn('Ошибка чтения CSV:', e);
-      }
+    // АВТО-ПУБЛИКАЦИЯ НАПРЯМУЮ В GITHUB РЕПОЗИТОРИЙ (ayanoflow/gilt-site)
+    async function pushToGitHubDirect() {
+      collectAdminData();
       renderCards();
+      const token = document.getElementById('admGhToken').value.trim();
+      const statusEl = document.getElementById('ghStatusMsg');
+
+      if (!token) {
+        statusEl.innerText = "⚠️ Введи GitHub Personal Token в поле выше, чтобы сайт сам обновил код на GitHub!";
+        return;
+      }
+
+      statusEl.innerText = "⏳ Отправляю обновления на GitHub...";
+      const repo = "ayanoflow/gilt-site";
+      const path = "index.html";
+
+      try {
+        // 1. Получаем текущий index.html с GitHub
+        const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+          headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github.v3+json" }
+        });
+        if (!getRes.ok) throw new Error("Проверь правильность GitHub Token (нужны права repo / contents)");
+        const fileData = await getRes.json();
+        const currentHtml = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+
+        // 2. Заменяем JSON-блоки контактов и карточек внутри кода
+        let updatedHtml = currentHtml.replace(
+          /\/\/ \(START_CONTACTS_JSON\)[\s\S]*?\/\/ \(END_CONTACTS_JSON\)/,
+          `// (START_CONTACTS_JSON)\n    const SITE_CONTACTS = ${JSON.stringify(contacts, null, 6)};\n    // (END_CONTACTS_JSON)`
+        ).replace(
+          /\/\/ \(START_ITEMS_JSON\)[\s\S]*?\/\/ \(END_ITEMS_JSON\)/,
+          `// (START_ITEMS_JSON)\n    const DEFAULT_ITEMS = ${JSON.stringify(items, null, 6)};\n    // (END_ITEMS_JSON)`
+        );
+
+        // 3. Отправляем обновленный файл обратно в ветку main
+        const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+          method: "PUT",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+            "Accept": "application/vnd.github.v3+json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message: "Авто-обновление ссылок и карточек из админки GILT",
+            content: btoa(unescape(encodeURIComponent(updatedHtml))),
+            sha: fileData.sha
+          })
+        });
+
+        if (!putRes.ok) throw new Error("Не удалось записать файл на GitHub");
+        statusEl.innerText = "✅ Готово! Сайт на GitHub успешно обновлен для всех посетителей (изменения вступят в силу через 40 сек).";
+      } catch (err) {
+        statusEl.innerText = "❌ Ошибка: " + err.message;
+      }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      const savedCsv = localStorage.getItem('gilt_sheet_csv') || PERMANENT_GOOGLE_SHEET_CSV;
-      if (savedCsv) {
-        loadFromCsv(savedCsv);
-      } else {
-        renderCards();
+      // Проверка секретного входа ?admin=gilt
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('admin') === 'gilt' || localStorage.getItem('gilt_owner_unlocked') === 'true') {
+        document.getElementById('secretAdminBtn').style.display = 'inline-flex';
       }
+      renderCards();
     });
   </script>
 </body>
