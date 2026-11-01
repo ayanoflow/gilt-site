@@ -9,8 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <!-- ================= ЯНДЕКС.МЕТРИКА (Базовый код) ================= -->
-  <!-- В будущем замени 00000000 на свой реальный номер счетчика Метрики -->
+  <!-- ================= ЯНДЕКС.МЕТРИКА ================= -->
   <script type="text/javascript" >
     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
     m[i].l=1*new Date();
@@ -61,6 +60,7 @@
       padding: 0 20px;
     }
 
+    /* Отступ для ПК (по центру экрана) */
     section, #categories-hub {
       scroll-margin-top: 30vh;
     }
@@ -654,7 +654,7 @@
       position: fixed;
       bottom: 20px;
       left: 50%;
-      transform: translateX(-50%) translateY(150px); /* Изначально спрятана вниз */
+      transform: translateX(-50%) translateY(150px);
       background: var(--lime);
       color: #090D14;
       font-family: 'Unbounded', sans-serif;
@@ -671,7 +671,7 @@
       transition: transform 0.4s ease;
     }
     .mobile-floating-btn.visible {
-      transform: translateX(-50%) translateY(0); /* Выезжает вверх */
+      transform: translateX(-50%) translateY(0);
     }
 
     /* ================= МОДАЛЬНЫЕ ОКНА ================= */
@@ -790,24 +790,28 @@
     }
     
     @media (max-width: 640px) {
-      /* Исправление мобильного отображения: высота auto, выравнивание сверху вниз */
+      /* Для телефонов: Отступ скролла переопределен на 90px (сразу под шапку) */
+      section, #categories-hub {
+        scroll-margin-top: 90px;
+      }
+
       .hero-slider { 
-        height: auto; 
-        min-height: 640px;
-        display: flex;
+        height: 680px;
+        display: block;
       }
       .slide { 
-        position: relative; 
-        padding: 40px 20px 30px; 
-        gap: 20px; 
-        align-items: start; 
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        padding: 30px 20px 20px; 
+        gap: 24px; 
+        align-items: start;
+        align-content: start; 
         text-align: left; 
       }
-      .slide:not(.active) { display: none; }
       
       .slide-tag { margin-bottom: 12px; }
       .slide p { margin-bottom: 20px; font-size: 14px; }
-      .slide-visual { text-align: left; padding: 24px; }
+      .slide-visual { text-align: left; padding: 24px; width: 100%; max-width: none; }
       
       .rko-grid, .steps-grid, .cat-hub-grid, .why-grid { grid-template-columns: 1fr; gap: 16px; }
       .btn-primary { width: 100%; padding: 14px 20px; }
@@ -815,7 +819,6 @@
       .modal-cat-tabs { gap: 6px; }
       .modal-tab-btn { padding: 8px 12px; font-size: 11px; flex: 1; text-align: center; }
 
-      /* Активация плавающей кнопки и отступ в подвале, чтобы она не закрывала текст */
       .mobile-floating-btn { display: block; }
       .footer { padding-bottom: 90px; }
     }
@@ -826,7 +829,7 @@
   <!-- ================= ШАПКА САЙТА ================= -->
   <header class="header">
     <div class="container header-inner">
-      <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Наверх">
+      <div class="logo" onclick="handleLogoTap()" title="Наверх">
         <span class="logo-dot"></span>GILT
       </div>
 
@@ -1036,7 +1039,7 @@
     </div>
   </section>
 
-  <!-- ================= ПОДВАЛ (ОБНОВЛЕННАЯ ЮРИДИЧЕСКАЯ ИНФОРМАЦИЯ) ================= -->
+  <!-- ================= ПОДВАЛ (ЮРИДИЧЕСКАЯ ЗАЩИТА) ================= -->
   <footer class="footer" id="contacts">
     <div class="container">
       <div class="footer-box">
@@ -1099,7 +1102,7 @@
     </div>
   </div>
 
-  <!-- ================= СЕКРЕТНАЯ АДМИНКА (ВЫЗОВ ТОЛЬКО SHIFT + A) ================= -->
+  <!-- ================= СЕКРЕТНАЯ АДМИНКА ================= -->
   <div class="modal-backdrop" id="adminModal">
     <div class="modal-window">
       <button type="button" class="modal-close" onclick="closeModal('adminModal')">×</button>
@@ -1190,7 +1193,6 @@
       renderAdminInputs();
     }
 
-    // Добавлена отправка события в Яндекс.Метрику при клике на кнопку оформления (ym)
     function cardTemplate(item) {
       const imgTag = item.img ? `<img src="${item.img}" alt="${item.title}" class="card-custom-img">` : '';
       return `
@@ -1275,7 +1277,20 @@
       }
     });
 
-    // Логика появления плавающей кнопки на скролле
+    let logoTapCount = 0;
+    let logoTapTimeout;
+    function handleLogoTap() {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+      logoTapCount++;
+      clearTimeout(logoTapTimeout);
+      if (logoTapCount >= 5) {
+        unlockAdminPanel();
+        logoTapCount = 0;
+      } else {
+        logoTapTimeout = setTimeout(() => { logoTapCount = 0; }, 400);
+      }
+    }
+
     window.addEventListener('scroll', () => {
       const btn = document.getElementById('mobFloatBtn');
       if (btn) {
