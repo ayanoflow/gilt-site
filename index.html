@@ -6,9 +6,9 @@
   <title>GILT — Помощь в открытии ИП, расчетных счетов и подбор карт</title>
   <meta name="description" content="Бесплатная консультация по регистрации бизнеса, подбору ОКВЭД и банковских продуктов.">
   
-  <!-- Иконка вкладки (Favicon) с принудительным обновлением кэша (?v=2) -->
-  <link rel="icon" type="image/png" href="./logo.png?v=2">
-  <link rel="shortcut icon" type="image/png" href="./logo.png?v=2">
+  <!-- Иконка вкладки (Favicon) с принудительным обновлением кэша (?v=3) -->
+  <link rel="icon" type="image/png" href="./logo.png?v=3">
+  <link rel="shortcut icon" type="image/png" href="./logo.png?v=3">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -410,7 +410,7 @@
       font-size: 16px;
     }
 
-    /* ================= ЭТАПЫ ================= */
+    /* ================= ЭТАПЫ (КОНСУЛЬТАЦИЯ) ================= */
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -844,6 +844,8 @@
       width: 100%;
       max-height: 85vh; 
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
       padding: 34px;
       position: relative;
       box-shadow: 0 25px 70px rgba(0,0,0,0.3);
@@ -971,7 +973,7 @@
   <header class="header">
     <div class="container header-inner">
       <div class="logo" onclick="handleLogoTap()" title="Наверх">
-        <img src="./logo.png?v=2" alt="GILT Logo">
+        <img src="./logo.png?v=3" alt="GILT Logo">
         <div class="logo-divider"></div>
         <span class="logo-text">GILT</span>
       </div>
@@ -1329,19 +1331,24 @@
   <script>
     const OWNER_PIN = "825113878GILT";
 
+    // Обработка скролла ПРИ ПОЛНОЙ ЗАГРУЗКЕ СТРАНИЦЫ
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }, 100);
+    });
+
     window.addEventListener('DOMContentLoaded', () => {
       updateThemeIcon(document.documentElement.getAttribute('data-theme'));
       if (localStorage.getItem('gilt_owner_unlocked') === 'true') {
         document.getElementById('secretAdminBtn').style.display = 'inline-flex';
       }
       
-      // Открытие формы отзыва по специальной ссылке (например, site.ru/?review=1)
       if (window.location.search.includes('review=')) {
         setTimeout(() => openModal('leaveReviewModal'), 500);
       }
 
       renderCards();
-      setTimeout(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, 50);
     });
 
     function updateThemeIcon(theme) {
@@ -1360,7 +1367,7 @@
       const container = document.getElementById('reviewsContainer');
       const card = container.querySelector('.review-card');
       if (card) {
-        const scrollAmount = card.offsetWidth + 24; // Ширина карточки + gap
+        const scrollAmount = card.offsetWidth + 24; 
         container.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
       }
     }
@@ -1413,7 +1420,17 @@
       { "id": "sber_credit", "cat": "credit", "badge": "КРЕДИТНАЯ КАРТА", "shortLogo": "СБЕРКАРТА", "img": "", "color": "linear-gradient(135deg, #16A34A 0%, #065F46 100%)", "textColor": "#fff", "title": "Кредитная СберКарта", "price": "120 дней без % • 0 ₽", "btn": "Оформить", "url": "#" },
       { "id": "zaimer", "cat": "mfo", "badge": "МФО", "shortLogo": "ЗАЙМЕР", "img": "", "color": "linear-gradient(135deg, #10B981 0%, #047857 100%)", "textColor": "#fff", "title": "Займер", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
       { "id": "webbankir", "cat": "mfo", "badge": "МФО", "shortLogo": "WEBBANKIR", "img": "", "color": "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)", "textColor": "#fff", "title": "WebBankir (Веб-Банкир)", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
-      { "id": "srochno", "cat": "mfo", "badge": "МФО", "shortLogo": "СРОЧНОДЕНЬГИ", "img": "", "color": "linear-gradient(135deg, #84CC16 0%, #4D7C0F 100%)", "textColor": "#fff", "title": "СрочноДеньги", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" }
+      { "id": "srochno", "cat": "mfo", "badge": "МФО", "shortLogo": "СРОЧНОДЕНЬГИ", "img": "", "color": "linear-gradient(135deg, #84CC16 0%, #4D7C0F 100%)", "textColor": "#fff", "title": "СрочноДеньги", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "credit7", "cat": "mfo", "badge": "МФО", "shortLogo": "CREDIT 7", "img": "", "color": "linear-gradient(135deg, #6366F1 0%, #4338CA 100%)", "textColor": "#fff", "title": "Credit7 (Кредит7)", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "maxcredit", "cat": "mfo", "badge": "МФО", "shortLogo": "MAX.CREDIT", "img": "", "color": "linear-gradient(135deg, #EC4899 0%, #BE185D 100%)", "textColor": "#fff", "title": "Макс Кредит (Max.Credit)", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "umnal", "cat": "mfo", "badge": "МФО", "shortLogo": "УМНЫЕ НАЛИЧНЫЕ", "img": "", "color": "linear-gradient(135deg, #8B5CF6 0%, #5B21B6 100%)", "textColor": "#fff", "title": "Умные Наличные", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "belka", "cat": "mfo", "badge": "МФО", "shortLogo": "БЕЛКА КРЕДИТ", "img": "", "color": "linear-gradient(135deg, #F97316 0%, #C2410C 100%)", "textColor": "#fff", "title": "Белка Кредит", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "oneclick", "cat": "mfo", "badge": "МФО", "shortLogo": "ONE CLICK MONEY", "img": "", "color": "linear-gradient(135deg, #14B8A6 0%, #0F766E 100%)", "textColor": "#fff", "title": "One Click Money", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "dengisrazu", "cat": "mfo", "badge": "МФО", "shortLogo": "ДЕНЬГИ СРАЗУ", "img": "", "color": "linear-gradient(135deg, #EAB308 0%, #A16207 100%)", "textColor": "#fff", "title": "Деньги Сразу", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "moneyman", "cat": "mfo", "badge": "МФО", "shortLogo": "MONEY MAN", "img": "", "color": "linear-gradient(135deg, #22C55E 0%, #15803D 100%)", "textColor": "#fff", "title": "Money Man", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "adengi", "cat": "mfo", "badge": "МФО", "shortLogo": "А-ДЕНЬГИ", "img": "", "color": "linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)", "textColor": "#fff", "title": "А-Деньги", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "migcredit", "cat": "mfo", "badge": "МФО", "shortLogo": "МИГ КРЕДИТ", "img": "", "color": "linear-gradient(135deg, #06B6D4 0%, #0E7490 100%)", "textColor": "#fff", "title": "Миг Кредит", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "turbozaim", "cat": "mfo", "badge": "МФО", "shortLogo": "ТУРБОЗАЙМ", "img": "", "color": "linear-gradient(135deg, #3B82F6 0%, #1E3A8A 100%)", "textColor": "#fff", "title": "ТУРБОЗАЙМ", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" }
     ];
     // (END_ITEMS_JSON)
 
@@ -1591,7 +1608,7 @@
 
       // Отзывы (только пользовательские)
       const customReviews = reviewsList.map((rev, idx) => {
-        if (rev.isInitial) return ''; // Скрываем из редактора базовые отзывы
+        if (rev.isInitial) return ''; 
         return `
           <div style="display:grid; grid-template-columns: 120px 60px 1fr; gap:10px; margin-bottom:10px;">
             <input type="text" class="admin-input" data-rev-field="name" data-idx="${idx}" value="${rev.name}" placeholder="Имя">
@@ -1643,7 +1660,7 @@
     function saveAdminSettings() {
       collectAdminData();
       renderCards();
-      alert('Настройки сохранены! Для обновления сайта используйте терминал Git (как мы делали ранее).');
+      alert('Настройки сохранены! Нажмите "Опубликовать на GitHub" чтобы обновить сайт в интернете.');
     }
 
     function addNewOfferRow() {
@@ -1660,6 +1677,51 @@
       collectAdminData();
       reviewsList.push({ name: "Новый Клиент", text: "Скопируйте сюда текст отзыва из Telegram.", rate: 5 });
       renderAdminInputs();
+    }
+
+    async function pushToGitHubDirect() {
+      collectAdminData();
+      renderCards();
+      const token = document.getElementById('admGhToken').value.trim();
+      const statusEl = document.getElementById('ghStatusMsg');
+
+      if (!token) {
+        statusEl.innerText = "⚠️ Введи GitHub Personal Token в поле выше!";
+        return;
+      }
+
+      statusEl.innerText = "⏳ Отправляю обновления на GitHub...";
+      const repo = "ayanoflow/gilt-site";
+      const path = "index.html";
+
+      try {
+        const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+          headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github.v3+json" }
+        });
+        if (!getRes.ok) throw new Error("Проверь правильность GitHub Token");
+        const fileData = await getRes.json();
+        const currentHtml = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
+
+        let updatedHtml = currentHtml
+          .replace(/\/\/ \(START_CONTACTS_JSON\)[\s\S]*?\/\/ \(END_CONTACTS_JSON\)/, `// (START_CONTACTS_JSON)\n    const SITE_CONTACTS = ${JSON.stringify(contacts, null, 6)};\n    // (END_CONTACTS_JSON)`)
+          .replace(/\/\/ \(START_REVIEWS_JSON\)[\s\S]*?\/\/ \(END_REVIEWS_JSON\)/, `// (START_REVIEWS_JSON)\n    const SITE_REVIEWS = ${JSON.stringify(reviewsList, null, 6)};\n    // (END_REVIEWS_JSON)`)
+          .replace(/\/\/ \(START_ITEMS_JSON\)[\s\S]*?\/\/ \(END_ITEMS_JSON\)/, `// (START_ITEMS_JSON)\n    const DEFAULT_ITEMS = ${JSON.stringify(items, null, 6)};\n    // (END_ITEMS_JSON)`);
+
+        const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+          method: "PUT",
+          headers: {
+            "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github.v3+json", "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message: "Обновление GILT: Консультация, Отзывы, Настройки",
+            content: btoa(unescape(encodeURIComponent(updatedHtml))),
+            sha: fileData.sha
+          })
+        });
+
+        if (!putRes.ok) throw new Error("Не удалось сохранить на GitHub");
+        statusEl.innerText = "✅ Успешно отправлено! GitHub Pages обновит сайт в течение 1-5 минут. Подождите и очистите кэш (Ctrl+F5).";
+      } catch (err) { statusEl.innerText = "❌ Ошибка: " + err.message + ". Попробуйте использовать терминал (Git Bash) для заливки кода."; }
     }
   </script>
 </body>
