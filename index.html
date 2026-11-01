@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>GILT — Регистрация ИП, РКО, Карты и МФО онлайн</title>
   <meta name="description" content="Получите профессиональную юридическую помощь и станьте предпринимателем без похода в ФНС уже сегодня! Регистрация ИП, РКО, дебетовые и кредитные карты, МФО.">
+  
+  <!-- ================= ИКОНКА ВО ВКЛАДКЕ БРАУЗЕРА (FAVICON) ================= -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23CCFF00'/><stop offset='100%' stop-color='%23FF6B00'/></linearGradient></defs><path d='M50 20C33.43 20 20 33.43 20 50C20 66.57 33.43 80 50 80C62.7 80 73.53 72.1 77.94 60.5H62.72C59.5 65.2 55.1 68 50 68C40.06 68 32 59.94 32 50C32 40.06 40.06 32 50 32C56.12 32 61.42 35.08 64.63 39.8H78.8C74.3 27.2 63.2 18 50 20Z' fill='url(%23g)'/><path d='M78 50H50V62H78V50Z' fill='url(%23g)'/></svg>">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <!-- ================= УПРАВЛЕНИЕ ТЕМАМИ (Загрузка до отрисовки) ================= -->
+  <!-- ================= УПРАВЛЕНИЕ ТЕМАМИ ================= -->
   <script>
     if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
     const savedTheme = localStorage.getItem('gilt_theme') || 'dark';
@@ -23,14 +27,12 @@
     for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
     k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
     (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
     ym(00000000, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/00000000" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-  <!-- ================= КОНЕЦ МЕТРИКИ ================= -->
 
   <style>
-    /* ================= ПЕРЕМЕННЫЕ (ТЕМНАЯ ТЕМА ПО УМОЛЧАНИЮ) ================= */
+    /* ================= ПЕРЕМЕННЫЕ (ТЕМНАЯ ТЕМА) ================= */
     :root {
       --bg-dark: #090D14;
       --bg-card: #111722;
@@ -65,10 +67,10 @@
       --lime-hover: #E65C00;
       --lime-glow: rgba(255, 107, 0, 0.15);
       --text-white: #0F172A;
-      --text-gray: #64748B;
+      --text-gray: #475569;
       --btn-text: #FFFFFF;
       
-      --bg-hero-grad: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+      --bg-hero-grad: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%);
       --bg-header: rgba(244, 246, 248, 0.88);
       --bg-header-mob: rgba(244, 246, 248, 0.98);
       --bg-footer: #E2E8F0;
@@ -100,10 +102,9 @@
       padding: 0 20px;
     }
 
-    /* ПК-отступ для якорных ссылок (в центре экрана) */
-    section, #categories-hub { scroll-margin-top: 30vh; }
+    section, #categories-hub { scroll-margin-top: 100px; }
 
-    /* ================= ШАПКА ================= */
+    /* ================= ШАПКА И ЛОГОТИП ================= */
     .header {
       position: sticky;
       top: 0;
@@ -123,22 +124,22 @@
     }
     
     .logo {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--lime);
-      text-decoration: none;
-      letter-spacing: 0.5px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      text-decoration: none;
       user-select: none;
       cursor: pointer;
-      transition: 0.3s;
     }
-    .logo:hover {
-      text-shadow: 0 0 15px var(--lime-glow);
+    .logo-text {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-white);
+      letter-spacing: 0.5px;
+      transition: color 0.3s;
     }
+    .logo:hover .logo-text { color: var(--lime); }
 
     .nav-center, .nav-right {
       display: flex;
@@ -155,10 +156,7 @@
       transition: 0.2s;
       cursor: pointer;
     }
-    .nav-center a:hover, .nav-right a.nav-link:hover {
-      color: var(--lime);
-      opacity: 1;
-    }
+    .nav-center a:hover, .nav-right a.nav-link:hover { color: var(--lime); opacity: 1; }
     .socials {
       display: flex;
       align-items: center;
@@ -226,42 +224,33 @@
       border-bottom: 1px solid var(--border);
     }
 
-    /* ================= ПЕРВЫЙ ЭКРАН: СЛАЙДЕР ================= */
+    /* ================= ПЕРВЫЙ ЭКРАН (ГЛАВНЫЙ СЛАЙДЕР) ================= */
     .hero-section { padding: 40px 0 30px; }
-    .hero-slider {
-      position: relative;
+    .hero-slider-wrap {
       background: var(--bg-hero-grad);
       border: 1px solid var(--border);
       border-radius: 26px;
-      overflow: hidden;
-      height: 460px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
       transition: background 0.4s ease;
+      overflow: hidden;
     }
+    
     .slide {
-      position: absolute;
-      inset: 0; 
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-      width: 100%;
-      height: 100%;
-      padding: 0 60px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: none; /* Скрываем все неактивные, чтобы высота подстраивалась под контент */
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 40px;
+      align-items: center;
+      padding: 60px;
+      animation: fadeInSlide 0.4s ease forwards;
     }
-    .slide.active {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      z-index: 2;
+    .slide.active { display: grid; }
+    
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .slide-content {
-      max-width: 580px; /* Фикс наложения текста на ПК */
-    }
+    
+    .slide-content { max-width: 580px; }
     
     .slide-tag {
       display: inline-block;
@@ -318,7 +307,7 @@
       border-radius: 22px;
       padding: 34px;
       text-align: center;
-      min-width: 320px;
+      min-width: 300px;
     }
     .visual-big {
       font-family: 'Unbounded', sans-serif;
@@ -334,7 +323,7 @@
       justify-content: center;
       align-items: center;
       gap: 12px;
-      margin-top: 18px;
+      padding: 0 0 26px 0; /* Отступ внутри белого/темного контейнера */
     }
     .slider-dot {
       width: 36px;
@@ -506,7 +495,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
       gap: 22px;
-      padding-bottom: 30px; /* Фикс обрезанного низа на мобильных */
+      padding-bottom: 30px; 
     }
     .product-card {
       background: var(--bg-card);
@@ -522,7 +511,7 @@
       background: var(--bg-card-hover);
       border-color: var(--lime);
       transform: translateY(-5px);
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
     }
     .card-thumb {
       height: 150px;
@@ -551,6 +540,7 @@
       text-align: center;
       z-index: 2;
       text-shadow: 0 4px 16px rgba(0,0,0,0.65);
+      color: #fff; /* Всегда белые буквы на градиентах банков */
     }
     .card-thumb-badge {
       position: absolute;
@@ -701,9 +691,7 @@
       text-align: center;
       transition: transform 0.4s ease;
     }
-    .mobile-floating-btn.visible {
-      transform: translateX(-50%) translateY(0);
-    }
+    .mobile-floating-btn.visible { transform: translateX(-50%) translateY(0); }
 
     /* ================= МОДАЛЬНЫЕ ОКНА ================= */
     .modal-backdrop {
@@ -725,16 +713,12 @@
       border-radius: 24px;
       max-width: 1020px;
       width: 100%;
-      max-height: 85vh; /* Безопасная высота для iOS */
+      max-height: 85vh; 
       overflow-y: auto;
       padding: 34px;
       position: relative;
-      box-shadow: 0 25px 70px var(--shadow-color);
+      box-shadow: 0 25px 70px rgba(0,0,0,0.3);
       animation: fadeIn 0.25s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
     .modal-close {
       position: absolute;
@@ -800,38 +784,33 @@
     }
     .admin-input:focus { border-color: var(--lime); outline: none; }
 
-    /* ================= АДАПТИВ (Планшеты и Мобильные) ================= */
+    /* ================= АДАПТИВ ================= */
     @media (max-width: 992px) {
       .nav-center, .nav-right { display: none; }
       .burger { display: inline-block; }
       
-      .hero-slider { height: 600px; }
       .slide {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         justify-content: center;
         text-align: center;
-        padding: 30px 40px;
+        padding: 40px;
       }
       .slide-content { max-width: none; }
-      .slide-visual { max-width: 400px; width: 100%; }
+      .slide-visual { max-width: 400px; width: 100%; margin: 0 auto; }
       
-      .steps-grid, .cat-hub-grid { grid-template-columns: repeat(2, 1fr); }
-      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .steps-grid, .cat-hub-grid, .why-grid { grid-template-columns: repeat(2, 1fr); }
       .admin-row { grid-template-columns: 1fr; }
     }
     
     @media (max-width: 640px) {
-      /* Для телефонов: Отступ скролла переопределен на 90px (ровно под шапку) */
       section, #categories-hub { scroll-margin-top: 90px; }
 
-      /* Жесткая высота слайдера для телефонов, чтобы не было прыжков при переключении */
-      .hero-slider { height: 720px; display: block; }
       .slide { 
-        padding: 30px 20px; 
+        padding: 30px 20px 20px; 
         gap: 24px; 
-        justify-content: start; 
         text-align: left; 
       }
+      .slide.active { display: flex; flex-direction: column; }
       
       .slide-tag { margin-bottom: 12px; }
       .slide p { margin-bottom: 20px; font-size: 14px; }
@@ -855,18 +834,17 @@
   <header class="header">
     <div class="container header-inner">
       <div class="logo" onclick="handleLogoTap()" title="Наверх">
-        <!-- Уникальный SVG Логотип (Градиент G) -->
-        <svg width="28" height="28" viewBox="0 0 100 100" fill="none" style="flex-shrink: 0;">
+        <svg width="34" height="34" viewBox="0 0 100 100" fill="none" style="flex-shrink: 0;">
           <defs>
             <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="var(--lime)" />
-              <stop offset="100%" stop-color="#FF4500" />
+              <stop offset="100%" stop-color="#FF6B00" />
             </linearGradient>
           </defs>
           <path d="M50 20C33.43 20 20 33.43 20 50C20 66.57 33.43 80 50 80C62.7 80 73.53 72.1 77.94 60.5H62.72C59.5 65.2 55.1 68 50 68C40.06 68 32 59.94 32 50C32 40.06 40.06 32 50 32C56.12 32 61.42 35.08 64.63 39.8H78.8C74.3 27.2 63.2 18 50 20Z" fill="url(#logoGrad)"/>
           <path d="M78 50H50V62H78V50Z" fill="url(#logoGrad)"/>
         </svg>
-        GILT
+        <span class="logo-text">GILT</span>
       </div>
 
       <ul class="nav-center">
@@ -879,7 +857,6 @@
         <a href="#" onclick="openModal('privacyModal'); return false;" class="nav-link">Правовая информация</a>
         <a href="#contacts" class="nav-link">Контакты</a>
         <div class="socials">
-          <!-- Кнопка переключения тем -->
           <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" title="Сменить тему">
             <svg id="icon-moon" style="display:none;" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
             <svg id="icon-sun" style="display:none;" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM2 13h2a1 1 0 0 0 0-2H2a1 1 0 0 0 0 2zm18 0h2a1 1 0 0 0 0-2h-2a1 1 0 0 0 0 2zM11 2v2a1 1 0 0 0 2 0V2a1 1 0 0 0-2 0zm0 18v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-2 0zM5.99 4.58a1 1 0 1 0-1.41 1.41l1.06 1.06a1 1 0 1 0 1.41-1.41L5.99 4.58zm12.37 12.37a1 1 0 1 0-1.41 1.41l1.06 1.06a1 1 0 1 0 1.41-1.41l-1.06-1.06zM7.05 18.36a1 1 0 1 0-1.41-1.41l-1.06 1.06a1 1 0 1 0 1.41 1.41l1.06-1.06zm12.37-12.37a1 1 0 1 0-1.41-1.41L16.95 5.64a1 1 0 1 0 1.41 1.41l1.06-1.06z"/></svg>
@@ -887,10 +864,9 @@
           <a id="headerTgLink" href="https://t.me/accountzeus" target="_blank" rel="nofollow" class="soc-icon" title="Telegram">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.74 7.58-3.27 3.61-1.51 4.35-1.77 4.84-1.78.11 0 .35.03.5.16.13.1.17.24.18.34.02.08.02.24.01.38z"/></svg>
           </a>
-          <button type="button" id="secretAdminBtn" onclick="openModal('adminModal')" class="soc-icon" title="Закрытая панель владельца">⚙️</button>
+          <button type="button" id="secretAdminBtn" onclick="openModal('adminModal')" class="soc-icon" title="Настройки">⚙️</button>
         </div>
       </div>
-
       <button type="button" class="burger" onclick="toggleMobileNav()">☰</button>
     </div>
 
@@ -903,11 +879,11 @@
     </div>
   </header>
 
-  <!-- ================= ПЕРВЫЙ ЭКРАН: СЛАЙДЕР ================= -->
+  <!-- ================= ПЕРВЫЙ ЭКРАН ================= -->
   <section class="hero-section">
     <div class="container">
-      <div class="hero-slider">
-        <!-- СЛАЙД 1 -->
+      <div class="hero-slider-wrap">
+        
         <div class="slide active" id="slide-0">
           <div class="slide-content">
             <span class="slide-tag">GILT • ОНЛАЙН-СЕРВИС</span>
@@ -922,7 +898,6 @@
           </div>
         </div>
 
-        <!-- СЛАЙД 2 -->
         <div class="slide" id="slide-1">
           <div class="slide-content">
             <span class="slide-tag">GILT • КОНСАЛТИНГ</span>
@@ -936,30 +911,29 @@
             <p style="font-size: 14px; margin-bottom: 0;">Бесплатная консультация и сопровождение на всех этапах регистрации бизнеса и подбора финансирования</p>
           </div>
         </div>
-      </div>
 
-      <div class="slider-controls">
-        <button type="button" class="slider-arrow" onclick="event.preventDefault(); prevSlide()">‹</button>
-        <button type="button" class="slider-dot active" id="dot-0" onclick="event.preventDefault(); changeSlide(0)"></button>
-        <button type="button" class="slider-dot" id="dot-1" onclick="event.preventDefault(); changeSlide(1)"></button>
-        <button type="button" class="slider-arrow" onclick="event.preventDefault(); nextSlide()">›</button>
+        <div class="slider-controls">
+          <button type="button" class="slider-arrow" onclick="event.preventDefault(); prevSlide()">‹</button>
+          <button type="button" class="slider-dot active" id="dot-0" onclick="event.preventDefault(); changeSlide(0)"></button>
+          <button type="button" class="slider-dot" id="dot-1" onclick="event.preventDefault(); changeSlide(1)"></button>
+          <button type="button" class="slider-arrow" onclick="event.preventDefault(); nextSlide()">›</button>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= ЭТАПЫ РЕГИСТРАЦИИ ================= -->
+  <!-- ================= ЭТАПЫ ================= -->
   <section id="steps">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Этапы регистрации</h2>
         <p class="section-sub">Этап регистрации пройдет всего в 4 шага!</p>
       </div>
-
       <div class="steps-grid">
         <div class="step-item">
           <div class="step-circle">1</div>
           <h3>Заявка на открытие</h3>
-          <p>Вам понадобится всего лишь ПАСПОРТ, ИНН И СНИЛС. Заявку подаете самостоятельно и дистанционно, без похода в ФНС (Федеральная налоговая служба)</p>
+          <p>Вам понадобится всего лишь ПАСПОРТ, ИНН И СНИЛС. Заявку подаете самостоятельно и дистанционно, без похода в ФНС</p>
         </div>
         <div class="step-item">
           <div class="step-circle">2</div>
@@ -990,7 +964,6 @@
 
       <div class="rko-grid" id="ipContainer"></div>
 
-      <!-- 4 ИКОНКИ КАТЕГОРИЙ -->
       <div id="categories-hub" style="padding-top: 16px;">
         <h3 class="cat-hub-title">Все финансовые продукты и сервисы (нажмите для выбора):</h3>
         <div class="cat-hub-grid">
@@ -1023,13 +996,12 @@
     </div>
   </section>
 
-  <!-- ================= ПОЧЕМУ СТОИТ ВЫБРАТЬ ИМЕННО НАС ================= -->
+  <!-- ================= ПОЧЕМУ МЫ ================= -->
   <section id="why">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Почему стоит выбрать именно нас:</h2>
       </div>
-
       <div class="why-grid">
         <div class="why-card">
           <div class="why-check">✓</div>
@@ -1077,7 +1049,7 @@
     </div>
   </section>
 
-  <!-- ================= ПОДВАЛ (ЮРИДИЧЕСКАЯ ЗАЩИТА) ================= -->
+  <!-- ================= ПОДВАЛ ================= -->
   <footer class="footer" id="contacts">
     <div class="container">
       <div class="footer-box">
@@ -1096,10 +1068,10 @@
     </div>
   </footer>
 
-  <!-- ================= ПЛАВАЮЩАЯ КНОПКА (МОБИЛЬНЫЕ) ================= -->
+  <!-- ================= ПЛАВАЮЩАЯ КНОПКА (ТОЛЬКО ДЛЯ МОБИЛЬНЫХ) ================= -->
   <a href="#categories-hub" id="mobFloatBtn" class="mobile-floating-btn" onclick="ym(00000000, 'reachGoal', 'MOBILE_FLOAT_CLICK')">Подобрать продукт</a>
 
-  <!-- ================= ВНУТРЕННЕЕ ОКНО КАТАЛОГА ================= -->
+  <!-- ================= МОДАЛКА КАТАЛОГА ================= -->
   <div class="modal-backdrop" id="catalogModal" onclick="if(event.target===this) closeModal('catalogModal')">
     <div class="modal-window">
       <button type="button" class="modal-close" onclick="closeModal('catalogModal')">×</button>
@@ -1116,26 +1088,17 @@
     </div>
   </div>
 
-  <!-- ================= ПОПАП: ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ (152-ФЗ) ================= -->
+  <!-- ================= ПОПАП ПОЛИТИКИ (152-ФЗ) ================= -->
   <div class="modal-backdrop" id="privacyModal" onclick="if(event.target===this) closeModal('privacyModal')">
     <div class="modal-window" style="max-width: 760px;">
       <button type="button" class="modal-close" onclick="closeModal('privacyModal')">×</button>
-      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 16px; color: var(--lime);">Пользовательское соглашение и Политика конфиденциальности</h3>
+      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 16px; color: var(--lime);">Пользовательское соглашение</h3>
       <div style="font-size: 13px; color: var(--text-gray); line-height: 1.65; max-height: 60vh; overflow-y: auto; padding-right: 10px;">
-        <p><b>1. Общие положения</b><br>
-        Настоящий документ определяет условия использования информационного сервиса GILT (далее — «Сервис») и политику в отношении обработки персональных данных в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных».</p><br>
-        
-        <p><b>2. Статус Сервиса и ограничение ответственности</b><br>
-        Сервис не осуществляет финансовую, банковскую или микрофинансовую деятельность. Мы предоставляем структурированный каталог ссылок на официальные сайты партнеров (банков и МФО). Переход по ссылкам, заполнение анкет, передача паспортных и иных данных осуществляются Пользователем добровольно на защищенных ресурсах третьих лиц. Сервис не контролирует сайты партнеров и не несет ответственности за их содержание или утечку данных на их стороне.</p><br>
-        
-        <p><b>3. Отсутствие сбора персональных данных</b><br>
-        В рамках работы Сервиса (на домене giltrko.ru / github.io) <b>не производится</b> сбор, хранение, обработка или систематизация персональных данных пользователей в понимании 152-ФЗ. Сервис не запрашивает ФИО, паспортные данные, номера телефонов, адреса электронной почты или реквизиты банковских карт. Все действия по оформлению продуктов происходят исключительно на официальных серверах банков-эмитентов.</p><br>
-        
-        <p><b>4. Использование файлов Cookie</b><br>
-        Для обеспечения корректной работы Сервис может использовать технические файлы cookie (например, для сохранения настроек отображения). Cookie не содержат персональных данных и не используются для идентификации личности Пользователя. Пользователь вправе в любой момент заблокировать прием файлов cookie в настройках своего браузера.</p><br>
-        
-        <p><b>5. Заключительные положения</b><br>
-        Продолжая использование Сервиса, Пользователь подтверждает свое согласие с настоящими правилами. Администрация Сервиса оставляет за собой право вносить изменения в настоящий документ без предварительного уведомления. По всем вопросам взаимодействия с Сервисом Пользователь может обратиться по контактам, указанным в соответствующем разделе сайта.</p>
+        <p><b>1. Общие положения</b><br>Настоящий документ определяет условия использования информационного сервиса GILT (далее — «Сервис») и политику в отношении обработки персональных данных в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных».</p><br>
+        <p><b>2. Статус Сервиса и ограничение ответственности</b><br>Сервис не осуществляет финансовую, банковскую или микрофинансовую деятельность. Мы предоставляем структурированный каталог ссылок на официальные сайты партнеров (банков и МФО). Переход по ссылкам, заполнение анкет, передача паспортных и иных данных осуществляются Пользователем добровольно на защищенных ресурсах третьих лиц. Сервис не контролирует сайты партнеров и не несет ответственности за их содержание или утечку данных на их стороне.</p><br>
+        <p><b>3. Отсутствие сбора персональных данных</b><br>В рамках работы Сервиса (на домене giltrko.ru / github.io) <b>не производится</b> сбор, хранение, обработка или систематизация персональных данных пользователей в понимании 152-ФЗ. Сервис не запрашивает ФИО, паспортные данные, номера телефонов, адреса электронной почты или реквизиты банковских карт. Все действия по оформлению продуктов происходят исключительно на официальных серверах банков-эмитентов.</p><br>
+        <p><b>4. Использование файлов Cookie</b><br>Для обеспечения корректной работы Сервис может использовать технические файлы cookie (например, для сохранения настроек отображения). Cookie не содержат персональных данных и не используются для идентификации личности Пользователя. Пользователь вправе в любой момент заблокировать прием файлов cookie в настройках своего браузера.</p><br>
+        <p><b>5. Заключительные положения</b><br>Продолжая использование Сервиса, Пользователь подтверждает свое согласие с настоящими правилами. Администрация Сервиса оставляет за собой право вносить изменения в настоящий документ без предварительного уведомления.</p>
       </div>
     </div>
   </div>
@@ -1144,9 +1107,9 @@
   <div class="modal-backdrop" id="adminModal">
     <div class="modal-window">
       <button type="button" class="modal-close" onclick="closeModal('adminModal')">×</button>
-      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 6px; color: var(--lime);">🔒 Закрытая панель владельца GILT</h3>
+      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 6px; color: var(--lime);">🔒 Закрытая панель GILT</h3>
       <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 18px;">
-        Здесь ты управляешь всеми карточками (Дебетовые, Кредитные, РКО, МФО), картинками, контактами и авто-публикацией на GitHub.
+        Управление всеми карточками (Дебетовые, Кредитные, РКО, МФО), контактами и авто-публикацией на GitHub.
       </p>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; background: var(--admin-input-bg); border: 1px solid var(--border); padding: 16px; border-radius: 14px; margin-bottom: 18px;">
@@ -1164,9 +1127,7 @@
         </div>
       </div>
 
-      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">
-        Список предложений:
-      </div>
+      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">Список предложений:</div>
       <div style="max-height: 310px; overflow-y: auto; padding-right: 6px; margin-bottom: 18px;" id="adminLinksList"></div>
 
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -1178,25 +1139,21 @@
     </div>
   </div>
 
-  <!-- ================= СКРИПТ ДАННЫХ И ЛОГИКИ ================= -->
+  <!-- ================= СКРИПТ ЛОГИКИ ================= -->
   <script>
-    // Сброс скролла на самый верх при обновлении страницы
+    const OWNER_PIN = "825113878GILT";
+
     window.addEventListener('DOMContentLoaded', () => {
-      window.scrollTo(0, 0);
       updateThemeIcon(document.documentElement.getAttribute('data-theme'));
+      if (localStorage.getItem('gilt_owner_unlocked') === 'true') {
+        document.getElementById('secretAdminBtn').style.display = 'inline-flex';
+      }
+      renderCards();
     });
 
-    // Логика переключения светлой/темной темы
     function updateThemeIcon(theme) {
-      const moon = document.getElementById('icon-moon');
-      const sun = document.getElementById('icon-sun');
-      if (theme === 'light') {
-        moon.style.display = 'block'; // В светлой теме показываем луну (переключить на темную)
-        sun.style.display = 'none';
-      } else {
-        moon.style.display = 'none';
-        sun.style.display = 'block';  // В темной теме показываем солнце (переключить на светлую)
-      }
+      document.getElementById('icon-moon').style.display = theme === 'light' ? 'block' : 'none';
+      document.getElementById('icon-sun').style.display = theme === 'light' ? 'none' : 'block';
     }
 
     function toggleTheme() {
@@ -1206,14 +1163,8 @@
       updateThemeIcon(current);
     }
 
-    const OWNER_PIN = "825113878GILT";
-
     // (START_CONTACTS_JSON)
-    const SITE_CONTACTS = {
-      tg: "https://t.me/accountzeus",
-      mail: "zeusmail@bk.ru",
-      csv: ""
-    };
+    const SITE_CONTACTS = { tg: "https://t.me/accountzeus", mail: "zeusmail@bk.ru", csv: "" };
     // (END_CONTACTS_JSON)
 
     // (START_ITEMS_JSON)
@@ -1253,7 +1204,6 @@
       document.getElementById('footerTgBtn').href = contacts.tg;
       document.getElementById('headerMailLink').href = 'mailto:' + contacts.mail;
       document.getElementById('footerMailBtn').href = 'mailto:' + contacts.mail;
-
       renderAdminInputs();
     }
 
@@ -1286,7 +1236,6 @@
         rko: { t: "🏦 Расчетно-кассовое обслуживание (РКО и ИП)", s: "Бесплатная регистрация бизнеса и открытие счета без визита в ФНС" },
         mfo: { t: "⚡ Микрофинансовые организации (МФО)", s: "Моментальное зачисление на любую карту онлайн за 5 минут" }
       };
-
       const info = titles[cat] || titles.debit;
       document.getElementById('catalogModalTitle').innerText = info.t;
       document.getElementById('catalogModalSub').innerText = info.s;
@@ -1306,11 +1255,7 @@
     function changeSlide(idx) {
       currentSlide = idx;
       document.querySelectorAll('.slide').forEach((s, i) => {
-        if (i === idx) {
-          s.classList.add('active');
-        } else {
-          s.classList.remove('active');
-        }
+        if (i === idx) s.classList.add('active'); else s.classList.remove('active');
       });
       document.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
     }
@@ -1328,16 +1273,13 @@
         localStorage.setItem('gilt_owner_unlocked', 'true');
         document.getElementById('secretAdminBtn').style.display = 'inline-flex';
         openModal('adminModal');
-      } else if (pin !== null) {
-        alert("Доступ запрещен. Неверный PIN-код.");
-      }
+      } else if (pin !== null) { alert("Доступ запрещен. Неверный PIN-код."); }
     }
 
     document.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
       if (e.shiftKey && (e.key === 'A' || e.key === 'a' || e.key === 'Ф' || e.key === 'ф')) {
-        e.preventDefault();
-        unlockAdminPanel();
+        e.preventDefault(); unlockAdminPanel();
       }
     });
 
@@ -1358,11 +1300,8 @@
     window.addEventListener('scroll', () => {
       const btn = document.getElementById('mobFloatBtn');
       if (btn) {
-        if (window.scrollY > 400) {
-          btn.classList.add('visible');
-        } else {
-          btn.classList.remove('visible');
-        }
+        if (window.scrollY > 400) btn.classList.add('visible');
+        else btn.classList.remove('visible');
       }
     });
 
@@ -1399,12 +1338,9 @@
         const field = el.dataset.field;
         if (items[idx]) {
           items[idx][field] = el.value.trim();
-          if (field === 'title' && !items[idx].shortLogo) {
-            items[idx].shortLogo = el.value.trim().toUpperCase();
-          }
+          if (field === 'title' && !items[idx].shortLogo) items[idx].shortLogo = el.value.trim().toUpperCase();
         }
       });
-
       localStorage.setItem('gilt_v2_items', JSON.stringify(items));
       localStorage.setItem('gilt_v2_contacts', JSON.stringify(contacts));
     }
@@ -1418,17 +1354,9 @@
     function addNewOfferRow() {
       collectAdminData();
       items.unshift({
-        id: "custom_" + Date.now(),
-        cat: "debit",
-        badge: "НОВОЕ",
-        shortLogo: "БАНК",
-        img: "",
-        color: "linear-gradient(135deg, #1E293B 0%, #0F172A 100%)",
-        textColor: "#CCFF00",
-        title: "Новый банк / карта",
-        price: "Обслуживание 0 ₽",
-        btn: "Оформить",
-        url: "https://"
+        id: "custom_" + Date.now(), cat: "debit", badge: "НОВОЕ", shortLogo: "БАНК", img: "",
+        color: "linear-gradient(135deg, #1E293B 0%, #0F172A 100%)", textColor: "#CCFF00",
+        title: "Новый банк / карта", price: "Обслуживание 0 ₽", btn: "Оформить", url: "https://"
       });
       renderAdminInputs();
     }
@@ -1480,17 +1408,8 @@
 
         if (!putRes.ok) throw new Error("Не удалось сохранить на GitHub");
         statusEl.innerText = "✅ Готово! Сайт успешно обновлен в интернете.";
-      } catch (err) {
-        statusEl.innerText = "❌ Ошибка: " + err.message;
-      }
+      } catch (err) { statusEl.innerText = "❌ Ошибка: " + err.message; }
     }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      if (localStorage.getItem('gilt_owner_unlocked') === 'true') {
-        document.getElementById('secretAdminBtn').style.display = 'inline-flex';
-      }
-      renderCards();
-    });
   </script>
 </body>
 </html>
