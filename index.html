@@ -1392,46 +1392,316 @@
     const SITE_CONTACTS = {
       "tg": "https://t.me/haveahatred",
       "mail": "drejkartem@gmail.com",
-      "fio": "Иванов И.И.",
+      "fio": "Куликов Артём Александрович",
       "inn": "000000000000",
       "showMfo": true,
-      "showLegal": true,
-      "showInitialReviews": true
-    };
+      "showLegal": false,
+      "showInitialReviews": true,
+      "csv": ""
+};
     // (END_CONTACTS_JSON)
 
     // (START_REVIEWS_JSON)
     const SITE_REVIEWS = [
-      { name: "Иван С.", text: "Отличный сервис. Помогли выбрать банк для ИП и всё объяснили. Сэкономил кучу времени.", rate: 5, isInitial: true },
-      { name: "Анна К.", text: "Оформила ИП буквально не выходя из дома. Спасибо за грамотную консультацию по налогам!", rate: 5, isInitial: true },
-      { name: "Максим", text: "Всё честно, бесплатно и быстро. Подсказали, какие ОКВЭД нужны именно мне. Рекомендую.", rate: 5, isInitial: true }
-    ];
+      {
+            "name": "Иван С.",
+            "text": "Отличный сервис. Помогли выбрать банк для ИП и всё объяснили. Сэкономил кучу времени.",
+            "rate": 5
+      },
+      {
+            "name": "Анна К.",
+            "text": "Оформила ИП буквально не выходя из дома. Спасибо за грамотную консультацию по налогам!",
+            "rate": 5
+      },
+      {
+            "name": "Максим",
+            "text": "Всё честно, бесплатно и быстро. Подсказали, какие ОКВЭД нужны именно мне. Рекомендую.",
+            "rate": 5
+      },
+      {
+            "name": "Елена",
+            "text": "Очень боялась бумажной волокиты с налоговой, но ребята всё сделали по красоте онлайн.",
+            "rate": 5
+      }
+];
     // (END_REVIEWS_JSON)
 
     // (START_ITEMS_JSON)
     const DEFAULT_ITEMS = [
-      { "id": "tbank_rko", "cat": "rko", "badge": "ТОП ВЫБОР", "shortLogo": "Т-БАНК", "img": "", "color": "linear-gradient(135deg, #FFDD2D 0%, #F59E0B 100%)", "textColor": "#000", "title": "Расчетный счет в Т-Банке", "price": "Бесплатное обслуживание", "btn": "Оформить", "url": "https://www.tbank.ru/business/registration-ip/" },
-      { "id": "alfa_rko", "cat": "rko", "badge": "ПОПУЛЯРНОЕ", "shortLogo": "АЛЬФА-БАНК", "img": "", "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)", "textColor": "#fff", "title": "Счет для бизнеса в Альфа-Банке", "price": "Бесплатное обслуживание", "btn": "Оформить", "url": "https://trk.ppdu.ru/click/aGbkLIo0?erid=2SDnjeyjBZq&sub1=site&siteId=20402" },
-      { "id": "tbank_black", "cat": "debit", "badge": "ДЕБЕТОВАЯ КАРТА", "shortLogo": "Т-БАНК BLACK", "img": "", "color": "linear-gradient(135deg, #FFDD2D 0%, #CA8A04 100%)", "textColor": "#000", "title": "Дебетовая карта Т-Банк Black", "price": "Кэшбэк до 30% рублями • 0 ₽", "btn": "Оформить", "url": "#" },
-      { "id": "alfa_debit", "cat": "debit", "badge": "ДЕБЕТОВАЯ КАРТА", "shortLogo": "АЛЬФА-КАРТА", "img": "", "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)", "textColor": "#fff", "title": "Альфа-Карта с суперкэшбэком", "price": "Обслуживание 0 ₽ навсегда", "btn": "Оформить", "url": "#" },
-      { "id": "vtb_debit", "cat": "debit", "badge": "ДЕБЕТОВАЯ КАРТА", "shortLogo": "ВТБ КАРТА", "img": "", "color": "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)", "textColor": "#fff", "title": "Карта для жизни ВТБ", "price": "Кэшбэк рублями • 0 ₽", "btn": "Оформить", "url": "#" },
-      { "id": "tbank_plat", "cat": "credit", "badge": "КРЕДИТНАЯ КАРТА", "shortLogo": "Т-БАНК PLATINUM", "img": "", "color": "linear-gradient(135deg, #334155 0%, #0F172A 100%)", "textColor": "#CCFF00", "title": "Кредитная карта Т-Банк Платинум", "price": "До 1 000 000 ₽ • без %", "btn": "Оформить", "url": "#" },
-      { "id": "alfa_credit", "cat": "credit", "badge": "КРЕДИТНАЯ КАРТА", "shortLogo": "АЛЬФА КРЕДИТКА", "img": "", "color": "linear-gradient(135deg, #DC2626 0%, #7F1D1D 100%)", "textColor": "#fff", "title": "Кредитная карта Альфа-Банк", "price": "Льготный период • снятие наличных", "btn": "Оформить", "url": "#" },
-      { "id": "sber_credit", "cat": "credit", "badge": "КРЕДИТНАЯ КАРТА", "shortLogo": "СБЕРКАРТА", "img": "", "color": "linear-gradient(135deg, #16A34A 0%, #065F46 100%)", "textColor": "#fff", "title": "Кредитная СберКарта", "price": "120 дней без % • 0 ₽", "btn": "Оформить", "url": "#" },
-      { "id": "zaimer", "cat": "mfo", "badge": "МФО", "shortLogo": "ЗАЙМЕР", "img": "", "color": "linear-gradient(135deg, #10B981 0%, #047857 100%)", "textColor": "#fff", "title": "Займер", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
-      { "id": "webbankir", "cat": "mfo", "badge": "МФО", "shortLogo": "WEBBANKIR", "img": "", "color": "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)", "textColor": "#fff", "title": "WebBankir (Веб-Банкир)", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
-      { "id": "srochno", "cat": "mfo", "badge": "МФО", "shortLogo": "СРОЧНОДЕНЬГИ", "img": "", "color": "linear-gradient(135deg, #84CC16 0%, #4D7C0F 100%)", "textColor": "#fff", "title": "СрочноДеньги", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
-      { "id": "credit7", "cat": "mfo", "badge": "МФО", "shortLogo": "CREDIT 7", "img": "", "color": "linear-gradient(135deg, #6366F1 0%, #4338CA 100%)", "textColor": "#fff", "title": "Credit7 (Кредит7)", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
-      { "id": "maxcredit", "cat": "mfo", "badge": "МФО", "shortLogo": "MAX.CREDIT", "img": "", "color": "linear-gradient(135deg, #EC4899 0%, #BE185D 100%)", "textColor": "#fff", "title": "Макс Кредит (Max.Credit)", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
-      { "id": "umnal", "cat": "mfo", "badge": "МФО", "shortLogo": "УМНЫЕ НАЛИЧНЫЕ", "img": "", "color": "linear-gradient(135deg, #8B5CF6 0%, #5B21B6 100%)", "textColor": "#fff", "title": "Умные Наличные", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
-      { "id": "belka", "cat": "mfo", "badge": "МФО", "shortLogo": "БЕЛКА КРЕДИТ", "img": "", "color": "linear-gradient(135deg, #F97316 0%, #C2410C 100%)", "textColor": "#fff", "title": "Белка Кредит", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
-      { "id": "oneclick", "cat": "mfo", "badge": "МФО", "shortLogo": "ONE CLICK MONEY", "img": "", "color": "linear-gradient(135deg, #14B8A6 0%, #0F766E 100%)", "textColor": "#fff", "title": "One Click Money", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
-      { "id": "dengisrazu", "cat": "mfo", "badge": "МФО", "shortLogo": "ДЕНЬГИ СРАЗУ", "img": "", "color": "linear-gradient(135deg, #EAB308 0%, #A16207 100%)", "textColor": "#fff", "title": "Деньги Сразу", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
-      { "id": "moneyman", "cat": "mfo", "badge": "МФО", "shortLogo": "MONEY MAN", "img": "", "color": "linear-gradient(135deg, #22C55E 0%, #15803D 100%)", "textColor": "#fff", "title": "Money Man", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
-      { "id": "adengi", "cat": "mfo", "badge": "МФО", "shortLogo": "А-ДЕНЬГИ", "img": "", "color": "linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)", "textColor": "#fff", "title": "А-Деньги", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
-      { "id": "migcredit", "cat": "mfo", "badge": "МФО", "shortLogo": "МИГ КРЕДИТ", "img": "", "color": "linear-gradient(135deg, #06B6D4 0%, #0E7490 100%)", "textColor": "#fff", "title": "Миг Кредит", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
-      { "id": "turbozaim", "cat": "mfo", "badge": "МФО", "shortLogo": "ТУРБОЗАЙМ", "img": "", "color": "linear-gradient(135deg, #3B82F6 0%, #1E3A8A 100%)", "textColor": "#fff", "title": "ТУРБОЗАЙМ", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" }
-    ];
+      {
+            "id": "tbank_rko",
+            "cat": "rko",
+            "badge": "ПЕРВЫЙ ВАРИАНТ",
+            "shortLogo": "Т-БАНК",
+            "img": "",
+            "color": "linear-gradient(135deg, #FFDD2D 0%, #F59E0B 100%)",
+            "textColor": "#000",
+            "title": "Открыть счет в ТБанке (ПЕРВЫЙ ВАРИАНТ)",
+            "price": "Обслуживание 0/месяц р.",
+            "btn": "Заказать",
+            "url": "https://www.tbank.ru/business/registration-ip/"
+      },
+      {
+            "id": "alfa_rko",
+            "cat": "rko",
+            "badge": "ВТОРОЙ ВАРИАНТ",
+            "shortLogo": "АЛЬФА-БАНК",
+            "img": "",
+            "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)",
+            "textColor": "#fff",
+            "title": "Открыть счет в Альфе (ВТОРОЙ ВАРИАНТ)",
+            "price": "Обслуживание 0/месяц р.",
+            "btn": "Заказать",
+            "url": "https://trk.ppdu.ru/click/aGbkLIo0?erid=2SDnjeyjBZq&sub1=site&siteId=20402"
+      },
+      {
+            "id": "tbank_black",
+            "cat": "debit",
+            "badge": "ДЕБЕТОВАЯ КАРТА",
+            "shortLogo": "Т-БАНК BLACK",
+            "img": "",
+            "color": "linear-gradient(135deg, #FFDD2D 0%, #CA8A04 100%)",
+            "textColor": "#000",
+            "title": "Дебетовая карта Т-Банк Black",
+            "price": "Кэшбэк до 30% рублями • 0 ₽",
+            "btn": "Оформить карту",
+            "url": "#"
+      },
+      {
+            "id": "alfa_debit",
+            "cat": "debit",
+            "badge": "ДЕБЕТОВАЯ КАРТА",
+            "shortLogo": "АЛЬФА-КАРТА",
+            "img": "",
+            "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)",
+            "textColor": "#fff",
+            "title": "Альфа-Карта с суперкэшбэком",
+            "price": "Обслуживание 0 ₽ навсегда",
+            "btn": "Оформить карту",
+            "url": "#"
+      },
+      {
+            "id": "vtb_debit",
+            "cat": "debit",
+            "badge": "ДЕБЕТОВАЯ КАРТА",
+            "shortLogo": "ВТБ КАРТА",
+            "img": "",
+            "color": "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)",
+            "textColor": "#fff",
+            "title": "Карта для жизни ВТБ",
+            "price": "Кэшбэк рублями • 0 ₽",
+            "btn": "Оформить карту",
+            "url": "#"
+      },
+      {
+            "id": "tbank_plat",
+            "cat": "credit",
+            "badge": "КРЕДИТНАЯ КАРТА",
+            "shortLogo": "Т-БАНК PLATINUM",
+            "img": "",
+            "color": "linear-gradient(135deg, #334155 0%, #0F172A 100%)",
+            "textColor": "#CCFF00",
+            "title": "Кредитная карта Т-Банк Платинум",
+            "price": "До 1 000 000 ₽ • беспроцентный период",
+            "btn": "Оформить карту",
+            "url": "#"
+      },
+      {
+            "id": "alfa_credit",
+            "cat": "credit",
+            "badge": "КРЕДИТНАЯ КАРТА",
+            "shortLogo": "АЛЬФА КРЕДИТКА",
+            "img": "",
+            "color": "linear-gradient(135deg, #DC2626 0%, #7F1D1D 100%)",
+            "textColor": "#fff",
+            "title": "Кредитная карта Альфа-Банк",
+            "price": "Льготный период • снятие наличных",
+            "btn": "Оформить карту",
+            "url": "#"
+      },
+      {
+            "id": "sber_credit",
+            "cat": "credit",
+            "badge": "КРЕДИТНАЯ КАРТА",
+            "shortLogo": "СБЕРКАРТА",
+            "img": "",
+            "color": "linear-gradient(135deg, #16A34A 0%, #065F46 100%)",
+            "textColor": "#fff",
+            "title": "Кредитная СберКарта",
+            "price": "120 дней без % • 0 ₽ обслуживание",
+            "btn": "Оформить карту",
+            "url": "#"
+      },
+      {
+            "id": "zaimer",
+            "cat": "mfo",
+            "badge": "МФО",
+            "shortLogo": "ЗАЙМЕР",
+            "img": "",
+            "color": "linear-gradient(135deg, #10B981 0%, #047857 100%)",
+            "textColor": "#fff",
+            "title": "Займер",
+            "price": "Обслуживание 0 - 7900 р.",
+            "btn": "ПОЛУЧИТЬ",
+            "url": ""
+      },
+      {
+            "id": "webbankir",
+            "cat": "mfo",
+            "badge": "МФО",
+            "shortLogo": "WEBBANKIR",
+            "img": "",
+            "color": "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)",
+            "textColor": "#fff",
+            "title": "WebBankir (Веб-Банкир)",
+            "price": "Обслуживание 0 - 500 р.",
+            "btn": "ПОЛУЧИТЬ",
+            "url": ""
+      },
+      {
+            "id": "srochno",
+            "cat": "mfo",
+            "badge": "МФО",
+            "shortLogo": "СРОЧНОДЕНЬГИ",
+            "img": "",
+            "color": "linear-gradient(135deg, #84CC16 0%, #4D7C0F 100%)",
+            "textColor": "#fff",
+            "title": "СрочноДеньги",
+            "price": "Обслуживание 0 - 9900 р.",
+            "btn": "ПОЛУЧИТЬ",
+            "url": ""
+      },
+      {
+            "id": "credit7",
+            "cat": "mfo",
+            "badge": "МФО",
+            "shortLogo": "CREDIT 7",
+            "img": "",
+            "color": "linear-gradient(135deg, #6366F1 0%, #4338CA 100%)",
+            "textColor": "#fff",
+            "title": "Credit7 (Кредит7)",
+            "price": "Обслуживание 0-4990 р.",
+            "btn": "ПОЛУЧИТЬ",
+            "url": ""
+      },
+      {
+            "id": "maxcredit",
+            "cat": "mfo",
+            "badge": "МФО",
+            "shortLogo": "MAX.CREDIT",
+            "img": "",
+            "color": "linear-gradient(135deg, #EC4899 0%, #BE185D 100%)",
+            "textColor": "#fff",
+            "title": "Макс Кредит (Max.Credit)",
+            "price": "Обслуживание 0-4990 р.",
+            "btn": "ПОЛУЧИТЬ",
+            "url": ""
+      },
+      {
+            "id": "umnal",
+            "cat": "mfo",
+            "badge": "МФО",
+            "shortLogo": "УМНЫЕ НАЛИЧНЫЕ",
+            "img": "",
+            "color": "linear-gradient(135deg, #8B5CF6 0%, #5B21B6 100%)",
+            "textColor": "#fff",
+            "title": "Умные Наличные",
+            "price": "Обслуживание 0-4990 р.",
+            "btn": "ПОЛУЧИТЬ",
+            "url": ""
+      },
+      {
+            "id": "belka",
+            "cat": "mfo",
+            "badge": "МФО",
+            "shortLogo": "БЕЛКА КРЕДИТ",
+            "img": "",
+            "color": "linear-gradient(135deg, #F97316 0%, #C2410C 100%)",
+            "textColor": "#fff",
+            "title": "Белка Кредит",
+            "price": "Обслуживание 0-4990 р.",
+            "btn": "ПОЛУЧИТЬ",
+            "url": ""
+      },
+      {
+            "id": "oneclick",
+            "cat": "mfo",
+            "badge": "МФО",
+            "shortLogo": "ONE CLICK MONEY",
+            "img": "",
+            "color": "linear-gradient(135deg, #14B8A6 0%, #0F766E 100%)",
+            "textColor": "#fff",
+            "title": "One Click Money",
+            "price": "Обслуживание 0-4990 р.",
+            "btn": "ПОЛУЧИТЬ",
+            "url": ""
+      },
+      {
+            "id": "dengisrazu",
+            "cat": "mfo",
+            "badge": "МФО",
+            "shortLogo": "ДЕНЬГИ СРАЗУ",
+            "img": "",
+            "color": "linear-gradient(135deg, #EAB308 0%, #A16207 100%)",
+            "textColor": "#fff",
+            "title": "Деньги Сразу",
+            "price": "Обслуживание 0-4990 р.",
+            "btn": "ПОЛУЧИТЬ",
+            "url": ""
+      },
+      {
+            "id": "moneyman",
+            "cat": "mfo",
+            "badge": "МФО",
+            "shortLogo": "MONEY MAN",
+            "img": "",
+            "color": "linear-gradient(135deg, #22C55E 0%, #15803D 100%)",
+            "textColor": "#fff",
+            "title": "Money Man",
+            "price": "Обслуживание 0-4990 р.",
+            "btn": "ПОЛУЧИТЬ",
+            "url": ""
+      },
+      {
+            "id": "adengi",
+            "cat": "mfo",
+            "badge": "МФО",
+            "shortLogo": "А-ДЕНЬГИ",
+            "img": "",
+            "color": "linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)",
+            "textColor": "#fff",
+            "title": "А-Деньги",
+            "price": "Обслуживание 0-4990 р.",
+            "btn": "ПОЛУЧИТЬ",
+            "url": ""
+      },
+      {
+            "id": "migcredit",
+            "cat": "mfo",
+            "badge": "МФО",
+            "shortLogo": "МИГ КРЕДИТ",
+            "img": "",
+            "color": "linear-gradient(135deg, #06B6D4 0%, #0E7490 100%)",
+            "textColor": "#fff",
+            "title": "Миг Кредит",
+            "price": "Обслуживание 0-4990 р.",
+            "btn": "ПОЛУЧИТЬ",
+            "url": ""
+      },
+      {
+            "id": "turbozaim",
+            "cat": "mfo",
+            "badge": "МФО",
+            "shortLogo": "ТУРБОЗАЙМ",
+            "img": "",
+            "color": "linear-gradient(135deg, #3B82F6 0%, #1E3A8A 100%)",
+            "textColor": "#fff",
+            "title": "ТУРБОЗАЙМ",
+            "price": "Обслуживание 0-4990 р.",
+            "btn": "ПОЛУЧИТЬ",
+            "url": ""
+      }
+];
     // (END_ITEMS_JSON)
 
     let items = JSON.parse(localStorage.getItem('gilt_v2_items')) || [...DEFAULT_ITEMS];
