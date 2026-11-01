@@ -9,6 +9,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@600;700;800&display=swap" rel="stylesheet">
 
+  <!-- ================= ЯНДЕКС.МЕТРИКА (Базовый код) ================= -->
+  <!-- В будущем замени 00000000 на свой реальный номер счетчика Метрики -->
+  <script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(00000000, "init", {
+         clickmap:true,
+         trackLinks:true,
+         accurateTrackBounce:true
+    });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/00000000" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- ================= КОНЕЦ МЕТРИКИ ================= -->
+
   <style>
     :root {
       --bg-dark: #090D14;
@@ -34,7 +52,7 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       line-height: 1.55;
       overflow-x: hidden;
-      -webkit-tap-highlight-color: transparent; /* Убираем синие вспышки при клике на телефоне */
+      -webkit-tap-highlight-color: transparent;
     }
 
     .container {
@@ -43,7 +61,6 @@
       padding: 0 20px;
     }
 
-    /* Умный отступ для якорных ссылок (30vh = 30% от высоты экрана, чтобы быть точно по центру) */
     section, #categories-hub {
       scroll-margin-top: 30vh;
     }
@@ -66,7 +83,6 @@
       gap: 16px;
     }
     
-    /* Логотип с эффектом при наведении */
     .logo {
       font-family: 'Unbounded', sans-serif;
       font-size: 26px;
@@ -142,11 +158,7 @@
     }
     .soc-icon svg { width: 18px; height: 18px; fill: currentColor; }
 
-    #secretAdminBtn {
-      display: none;
-      border-color: var(--lime);
-      color: var(--lime);
-    }
+    #secretAdminBtn { display: none; border-color: var(--lime); color: var(--lime); }
 
     .burger {
       display: none;
@@ -194,12 +206,12 @@
       border: 1px solid rgba(204, 255, 0, 0.22);
       border-radius: 26px;
       overflow: hidden;
-      height: 460px; /* Жестко фиксированная высота, чтобы не было прыжков! */
+      height: 460px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
     }
     .slide {
       position: absolute;
-      inset: 0; /* Растягиваем слайд на весь контейнер */
+      inset: 0; 
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
@@ -210,7 +222,7 @@
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
       gap: 40px;
-      align-items: center;
+      align-items: center; 
     }
     .slide.active {
       opacity: 1;
@@ -603,7 +615,7 @@
       line-height: 1.55;
     }
 
-    /* ================= ПОДВАЛ ================= */
+    /* ================= ПОДВАЛ (ЮРИДИЧЕСКАЯ ЗАЩИТА) ================= */
     .footer {
       border-top: 1px solid var(--border);
       padding: 56px 0 44px;
@@ -629,11 +641,37 @@
       margin: 20px 0 26px;
     }
     .disclaimer {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-gray);
       line-height: 1.65;
       border-top: 1px solid var(--border);
       padding-top: 20px;
+    }
+
+    /* ================= ПЛАВАЮЩАЯ КНОПКА ДЛЯ ТЕЛЕФОНОВ ================= */
+    .mobile-floating-btn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(150px); /* Изначально спрятана вниз */
+      background: var(--lime);
+      color: #090D14;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 16px 24px;
+      border-radius: 14px;
+      text-decoration: none;
+      z-index: 90;
+      box-shadow: 0 10px 30px rgba(204, 255, 0, 0.4);
+      text-transform: uppercase;
+      width: calc(100% - 40px);
+      text-align: center;
+      transition: transform 0.4s ease;
+    }
+    .mobile-floating-btn.visible {
+      transform: translateX(-50%) translateY(0); /* Выезжает вверх */
     }
 
     /* ================= МОДАЛЬНЫЕ ОКНА ================= */
@@ -736,7 +774,6 @@
       .nav-center, .nav-right { display: none; }
       .burger { display: inline-block; }
       
-      /* Адаптив высоты слайдера для планшетов */
       .hero-slider { height: 600px; }
       .slide {
         grid-template-columns: 1fr;
@@ -753,17 +790,34 @@
     }
     
     @media (max-width: 640px) {
-      /* Жестко фиксированная высота под мобилки, чтобы ничего не прыгало */
-      .hero-slider { height: 660px; }
-      .slide { padding: 20px 20px; gap: 24px; }
+      /* Исправление мобильного отображения: высота auto, выравнивание сверху вниз */
+      .hero-slider { 
+        height: auto; 
+        min-height: 640px;
+        display: flex;
+      }
+      .slide { 
+        position: relative; 
+        padding: 40px 20px 30px; 
+        gap: 20px; 
+        align-items: start; 
+        text-align: left; 
+      }
+      .slide:not(.active) { display: none; }
+      
       .slide-tag { margin-bottom: 12px; }
       .slide p { margin-bottom: 20px; font-size: 14px; }
+      .slide-visual { text-align: left; padding: 24px; }
       
       .rko-grid, .steps-grid, .cat-hub-grid, .why-grid { grid-template-columns: 1fr; gap: 16px; }
       .btn-primary { width: 100%; padding: 14px 20px; }
       .modal-window { padding: 24px 16px; max-height: 95vh; }
       .modal-cat-tabs { gap: 6px; }
       .modal-tab-btn { padding: 8px 12px; font-size: 11px; flex: 1; text-align: center; }
+
+      /* Активация плавающей кнопки и отступ в подвале, чтобы она не закрывала текст */
+      .mobile-floating-btn { display: block; }
+      .footer { padding-bottom: 90px; }
     }
   </style>
 </head>
@@ -783,7 +837,7 @@
       </ul>
 
       <div class="nav-right">
-        <a href="#" onclick="openModal('privacyModal'); return false;" class="nav-link">Политика конфиденциальности</a>
+        <a href="#" onclick="openModal('privacyModal'); return false;" class="nav-link">Правовая информация</a>
         <a href="#contacts" class="nav-link">Контакты</a>
         <div class="socials">
           <a id="headerTgLink" href="https://t.me/accountzeus" target="_blank" rel="nofollow" class="soc-icon" title="Telegram">
@@ -799,12 +853,11 @@
       <button type="button" class="burger" onclick="toggleMobileNav()">☰</button>
     </div>
 
-    <!-- Мобильное меню теперь выпадает аккуратно поверх контента -->
     <div class="mobile-nav" id="mobileNav">
       <a href="#steps" onclick="toggleMobileNav()">Этапы</a>
       <a href="#rko" onclick="toggleMobileNav()">Регистрация ИП</a>
       <a href="#categories-hub" onclick="toggleMobileNav()">Продукты</a>
-      <a href="#" onclick="toggleMobileNav(); openModal('privacyModal'); return false;">Политика конфиденциальности</a>
+      <a href="#" onclick="toggleMobileNav(); openModal('privacyModal'); return false;">Правовая информация</a>
       <a href="#contacts" onclick="toggleMobileNav()">Контакты</a>
     </div>
   </header>
@@ -844,7 +897,6 @@
         </div>
       </div>
 
-      <!-- preventDefault запрещает браузеру любые попытки обновить или дернуть страницу -->
       <div class="slider-controls">
         <button type="button" class="slider-arrow" onclick="event.preventDefault(); prevSlide()">‹</button>
         <button type="button" class="slider-dot active" id="dot-0" onclick="event.preventDefault(); changeSlide(0)"></button>
@@ -984,7 +1036,7 @@
     </div>
   </section>
 
-  <!-- ================= ПОДВАЛ ================= -->
+  <!-- ================= ПОДВАЛ (ОБНОВЛЕННАЯ ЮРИДИЧЕСКАЯ ИНФОРМАЦИЯ) ================= -->
   <footer class="footer" id="contacts">
     <div class="container">
       <div class="footer-box">
@@ -995,15 +1047,16 @@
           <a id="footerMailBtn" href="mailto:zeusmail@bk.ru" class="btn-primary" style="background: transparent; color: var(--text-white); border: 1px solid var(--border); box-shadow: none;">Написать на почту</a>
         </div>
         <div class="disclaimer">
-          Это бесплатный информационный сервис, предоставляющий контент и справочную информацию о расчетных счетах, дебетовых и кредитных картах, кредитах, автокредитах, ипотечных и прочих займах. Используя его вы сможете быстро решить свои финансовые вопросы, затратив минимум своего личного времени.<br><br>
-          Все товарные знаки и логотипы, представленные на этом сайте, являются собственностью соответствующих владельцев и взяты из публичных источников. Их появление на этом сайте не подразумевает одобрение ими нашего продукта.<br><br>
-          <b>Отказ от ответственности:</b><br>
-          Сервис не является кредитором или ипотечным/кредитным брокером и не предоставляет финансовые услуги прямо или косвенно через представителей или агентов. Не осуществляет выдачу каких-либо видов кредита. Не несет ответственности за точность информации, предоставленной банками по тарифам, кредитным ставкам, переплатам, а также за любую другую информацию.<br><br>
-          Оценивайте свои финансовые возможности и риски. Изучите все условия кредита (займа). Реклама. Рекламодатель: ООО "МБ Маркетплейс". ИНН 7727618949
+          <b>Правовой статус сервиса:</b> Данный сайт (GILT) является исключительно информационно-справочным агрегатором. Проект не является кредитной организацией, банком, МФО, кредитным брокером или инвестиционным советником. Мы не выдаем кредиты, не привлекаем средства во вклады и не осуществляем расчетно-кассовое обслуживание.<br><br>
+          <b>Отказ от ответственности:</b> Вся информация о финансовых продуктах, тарифах, процентных ставках и условиях обслуживания носит ознакомительный характер и не является публичной офертой, определяемой положениями ст. 437 ГК РФ. Итоговые условия договоров определяются исключительно финансовыми организациями на момент подписания документов. Сервис не несет ответственности за решения, принятые пользователем на основе предоставленной информации, а также за последствия заключенных финансовых сделок.<br><br>
+          <b>Защита авторских прав и товарные знаки:</b> Все логотипы, товарные знаки и наименования финансовых организаций, представленные на сайте, являются интеллектуальной собственностью их законных правообладателей и используются исключительно в информационных целях для идентификации соответствующих продуктов (в соответствии со ст. 1487 ГК РФ).
         </div>
       </div>
     </div>
   </footer>
+
+  <!-- ================= ПЛАВАЮЩАЯ КНОПКА (МОБИЛЬНЫЕ) ================= -->
+  <a href="#categories-hub" id="mobFloatBtn" class="mobile-floating-btn" onclick="ym(00000000, 'reachGoal', 'MOBILE_FLOAT_CLICK')">Подобрать продукт</a>
 
   <!-- ================= ВНУТРЕННЕЕ ОКНО КАТАЛОГА ================= -->
   <div class="modal-backdrop" id="catalogModal" onclick="if(event.target===this) closeModal('catalogModal')">
@@ -1022,16 +1075,26 @@
     </div>
   </div>
 
-  <!-- ================= ПОПАП: ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ================= -->
+  <!-- ================= ПОПАП: ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ (152-ФЗ) ================= -->
   <div class="modal-backdrop" id="privacyModal" onclick="if(event.target===this) closeModal('privacyModal')">
-    <div class="modal-window" style="max-width: 680px;">
+    <div class="modal-window" style="max-width: 760px;">
       <button type="button" class="modal-close" onclick="closeModal('privacyModal')">×</button>
-      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 16px; color: var(--lime);">Политика конфиденциальности</h3>
-      <div style="font-size: 14px; color: var(--text-gray); line-height: 1.65;">
-        <p>Настоящая Политика конфиденциальности регулирует порядок обработки и защиты информации о физических и юридических лицах, пользующихся информационным сервисом GILT.</p><br>
-        <p>1. Сервис GILT носит исключительно информационно-справочный характер и перенаправляет пользователей на официальные страницы банков-партнеров и микрофинансовых организаций.</p><br>
-        <p>2. Сервис не собирает и не хранит паспортные или платежные данные пользователей. Все анкеты заполняются пользователем непосредственно на защищенных ресурсах выбранных финансовых организаций.</p><br>
-        <p>3. По всем вопросам вы можете связаться с администрацией сайта через Telegram или электронную почту, указанные в разделе Контакты.</p>
+      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 16px; color: var(--lime);">Пользовательское соглашение и Политика конфиденциальности</h3>
+      <div style="font-size: 13px; color: var(--text-gray); line-height: 1.65; max-height: 60vh; overflow-y: auto; padding-right: 10px;">
+        <p><b>1. Общие положения</b><br>
+        Настоящий документ определяет условия использования информационного сервиса GILT (далее — «Сервис») и политику в отношении обработки персональных данных в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных».</p><br>
+        
+        <p><b>2. Статус Сервиса и ограничение ответственности</b><br>
+        Сервис не осуществляет финансовую, банковскую или микрофинансовую деятельность. Мы предоставляем структурированный каталог ссылок на официальные сайты партнеров (банков и МФО). Переход по ссылкам, заполнение анкет, передача паспортных и иных данных осуществляются Пользователем добровольно на защищенных ресурсах третьих лиц. Сервис не контролирует сайты партнеров и не несет ответственности за их содержание или утечку данных на их стороне.</p><br>
+        
+        <p><b>3. Отсутствие сбора персональных данных</b><br>
+        В рамках работы Сервиса (на домене giltrko.ru / github.io) <b>не производится</b> сбор, хранение, обработка или систематизация персональных данных пользователей в понимании 152-ФЗ. Сервис не запрашивает ФИО, паспортные данные, номера телефонов, адреса электронной почты или реквизиты банковских карт. Все действия по оформлению продуктов происходят исключительно на официальных серверах банков-эмитентов.</p><br>
+        
+        <p><b>4. Использование файлов Cookie</b><br>
+        Для обеспечения корректной работы Сервис может использовать технические файлы cookie (например, для сохранения настроек отображения). Cookie не содержат персональных данных и не используются для идентификации личности Пользователя. Пользователь вправе в любой момент заблокировать прием файлов cookie в настройках своего браузера.</p><br>
+        
+        <p><b>5. Заключительные положения</b><br>
+        Продолжая использование Сервиса, Пользователь подтверждает свое согласие с настоящими правилами. Администрация Сервиса оставляет за собой право вносить изменения в настоящий документ без предварительного уведомления. По всем вопросам взаимодействия с Сервисом Пользователь может обратиться по контактам, указанным в соответствующем разделе сайта.</p>
       </div>
     </div>
   </div>
@@ -1076,7 +1139,6 @@
 
   <!-- ================= СКРИПТ ДАННЫХ И ЛОГИКИ ================= -->
   <script>
-    // НОВЫЙ СТРОГИЙ ПИН-КОД
     const OWNER_PIN = "825113878GILT";
 
     // (START_CONTACTS_JSON)
@@ -1128,11 +1190,12 @@
       renderAdminInputs();
     }
 
+    // Добавлена отправка события в Яндекс.Метрику при клике на кнопку оформления (ym)
     function cardTemplate(item) {
       const imgTag = item.img ? `<img src="${item.img}" alt="${item.title}" class="card-custom-img">` : '';
       return `
         <div class="product-card">
-          <a href="${item.url}" target="_blank" rel="nofollow noopener" style="text-decoration: none; color: inherit;">
+          <a href="${item.url}" target="_blank" rel="nofollow noopener" style="text-decoration: none; color: inherit;" onclick="ym(00000000, 'reachGoal', 'CLICK_CARD_${item.id.toUpperCase()}')">
             <div class="card-thumb" style="background: ${item.color || 'linear-gradient(135deg, #1E293B, #0F172A)'}; color: ${item.textColor || '#fff'};">
               ${imgTag}
               <span class="card-thumb-badge">${item.badge || 'ПАРТНЕР'}</span>
@@ -1144,7 +1207,7 @@
               <div class="card-name">${item.title}</div>
               <div class="card-sub">${item.price}</div>
             </div>
-            <a href="${item.url}" target="_blank" rel="nofollow noopener" class="card-btn">${item.btn || 'Оформить'}</a>
+            <a href="${item.url}" target="_blank" rel="nofollow noopener" class="card-btn" onclick="ym(00000000, 'reachGoal', 'CLICK_BTN_${item.id.toUpperCase()}')">${item.btn || 'Оформить'}</a>
           </div>
         </div>
       `;
@@ -1171,7 +1234,6 @@
       openModal('catalogModal');
     }
 
-    // ================= ЛОГИКА СЛАЙДЕРА (ТЕПЕРЬ БЕЗ ПРЫЖКОВ) =================
     let currentSlide = 0;
     const totalSlides = 2;
 
@@ -1187,26 +1249,13 @@
       document.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
     }
     
-    function nextSlide() {
-      changeSlide((currentSlide + 1) % totalSlides);
-    }
-    
-    function prevSlide() {
-      changeSlide((currentSlide - 1 + totalSlides) % totalSlides);
-    }
+    function nextSlide() { changeSlide((currentSlide + 1) % totalSlides); }
+    function prevSlide() { changeSlide((currentSlide - 1 + totalSlides) % totalSlides); }
 
-    // ================= ИНТЕРФЕЙС И МОДАЛКИ =================
-    function toggleMobileNav() {
-      document.getElementById('mobileNav').classList.toggle('open');
-    }
-    function openModal(id) {
-      document.getElementById(id).classList.add('open');
-    }
-    function closeModal(id) {
-      document.getElementById(id).classList.remove('open');
-    }
+    function toggleMobileNav() { document.getElementById('mobileNav').classList.toggle('open'); }
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
-    // ================= СТРОГАЯ ЗАЩИТА АДМИНКИ =================
     function unlockAdminPanel() {
       const pin = prompt("Введите PIN-код владельца сайта GILT:");
       if (pin === OWNER_PIN) {
@@ -1226,7 +1275,18 @@
       }
     });
 
-    // ================= УПРАВЛЕНИЕ АДМИНКОЙ =================
+    // Логика появления плавающей кнопки на скролле
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('mobFloatBtn');
+      if (btn) {
+        if (window.scrollY > 400) {
+          btn.classList.add('visible');
+        } else {
+          btn.classList.remove('visible');
+        }
+      }
+    });
+
     function renderAdminInputs() {
       document.getElementById('admTg').value = contacts.tg || '';
       document.getElementById('admMail').value = contacts.mail || '';
