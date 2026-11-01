@@ -6,8 +6,8 @@
   <title>GILT — Регистрация ИП, РКО, Карты и МФО онлайн</title>
   <meta name="description" content="Получите профессиональную юридическую помощь и станьте предпринимателем без похода в ФНС уже сегодня! Регистрация ИП, РКО, дебетовые и кредитные карты, МФО.">
   
-  <!-- ================= ИКОНКА ВО ВКЛАДКЕ БРАУЗЕРА (FAVICON) ================= -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23CCFF00'/><stop offset='100%' stop-color='%23FF6B00'/></linearGradient></defs><path d='M50 20C33.43 20 20 33.43 20 50C20 66.57 33.43 80 50 80C62.7 80 73.53 72.1 77.94 60.5H62.72C59.5 65.2 55.1 68 50 68C40.06 68 32 59.94 32 50C32 40.06 40.06 32 50 32C56.12 32 61.42 35.08 64.63 39.8H78.8C74.3 27.2 63.2 18 50 20Z' fill='url(%23g)'/><path d='M78 50H50V62H78V50Z' fill='url(%23g)'/></svg>">
+  <!-- ================= ИКОНКА ВО ВКЛАДКЕ (FAVICON) ================= -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23CCFF00'/><stop offset='100%' stop-color='%23FF6B00'/></linearGradient></defs><path d='M50 15 C30.67 15 15 30.67 15 50 C15 69.33 30.67 85 50 85 C66.07 85 79.6 74.14 83.5 59 H66 C62.5 66 56.8 70 50 70 C38.95 70 30 61.05 30 50 C30 38.95 38.95 30 50 30 C56.63 30 62.5 33.23 66.05 38.2 L80.1 26.2 C73.1 17.5 62.1 12 50 15 Z' fill='url(%23g)'/><path d='M45 42.5 H90 V57.5 H45 Z' fill='url(%23g)' rx='7'/></svg>">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,15 +32,18 @@
   <noscript><div><img src="https://mc.yandex.ru/watch/00000000" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
   <style>
-    /* ================= ПЕРЕМЕННЫЕ (ТЕМНАЯ ТЕМА) ================= */
+    /* ================= ТЕМНАЯ ТЕМА (ПО УМОЛЧАНИЮ) ================= */
     :root {
       --bg-dark: #090D14;
       --bg-card: #111722;
       --bg-card-hover: #161F2E;
       --border: rgba(255, 255, 255, 0.09);
+      
       --lime: #CCFF00;
+      --accent: #FF6B00; /* Градиент от салатового к оранжевому */
       --lime-hover: #b8e600;
       --lime-glow: rgba(204, 255, 0, 0.25);
+      
       --text-white: #F8FAFC;
       --text-gray: #94A3B8;
       --btn-text: #090D14;
@@ -57,28 +60,31 @@
       --hero-visual-bg: rgba(255, 255, 255, 0.03);
     }
 
-    /* ================= ПЕРЕМЕННЫЕ (СВЕТЛАЯ ТЕМА) ================= */
+    /* ================= ИДЕАЛЬНО БЕЛАЯ СВЕТЛАЯ ТЕМА ================= */
     [data-theme="light"] {
-      --bg-dark: #F4F6F8;
-      --bg-card: #FFFFFF;
-      --bg-card-hover: #F8FAFC;
+      --bg-dark: #FFFFFF;
+      --bg-card: #F8FAFC;
+      --bg-card-hover: #F1F5F9;
       --border: #E2E8F0;
+      
       --lime: #FF6B00;
+      --accent: #FF0055; /* Градиент от оранжевого к красному */
       --lime-hover: #E65C00;
       --lime-glow: rgba(255, 107, 0, 0.15);
+      
       --text-white: #0F172A;
       --text-gray: #475569;
       --btn-text: #FFFFFF;
       
-      --bg-hero-grad: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%);
-      --bg-header: rgba(244, 246, 248, 0.88);
-      --bg-header-mob: rgba(244, 246, 248, 0.98);
-      --bg-footer: #E2E8F0;
+      --bg-hero-grad: #FFFFFF;
+      --bg-header: rgba(255, 255, 255, 0.92);
+      --bg-header-mob: rgba(255, 255, 255, 0.98);
+      --bg-footer: #F8FAFC;
       --bg-modal: #FFFFFF;
       --admin-input-bg: #F1F5F9;
       --cat-hub-grad: #FFFFFF;
       --cat-hub-hover: #F8FAFC;
-      --hero-visual-bg: #F1F5F9;
+      --hero-visual-bg: #F8FAFC;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -230,13 +236,20 @@
       background: var(--bg-hero-grad);
       border: 1px solid var(--border);
       border-radius: 26px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
       transition: background 0.4s ease;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .slider-content-area {
+      position: relative;
+      width: 100%;
     }
     
     .slide {
-      display: none; /* Скрываем все неактивные, чтобы высота подстраивалась под контент */
+      display: none; 
       grid-template-columns: 1.2fr 0.8fr;
       gap: 40px;
       align-items: center;
@@ -323,7 +336,7 @@
       justify-content: center;
       align-items: center;
       gap: 12px;
-      padding: 0 0 26px 0; /* Отступ внутри белого/темного контейнера */
+      padding: 0 0 26px 0;
     }
     .slider-dot {
       width: 36px;
@@ -384,6 +397,7 @@
     .step-item:hover {
       border-color: var(--lime);
       transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
     .step-circle {
       width: 48px;
@@ -669,30 +683,6 @@
       padding-top: 20px;
     }
 
-    /* ================= ПЛАВАЮЩАЯ КНОПКА (МОБИЛЬНЫЕ) ================= */
-    .mobile-floating-btn {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%) translateY(150px);
-      background: var(--lime);
-      color: var(--btn-text);
-      font-family: 'Unbounded', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 16px 24px;
-      border-radius: 14px;
-      text-decoration: none;
-      z-index: 90;
-      box-shadow: 0 10px 30px var(--lime-glow);
-      text-transform: uppercase;
-      width: calc(100% - 40px);
-      text-align: center;
-      transition: transform 0.4s ease;
-    }
-    .mobile-floating-btn.visible { transform: translateX(-50%) translateY(0); }
-
     /* ================= МОДАЛЬНЫЕ ОКНА ================= */
     .modal-backdrop {
       position: fixed;
@@ -719,6 +709,10 @@
       position: relative;
       box-shadow: 0 25px 70px rgba(0,0,0,0.3);
       animation: fadeIn 0.25s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .modal-close {
       position: absolute;
@@ -805,6 +799,7 @@
     @media (max-width: 640px) {
       section, #categories-hub { scroll-margin-top: 90px; }
 
+      /* Гибкая высота для мобильных, чтобы рамка всегда закрывалась */
       .slide { 
         padding: 30px 20px 20px; 
         gap: 24px; 
@@ -822,9 +817,6 @@
       .modal-window { padding: 24px 16px; }
       .modal-cat-tabs { gap: 6px; }
       .modal-tab-btn { padding: 8px 12px; font-size: 11px; flex: 1; text-align: center; }
-
-      .mobile-floating-btn { display: block; }
-      .footer { padding-bottom: 90px; }
     }
   </style>
 </head>
@@ -834,15 +826,16 @@
   <header class="header">
     <div class="container header-inner">
       <div class="logo" onclick="handleLogoTap()" title="Наверх">
+        <!-- SVG Логотип (Круговой финтех-стиль) -->
         <svg width="34" height="34" viewBox="0 0 100 100" fill="none" style="flex-shrink: 0;">
           <defs>
             <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="var(--lime)" />
-              <stop offset="100%" stop-color="#FF6B00" />
+              <stop offset="100%" stop-color="var(--accent)" />
             </linearGradient>
           </defs>
-          <path d="M50 20C33.43 20 20 33.43 20 50C20 66.57 33.43 80 50 80C62.7 80 73.53 72.1 77.94 60.5H62.72C59.5 65.2 55.1 68 50 68C40.06 68 32 59.94 32 50C32 40.06 40.06 32 50 32C56.12 32 61.42 35.08 64.63 39.8H78.8C74.3 27.2 63.2 18 50 20Z" fill="url(#logoGrad)"/>
-          <path d="M78 50H50V62H78V50Z" fill="url(#logoGrad)"/>
+          <path d="M50 15 C30.67 15 15 30.67 15 50 C15 69.33 30.67 85 50 85 C66.07 85 79.6 74.14 83.5 59 H66 C62.5 66 56.8 70 50 70 C38.95 70 30 61.05 30 50 C30 38.95 38.95 30 50 30 C56.63 30 62.5 33.23 66.05 38.2 L80.1 26.2 C73.1 17.5 62.1 12 50 15 Z" fill="url(#logoGrad)"/>
+          <path d="M45 42.5 H90 V57.5 H45 Z" fill="url(#logoGrad)" rx="7"/>
         </svg>
         <span class="logo-text">GILT</span>
       </div>
@@ -883,32 +876,33 @@
   <section class="hero-section">
     <div class="container">
       <div class="hero-slider-wrap">
-        
-        <div class="slide active" id="slide-0">
-          <div class="slide-content">
-            <span class="slide-tag">GILT • ОНЛАЙН-СЕРВИС</span>
-            <h1>Получите профессиональную юридическую помощь и станьте предпринимателем без похода в ФНС уже сегодня!</h1>
-            <p>Дистанционная подача документов без госпошлины 0 ₽. Поможем открыть расчетный счет, подобрать карты и зарегистрировать бизнес в кратчайшие сроки.</p>
-            <a href="#rko" class="btn-primary">К УСЛУГАМ ↓</a>
+        <div class="slider-content-area">
+          <div class="slide active" id="slide-0">
+            <div class="slide-content">
+              <span class="slide-tag">GILT • ОНЛАЙН-СЕРВИС</span>
+              <h1>Получите профессиональную юридическую помощь и станьте предпринимателем без похода в ФНС уже сегодня!</h1>
+              <p>Дистанционная подача документов без госпошлины 0 ₽. Поможем открыть расчетный счет, подобрать карты и зарегистрировать бизнес в кратчайшие сроки.</p>
+              <a href="#rko" class="btn-primary">К УСЛУГАМ ↓</a>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-big">0 ₽</div>
+              <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">Госпошлина и подготовка</div>
+              <p style="font-size: 14px; margin-bottom: 0;">Полное дистанционное оформление по Паспорту, ИНН и СНИЛС за 3–4 рабочих дня</p>
+            </div>
           </div>
-          <div class="slide-visual">
-            <div class="visual-big">0 ₽</div>
-            <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">Госпошлина и подготовка</div>
-            <p style="font-size: 14px; margin-bottom: 0;">Полное дистанционное оформление по Паспорту, ИНН и СНИЛС за 3–4 рабочих дня</p>
-          </div>
-        </div>
 
-        <div class="slide" id="slide-1">
-          <div class="slide-content">
-            <span class="slide-tag">GILT • КОНСАЛТИНГ</span>
-            <h2>Юридическая поддержка для бизнеса</h2>
-            <p>Мы предлагаем комплексные юридические услуги для вашего бизнеса. Наша команда профессионалов поможет разобраться в сложных вопросах, связанных с банковскими продуктами и консалтингом, обеспечивая надежность и защиту ваших интересов.</p>
-            <a href="#rko" class="btn-primary">К УСЛУГАМ ↓</a>
-          </div>
-          <div class="slide-visual">
-            <div class="visual-big">24/7</div>
-            <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">Персональный менеджер</div>
-            <p style="font-size: 14px; margin-bottom: 0;">Бесплатная консультация и сопровождение на всех этапах регистрации бизнеса и подбора финансирования</p>
+          <div class="slide" id="slide-1">
+            <div class="slide-content">
+              <span class="slide-tag">GILT • КОНСАЛТИНГ</span>
+              <h2>Юридическая поддержка для бизнеса</h2>
+              <p>Мы предлагаем комплексные юридические услуги для вашего бизнеса. Наша команда профессионалов поможет разобраться в сложных вопросах, связанных с банковскими продуктами и консалтингом, обеспечивая надежность и защиту ваших интересов.</p>
+              <a href="#rko" class="btn-primary">К УСЛУГАМ ↓</a>
+            </div>
+            <div class="slide-visual">
+              <div class="visual-big">24/7</div>
+              <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">Персональный менеджер</div>
+              <p style="font-size: 14px; margin-bottom: 0;">Бесплатная консультация и сопровождение на всех этапах регистрации бизнеса и подбора финансирования</p>
+            </div>
           </div>
         </div>
 
@@ -1068,9 +1062,6 @@
     </div>
   </footer>
 
-  <!-- ================= ПЛАВАЮЩАЯ КНОПКА (ТОЛЬКО ДЛЯ МОБИЛЬНЫХ) ================= -->
-  <a href="#categories-hub" id="mobFloatBtn" class="mobile-floating-btn" onclick="ym(00000000, 'reachGoal', 'MOBILE_FLOAT_CLICK')">Подобрать продукт</a>
-
   <!-- ================= МОДАЛКА КАТАЛОГА ================= -->
   <div class="modal-backdrop" id="catalogModal" onclick="if(event.target===this) closeModal('catalogModal')">
     <div class="modal-window">
@@ -1144,6 +1135,8 @@
     const OWNER_PIN = "825113878GILT";
 
     window.addEventListener('DOMContentLoaded', () => {
+      // Сброс скролла на верх при загрузке
+      window.scrollTo(0, 0);
       updateThemeIcon(document.documentElement.getAttribute('data-theme'));
       if (localStorage.getItem('gilt_owner_unlocked') === 'true') {
         document.getElementById('secretAdminBtn').style.display = 'inline-flex';
@@ -1296,14 +1289,6 @@
         logoTapTimeout = setTimeout(() => { logoTapCount = 0; }, 400);
       }
     }
-
-    window.addEventListener('scroll', () => {
-      const btn = document.getElementById('mobFloatBtn');
-      if (btn) {
-        if (window.scrollY > 400) btn.classList.add('visible');
-        else btn.classList.remove('visible');
-      }
-    });
 
     function renderAdminInputs() {
       document.getElementById('admTg').value = contacts.tg || '';
