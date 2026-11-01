@@ -20,15 +20,28 @@
     document.documentElement.setAttribute('data-theme', savedTheme);
   </script>
 
-  <script type="text/javascript" >
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();
-    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-    ym(00000000, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113984418', 'ym');
+
+    ym(113984418, 'init', {
+      ssr:true, 
+      webvisor:true, 
+      clickmap:true, 
+      ecommerce:"dataLayer", 
+      referrer: document.referrer, 
+      url: location.href, 
+      accurateTrackBounce:true, 
+      trackLinks:true
+    });
   </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/00000000" style="position:absolute; left:-9999px; width:0; height:0; visibility:hidden;" alt="" /></div></noscript>
+  <noscript><div><img src="https://mc.yandex.ru/watch/113984418" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
 
   <style>
     /* ================= ТЕМНАЯ ТЕМА ================= */
@@ -963,7 +976,7 @@
       .footer-box { padding: 24px 16px; }
       
       .review-card { flex: 0 0 280px; } 
-      .review-arrow { display: none; } /* На мобильных листают свайпом */
+      .review-arrow { display: none; } 
     }
   </style>
 </head>
@@ -1000,6 +1013,11 @@
       </div>
 
       <div class="mobile-header-actions">
+        <!-- Кнопка Telegram на мобильных телефонах -->
+        <a id="headerTgLinkMob" href="#" target="_blank" rel="nofollow" class="soc-icon" style="width: 38px; height: 38px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; color: var(--text-white); text-decoration: none;" title="Telegram">
+          <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.74 7.58-3.27 3.61-1.51 4.35-1.77 4.84-1.78.11 0 .35.03.5.16.13.1.17.24.18.34.02.08.02.24.01.38z"/></svg>
+        </a>
+        
         <button class="theme-toggle" id="themeToggleBtnMob" onclick="toggleTheme()" title="Сменить тему">
           <svg class="icon-moon" style="display:none;" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
           <svg class="icon-sun" style="display:none;" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM2 13h2a1 1 0 0 0 0-2H2a1 1 0 0 0 0 2zm18 0h2a1 1 0 0 0 0-2h-2a1 1 0 0 0 0 2zM11 2v2a1 1 0 0 0 2 0V2a1 1 0 0 0-2 0zm0 18v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-2 0zM5.99 4.58a1 1 0 1 0-1.41 1.41l1.06 1.06a1 1 0 1 0 1.41-1.41L5.99 4.58zm12.37 12.37a1 1 0 1 0-1.41 1.41l1.06 1.06a1 1 0 1 0 1.41-1.41l-1.06-1.06zM7.05 18.36a1 1 0 1 0-1.41-1.41l-1.06 1.06a1 1 0 1 0 1.41 1.41l1.06-1.06zm12.37-12.37a1 1 0 1 0-1.41-1.41L16.95 5.64a1 1 0 1 0 1.41 1.41l1.06-1.06z"/></svg>
@@ -1027,7 +1045,7 @@
               <span class="slide-tag">GILT • ОНЛАЙН-СЕРВИС</span>
               <h1>Откроем ИП и расчетный счет без визита в налоговую</h1>
               <p>Поможем подобрать коды ОКВЭД, выбрать банк с выгодным тарифом и бесплатно сопроводим на всех этапах дистанционной регистрации.</p>
-              <a href="#rko" class="btn-primary">ПОЛУЧИТЬ КОНСУЛЬТАЦИЮ ↓</a>
+              <a href="#steps" class="btn-primary">К ЭТАПАМ РАБОТЫ ↓</a>
             </div>
             <div class="slide-visual">
               <div class="visual-big">0 ₽</div>
@@ -1041,7 +1059,7 @@
               <span class="slide-tag">GILT • ПОДДЕРЖКА</span>
               <h2>Всегда на связи с вами</h2>
               <p>Мы работаем напрямую с банками-партнерами. Наша цель — сэкономить ваше время, уберечь от ошибок при регистрации и подобрать оптимальный тариф для вашего дела.</p>
-              <a href="#rko" class="btn-primary">ПОЛУЧИТЬ КОНСУЛЬТАЦИЮ ↓</a>
+              <a href="#rko" class="btn-primary">ВЫБРАТЬ БАНК ↓</a>
             </div>
             <div class="slide-visual">
               <div class="visual-big time">01:00-17:00</div>
@@ -1082,7 +1100,7 @@
         <div class="step-item">
           <div class="step-circle">3</div>
           <h3>Оформление</h3>
-          <p>Вы самостоятельно подаете дистанционную заявку в банк по нашей партнерской ссылке (под нашим руководством).</p>
+          <p>Вы самостоятельно подаете дистанционную заявку в банк по ссылке (под нашим руководством).</p>
         </div>
         <div class="step-item">
           <div class="step-circle">4</div>
@@ -1392,316 +1410,46 @@
     const SITE_CONTACTS = {
       "tg": "https://t.me/haveahatred",
       "mail": "drejkartem@gmail.com",
-      "fio": "Куликов Артём Александрович",
+      "fio": "Иванов И.И.",
       "inn": "000000000000",
       "showMfo": true,
-      "showLegal": false,
-      "showInitialReviews": true,
-      "csv": ""
-};
+      "showLegal": true,
+      "showInitialReviews": true
+    };
     // (END_CONTACTS_JSON)
 
     // (START_REVIEWS_JSON)
     const SITE_REVIEWS = [
-      {
-            "name": "Иван С.",
-            "text": "Отличный сервис. Помогли выбрать банк для ИП и всё объяснили. Сэкономил кучу времени.",
-            "rate": 5
-      },
-      {
-            "name": "Анна К.",
-            "text": "Оформила ИП буквально не выходя из дома. Спасибо за грамотную консультацию по налогам!",
-            "rate": 5
-      },
-      {
-            "name": "Максим",
-            "text": "Всё честно, бесплатно и быстро. Подсказали, какие ОКВЭД нужны именно мне. Рекомендую.",
-            "rate": 5
-      },
-      {
-            "name": "Елена",
-            "text": "Очень боялась бумажной волокиты с налоговой, но ребята всё сделали по красоте онлайн.",
-            "rate": 5
-      }
-];
+      { name: "Иван С.", text: "Отличный сервис. Помогли выбрать банк для ИП и всё объяснили. Сэкономил кучу времени.", rate: 5, isInitial: true },
+      { name: "Анна К.", text: "Оформила ИП буквально не выходя из дома. Спасибо за грамотную консультацию по налогам!", rate: 5, isInitial: true },
+      { name: "Максим", text: "Всё честно, бесплатно и быстро. Подсказали, какие ОКВЭД нужны именно мне. Рекомендую.", rate: 5, isInitial: true }
+    ];
     // (END_REVIEWS_JSON)
 
     // (START_ITEMS_JSON)
     const DEFAULT_ITEMS = [
-      {
-            "id": "tbank_rko",
-            "cat": "rko",
-            "badge": "ПЕРВЫЙ ВАРИАНТ",
-            "shortLogo": "Т-БАНК",
-            "img": "",
-            "color": "linear-gradient(135deg, #FFDD2D 0%, #F59E0B 100%)",
-            "textColor": "#000",
-            "title": "Открыть счет в ТБанке (ПЕРВЫЙ ВАРИАНТ)",
-            "price": "Обслуживание 0/месяц р.",
-            "btn": "Заказать",
-            "url": "https://www.tbank.ru/business/registration-ip/"
-      },
-      {
-            "id": "alfa_rko",
-            "cat": "rko",
-            "badge": "ВТОРОЙ ВАРИАНТ",
-            "shortLogo": "АЛЬФА-БАНК",
-            "img": "",
-            "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)",
-            "textColor": "#fff",
-            "title": "Открыть счет в Альфе (ВТОРОЙ ВАРИАНТ)",
-            "price": "Обслуживание 0/месяц р.",
-            "btn": "Заказать",
-            "url": "https://trk.ppdu.ru/click/aGbkLIo0?erid=2SDnjeyjBZq&sub1=site&siteId=20402"
-      },
-      {
-            "id": "tbank_black",
-            "cat": "debit",
-            "badge": "ДЕБЕТОВАЯ КАРТА",
-            "shortLogo": "Т-БАНК BLACK",
-            "img": "",
-            "color": "linear-gradient(135deg, #FFDD2D 0%, #CA8A04 100%)",
-            "textColor": "#000",
-            "title": "Дебетовая карта Т-Банк Black",
-            "price": "Кэшбэк до 30% рублями • 0 ₽",
-            "btn": "Оформить карту",
-            "url": "#"
-      },
-      {
-            "id": "alfa_debit",
-            "cat": "debit",
-            "badge": "ДЕБЕТОВАЯ КАРТА",
-            "shortLogo": "АЛЬФА-КАРТА",
-            "img": "",
-            "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)",
-            "textColor": "#fff",
-            "title": "Альфа-Карта с суперкэшбэком",
-            "price": "Обслуживание 0 ₽ навсегда",
-            "btn": "Оформить карту",
-            "url": "#"
-      },
-      {
-            "id": "vtb_debit",
-            "cat": "debit",
-            "badge": "ДЕБЕТОВАЯ КАРТА",
-            "shortLogo": "ВТБ КАРТА",
-            "img": "",
-            "color": "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)",
-            "textColor": "#fff",
-            "title": "Карта для жизни ВТБ",
-            "price": "Кэшбэк рублями • 0 ₽",
-            "btn": "Оформить карту",
-            "url": "#"
-      },
-      {
-            "id": "tbank_plat",
-            "cat": "credit",
-            "badge": "КРЕДИТНАЯ КАРТА",
-            "shortLogo": "Т-БАНК PLATINUM",
-            "img": "",
-            "color": "linear-gradient(135deg, #334155 0%, #0F172A 100%)",
-            "textColor": "#CCFF00",
-            "title": "Кредитная карта Т-Банк Платинум",
-            "price": "До 1 000 000 ₽ • беспроцентный период",
-            "btn": "Оформить карту",
-            "url": "#"
-      },
-      {
-            "id": "alfa_credit",
-            "cat": "credit",
-            "badge": "КРЕДИТНАЯ КАРТА",
-            "shortLogo": "АЛЬФА КРЕДИТКА",
-            "img": "",
-            "color": "linear-gradient(135deg, #DC2626 0%, #7F1D1D 100%)",
-            "textColor": "#fff",
-            "title": "Кредитная карта Альфа-Банк",
-            "price": "Льготный период • снятие наличных",
-            "btn": "Оформить карту",
-            "url": "#"
-      },
-      {
-            "id": "sber_credit",
-            "cat": "credit",
-            "badge": "КРЕДИТНАЯ КАРТА",
-            "shortLogo": "СБЕРКАРТА",
-            "img": "",
-            "color": "linear-gradient(135deg, #16A34A 0%, #065F46 100%)",
-            "textColor": "#fff",
-            "title": "Кредитная СберКарта",
-            "price": "120 дней без % • 0 ₽ обслуживание",
-            "btn": "Оформить карту",
-            "url": "#"
-      },
-      {
-            "id": "zaimer",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "ЗАЙМЕР",
-            "img": "",
-            "color": "linear-gradient(135deg, #10B981 0%, #047857 100%)",
-            "textColor": "#fff",
-            "title": "Займер",
-            "price": "Обслуживание 0 - 7900 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "webbankir",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "WEBBANKIR",
-            "img": "",
-            "color": "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)",
-            "textColor": "#fff",
-            "title": "WebBankir (Веб-Банкир)",
-            "price": "Обслуживание 0 - 500 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "srochno",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "СРОЧНОДЕНЬГИ",
-            "img": "",
-            "color": "linear-gradient(135deg, #84CC16 0%, #4D7C0F 100%)",
-            "textColor": "#fff",
-            "title": "СрочноДеньги",
-            "price": "Обслуживание 0 - 9900 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "credit7",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "CREDIT 7",
-            "img": "",
-            "color": "linear-gradient(135deg, #6366F1 0%, #4338CA 100%)",
-            "textColor": "#fff",
-            "title": "Credit7 (Кредит7)",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "maxcredit",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "MAX.CREDIT",
-            "img": "",
-            "color": "linear-gradient(135deg, #EC4899 0%, #BE185D 100%)",
-            "textColor": "#fff",
-            "title": "Макс Кредит (Max.Credit)",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "umnal",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "УМНЫЕ НАЛИЧНЫЕ",
-            "img": "",
-            "color": "linear-gradient(135deg, #8B5CF6 0%, #5B21B6 100%)",
-            "textColor": "#fff",
-            "title": "Умные Наличные",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "belka",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "БЕЛКА КРЕДИТ",
-            "img": "",
-            "color": "linear-gradient(135deg, #F97316 0%, #C2410C 100%)",
-            "textColor": "#fff",
-            "title": "Белка Кредит",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "oneclick",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "ONE CLICK MONEY",
-            "img": "",
-            "color": "linear-gradient(135deg, #14B8A6 0%, #0F766E 100%)",
-            "textColor": "#fff",
-            "title": "One Click Money",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "dengisrazu",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "ДЕНЬГИ СРАЗУ",
-            "img": "",
-            "color": "linear-gradient(135deg, #EAB308 0%, #A16207 100%)",
-            "textColor": "#fff",
-            "title": "Деньги Сразу",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "moneyman",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "MONEY MAN",
-            "img": "",
-            "color": "linear-gradient(135deg, #22C55E 0%, #15803D 100%)",
-            "textColor": "#fff",
-            "title": "Money Man",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "adengi",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "А-ДЕНЬГИ",
-            "img": "",
-            "color": "linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)",
-            "textColor": "#fff",
-            "title": "А-Деньги",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "migcredit",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "МИГ КРЕДИТ",
-            "img": "",
-            "color": "linear-gradient(135deg, #06B6D4 0%, #0E7490 100%)",
-            "textColor": "#fff",
-            "title": "Миг Кредит",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "turbozaim",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "ТУРБОЗАЙМ",
-            "img": "",
-            "color": "linear-gradient(135deg, #3B82F6 0%, #1E3A8A 100%)",
-            "textColor": "#fff",
-            "title": "ТУРБОЗАЙМ",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      }
-];
+      { "id": "tbank_rko", "cat": "rko", "badge": "ТОП ВЫБОР", "shortLogo": "Т-БАНК", "img": "", "color": "linear-gradient(135deg, #FFDD2D 0%, #F59E0B 100%)", "textColor": "#000", "title": "Расчетный счет в Т-Банке", "price": "Бесплатное обслуживание", "btn": "Оформить", "url": "https://www.tbank.ru/business/registration-ip/" },
+      { "id": "alfa_rko", "cat": "rko", "badge": "ПОПУЛЯРНОЕ", "shortLogo": "АЛЬФА-БАНК", "img": "", "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)", "textColor": "#fff", "title": "Счет для бизнеса в Альфа-Банке", "price": "Бесплатное обслуживание", "btn": "Оформить", "url": "https://trk.ppdu.ru/click/aGbkLIo0?erid=2SDnjeyjBZq&sub1=site&siteId=20402" },
+      { "id": "tbank_black", "cat": "debit", "badge": "ДЕБЕТОВАЯ КАРТА", "shortLogo": "Т-БАНК BLACK", "img": "", "color": "linear-gradient(135deg, #FFDD2D 0%, #CA8A04 100%)", "textColor": "#000", "title": "Дебетовая карта Т-Банк Black", "price": "Кэшбэк до 30% рублями • 0 ₽", "btn": "Оформить", "url": "#" },
+      { "id": "alfa_debit", "cat": "debit", "badge": "ДЕБЕТОВАЯ КАРТА", "shortLogo": "АЛЬФА-КАРТА", "img": "", "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)", "textColor": "#fff", "title": "Альфа-Карта с суперкэшбэком", "price": "Обслуживание 0 ₽ навсегда", "btn": "Оформить", "url": "#" },
+      { "id": "vtb_debit", "cat": "debit", "badge": "ДЕБЕТОВАЯ КАРТА", "shortLogo": "ВТБ КАРТА", "img": "", "color": "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)", "textColor": "#fff", "title": "Карта для жизни ВТБ", "price": "Кэшбэк рублями • 0 ₽", "btn": "Оформить", "url": "#" },
+      { "id": "tbank_plat", "cat": "credit", "badge": "КРЕДИТНАЯ КАРТА", "shortLogo": "Т-БАНК PLATINUM", "img": "", "color": "linear-gradient(135deg, #334155 0%, #0F172A 100%)", "textColor": "#CCFF00", "title": "Кредитная карта Т-Банк Платинум", "price": "До 1 000 000 ₽ • без %", "btn": "Оформить", "url": "#" },
+      { "id": "alfa_credit", "cat": "credit", "badge": "КРЕДИТНАЯ КАРТА", "shortLogo": "АЛЬФА КРЕДИТКА", "img": "", "color": "linear-gradient(135deg, #DC2626 0%, #7F1D1D 100%)", "textColor": "#fff", "title": "Кредитная карта Альфа-Банк", "price": "Льготный период • снятие наличных", "btn": "Оформить", "url": "#" },
+      { "id": "sber_credit", "cat": "credit", "badge": "КРЕДИТНАЯ КАРТА", "shortLogo": "СБЕРКАРТА", "img": "", "color": "linear-gradient(135deg, #16A34A 0%, #065F46 100%)", "textColor": "#fff", "title": "Кредитная СберКарта", "price": "120 дней без % • 0 ₽", "btn": "Оформить", "url": "#" },
+      { "id": "zaimer", "cat": "mfo", "badge": "МФО", "shortLogo": "ЗАЙМЕР", "img": "", "color": "linear-gradient(135deg, #10B981 0%, #047857 100%)", "textColor": "#fff", "title": "Займер", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "webbankir", "cat": "mfo", "badge": "МФО", "shortLogo": "WEBBANKIR", "img": "", "color": "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)", "textColor": "#fff", "title": "WebBankir (Веб-Банкир)", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "srochno", "cat": "mfo", "badge": "МФО", "shortLogo": "СРОЧНОДЕНЬГИ", "img": "", "color": "linear-gradient(135deg, #84CC16 0%, #4D7C0F 100%)", "textColor": "#fff", "title": "СрочноДеньги", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "credit7", "cat": "mfo", "badge": "МФО", "shortLogo": "CREDIT 7", "img": "", "color": "linear-gradient(135deg, #6366F1 0%, #4338CA 100%)", "textColor": "#fff", "title": "Credit7 (Кредит7)", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "maxcredit", "cat": "mfo", "badge": "МФО", "shortLogo": "MAX.CREDIT", "img": "", "color": "linear-gradient(135deg, #EC4899 0%, #BE185D 100%)", "textColor": "#fff", "title": "Макс Кредит (Max.Credit)", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "umnal", "cat": "mfo", "badge": "МФО", "shortLogo": "УМНЫЕ НАЛИЧНЫЕ", "img": "", "color": "linear-gradient(135deg, #8B5CF6 0%, #5B21B6 100%)", "textColor": "#fff", "title": "Умные Наличные", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "belka", "cat": "mfo", "badge": "МФО", "shortLogo": "БЕЛКА КРЕДИТ", "img": "", "color": "linear-gradient(135deg, #F97316 0%, #C2410C 100%)", "textColor": "#fff", "title": "Белка Кредит", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "oneclick", "cat": "mfo", "badge": "МФО", "shortLogo": "ONE CLICK MONEY", "img": "", "color": "linear-gradient(135deg, #14B8A6 0%, #0F766E 100%)", "textColor": "#fff", "title": "One Click Money", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "dengisrazu", "cat": "mfo", "badge": "МФО", "shortLogo": "ДЕНЬГИ СРАЗУ", "img": "", "color": "linear-gradient(135deg, #EAB308 0%, #A16207 100%)", "textColor": "#fff", "title": "Деньги Сразу", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "moneyman", "cat": "mfo", "badge": "МФО", "shortLogo": "MONEY MAN", "img": "", "color": "linear-gradient(135deg, #22C55E 0%, #15803D 100%)", "textColor": "#fff", "title": "Money Man", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "adengi", "cat": "mfo", "badge": "МФО", "shortLogo": "А-ДЕНЬГИ", "img": "", "color": "linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)", "textColor": "#fff", "title": "А-Деньги", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "migcredit", "cat": "mfo", "badge": "МФО", "shortLogo": "МИГ КРЕДИТ", "img": "", "color": "linear-gradient(135deg, #06B6D4 0%, #0E7490 100%)", "textColor": "#fff", "title": "Миг Кредит", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" },
+      { "id": "turbozaim", "cat": "mfo", "badge": "МФО", "shortLogo": "ТУРБОЗАЙМ", "img": "", "color": "linear-gradient(135deg, #3B82F6 0%, #1E3A8A 100%)", "textColor": "#fff", "title": "ТУРБОЗАЙМ", "price": "До 30 000 руб.", "btn": "ПОЛУЧИТЬ", "url": "" }
+    ];
     // (END_ITEMS_JSON)
 
     let items = JSON.parse(localStorage.getItem('gilt_v2_items')) || [...DEFAULT_ITEMS];
@@ -1716,6 +1464,7 @@
 
       // 2. Юридические данные и контакты
       document.getElementById('headerTgLink').href = contacts.tg;
+      document.getElementById('headerTgLinkMob').href = contacts.tg;
       document.getElementById('footerTgBtn').href = contacts.tg;
       document.getElementById('footerMailBtn').href = 'mailto:' + contacts.mail;
       
@@ -1769,7 +1518,7 @@
       const imgTag = item.img ? `<img src="${item.img}" alt="${item.title}" class="card-custom-img">` : '';
       return `
         <div class="product-card">
-          <a href="${item.url}" target="_blank" rel="nofollow noopener" style="text-decoration: none; color: inherit;" onclick="ym(00000000, 'reachGoal', 'CLICK_CARD_${item.id.toUpperCase()}')">
+          <a href="${item.url}" target="_blank" rel="nofollow noopener" style="text-decoration: none; color: inherit;" onclick="ym(113984418, 'reachGoal', 'CLICK_CARD_${item.id.toUpperCase()}')">
             <div class="card-thumb" style="background: ${item.color || 'linear-gradient(135deg, #1E293B, #0F172A)'}; color: ${item.textColor || '#fff'};">
               ${imgTag}
               <span class="card-thumb-badge">${item.badge || 'ПАРТНЕР'}</span>
@@ -1781,7 +1530,7 @@
               <div class="card-name">${item.title}</div>
               <div class="card-sub">${item.price}</div>
             </div>
-            <a href="${item.url}" target="_blank" rel="nofollow noopener" class="card-btn" onclick="ym(00000000, 'reachGoal', 'CLICK_BTN_${item.id.toUpperCase()}')">${item.btn || 'Оформить'}</a>
+            <a href="${item.url}" target="_blank" rel="nofollow noopener" class="card-btn" onclick="ym(113984418, 'reachGoal', 'CLICK_BTN_${item.id.toUpperCase()}')">${item.btn || 'Оформить'}</a>
           </div>
         </div>
       `;
