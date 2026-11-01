@@ -6,8 +6,8 @@
   <title>GILT — Регистрация ИП, РКО, Карты и МФО онлайн</title>
   <meta name="description" content="Получите профессиональную юридическую помощь и станьте предпринимателем без похода в ФНС уже сегодня! Регистрация ИП, РКО, дебетовые и кредитные карты, МФО.">
   
-  <!-- Иконка вкладки (Favicon) с новым сложным SVG логотипом -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23CCFF00'/><stop offset='45%' stop-color='%2332CD32'/><stop offset='100%' stop-color='%23FF6B00'/></linearGradient></defs><path d='M50 10C27.9 10 10 27.9 10 50C10 72.1 27.9 90 50 90C72.1 90 90 72.1 90 50H74C74 63.25 63.25 74 50 74C36.75 74 26 63.25 26 50C26 36.75 36.75 26 50 26C55.6 26 60.7 27.9 64.9 31.1L57.5 38.5C55.3 37.3 52.8 36.6 50 36.6C42.6 36.6 36.6 42.6 36.6 50C36.6 57.4 42.6 63.4 50 63.4C56 63.4 61.1 59.4 62.9 54H50V40.6H78.4C79.4 43.6 80 46.7 80 50C80 33.4 66.6 20 50 20Z' fill='url(%23g)'/></svg>">
+  <!-- Иконка вкладки (Favicon) из твоего файла logo.png -->
+  <link rel="icon" type="image/png" href="logo.png">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,6 @@
     if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
     const savedTheme = localStorage.getItem('gilt_theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
-    // Принудительный скролл наверх до отрисовки
     window.scrollTo(0,0);
   </script>
 
@@ -135,7 +134,12 @@
       user-select: none;
       cursor: pointer;
     }
-    /* Разделитель между лого и текстом */
+    .logo img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
     .logo-divider {
       width: 2px;
       height: 24px;
@@ -198,7 +202,6 @@
 
     #secretAdminBtn { display: none; border-color: var(--lime); color: var(--lime); }
 
-    /* Кнопки мобильной шапки */
     .mobile-header-actions {
       display: none;
       align-items: center;
@@ -243,7 +246,7 @@
     }
 
     /* ================= ПЕРВЫЙ ЭКРАН ================= */
-    .hero-section { padding: 40px 0 30px; }
+    .hero-section { padding: 40px 0 60px; } /* Увеличен нижний отступ */
     .hero-slider-wrap {
       background: var(--bg-hero-grad);
       border: 1px solid var(--border);
@@ -375,11 +378,30 @@
     }
     .slider-arrow:hover { border-color: var(--lime); color: var(--lime); }
 
+    /* ================= СЕКЦИИ (УВЕЛИЧЕННЫЕ ОТСТУПЫ) ================= */
+    section { padding: 50px 0; } /* Увеличены базовые отступы сверху и снизу */
+    .section-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 40px; /* Отступ под заголовками стал больше */
+    }
+    .section-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(22px, 2.8vw, 34px);
+      margin-bottom: 10px;
+      color: var(--text-white);
+    }
+    .section-sub {
+      color: var(--text-gray);
+      font-size: 16px;
+    }
+
     /* ================= ЭТАПЫ ================= */
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 22px;
+      margin-bottom: 40px; /* Добавлен нижний отступ, чтобы отдалить следующий блок */
     }
     .step-item {
       background: var(--bg-card);
@@ -425,14 +447,14 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 28px;
       max-width: 920px;
-      margin: 0 auto 48px;
+      margin: 0 auto 60px; /* Значительно увеличен отступ между ИП и Хабом продуктов */
     }
 
     .cat-hub-title {
       text-align: center;
       font-family: 'Unbounded', sans-serif;
       font-size: 20px;
-      margin-bottom: 24px;
+      margin-bottom: 30px;
       color: var(--text-white);
     }
     .cat-hub-grid {
@@ -440,7 +462,7 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
       max-width: 1060px;
-      margin: 0 auto;
+      margin: 0 auto 40px; /* Отступ перед следующим блоком */
     }
     .cat-hub-card {
       background: var(--cat-hub-grad);
@@ -548,7 +570,7 @@
       text-align: center;
       z-index: 2;
       text-shadow: 0 4px 16px rgba(0,0,0,0.65);
-      color: #fff; /* Всегда белые буквы на градиентах банков */
+      color: #fff;
     }
     .card-thumb-badge {
       position: absolute;
@@ -605,11 +627,6 @@
     }
 
     /* ================= ПОЧЕМУ МЫ ================= */
-    .section-header {
-      text-align: center;
-      max-width: 760px;
-      margin: 0 auto 30px;
-    }
     .why-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -653,7 +670,7 @@
     .footer {
       border-top: 1px solid var(--border);
       padding: 56px 0 44px;
-      margin-top: 30px;
+      margin-top: 50px;
       background: var(--bg-footer);
     }
     .footer-box {
@@ -824,17 +841,8 @@
   <header class="header">
     <div class="container header-inner">
       <div class="logo" onclick="handleLogoTap()" title="Наверх">
-        <!-- Векторный логотип по референсу №1 -->
-        <svg width="34" height="34" viewBox="0 0 100 100" fill="none" style="flex-shrink: 0;">
-          <defs>
-            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#CCFF00" />
-              <stop offset="45%" stop-color="#32CD32" />
-              <stop offset="100%" stop-color="#FF6B00" />
-            </linearGradient>
-          </defs>
-          <path d="M50 10C27.9 10 10 27.9 10 50C10 72.1 27.9 90 50 90C72.1 90 90 72.1 90 50H74C74 63.25 63.25 74 50 74C36.75 74 26 63.25 26 50C26 36.75 36.75 26 50 26C55.6 26 60.7 27.9 64.9 31.1L57.5 38.5C55.3 37.3 52.8 36.6 50 36.6C42.6 36.6 36.6 42.6 36.6 50C36.6 57.4 42.6 63.4 50 63.4C56 63.4 61.1 59.4 62.9 54H50V40.6H78.4C79.4 43.6 80 46.7 80 50C80 33.4 66.6 20 50 20Z" fill="url(#logoGrad)"/>
-        </svg>
+        <!-- Твой файл логотипа -->
+        <img src="logo.png" alt="GILT Logo">
         <div class="logo-divider"></div>
         <span class="logo-text">GILT</span>
       </div>
@@ -845,7 +853,6 @@
         <li><a href="#categories-hub">Продукты</a></li>
       </ul>
 
-      <!-- Блок ПК навигации -->
       <div class="nav-right">
         <a href="#" onclick="openModal('privacyModal'); return false;" class="nav-link">Правовая информация</a>
         <a href="#contacts" class="nav-link">Контакты</a>
@@ -861,7 +868,6 @@
         </div>
       </div>
 
-      <!-- Блок кнопок мобильной шапки -->
       <div class="mobile-header-actions">
         <button class="theme-toggle" id="themeToggleBtnMob" onclick="toggleTheme()" title="Сменить тему">
           <svg class="icon-moon" style="display:none;" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
@@ -1142,12 +1148,7 @@
   <script>
     const OWNER_PIN = "825113878GILT";
 
-    // Установка правильной иконки темы при загрузке
     window.addEventListener('DOMContentLoaded', () => {
-      // Скролл вверх при первой загрузке (страховка)
-      window.scrollTo(0,0);
-      setTimeout(() => window.scrollTo(0,0), 100);
-      
       updateThemeIcon(document.documentElement.getAttribute('data-theme'));
       if (localStorage.getItem('gilt_owner_unlocked') === 'true') {
         document.getElementById('secretAdminBtn').style.display = 'inline-flex';
