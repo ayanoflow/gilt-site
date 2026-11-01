@@ -250,7 +250,7 @@
       border-bottom: 1px solid var(--border);
     }
 
-    /* ================= ПЕРВЫЙ ЭКРАН (БЕЗ ДЕРГАНИЯ) ================= */
+    /* ================= ПЕРВЫЙ ЭКРАН ================= */
     .hero-section { padding: 40px 0 60px; }
     .hero-slider-wrap {
       background: var(--bg-hero-grad);
@@ -356,6 +356,9 @@
       line-height: 1.1;
       margin-bottom: 10px;
     }
+    .visual-big.time {
+      font-size: 32px;
+    }
     
     .slider-controls {
       display: flex;
@@ -407,7 +410,7 @@
       font-size: 16px;
     }
 
-    /* ================= ЭТАПЫ (КОНСУЛЬТАЦИЯ) ================= */
+    /* ================= ЭТАПЫ ================= */
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -536,17 +539,23 @@
       text-transform: uppercase;
     }
 
-    /* ================= ОТЗЫВЫ (СЛАЙДЕР) ================= */
+    /* ================= ОТЗЫВЫ ================= */
+    .reviews-section-inner {
+      position: relative;
+      max-width: 1060px;
+      margin: 0 auto;
+    }
     .reviews-wrapper {
       display: flex;
       gap: 24px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       padding: 10px 0 30px;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none;  /* IE */
+      scrollbar-width: none; 
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
     }
-    .reviews-wrapper::-webkit-scrollbar { display: none; } /* Chrome */
+    .reviews-wrapper::-webkit-scrollbar { display: none; } 
     
     .review-card {
       scroll-snap-align: start;
@@ -565,6 +574,29 @@
     .review-name { font-family: 'Unbounded', sans-serif; font-size: 15px; font-weight: 700; color: var(--text-white); }
     .review-stars { color: #F59E0B; font-size: 16px; letter-spacing: 2px; }
     .review-text { color: var(--text-gray); font-size: 14px; line-height: 1.6; }
+
+    .review-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-white);
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: 0.2s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .review-arrow:hover { border-color: var(--lime); color: var(--lime); }
+    .review-arrow.left { left: -22px; }
+    .review-arrow.right { right: -22px; }
 
     /* ================= FAQ ================= */
     .faq-list {
@@ -868,7 +900,7 @@
 
     .admin-row {
       display: grid;
-      grid-template-columns: 120px 180px 1fr 1fr;
+      grid-template-columns: 120px 150px 150px 1fr 1fr;
       gap: 10px;
       align-items: center;
       padding: 10px 0;
@@ -928,7 +960,8 @@
       .modal-tab-btn { padding: 8px 12px; font-size: 11px; flex: 1; text-align: center; }
       .footer-box { padding: 24px 16px; }
       
-      .review-card { flex: 0 0 280px; } /* Чуть меньше на мобилках */
+      .review-card { flex: 0 0 280px; } 
+      .review-arrow { display: none; } /* На мобильных листают свайпом */
     }
   </style>
 </head>
@@ -1004,14 +1037,14 @@
           <div class="slide" id="slide-1">
             <div class="slide-content">
               <span class="slide-tag">GILT • ПОДДЕРЖКА</span>
-              <h2>Честная помощь для бизнеса</h2>
+              <h2>Всегда на связи с вами</h2>
               <p>Мы работаем напрямую с банками-партнерами. Наша цель — сэкономить ваше время, уберечь от ошибок при регистрации и подобрать оптимальный тариф для вашего дела.</p>
               <a href="#rko" class="btn-primary">ПОЛУЧИТЬ КОНСУЛЬТАЦИЮ ↓</a>
             </div>
             <div class="slide-visual">
-              <div class="visual-big">1 день</div>
-              <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">На подготовку заявки</div>
-              <p style="font-size: 14px; margin-bottom: 0;">Сама налоговая зарегистрирует ИП всего за 3–4 рабочих дня</p>
+              <div class="visual-big time">01:00-17:00</div>
+              <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">На связи по МСК</div>
+              <p style="font-size: 14px; margin-bottom: 0;">(или с 08:00 до 00:00 по Хабаровскому времени). Готовы ответить на любые вопросы.</p>
             </div>
           </div>
         </div>
@@ -1133,14 +1166,18 @@
   </section>
 
   <!-- ================= ОТЗЫВЫ ================= -->
-  <section id="reviews">
+  <section id="reviews" style="display: none;">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Отзывы наших клиентов</h2>
-        <p class="section-sub">Листайте вправо, чтобы прочитать мнения тех, кто уже открыл бизнес с нами</p>
+        <p class="section-sub">Мы ценим обратную связь от предпринимателей, с которыми работаем</p>
       </div>
-      <div class="reviews-wrapper" id="reviewsContainer">
-        <!-- Отзывы будут сгенерированы через JS -->
+      <div class="reviews-section-inner">
+        <button class="review-arrow left" onclick="scrollReviews(-1)">‹</button>
+        <div class="reviews-wrapper" id="reviewsContainer">
+          <!-- Отзывы генерируются через JS -->
+        </div>
+        <button class="review-arrow right" onclick="scrollReviews(1)">›</button>
       </div>
     </div>
   </section>
@@ -1158,15 +1195,15 @@
         </div>
         <div class="faq-item" onclick="this.classList.toggle('active')">
           <div class="faq-q">Можно ли открыть ИП, если я работаю по найму?</div>
-          <div class="faq-a">Да, закон не запрещает совмещать работу по трудовому договору и ведение предпринимательской деятельности (если вы не госслужащий).</div>
+          <div class="faq-a">Да, закон не запрещает совмещать работу по трудовому договору и ведение бизнеса, <b>если вы не являетесь госслужащим или врачом (в гос. учреждениях)</b>.</div>
+        </div>
+        <div class="faq-item" onclick="this.classList.toggle('active')">
+          <div class="faq-q">Какие документы нужны от меня?</div>
+          <div class="faq-a">Для старта потребуется только паспорт РФ (разворот с фото и прописка), ваш ИНН и СНИЛС. И, конечно, смартфон для получения СМС от банка.<br><br><b>Важно:</b> все данные вы заполняете самостоятельно на официальной защищенной странице банка. Мы не запрашиваем ваши документы и не имеем к ним доступа.</div>
         </div>
         <div class="faq-item" onclick="this.classList.toggle('active')">
           <div class="faq-q">А если мне не одобрят регистрацию?</div>
           <div class="faq-a">Отказы случаются крайне редко (обычно из-за ошибок в данных или если вы уже являетесь банкротом). Если мы заметим риски на этапе консультации, мы обязательно вас предупредим.</div>
-        </div>
-        <div class="faq-item" onclick="this.classList.toggle('active')">
-          <div class="faq-q">Какие документы нужны от меня?</div>
-          <div class="faq-a">Для старта потребуется только паспорт РФ (разворот с фото и прописка), ваш ИНН и СНИЛС. И, конечно, смартфон для получения СМС от банка.</div>
         </div>
       </div>
     </div>
@@ -1184,7 +1221,9 @@
         </div>
         <div class="disclaimer">
           <b>Правовой статус сервиса:</b> Сайт носит исключительно информационно-справочный характер. Мы оказываем консультационные услуги по регистрации бизнеса и подбору банковских тарифов. Мы не являемся банком, не выдаем кредиты, не ведем счета и не гарантируем одобрение банковских продуктов.<br><br>
-          <b>Юридическая информация:</b> Услуги оказываются в рамках партнерских программ банков. Рекламодатель: <span id="legalFioDisplay">Самозанятый (или ИП)</span>, ИНН: <span id="legalInnDisplay">000000000000</span>. Все товарные знаки и логотипы, представленные на сайте, принадлежат их законным правообладателям и используются в информационных целях.<br><br>
+          <div id="legalInfoBlock">
+            <b>Юридическая информация:</b> Услуги оказываются в рамках партнерских программ банков. Рекламодатель: <span id="legalFioDisplay"></span>, ИНН: <span id="legalInnDisplay"></span>. Все товарные знаки и логотипы, представленные на сайте, принадлежат их законным правообладателям и используются в информационных целях.<br><br>
+          </div>
           <b>Согласие на обработку:</b> Оставляя заявку (переходя в мессенджер), вы подтверждаете свое согласие с условиями Пользовательского соглашения. Мы не собираем и не храним ваши паспортные данные на серверах данного сайта.
         </div>
       </div>
@@ -1205,6 +1244,25 @@
         <button type="button" class="modal-tab-btn" id="mtab-mfo" onclick="openCategoryCatalog('mfo')">⚡ МФО</button>
       </div>
       <div class="modal-cards-grid" id="catalogModalGrid"></div>
+    </div>
+  </div>
+
+  <!-- ================= ПОПАП ОСТАВИТЬ ОТЗЫВ (ПО СЕКРЕТНОЙ ССЫЛКЕ) ================= -->
+  <div class="modal-backdrop" id="leaveReviewModal" onclick="if(event.target===this) closeModal('leaveReviewModal')">
+    <div class="modal-window" style="max-width: 500px;">
+      <button type="button" class="modal-close" onclick="closeModal('leaveReviewModal')">×</button>
+      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 6px; color: var(--lime);">Оставить отзыв</h3>
+      <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 20px;">Заполните форму, и она будет отправлена нам в Telegram для публикации на сайте.</p>
+      
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <input type="text" id="revFormName" class="admin-input" placeholder="Ваше Имя (как отобразить на сайте)">
+        <select id="revFormRate" class="admin-input">
+          <option value="5">⭐⭐⭐⭐⭐ (5 звезд)</option>
+          <option value="4">⭐⭐⭐⭐ (4 звезды)</option>
+        </select>
+        <textarea id="revFormText" class="admin-input" rows="4" placeholder="Напишите ваш отзыв..."></textarea>
+        <button type="button" class="btn-primary" onclick="sendReviewToAdmin()" style="width: 100%; margin-top: 10px;">Отправить отзыв в Telegram</button>
+      </div>
     </div>
   </div>
 
@@ -1235,19 +1293,23 @@
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; background: var(--admin-input-bg); border: 1px solid var(--border); padding: 16px; border-radius: 14px; margin-bottom: 18px;">
         <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">Telegram (ссылка):</label><input type="text" id="admTg" class="admin-input"></div>
         <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">Почта (email):</label><input type="text" id="admMail" class="admin-input"></div>
-        <div>
-          <label style="font-size: 11px; color: var(--lime); font-weight: 700;">Отображать МФО на сайте:</label><br>
-          <input type="checkbox" id="admShowMfo" style="margin-top:10px; width:18px; height:18px; cursor:pointer;"> Да
+        
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-size: 11px; color: var(--lime); font-weight: 700;">Переключатели (Отображать на сайте):</label>
+          <label style="font-size: 13px;"><input type="checkbox" id="admShowMfo" style="cursor:pointer;"> Блок МФО</label>
+          <label style="font-size: 13px;"><input type="checkbox" id="admShowLegal" style="cursor:pointer;"> Юр. Информацию (ИНН/ФИО)</label>
+          <label style="font-size: 13px;"><input type="checkbox" id="admShowInitialReviews" style="cursor:pointer;"> 3 Базовых демо-отзыва</label>
         </div>
+
         <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">Твое ФИО / Статус (для подвала):</label><input type="text" id="admFio" class="admin-input" placeholder="ИП Иванов И.И."></div>
         <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">Твой ИНН (для Яндекса):</label><input type="text" id="admInn" class="admin-input" placeholder="123456789012"></div>
         <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">GitHub Token:</label><input type="password" id="admGhToken" class="admin-input"></div>
       </div>
 
       <!-- Отзывы -->
-      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">Управление отзывами:</div>
+      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">Управление клиентскими отзывами (Базовые отзывы скрыты из редактора):</div>
       <div style="max-height: 180px; overflow-y: auto; padding-right: 6px; margin-bottom: 18px;" id="adminReviewsList"></div>
-      <button type="button" class="btn-primary" style="background: transparent; border: 1px solid var(--border); color: var(--text-white); box-shadow: none; padding: 10px 16px; margin-bottom: 20px; font-size:11px;" onclick="addNewReviewRow()">+ Добавить отзыв</button>
+      <button type="button" class="btn-primary" style="background: transparent; border: 1px solid var(--border); color: var(--text-white); box-shadow: none; padding: 10px 16px; margin-bottom: 20px; font-size:11px;" onclick="addNewReviewRow()">+ Добавить отзыв от клиента</button>
 
       <!-- Карточки Банков -->
       <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">Список предложений банков:</div>
@@ -1272,8 +1334,13 @@
       if (localStorage.getItem('gilt_owner_unlocked') === 'true') {
         document.getElementById('secretAdminBtn').style.display = 'inline-flex';
       }
-      renderCards();
       
+      // Открытие формы отзыва по специальной ссылке (например, site.ru/?review=1)
+      if (window.location.search.includes('review=')) {
+        setTimeout(() => openModal('leaveReviewModal'), 500);
+      }
+
+      renderCards();
       setTimeout(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, 50);
     });
 
@@ -1289,22 +1356,48 @@
       updateThemeIcon(current);
     }
 
+    function scrollReviews(dir) {
+      const container = document.getElementById('reviewsContainer');
+      const card = container.querySelector('.review-card');
+      if (card) {
+        const scrollAmount = card.offsetWidth + 24; // Ширина карточки + gap
+        container.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+      }
+    }
+
+    function sendReviewToAdmin() {
+      const name = document.getElementById('revFormName').value.trim() || 'Аноним';
+      const text = document.getElementById('revFormText').value.trim() || 'Без текста';
+      const rate = document.getElementById('revFormRate').value;
+      
+      let tgUser = "haveahatred";
+      if (contacts.tg && contacts.tg.includes('t.me/')) {
+        tgUser = contacts.tg.split('t.me/')[1].replace('/', '');
+      }
+
+      const msg = `🌟 НОВЫЙ ОТЗЫВ С САЙТА 🌟%0AИмя: ${name}%0AОценка: ${rate} звезд%0AТекст: ${text}`;
+      window.open(`https://t.me/${tgUser}?text=${msg}`, '_blank');
+      closeModal('leaveReviewModal');
+      alert("Сообщение сформировано! Отправьте его в открывшемся чате Telegram.");
+    }
+
     // (START_CONTACTS_JSON)
     const SITE_CONTACTS = {
       "tg": "https://t.me/haveahatred",
       "mail": "drejkartem@gmail.com",
       "fio": "Иванов И.И.",
       "inn": "000000000000",
-      "showMfo": true
+      "showMfo": true,
+      "showLegal": true,
+      "showInitialReviews": true
     };
     // (END_CONTACTS_JSON)
 
     // (START_REVIEWS_JSON)
     const SITE_REVIEWS = [
-      { name: "Иван С.", text: "Отличный сервис. Помогли выбрать банк для ИП и всё объяснили. Сэкономил кучу времени.", rate: 5 },
-      { name: "Анна К.", text: "Оформила ИП буквально не выходя из дома. Спасибо за грамотную консультацию по налогам!", rate: 5 },
-      { name: "Максим", text: "Всё честно, бесплатно и быстро. Подсказали, какие ОКВЭД нужны именно мне. Рекомендую.", rate: 5 },
-      { name: "Елена", text: "Очень боялась бумажной волокиты с налоговой, но ребята всё сделали по красоте онлайн.", rate: 5 }
+      { name: "Иван С.", text: "Отличный сервис. Помогли выбрать банк для ИП и всё объяснили. Сэкономил кучу времени.", rate: 5, isInitial: true },
+      { name: "Анна К.", text: "Оформила ИП буквально не выходя из дома. Спасибо за грамотную консультацию по налогам!", rate: 5, isInitial: true },
+      { name: "Максим", text: "Всё честно, бесплатно и быстро. Подсказали, какие ОКВЭД нужны именно мне. Рекомендую.", rate: 5, isInitial: true }
     ];
     // (END_REVIEWS_JSON)
 
@@ -1325,7 +1418,6 @@
     // (END_ITEMS_JSON)
 
     let items = JSON.parse(localStorage.getItem('gilt_v2_items')) || [...DEFAULT_ITEMS];
-    // Безопасное слияние контактов, чтобы не затереть новые поля (showMfo, fio) при наличии старого локального кеша
     let savedContacts = JSON.parse(localStorage.getItem('gilt_v2_contacts')) || {};
     let contacts = { ...SITE_CONTACTS, ...savedContacts };
     let reviewsList = JSON.parse(localStorage.getItem('gilt_v2_reviews')) || [...SITE_REVIEWS];
@@ -1339,8 +1431,15 @@
       document.getElementById('headerTgLink').href = contacts.tg;
       document.getElementById('footerTgBtn').href = contacts.tg;
       document.getElementById('footerMailBtn').href = 'mailto:' + contacts.mail;
-      document.getElementById('legalFioDisplay').innerText = contacts.fio || 'Укажите в админке';
-      document.getElementById('legalInnDisplay').innerText = contacts.inn || 'Укажите в админке';
+      
+      const legalBlock = document.getElementById('legalInfoBlock');
+      if (contacts.showLegal !== false) {
+        legalBlock.style.display = 'block';
+        document.getElementById('legalFioDisplay').innerText = contacts.fio || 'Укажите в админке';
+        document.getElementById('legalInnDisplay').innerText = contacts.inn || 'Укажите в админке';
+      } else {
+        legalBlock.style.display = 'none';
+      }
 
       // 3. Умное скрытие МФО
       const hubGrid = document.getElementById('mainCatHub');
@@ -1357,16 +1456,24 @@
         mtabMfo.style.display = 'inline-block';
       }
 
-      // 4. Отрисовка Отзывов
-      document.getElementById('reviewsContainer').innerHTML = reviewsList.map(r => `
-        <div class="review-card">
-          <div class="review-header">
-            <div class="review-name">${r.name}</div>
-            <div class="review-stars">${'★'.repeat(r.rate)}${'☆'.repeat(5-r.rate)}</div>
+      // 4. Отрисовка Отзывов (с учетом фильтра)
+      const visibleReviews = reviewsList.filter(r => !r.isInitial || contacts.showInitialReviews !== false);
+      const reviewsSection = document.getElementById('reviews');
+      
+      if (visibleReviews.length > 0) {
+        reviewsSection.style.display = 'block';
+        document.getElementById('reviewsContainer').innerHTML = visibleReviews.map(r => `
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-name">${r.name}</div>
+              <div class="review-stars">${'★'.repeat(r.rate)}${'☆'.repeat(5-r.rate)}</div>
+            </div>
+            <div class="review-text">«${r.text}»</div>
           </div>
-          <div class="review-text">«${r.text}»</div>
-        </div>
-      `).join('');
+        `).join('');
+      } else {
+        reviewsSection.style.display = 'none';
+      }
 
       renderAdminInputs();
     }
@@ -1460,11 +1567,13 @@
       document.getElementById('admTg').value = contacts.tg || '';
       document.getElementById('admMail').value = contacts.mail || '';
       document.getElementById('admShowMfo').checked = contacts.showMfo !== false;
+      document.getElementById('admShowLegal').checked = contacts.showLegal !== false;
+      document.getElementById('admShowInitialReviews').checked = contacts.showInitialReviews !== false;
       document.getElementById('admFio').value = contacts.fio || '';
       document.getElementById('admInn').value = contacts.inn || '';
       document.getElementById('admGhToken').value = localStorage.getItem('gilt_gh_token') || '';
 
-      // Карточки Банков
+      // Карточки Банков (с полем Описание)
       document.getElementById('adminLinksList').innerHTML = items.map((item, idx) => `
         <div class="admin-row">
           <select class="admin-input" data-field="cat" data-idx="${idx}">
@@ -1474,19 +1583,25 @@
             <option value="mfo" ${item.cat==='mfo'?'selected':''}>МФО</option>
           </select>
           <input type="text" class="admin-input" data-field="title" data-idx="${idx}" value="${item.title}" placeholder="Название банка">
+          <input type="text" class="admin-input" data-field="price" data-idx="${idx}" value="${item.price}" placeholder="Описание (напр. Бесплатно)">
           <input type="url" class="admin-input" data-field="img" data-idx="${idx}" value="${item.img || ''}" placeholder="Картинка (URL)">
           <input type="url" class="admin-input" data-field="url" data-idx="${idx}" value="${item.url}" placeholder="Твоя реф. ссылка">
         </div>
       `).join('');
 
-      // Отзывы
-      document.getElementById('adminReviewsList').innerHTML = reviewsList.map((rev, idx) => `
-        <div style="display:grid; grid-template-columns: 100px 60px 1fr; gap:10px; margin-bottom:10px;">
-          <input type="text" class="admin-input" data-rev-field="name" data-idx="${idx}" value="${rev.name}" placeholder="Имя">
-          <input type="number" class="admin-input" data-rev-field="rate" data-idx="${idx}" value="${rev.rate}" min="1" max="5" placeholder="5">
-          <input type="text" class="admin-input" data-rev-field="text" data-idx="${idx}" value="${rev.text}" placeholder="Текст отзыва">
-        </div>
-      `).join('');
+      // Отзывы (только пользовательские)
+      const customReviews = reviewsList.map((rev, idx) => {
+        if (rev.isInitial) return ''; // Скрываем из редактора базовые отзывы
+        return `
+          <div style="display:grid; grid-template-columns: 120px 60px 1fr; gap:10px; margin-bottom:10px;">
+            <input type="text" class="admin-input" data-rev-field="name" data-idx="${idx}" value="${rev.name}" placeholder="Имя">
+            <input type="number" class="admin-input" data-rev-field="rate" data-idx="${idx}" value="${rev.rate}" min="1" max="5" placeholder="5">
+            <input type="text" class="admin-input" data-rev-field="text" data-idx="${idx}" value="${rev.text}" placeholder="Текст отзыва">
+          </div>
+        `;
+      }).join('');
+      
+      document.getElementById('adminReviewsList').innerHTML = customReviews || '<div style="font-size:12px; color:#666;">Пока нет добавленных клиентских отзывов.</div>';
     }
 
     function collectAdminData() {
@@ -1495,6 +1610,8 @@
       contacts.fio = document.getElementById('admFio').value.trim() || '';
       contacts.inn = document.getElementById('admInn').value.trim() || '';
       contacts.showMfo = document.getElementById('admShowMfo').checked;
+      contacts.showLegal = document.getElementById('admShowLegal').checked;
+      contacts.showInitialReviews = document.getElementById('admShowInitialReviews').checked;
 
       const ghToken = document.getElementById('admGhToken').value.trim();
       if (ghToken) localStorage.setItem('gilt_gh_token', ghToken);
@@ -1526,7 +1643,7 @@
     function saveAdminSettings() {
       collectAdminData();
       renderCards();
-      alert('Настройки сохранены! Нажмите "Опубликовать на GitHub" чтобы обновить сайт в интернете.');
+      alert('Настройки сохранены! Для обновления сайта используйте терминал Git (как мы делали ранее).');
     }
 
     function addNewOfferRow() {
@@ -1541,53 +1658,8 @@
 
     function addNewReviewRow() {
       collectAdminData();
-      reviewsList.unshift({ name: "Новый Клиент", text: "Отличная консультация!", rate: 5 });
+      reviewsList.push({ name: "Новый Клиент", text: "Скопируйте сюда текст отзыва из Telegram.", rate: 5 });
       renderAdminInputs();
-    }
-
-    async function pushToGitHubDirect() {
-      collectAdminData();
-      renderCards();
-      const token = document.getElementById('admGhToken').value.trim();
-      const statusEl = document.getElementById('ghStatusMsg');
-
-      if (!token) {
-        statusEl.innerText = "⚠️ Введи GitHub Personal Token в поле выше!";
-        return;
-      }
-
-      statusEl.innerText = "⏳ Отправляю обновления на GitHub...";
-      const repo = "ayanoflow/gilt-site";
-      const path = "index.html";
-
-      try {
-        const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
-          headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github.v3+json" }
-        });
-        if (!getRes.ok) throw new Error("Проверь правильность GitHub Token");
-        const fileData = await getRes.json();
-        const currentHtml = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
-
-        let updatedHtml = currentHtml
-          .replace(/\/\/ \(START_CONTACTS_JSON\)[\s\S]*?\/\/ \(END_CONTACTS_JSON\)/, `// (START_CONTACTS_JSON)\n    const SITE_CONTACTS = ${JSON.stringify(contacts, null, 6)};\n    // (END_CONTACTS_JSON)`)
-          .replace(/\/\/ \(START_REVIEWS_JSON\)[\s\S]*?\/\/ \(END_REVIEWS_JSON\)/, `// (START_REVIEWS_JSON)\n    const SITE_REVIEWS = ${JSON.stringify(reviewsList, null, 6)};\n    // (END_REVIEWS_JSON)`)
-          .replace(/\/\/ \(START_ITEMS_JSON\)[\s\S]*?\/\/ \(END_ITEMS_JSON\)/, `// (START_ITEMS_JSON)\n    const DEFAULT_ITEMS = ${JSON.stringify(items, null, 6)};\n    // (END_ITEMS_JSON)`);
-
-        const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
-          method: "PUT",
-          headers: {
-            "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github.v3+json", "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            message: "Обновление GILT: Консультация, Отзывы, Настройки",
-            content: btoa(unescape(encodeURIComponent(updatedHtml))),
-            sha: fileData.sha
-          })
-        });
-
-        if (!putRes.ok) throw new Error("Не удалось сохранить на GitHub");
-        statusEl.innerText = "✅ Готово! Сайт успешно обновлен в интернете.";
-      } catch (err) { statusEl.innerText = "❌ Ошибка: " + err.message; }
     }
   </script>
 </body>
