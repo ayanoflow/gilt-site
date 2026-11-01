@@ -9,6 +9,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Unbounded:wght@600;700;800&display=swap" rel="stylesheet">
 
+  <!-- ================= УПРАВЛЕНИЕ ТЕМАМИ (Загрузка до отрисовки) ================= -->
+  <script>
+    if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+    const savedTheme = localStorage.getItem('gilt_theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
+
   <!-- ================= ЯНДЕКС.МЕТРИКА ================= -->
   <script type="text/javascript" >
     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -17,16 +24,13 @@
     k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
     (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-    ym(00000000, "init", {
-         clickmap:true,
-         trackLinks:true,
-         accurateTrackBounce:true
-    });
+    ym(00000000, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/00000000" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- ================= КОНЕЦ МЕТРИКИ ================= -->
 
   <style>
+    /* ================= ПЕРЕМЕННЫЕ (ТЕМНАЯ ТЕМА ПО УМОЛЧАНИЮ) ================= */
     :root {
       --bg-dark: #090D14;
       --bg-card: #111722;
@@ -37,7 +41,42 @@
       --lime-glow: rgba(204, 255, 0, 0.25);
       --text-white: #F8FAFC;
       --text-gray: #94A3B8;
+      --btn-text: #090D14;
       --radius: 20px;
+      
+      --bg-hero-grad: linear-gradient(135deg, #131B29 0%, #0C111A 100%);
+      --bg-header: rgba(9, 13, 20, 0.88);
+      --bg-header-mob: rgba(13, 19, 29, 0.98);
+      --bg-footer: #06090E;
+      --bg-modal: #0E141F;
+      --admin-input-bg: #090D14;
+      --cat-hub-grad: linear-gradient(145deg, #151D2B 0%, #0E141F 100%);
+      --cat-hub-hover: linear-gradient(145deg, #1A2436 0%, #111827 100%);
+      --hero-visual-bg: rgba(255, 255, 255, 0.03);
+    }
+
+    /* ================= ПЕРЕМЕННЫЕ (СВЕТЛАЯ ТЕМА) ================= */
+    [data-theme="light"] {
+      --bg-dark: #F4F6F8;
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #F8FAFC;
+      --border: #E2E8F0;
+      --lime: #FF6B00;
+      --lime-hover: #E65C00;
+      --lime-glow: rgba(255, 107, 0, 0.15);
+      --text-white: #0F172A;
+      --text-gray: #64748B;
+      --btn-text: #FFFFFF;
+      
+      --bg-hero-grad: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+      --bg-header: rgba(244, 246, 248, 0.88);
+      --bg-header-mob: rgba(244, 246, 248, 0.98);
+      --bg-footer: #E2E8F0;
+      --bg-modal: #FFFFFF;
+      --admin-input-bg: #F1F5F9;
+      --cat-hub-grad: #FFFFFF;
+      --cat-hub-hover: #F8FAFC;
+      --hero-visual-bg: #F1F5F9;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,13 +84,14 @@
     body {
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 15% 5%, rgba(204, 255, 0, 0.07) 0%, transparent 35%),
-        radial-gradient(circle at 85% 25%, rgba(204, 255, 0, 0.04) 0%, transparent 40%);
+        radial-gradient(circle at 15% 5%, var(--lime-glow) 0%, transparent 35%),
+        radial-gradient(circle at 85% 25%, var(--lime-glow) 0%, transparent 40%);
       color: var(--text-white);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       line-height: 1.55;
       overflow-x: hidden;
       -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.4s ease, color 0.4s ease;
     }
 
     .container {
@@ -60,20 +100,19 @@
       padding: 0 20px;
     }
 
-    /* Отступ для ПК (по центру экрана) */
-    section, #categories-hub {
-      scroll-margin-top: 30vh;
-    }
+    /* ПК-отступ для якорных ссылок (в центре экрана) */
+    section, #categories-hub { scroll-margin-top: 30vh; }
 
     /* ================= ШАПКА ================= */
     .header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(9, 13, 20, 0.88);
+      background: var(--bg-header);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
+      transition: background 0.4s ease, border-color 0.4s ease;
     }
     .header-inner {
       display: flex;
@@ -97,20 +136,8 @@
       cursor: pointer;
       transition: 0.3s;
     }
-    .logo-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--lime);
-      box-shadow: 0 0 12px var(--lime);
-      transition: 0.3s;
-    }
-    .logo:hover .logo-dot {
-      background: #ffffff;
-      box-shadow: 0 0 16px #ffffff, 0 0 24px var(--lime);
-    }
     .logo:hover {
-      text-shadow: 0 0 15px rgba(204, 255, 0, 0.2);
+      text-shadow: 0 0 15px var(--lime-glow);
     }
 
     .nav-center, .nav-right {
@@ -137,7 +164,7 @@
       align-items: center;
       gap: 10px;
     }
-    .soc-icon {
+    .soc-icon, .theme-toggle {
       width: 38px;
       height: 38px;
       border-radius: 10px;
@@ -150,13 +177,14 @@
       text-decoration: none;
       transition: 0.2s;
       cursor: pointer;
+      outline: none;
     }
-    .soc-icon:hover {
+    .soc-icon:hover, .theme-toggle:hover {
       border-color: var(--lime);
       color: var(--lime);
       transform: translateY(-2px);
     }
-    .soc-icon svg { width: 18px; height: 18px; fill: currentColor; }
+    .soc-icon svg, .theme-toggle svg { width: 18px; height: 18px; fill: currentColor; }
 
     #secretAdminBtn { display: none; border-color: var(--lime); color: var(--lime); }
 
@@ -176,7 +204,7 @@
       top: 78px;
       left: 0;
       width: 100%;
-      background: rgba(13, 19, 29, 0.98);
+      background: var(--bg-header-mob);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
@@ -195,19 +223,20 @@
       font-weight: 600;
       font-size: 16px;
       padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid var(--border);
     }
 
     /* ================= ПЕРВЫЙ ЭКРАН: СЛАЙДЕР ================= */
     .hero-section { padding: 40px 0 30px; }
     .hero-slider {
       position: relative;
-      background: linear-gradient(135deg, #131B29 0%, #0C111A 100%);
-      border: 1px solid rgba(204, 255, 0, 0.22);
+      background: var(--bg-hero-grad);
+      border: 1px solid var(--border);
       border-radius: 26px;
       overflow: hidden;
       height: 460px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      transition: background 0.4s ease;
     }
     .slide {
       position: absolute;
@@ -219,10 +248,10 @@
       width: 100%;
       height: 100%;
       padding: 0 60px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 40px;
-      align-items: center; 
     }
     .slide.active {
       opacity: 1;
@@ -230,12 +259,15 @@
       pointer-events: auto;
       z-index: 2;
     }
+    .slide-content {
+      max-width: 580px; /* Фикс наложения текста на ПК */
+    }
     
     .slide-tag {
       display: inline-block;
-      background: rgba(204, 255, 0, 0.14);
+      background: var(--lime-glow);
       color: var(--lime);
-      border: 1px solid rgba(204, 255, 0, 0.35);
+      border: 1px solid var(--lime-glow);
       padding: 6px 16px;
       border-radius: 100px;
       font-family: 'Unbounded', sans-serif;
@@ -262,7 +294,7 @@
       justify-content: center;
       gap: 10px;
       background: var(--lime);
-      color: #090D14;
+      color: var(--btn-text);
       font-family: 'Unbounded', sans-serif;
       font-size: 13px;
       font-weight: 700;
@@ -278,14 +310,15 @@
     .btn-primary:hover {
       background: var(--lime-hover);
       transform: translateY(-2px);
-      box-shadow: 0 6px 32px rgba(204, 255, 0, 0.45);
+      box-shadow: 0 6px 32px var(--lime-glow);
     }
     .slide-visual {
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--hero-visual-bg);
       border: 1px solid var(--border);
       border-radius: 22px;
       padding: 34px;
       text-align: center;
+      min-width: 320px;
     }
     .visual-big {
       font-family: 'Unbounded', sans-serif;
@@ -307,7 +340,7 @@
       width: 36px;
       height: 6px;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.16);
+      background: var(--border);
       border: none;
       cursor: pointer;
       transition: 0.2s;
@@ -367,8 +400,8 @@
       width: 48px;
       height: 48px;
       border-radius: 14px;
-      background: rgba(204, 255, 0, 0.12);
-      border: 1px solid rgba(204, 255, 0, 0.4);
+      background: var(--lime-glow);
+      border: 1px solid var(--lime-glow);
       color: var(--lime);
       font-family: 'Unbounded', sans-serif;
       font-size: 18px;
@@ -389,7 +422,7 @@
       line-height: 1.55;
     }
 
-    /* ================= КАРТОЧКИ ИП + 4 ИКОНКИ КАТЕГОРИЙ ================= */
+    /* ================= КАРТОЧКИ ИП + ИКОНКИ КАТЕГОРИЙ ================= */
     .rko-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -413,8 +446,8 @@
       margin: 0 auto;
     }
     .cat-hub-card {
-      background: linear-gradient(145deg, #151D2B 0%, #0E141F 100%);
-      border: 1px solid rgba(204, 255, 0, 0.25);
+      background: var(--cat-hub-grad);
+      border: 1px solid var(--border);
       border-radius: 22px;
       padding: 28px 20px;
       text-align: center;
@@ -425,27 +458,24 @@
       align-items: center;
       justify-content: space-between;
       gap: 14px;
-      position: relative;
-      overflow: hidden;
     }
     .cat-hub-card:hover {
       border-color: var(--lime);
       transform: translateY(-6px);
-      box-shadow: 0 12px 35px rgba(204, 255, 0, 0.18);
-      background: linear-gradient(145deg, #1A2436 0%, #111827 100%);
+      box-shadow: 0 12px 35px var(--lime-glow);
+      background: var(--cat-hub-hover);
     }
     .cat-hub-icon {
       width: 68px;
       height: 68px;
       border-radius: 18px;
-      background: rgba(204, 255, 0, 0.12);
-      border: 1px solid rgba(204, 255, 0, 0.35);
+      background: var(--lime-glow);
+      border: 1px solid var(--lime-glow);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 32px;
       color: var(--lime);
-      box-shadow: 0 0 20px rgba(204, 255, 0, 0.12);
     }
     .cat-hub-name {
       font-family: 'Unbounded', sans-serif;
@@ -463,7 +493,7 @@
       margin-top: 4px;
       padding: 8px 16px;
       border-radius: 10px;
-      background: rgba(204, 255, 0, 0.14);
+      background: var(--lime-glow);
       color: var(--lime);
       font-family: 'Unbounded', sans-serif;
       font-size: 11px;
@@ -476,6 +506,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
       gap: 22px;
+      padding-bottom: 30px; /* Фикс обрезанного низа на мобильных */
     }
     .product-card {
       background: var(--bg-card);
@@ -491,7 +522,7 @@
       background: var(--bg-card-hover);
       border-color: var(--lime);
       transform: translateY(-5px);
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
     }
     .card-thumb {
       height: 150px;
@@ -560,7 +591,7 @@
       width: 100%;
       text-align: center;
       background: var(--lime);
-      color: #090D14;
+      color: var(--btn-text);
       font-family: 'Unbounded', sans-serif;
       font-size: 13px;
       font-weight: 700;
@@ -595,8 +626,8 @@
       height: 42px;
       min-width: 42px;
       border-radius: 12px;
-      background: rgba(204, 255, 0, 0.12);
-      border: 1px solid rgba(204, 255, 0, 0.35);
+      background: var(--lime-glow);
+      border: 1px solid var(--lime-glow);
       color: var(--lime);
       display: flex;
       align-items: center;
@@ -615,12 +646,12 @@
       line-height: 1.55;
     }
 
-    /* ================= ПОДВАЛ (ЮРИДИЧЕСКАЯ ЗАЩИТА) ================= */
+    /* ================= ПОДВАЛ ================= */
     .footer {
       border-top: 1px solid var(--border);
       padding: 56px 0 44px;
       margin-top: 30px;
-      background: #06090E;
+      background: var(--bg-footer);
     }
     .footer-box {
       background: var(--bg-card);
@@ -648,7 +679,7 @@
       padding-top: 20px;
     }
 
-    /* ================= ПЛАВАЮЩАЯ КНОПКА ДЛЯ ТЕЛЕФОНОВ ================= */
+    /* ================= ПЛАВАЮЩАЯ КНОПКА (МОБИЛЬНЫЕ) ================= */
     .mobile-floating-btn {
       display: none;
       position: fixed;
@@ -656,7 +687,7 @@
       left: 50%;
       transform: translateX(-50%) translateY(150px);
       background: var(--lime);
-      color: #090D14;
+      color: var(--btn-text);
       font-family: 'Unbounded', sans-serif;
       font-size: 13px;
       font-weight: 700;
@@ -664,7 +695,7 @@
       border-radius: 14px;
       text-decoration: none;
       z-index: 90;
-      box-shadow: 0 10px 30px rgba(204, 255, 0, 0.4);
+      box-shadow: 0 10px 30px var(--lime-glow);
       text-transform: uppercase;
       width: calc(100% - 40px);
       text-align: center;
@@ -689,16 +720,16 @@
     }
     .modal-backdrop.open { display: flex; }
     .modal-window {
-      background: #0E141F;
-      border: 1px solid rgba(204, 255, 0, 0.38);
+      background: var(--bg-modal);
+      border: 1px solid var(--border);
       border-radius: 24px;
       max-width: 1020px;
       width: 100%;
-      max-height: 90vh;
+      max-height: 85vh; /* Безопасная высота для iOS */
       overflow-y: auto;
       padding: 34px;
       position: relative;
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 25px 70px var(--shadow-color);
       animation: fadeIn 0.25s ease;
     }
     @keyframes fadeIn {
@@ -712,7 +743,7 @@
       width: 40px;
       height: 40px;
       border-radius: 12px;
-      background: rgba(255,255,255,0.06);
+      background: var(--bg-card);
       border: 1px solid var(--border);
       color: var(--text-white);
       font-size: 24px;
@@ -745,7 +776,7 @@
     }
     .modal-tab-btn.active {
       background: var(--lime);
-      color: #090D14;
+      color: var(--btn-text);
       border-color: var(--lime);
       box-shadow: 0 0 18px var(--lime-glow);
     }
@@ -761,7 +792,7 @@
     .admin-input {
       width: 100%;
       padding: 10px 12px;
-      background: #090D14;
+      background: var(--admin-input-bg);
       border: 1px solid var(--border);
       border-radius: 10px;
       color: var(--text-white);
@@ -776,13 +807,13 @@
       
       .hero-slider { height: 600px; }
       .slide {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
-        align-content: center;
-        padding: 30px 40px;
+        flex-direction: column;
+        justify-content: center;
         text-align: center;
+        padding: 30px 40px;
       }
-      .slide-visual { max-width: 400px; margin: 0 auto; }
+      .slide-content { max-width: none; }
+      .slide-visual { max-width: 400px; width: 100%; }
       
       .steps-grid, .cat-hub-grid { grid-template-columns: repeat(2, 1fr); }
       .why-grid { grid-template-columns: repeat(2, 1fr); }
@@ -790,22 +821,15 @@
     }
     
     @media (max-width: 640px) {
-      /* Для телефонов: Отступ скролла переопределен на 90px (сразу под шапку) */
-      section, #categories-hub {
-        scroll-margin-top: 90px;
-      }
+      /* Для телефонов: Отступ скролла переопределен на 90px (ровно под шапку) */
+      section, #categories-hub { scroll-margin-top: 90px; }
 
-      .hero-slider { 
-        height: 680px;
-        display: block;
-      }
+      /* Жесткая высота слайдера для телефонов, чтобы не было прыжков при переключении */
+      .hero-slider { height: 720px; display: block; }
       .slide { 
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
-        padding: 30px 20px 20px; 
+        padding: 30px 20px; 
         gap: 24px; 
-        align-items: start;
-        align-content: start; 
+        justify-content: start; 
         text-align: left; 
       }
       
@@ -815,7 +839,8 @@
       
       .rko-grid, .steps-grid, .cat-hub-grid, .why-grid { grid-template-columns: 1fr; gap: 16px; }
       .btn-primary { width: 100%; padding: 14px 20px; }
-      .modal-window { padding: 24px 16px; max-height: 95vh; }
+      
+      .modal-window { padding: 24px 16px; }
       .modal-cat-tabs { gap: 6px; }
       .modal-tab-btn { padding: 8px 12px; font-size: 11px; flex: 1; text-align: center; }
 
@@ -830,7 +855,18 @@
   <header class="header">
     <div class="container header-inner">
       <div class="logo" onclick="handleLogoTap()" title="Наверх">
-        <span class="logo-dot"></span>GILT
+        <!-- Уникальный SVG Логотип (Градиент G) -->
+        <svg width="28" height="28" viewBox="0 0 100 100" fill="none" style="flex-shrink: 0;">
+          <defs>
+            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--lime)" />
+              <stop offset="100%" stop-color="#FF4500" />
+            </linearGradient>
+          </defs>
+          <path d="M50 20C33.43 20 20 33.43 20 50C20 66.57 33.43 80 50 80C62.7 80 73.53 72.1 77.94 60.5H62.72C59.5 65.2 55.1 68 50 68C40.06 68 32 59.94 32 50C32 40.06 40.06 32 50 32C56.12 32 61.42 35.08 64.63 39.8H78.8C74.3 27.2 63.2 18 50 20Z" fill="url(#logoGrad)"/>
+          <path d="M78 50H50V62H78V50Z" fill="url(#logoGrad)"/>
+        </svg>
+        GILT
       </div>
 
       <ul class="nav-center">
@@ -843,11 +879,13 @@
         <a href="#" onclick="openModal('privacyModal'); return false;" class="nav-link">Правовая информация</a>
         <a href="#contacts" class="nav-link">Контакты</a>
         <div class="socials">
+          <!-- Кнопка переключения тем -->
+          <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" title="Сменить тему">
+            <svg id="icon-moon" style="display:none;" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+            <svg id="icon-sun" style="display:none;" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM2 13h2a1 1 0 0 0 0-2H2a1 1 0 0 0 0 2zm18 0h2a1 1 0 0 0 0-2h-2a1 1 0 0 0 0 2zM11 2v2a1 1 0 0 0 2 0V2a1 1 0 0 0-2 0zm0 18v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-2 0zM5.99 4.58a1 1 0 1 0-1.41 1.41l1.06 1.06a1 1 0 1 0 1.41-1.41L5.99 4.58zm12.37 12.37a1 1 0 1 0-1.41 1.41l1.06 1.06a1 1 0 1 0 1.41-1.41l-1.06-1.06zM7.05 18.36a1 1 0 1 0-1.41-1.41l-1.06 1.06a1 1 0 1 0 1.41 1.41l1.06-1.06zm12.37-12.37a1 1 0 1 0-1.41-1.41L16.95 5.64a1 1 0 1 0 1.41 1.41l1.06-1.06z"/></svg>
+          </button>
           <a id="headerTgLink" href="https://t.me/accountzeus" target="_blank" rel="nofollow" class="soc-icon" title="Telegram">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.74 7.58-3.27 3.61-1.51 4.35-1.77 4.84-1.78.11 0 .35.03.5.16.13.1.17.24.18.34.02.08.02.24.01.38z"/></svg>
-          </a>
-          <a id="headerMailLink" href="mailto:zeusmail@bk.ru" class="soc-icon" title="Электронная почта">
-            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
           </a>
           <button type="button" id="secretAdminBtn" onclick="openModal('adminModal')" class="soc-icon" title="Закрытая панель владельца">⚙️</button>
         </div>
@@ -871,7 +909,7 @@
       <div class="hero-slider">
         <!-- СЛАЙД 1 -->
         <div class="slide active" id="slide-0">
-          <div>
+          <div class="slide-content">
             <span class="slide-tag">GILT • ОНЛАЙН-СЕРВИС</span>
             <h1>Получите профессиональную юридическую помощь и станьте предпринимателем без похода в ФНС уже сегодня!</h1>
             <p>Дистанционная подача документов без госпошлины 0 ₽. Поможем открыть расчетный счет, подобрать карты и зарегистрировать бизнес в кратчайшие сроки.</p>
@@ -886,7 +924,7 @@
 
         <!-- СЛАЙД 2 -->
         <div class="slide" id="slide-1">
-          <div>
+          <div class="slide-content">
             <span class="slide-tag">GILT • КОНСАЛТИНГ</span>
             <h2>Юридическая поддержка для бизнеса</h2>
             <p>Мы предлагаем комплексные юридические услуги для вашего бизнеса. Наша команда профессионалов поможет разобраться в сложных вопросах, связанных с банковскими продуктами и консалтингом, обеспечивая надежность и защиту ваших интересов.</p>
@@ -1111,7 +1149,7 @@
         Здесь ты управляешь всеми карточками (Дебетовые, Кредитные, РКО, МФО), картинками, контактами и авто-публикацией на GitHub.
       </p>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; background: #090D14; border: 1px solid var(--border); padding: 16px; border-radius: 14px; margin-bottom: 18px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; background: var(--admin-input-bg); border: 1px solid var(--border); padding: 16px; border-radius: 14px; margin-bottom: 18px;">
         <div>
           <label style="font-size: 11px; color: var(--lime); font-weight: 700;">Твой Telegram (ссылка):</label>
           <input type="text" id="admTg" class="admin-input" placeholder="https://t.me/username">
@@ -1134,7 +1172,7 @@
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
         <button type="button" class="btn-primary" onclick="saveAdminSettings()">💾 Сохранить</button>
         <button type="button" class="btn-primary" style="background: #10B981; color: #fff; box-shadow: none;" onclick="pushToGitHubDirect()">🚀 Опубликовать на GitHub</button>
-        <button type="button" class="btn-primary" style="background: rgba(255,255,255,0.08); color: #fff; box-shadow: none;" onclick="addNewOfferRow()">+ Добавить банк</button>
+        <button type="button" class="btn-primary" style="background: transparent; border: 1px solid var(--border); color: var(--text-white); box-shadow: none;" onclick="addNewOfferRow()">+ Добавить банк</button>
       </div>
       <div id="ghStatusMsg" style="margin-top: 12px; font-size: 13px; color: var(--lime);"></div>
     </div>
@@ -1142,6 +1180,32 @@
 
   <!-- ================= СКРИПТ ДАННЫХ И ЛОГИКИ ================= -->
   <script>
+    // Сброс скролла на самый верх при обновлении страницы
+    window.addEventListener('DOMContentLoaded', () => {
+      window.scrollTo(0, 0);
+      updateThemeIcon(document.documentElement.getAttribute('data-theme'));
+    });
+
+    // Логика переключения светлой/темной темы
+    function updateThemeIcon(theme) {
+      const moon = document.getElementById('icon-moon');
+      const sun = document.getElementById('icon-sun');
+      if (theme === 'light') {
+        moon.style.display = 'block'; // В светлой теме показываем луну (переключить на темную)
+        sun.style.display = 'none';
+      } else {
+        moon.style.display = 'none';
+        sun.style.display = 'block';  // В темной теме показываем солнце (переключить на светлую)
+      }
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', current);
+      localStorage.setItem('gilt_theme', current);
+      updateThemeIcon(current);
+    }
+
     const OWNER_PIN = "825113878GILT";
 
     // (START_CONTACTS_JSON)
