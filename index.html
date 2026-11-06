@@ -760,7 +760,7 @@
       "showMfo": true,
       "showLegal": true,
       "showInitialReviews": true
-    };
+};
     // (END_CONTACTS_JSON)
 
     // (START_CAT_ICONS_JSON)
@@ -769,26 +769,125 @@
       "credit": "💎",
       "rko": "🏦",
       "mfo": "⚡"
-    };
+};
     // (END_CAT_ICONS_JSON)
 
     // (START_REVIEWS_JSON)
     const SITE_REVIEWS = [
-      { "name": "Иван Сторожев", "text": "Помогли оформить ИП и выбрать счёт.", "rate": 5, "isInitial": true },
-      { "name": "Anya", "text": "спасибо за консультацию!)", "rate": 5, "isInitial": true },
-      { "name": "Максон", "text": "Помогли оформить расчётный счет", "rate": 5, "isInitial": true },
-      { "name": "Елена", "text": "Все отлично!", "rate": 5, "isInitial": true }
-    ];
+      {
+            "name": "Иван Сторожев",
+            "text": "Помогли оформить ИП и выбрать счёт.",
+            "rate": 5,
+            "isInitial": true
+      },
+      {
+            "name": "Anya",
+            "text": "спасибо за консультацию!)",
+            "rate": 5,
+            "isInitial": true
+      },
+      {
+            "name": "Максон",
+            "text": "Помогли оформить расчётный счет",
+            "rate": 5,
+            "isInitial": true
+      },
+      {
+            "name": "Елена",
+            "text": "Все отлично!",
+            "rate": 5,
+            "isInitial": true
+      }
+];
     // (END_REVIEWS_JSON)
 
     // (START_ITEMS_JSON)
     const DEFAULT_ITEMS = [
-      { "id": "tbank_rko", "cat": "rko", "badge": "ПЕРВЫЙ ВАРИАНТ", "shortLogo": "Т-БАНК", "img": "", "color": "linear-gradient(135deg, #FFDD2D 0%, #F59E0B 100%)", "textColor": "#000", "title": "Открыть счет в ТБанке", "price": "Обслуживание 0/месяц р.", "psk": "", "btn": "Заказать", "url": "https://www.tbank.ru/business/registration-ip/" },
-      { "id": "alfa_rko", "cat": "rko", "badge": "ВТОРОЙ ВАРИАНТ", "shortLogo": "АЛЬФА-БАНК", "img": "", "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)", "textColor": "#fff", "title": "Открыть счет в Альфе", "price": "Обслуживание 0/месяц р.", "psk": "", "btn": "Заказать", "url": "https://trk.ppdu.ru/click/aGbkLIo0?erid=2SDnjeyjBZq&sub1=site&siteId=20402" },
-      { "id": "tbank_black", "cat": "debit", "badge": "ДЕБЕТОВАЯ КАРТА", "shortLogo": "Т-БАНК BLACK", "img": "", "color": "linear-gradient(135deg, #FFDD2D 0%, #CA8A04 100%)", "textColor": "#000", "title": "Т-Банк Black", "price": "Кэшбэк до 30% • 0 ₽", "psk": "", "btn": "Оформить карту", "url": "#" },
-      { "id": "tbank_plat", "cat": "credit", "badge": "КРЕДИТНАЯ КАРТА", "shortLogo": "Т-БАНК PLATINUM", "img": "", "color": "linear-gradient(135deg, #334155 0%, #0F172A 100%)", "textColor": "#CCFF00", "title": "Т-Банк Платинум", "price": "До 1 000 000 ₽", "psk": "11.900% - 39.900%", "btn": "Оформить карту", "url": "#" },
-      { "id": "zaimer", "cat": "mfo", "badge": "МФО", "shortLogo": "ЗАЙМЕР", "img": "", "color": "linear-gradient(135deg, #10B981 0%, #047857 100%)", "textColor": "#fff", "title": "Займер", "price": "Обслуживание 0 - 7900 р.", "psk": "0.000% - 292.000%", "btn": "ПОЛУЧИТЬ", "url": "" }
-    ];
+      {
+            "id": "custom_1793952491672",
+            "cat": "credit",
+            "badge": "НОВОЕ",
+            "shortLogo": "БАНК",
+            "img": "",
+            "color": "linear-gradient(135deg, #1E293B 0%, #0F172A 100%)",
+            "textColor": "#CCFF00",
+            "title": "Альфа Деньги - Кредитный Лимит",
+            "price": "первые 21 день пользования — бесплатно",
+            "psk": "",
+            "btn": "Оформить",
+            "url": "https://"
+      },
+      {
+            "id": "tbank_rko",
+            "cat": "rko",
+            "badge": "ПЕРВЫЙ ВАРИАНТ",
+            "shortLogo": "Т-БАНК",
+            "img": "",
+            "color": "linear-gradient(135deg, #FFDD2D 0%, #F59E0B 100%)",
+            "textColor": "#000",
+            "title": "Открыть счет в ТБанке",
+            "price": "Обслуживание 0/месяц р.",
+            "psk": "",
+            "btn": "Заказать",
+            "url": "https://www.tbank.ru/business/registration-ip/"
+      },
+      {
+            "id": "alfa_rko",
+            "cat": "rko",
+            "badge": "ВТОРОЙ ВАРИАНТ",
+            "shortLogo": "АЛЬФА-БАНК",
+            "img": "",
+            "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)",
+            "textColor": "#fff",
+            "title": "Открыть счет в Альфе",
+            "price": "Обслуживание 0/месяц р.",
+            "psk": "",
+            "btn": "Заказать",
+            "url": "https://trk.ppdu.ru/click/aGbkLIo0?erid=2SDnjeyjBZq&sub1=site&siteId=20402"
+      },
+      {
+            "id": "tbank_black",
+            "cat": "debit",
+            "badge": "ДЕБЕТОВАЯ КАРТА",
+            "shortLogo": "Т-БАНК BLACK",
+            "img": "",
+            "color": "linear-gradient(135deg, #FFDD2D 0%, #CA8A04 100%)",
+            "textColor": "#000",
+            "title": "Т-Банк Black",
+            "price": "Кэшбэк до 30% • 0 ₽",
+            "psk": "",
+            "btn": "Оформить карту",
+            "url": "#"
+      },
+      {
+            "id": "tbank_plat",
+            "cat": "credit",
+            "badge": "КРЕДИТНАЯ КАРТА",
+            "shortLogo": "Т-БАНК PLATINUM",
+            "img": "",
+            "color": "linear-gradient(135deg, #334155 0%, #0F172A 100%)",
+            "textColor": "#CCFF00",
+            "title": "Т-Банк Платинум",
+            "price": "До 1 000 000 ₽",
+            "psk": "11.900% - 39.900%",
+            "btn": "Оформить карту",
+            "url": "#"
+      },
+      {
+            "id": "zaimer",
+            "cat": "mfo",
+            "badge": "МФО",
+            "shortLogo": "ЗАЙМЕР",
+            "img": "",
+            "color": "linear-gradient(135deg, #10B981 0%, #047857 100%)",
+            "textColor": "#fff",
+            "title": "Займер",
+            "price": "Обслуживание 0 - 7900 р.",
+            "psk": "0.000% - 292.000%",
+            "btn": "ПОЛУЧИТЬ",
+            "url": ""
+      }
+];
     // (END_ITEMS_JSON)
 
     let items = JSON.parse(localStorage.getItem('gilt_v2_items')) || [...DEFAULT_ITEMS];
