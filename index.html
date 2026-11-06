@@ -6,7 +6,6 @@
   <title>GILT — Помощь в открытии ИП, расчетных счетов и подбор карт</title>
   <meta name="description" content="Бесплатная консультация по регистрации бизнеса, подбору ОКВЭД и банковских продуктов.">
   
-  <!-- Иконка вкладки (Favicon) с принудительным обновлением кэша (?v=3) -->
   <link rel="icon" type="image/png" href="./logo.png?v=3">
   <link rel="shortcut icon" type="image/png" href="./logo.png?v=3">
   
@@ -40,7 +39,7 @@
       trackLinks:true
     });
   </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/113984418" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <noscript><div><img src="https://mc.yandex.ru/watch/113984418" style="position:absolute; left:-9999px; width:0; height:0; visibility:hidden;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
 
   <style>
@@ -114,867 +113,182 @@
       transition: background-color 0.4s ease, color 0.4s ease;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      width: 100%;
-    }
-
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
     section, #categories-hub { scroll-margin-top: 100px; }
 
-    /* ================= ШАПКА И ЛОГОТИП ================= */
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--bg-header);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      transition: background 0.4s ease, border-color 0.4s ease;
-    }
-    .header-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 78px;
-      gap: 16px;
-    }
-    
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      user-select: none;
-      cursor: pointer;
-    }
-    .logo img {
-      width: 38px;
-      height: 38px;
-      object-fit: contain;
-      flex-shrink: 0;
-      display: block;
-    }
-    .logo-divider {
-      width: 2px;
-      height: 24px;
-      background: var(--border);
-      border-radius: 2px;
-    }
-    .logo-text {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--text-white);
-      letter-spacing: 0.5px;
-      transition: color 0.3s;
-    }
+    /* ================= ШАПКА ================= */
+    .header { position: sticky; top: 0; z-index: 100; background: var(--bg-header); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); transition: background 0.4s ease, border-color 0.4s ease; }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; height: 78px; gap: 16px; }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; user-select: none; cursor: pointer; }
+    .logo img { width: 38px; height: 38px; object-fit: contain; flex-shrink: 0; display: block; }
+    .logo-divider { width: 2px; height: 24px; background: var(--border); border-radius: 2px; }
+    .logo-text { font-family: 'Unbounded', sans-serif; font-size: 22px; font-weight: 800; color: var(--text-white); letter-spacing: 0.5px; transition: color 0.3s; }
     .logo:hover .logo-text { color: var(--lime); }
-
-    .nav-center, .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      list-style: none;
-    }
-    .nav-center a, .nav-right a.nav-link {
-      color: var(--text-white);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      opacity: 0.88;
-      transition: 0.2s;
-      cursor: pointer;
-    }
+    .nav-center, .nav-right { display: flex; align-items: center; gap: 26px; list-style: none; }
+    .nav-center a, .nav-right a.nav-link { color: var(--text-white); text-decoration: none; font-size: 14px; font-weight: 600; opacity: 0.88; transition: 0.2s; cursor: pointer; }
     .nav-center a:hover, .nav-right a.nav-link:hover { color: var(--lime); opacity: 1; }
-    
-    .socials {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .soc-icon, .theme-toggle {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-white);
-      text-decoration: none;
-      transition: 0.2s;
-      cursor: pointer;
-      outline: none;
-    }
-    .soc-icon:hover, .theme-toggle:hover {
-      border-color: var(--lime);
-      color: var(--lime);
-      transform: translateY(-2px);
-    }
+    .socials { display: flex; align-items: center; gap: 10px; }
+    .soc-icon, .theme-toggle { width: 38px; height: 38px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; color: var(--text-white); text-decoration: none; transition: 0.2s; cursor: pointer; outline: none; }
+    .soc-icon:hover, .theme-toggle:hover { border-color: var(--lime); color: var(--lime); transform: translateY(-2px); }
     .soc-icon svg, .theme-toggle svg { width: 18px; height: 18px; fill: currentColor; }
-
     #secretAdminBtn { display: none; border-color: var(--lime); color: var(--lime); }
-
-    .mobile-header-actions {
-      display: none;
-      align-items: center;
-      gap: 10px;
-    }
-    .burger {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text-white);
-      border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 20px;
-      cursor: pointer;
-      outline: none;
-    }
+    .mobile-header-actions { display: none; align-items: center; gap: 10px; }
+    .burger { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-white); border-radius: 10px; padding: 8px 12px; font-size: 20px; cursor: pointer; outline: none; }
     
-    .mobile-nav {
-      position: absolute;
-      top: 78px;
-      left: 0;
-      right: 0;
-      width: 100%;
-      background: var(--bg-header-mob);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      padding: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease;
-      z-index: 99;
-    }
+    .mobile-nav { position: absolute; top: 78px; left: 0; right: 0; width: 100%; background: var(--bg-header-mob); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease; z-index: 99; }
     .mobile-nav.open { max-height: 500px; padding: 10px 20px 20px; }
-    .mobile-nav a {
-      color: var(--text-white);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-    }
+    .mobile-nav a { color: var(--text-white); text-decoration: none; font-weight: 600; font-size: 16px; padding: 12px 0; border-bottom: 1px solid var(--border); }
 
     /* ================= ПЕРВЫЙ ЭКРАН ================= */
     .hero-section { padding: 40px 0 60px; }
-    .hero-slider-wrap {
-      background: var(--bg-hero-grad);
-      border: 1px solid var(--border);
-      border-radius: 26px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-      transition: background 0.4s ease;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .slider-content-area {
-      position: relative;
-      width: 100%;
-      min-height: 340px; 
-    }
-    
-    .slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      display: grid; 
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 40px;
-      align-items: center;
-      padding: 60px;
-      transition: opacity 0.35s ease, visibility 0.35s ease;
-    }
-    .slide.active { 
-      position: relative;
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
-    
+    .hero-slider-wrap { background: var(--bg-hero-grad); border: 1px solid var(--border); border-radius: 26px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08); transition: background 0.4s ease; overflow: hidden; display: flex; flex-direction: column; }
+    .slider-content-area { position: relative; width: 100%; min-height: 340px; }
+    .slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; pointer-events: none; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; padding: 60px; transition: opacity 0.35s ease, visibility 0.35s ease; }
+    .slide.active { position: relative; opacity: 1; visibility: visible; pointer-events: auto; }
     .slide-content { max-width: 580px; }
-    
-    .slide-tag {
-      display: inline-block;
-      background: var(--lime-glow);
-      color: var(--lime);
-      border: 1px solid var(--lime-glow);
-      padding: 6px 16px;
-      border-radius: 100px;
-      font-family: 'Unbounded', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-    .slide h1, .slide h2 {
-      font-family: 'Unbounded', sans-serif;
-      font-size: clamp(22px, 3vw, 36px);
-      line-height: 1.22;
-      margin-bottom: 20px;
-      color: var(--text-white);
-    }
-    .slide p {
-      color: var(--text-gray);
-      font-size: 16px;
-      line-height: 1.65;
-      margin-bottom: 30px;
-    }
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: var(--lime);
-      color: var(--btn-text);
-      font-family: 'Unbounded', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 16px 32px;
-      border-radius: 14px;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 0 25px var(--lime-glow);
-      transition: 0.2s;
-    }
-    .btn-primary:hover {
-      background: var(--lime-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 32px var(--lime-glow);
-    }
-    .slide-visual {
-      background: var(--hero-visual-bg);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 34px;
-      text-align: center;
-      min-width: 250px;
-    }
-    .visual-big {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 46px;
-      font-weight: 800;
-      color: var(--lime);
-      line-height: 1.1;
-      margin-bottom: 10px;
-    }
-    .visual-big.time {
-      font-size: 32px;
-    }
-    
-    .slider-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      padding: 0 0 26px 0;
-    }
-    .slider-dot {
-      width: 36px;
-      height: 6px;
-      border-radius: 10px;
-      background: var(--border);
-      border: none;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+    .slide-tag { display: inline-block; background: var(--lime-glow); color: var(--lime); border: 1px solid var(--lime-glow); padding: 6px 16px; border-radius: 100px; font-family: 'Unbounded', sans-serif; font-size: 12px; font-weight: 700; margin-bottom: 20px; }
+    .slide h1, .slide h2 { font-family: 'Unbounded', sans-serif; font-size: clamp(22px, 3vw, 36px); line-height: 1.22; margin-bottom: 20px; color: var(--text-white); }
+    .slide p { color: var(--text-gray); font-size: 16px; line-height: 1.65; margin-bottom: 30px; }
+    .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--lime); color: var(--btn-text); font-family: 'Unbounded', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; padding: 16px 32px; border-radius: 14px; text-decoration: none; border: none; cursor: pointer; box-shadow: 0 0 25px var(--lime-glow); transition: 0.2s; }
+    .btn-primary:hover { background: var(--lime-hover); transform: translateY(-2px); box-shadow: 0 6px 32px var(--lime-glow); }
+    .slide-visual { background: var(--hero-visual-bg); border: 1px solid var(--border); border-radius: 22px; padding: 34px; text-align: center; min-width: 250px; }
+    .visual-big { font-family: 'Unbounded', sans-serif; font-size: 46px; font-weight: 800; color: var(--lime); line-height: 1.1; margin-bottom: 10px; }
+    .visual-big.time { font-size: 32px; }
+    .slider-controls { display: flex; justify-content: center; align-items: center; gap: 12px; padding: 0 0 26px 0; }
+    .slider-dot { width: 36px; height: 6px; border-radius: 10px; background: var(--border); border: none; cursor: pointer; transition: 0.2s; }
     .slider-dot.active { background: var(--lime); width: 56px; }
-    
-    .slider-arrow {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text-white);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-weight: bold;
-      outline: none;
-      transition: 0.2s;
-    }
+    .slider-arrow { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-white); width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-weight: bold; outline: none; transition: 0.2s; }
     .slider-arrow:hover { border-color: var(--lime); color: var(--lime); }
 
     /* ================= СЕКЦИИ ================= */
     section { padding: 50px 0; }
-    .section-header {
-      text-align: center;
-      max-width: 760px;
-      margin: 0 auto 40px;
-    }
-    .section-title {
-      font-family: 'Unbounded', sans-serif;
-      font-size: clamp(22px, 2.8vw, 34px);
-      margin-bottom: 10px;
-      color: var(--text-white);
-    }
-    .section-sub {
-      color: var(--text-gray);
-      font-size: 16px;
-    }
+    .section-header { text-align: center; max-width: 760px; margin: 0 auto 40px; }
+    .section-title { font-family: 'Unbounded', sans-serif; font-size: clamp(22px, 2.8vw, 34px); margin-bottom: 10px; color: var(--text-white); }
+    .section-sub { color: var(--text-gray); font-size: 16px; }
 
-    /* ================= ЭТАПЫ (КОНСУЛЬТАЦИЯ) ================= */
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-      margin-bottom: 40px;
-    }
-    .step-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px 24px;
-      transition: 0.25s;
-    }
-    .step-item:hover {
-      border-color: var(--lime);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
-    .step-circle {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: var(--lime-glow);
-      border: 1px solid var(--lime-glow);
-      color: var(--lime);
-      font-family: 'Unbounded', sans-serif;
-      font-size: 18px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 18px;
-    }
-    .step-item h3 {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 17px;
-      margin-bottom: 10px;
-    }
-    .step-item p {
-      color: var(--text-gray);
-      font-size: 14px;
-      line-height: 1.55;
-    }
+    /* ================= ЭТАПЫ ================= */
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-bottom: 40px; }
+    .step-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; transition: 0.25s; }
+    .step-item:hover { border-color: var(--lime); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .step-circle { width: 48px; height: 48px; border-radius: 14px; background: var(--lime-glow); border: 1px solid var(--lime-glow); color: var(--lime); font-family: 'Unbounded', sans-serif; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+    .step-item h3 { font-family: 'Unbounded', sans-serif; font-size: 17px; margin-bottom: 10px; }
+    .step-item p { color: var(--text-gray); font-size: 14px; line-height: 1.55; }
 
-    /* ================= РЕГИСТРАЦИЯ ИП И ПРОДУКТЫ ================= */
-    .rko-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 28px;
-      max-width: 920px;
-      margin: 0 auto 60px;
-    }
-
-    .cat-hub-title {
-      text-align: center;
-      font-family: 'Unbounded', sans-serif;
-      font-size: 20px;
-      margin-bottom: 30px;
-      color: var(--text-white);
-    }
-    /* УМНАЯ СЕТКА КАТАЛОГА */
-    .cat-hub-grid {
-      display: grid;
-      gap: 20px;
-      max-width: 1060px;
-      margin: 0 auto 40px;
-    }
-    /* Если 4 элемента */
+    /* ================= КАТАЛОГ ================= */
+    .rko-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; max-width: 920px; margin: 0 auto 60px; }
+    .cat-hub-title { text-align: center; font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 30px; color: var(--text-white); }
+    .cat-hub-grid { display: grid; gap: 20px; max-width: 1060px; margin: 0 auto 40px; }
     .cat-hub-grid[data-cols="4"] { grid-template-columns: repeat(4, 1fr); }
-    /* Если 3 элемента (без МФО) */
     .cat-hub-grid[data-cols="3"] { grid-template-columns: repeat(3, 1fr); max-width: 900px; }
-    
-    .cat-hub-card {
-      background: var(--cat-hub-grad);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 28px 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-    }
-    .cat-hub-card:hover {
-      border-color: var(--lime);
-      transform: translateY(-6px);
-      box-shadow: 0 12px 35px var(--lime-glow);
-      background: var(--cat-hub-hover);
-    }
-    .cat-hub-icon {
-      width: 68px;
-      height: 68px;
-      border-radius: 18px;
-      background: var(--lime-glow);
-      border: 1px solid var(--lime-glow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      color: var(--lime);
-    }
-    .cat-hub-name {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-white);
-    }
-    .cat-hub-desc {
-      font-size: 13px;
-      color: var(--text-gray);
-      line-height: 1.4;
-    }
-    .cat-hub-open {
-      display: inline-block;
-      margin-top: 4px;
-      padding: 8px 16px;
-      border-radius: 10px;
-      background: var(--lime-glow);
-      color: var(--lime);
-      font-family: 'Unbounded', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
+    .cat-hub-card { background: var(--cat-hub-grad); border: 1px solid var(--border); border-radius: 22px; padding: 28px 20px; text-align: center; cursor: pointer; transition: all 0.25s ease; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 14px; }
+    .cat-hub-card:hover { border-color: var(--lime); transform: translateY(-6px); box-shadow: 0 12px 35px var(--lime-glow); background: var(--cat-hub-hover); }
+    .cat-hub-icon { width: 68px; height: 68px; border-radius: 18px; background: var(--lime-glow); border: 1px solid var(--lime-glow); display: flex; align-items: center; justify-content: center; font-size: 32px; color: var(--lime); overflow: hidden;}
+    .cat-hub-icon img { width: 100%; height: 100%; object-fit: cover; }
+    .cat-hub-name { font-family: 'Unbounded', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-white); }
+    .cat-hub-desc { font-size: 13px; color: var(--text-gray); line-height: 1.4; }
+    .cat-hub-open { display: inline-block; margin-top: 4px; padding: 8px 16px; border-radius: 10px; background: var(--lime-glow); color: var(--lime); font-family: 'Unbounded', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+
+    /* КАРТОЧКИ В МОДАЛКЕ */
+    .modal-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(265px, 1fr)); gap: 22px; padding-bottom: 30px; }
+    .product-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: 0.25s; position: relative;}
+    .product-card:hover { background: var(--bg-card-hover); border-color: var(--lime); transform: translateY(-5px); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08); }
+    .card-thumb { height: 150px; position: relative; display: flex; align-items: center; justify-content: center; padding: 20px; border-bottom: 1px solid var(--border); overflow: hidden; background-size: cover; background-position: center; }
+    .card-thumb img.card-custom-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+    .card-thumb-title { font-family: 'Unbounded', sans-serif; font-size: 21px; font-weight: 800; text-align: center; z-index: 2; text-shadow: 0 4px 16px rgba(0,0,0,0.65); color: #fff; }
+    .card-thumb-badge { position: absolute; top: 12px; right: 12px; z-index: 3; background: rgba(9, 13, 20, 0.82); border: 1px solid rgba(255,255,255,0.15); color: var(--lime); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 8px; backdrop-filter: blur(6px); }
+    .card-body { padding: 22px; display: flex; flex-direction: column; flex: 1; justify-content: space-between; }
+    .card-name { font-family: 'Unbounded', sans-serif; font-size: 16px; line-height: 1.35; margin-bottom: 8px; color: var(--text-white); }
+    .card-sub { font-size: 14px; color: var(--lime); font-weight: 600; margin-bottom: 6px; }
+    .card-psk { font-size: 12px; color: var(--text-gray); margin-bottom: 16px; }
+    .card-legal-warning { font-size: 10px; color: #64748b; margin-bottom: 12px; line-height: 1.4; text-align: center; }
+    .card-btn { display: block; width: 100%; text-align: center; background: var(--lime); color: var(--btn-text); font-family: 'Unbounded', sans-serif; font-size: 13px; font-weight: 700; padding: 14px 18px; border-radius: 12px; text-decoration: none; text-transform: uppercase; transition: 0.2s; }
+    .card-btn:hover { background: var(--lime-hover); box-shadow: 0 0 20px var(--lime-glow); }
+
+    /* ================= ПОЧЕМУ МЫ ================= */
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .why-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; display: flex; gap: 18px; align-items: flex-start; }
+    .why-check { width: 42px; height: 42px; min-width: 42px; border-radius: 12px; background: var(--lime-glow); border: 1px solid var(--lime-glow); color: var(--lime); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; }
+    .why-card h3 { font-family: 'Unbounded', sans-serif; font-size: 16px; margin-bottom: 8px; }
+    .why-card p { font-size: 14px; color: var(--text-gray); line-height: 1.55; }
 
     /* ================= ОТЗЫВЫ ================= */
-    .reviews-section-inner {
-      position: relative;
-      max-width: 1060px;
-      margin: 0 auto;
-    }
-    .reviews-wrapper {
-      display: flex;
-      gap: 24px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding: 10px 0 30px;
-      scrollbar-width: none; 
-      -ms-overflow-style: none;
-      scroll-behavior: smooth;
-    }
+    .reviews-section-inner { position: relative; max-width: 1060px; margin: 0 auto; }
+    .reviews-wrapper { display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 10px 0 30px; scrollbar-width: none; -ms-overflow-style: none; scroll-behavior: smooth; }
     .reviews-wrapper::-webkit-scrollbar { display: none; } 
-    
-    .review-card {
-      scroll-snap-align: start;
-      flex: 0 0 340px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      transition: 0.3s;
-    }
+    .review-card { scroll-snap-align: start; flex: 0 0 340px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; gap: 12px; transition: 0.3s; }
     .review-card:hover { border-color: var(--lime); }
     .review-header { display: flex; justify-content: space-between; align-items: center; }
     .review-name { font-family: 'Unbounded', sans-serif; font-size: 15px; font-weight: 700; color: var(--text-white); }
     .review-stars { color: #F59E0B; font-size: 16px; letter-spacing: 2px; }
     .review-text { color: var(--text-gray); font-size: 14px; line-height: 1.6; }
-
-    .review-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text-white);
-      font-size: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 10;
-      transition: 0.2s;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
+    .review-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-white); font-size: 22px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: 0.2s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
     .review-arrow:hover { border-color: var(--lime); color: var(--lime); }
     .review-arrow.left { left: -22px; }
     .review-arrow.right { right: -22px; }
 
     /* ================= FAQ ================= */
-    .faq-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .faq-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      cursor: pointer;
-      transition: border-color 0.3s;
-    }
+    .faq-list { display: flex; flex-direction: column; gap: 16px; max-width: 800px; margin: 0 auto; }
+    .faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: border-color 0.3s; }
     .faq-item:hover { border-color: var(--lime); }
-    .faq-q {
-      padding: 24px;
-      font-family: 'Unbounded', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text-white);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .faq-q::after {
-      content: '+';
-      font-size: 24px;
-      color: var(--lime);
-      transition: transform 0.3s;
-    }
+    .faq-q { padding: 24px; font-family: 'Unbounded', sans-serif; font-size: 15px; font-weight: 700; color: var(--text-white); display: flex; justify-content: space-between; align-items: center; }
+    .faq-q::after { content: '+'; font-size: 24px; color: var(--lime); transition: transform 0.3s; }
     .faq-item.active .faq-q::after { transform: rotate(45deg); }
-    .faq-a {
-      padding: 0 24px;
-      max-height: 0;
-      overflow: hidden;
-      color: var(--text-gray);
-      font-size: 14px;
-      line-height: 1.6;
-      transition: max-height 0.4s ease, padding 0.4s ease;
-    }
+    .faq-a { padding: 0 24px; max-height: 0; overflow: hidden; color: var(--text-gray); font-size: 14px; line-height: 1.6; transition: max-height 0.4s ease, padding 0.4s ease; }
     .faq-item.active .faq-a { padding: 0 24px 24px; max-height: 300px; }
 
-    /* КАРТОЧКИ ПРОДУКТОВ В МОДАЛЬНОМ ОКНЕ */
-    .modal-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
-      gap: 22px;
-      padding-bottom: 30px; 
-    }
-    .product-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: 0.25s;
-    }
-    .product-card:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--lime);
-      transform: translateY(-5px);
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
-    }
-    .card-thumb {
-      height: 150px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      border-bottom: 1px solid var(--border);
-      overflow: hidden;
-      background-size: cover;
-      background-position: center;
-    }
-    .card-thumb img.card-custom-img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 1;
-    }
-    .card-thumb-title {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 21px;
-      font-weight: 800;
-      text-align: center;
-      z-index: 2;
-      text-shadow: 0 4px 16px rgba(0,0,0,0.65);
-      color: #fff;
-    }
-    .card-thumb-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      z-index: 3;
-      background: rgba(9, 13, 20, 0.82);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: var(--lime);
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 8px;
-      backdrop-filter: blur(6px);
-    }
-    .card-body {
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      justify-content: space-between;
-    }
-    .card-name {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 16px;
-      line-height: 1.35;
-      margin-bottom: 8px;
-      color: var(--text-white);
-    }
-    .card-sub {
-      font-size: 14px;
-      color: var(--lime);
-      font-weight: 600;
-      margin-bottom: 18px;
-    }
-    .card-btn {
-      display: block;
-      width: 100%;
-      text-align: center;
-      background: var(--lime);
-      color: var(--btn-text);
-      font-family: 'Unbounded', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 14px 18px;
-      border-radius: 12px;
-      text-decoration: none;
-      text-transform: uppercase;
-      transition: 0.2s;
-    }
-    .card-btn:hover {
-      background: var(--lime-hover);
-      box-shadow: 0 0 20px var(--lime-glow);
-    }
-
-    /* ================= ПОЧЕМУ МЫ ================= */
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    .why-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      display: flex;
-      gap: 18px;
-      align-items: flex-start;
-    }
-    .why-check {
-      width: 42px;
-      height: 42px;
-      min-width: 42px;
-      border-radius: 12px;
-      background: var(--lime-glow);
-      border: 1px solid var(--lime-glow);
-      color: var(--lime);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: 800;
-    }
-    .why-card h3 {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
-    .why-card p {
-      font-size: 14px;
-      color: var(--text-gray);
-      line-height: 1.55;
-    }
-
     /* ================= ПОДВАЛ ================= */
-    .footer {
-      border-top: 1px solid var(--border);
-      padding: 56px 0 44px;
-      margin-top: 50px;
-      background: var(--bg-footer);
-    }
-    .footer-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px;
-    }
-    .footer-title {
-      font-family: 'Unbounded', sans-serif;
-      font-size: 20px;
-      color: var(--lime);
-      margin-bottom: 14px;
-    }
-    .footer-contacts {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin: 20px 0 26px;
-    }
-    .disclaimer {
-      font-size: 11px;
-      color: var(--text-gray);
-      line-height: 1.65;
-      border-top: 1px solid var(--border);
-      padding-top: 20px;
-    }
+    .footer { border-top: 1px solid var(--border); padding: 56px 0 44px; margin-top: 50px; background: var(--bg-footer); }
+    .footer-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; }
+    .footer-title { font-family: 'Unbounded', sans-serif; font-size: 20px; color: var(--lime); margin-bottom: 14px; }
+    .footer-contacts { display: flex; gap: 16px; flex-wrap: wrap; margin: 20px 0 26px; }
+    .disclaimer { font-size: 11px; color: var(--text-gray); line-height: 1.65; border-top: 1px solid var(--border); padding-top: 20px; }
 
-    /* ================= МОДАЛЬНЫЕ ОКНА ================= */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.84);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      z-index: 999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
+    /* ================= МОДАЛКИ И АДМИНКА ================= */
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.84); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 999; display: none; align-items: center; justify-content: center; padding: 16px; }
     .modal-backdrop.open { display: flex; }
-    .modal-window {
-      background: var(--bg-modal);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      max-width: 1020px;
-      width: 100%;
-      max-height: 85vh; 
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior: contain;
-      padding: 34px;
-      position: relative;
-      box-shadow: 0 25px 70px rgba(0,0,0,0.3);
-      animation: fadeIn 0.25s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .modal-close {
-      position: absolute;
-      top: 20px;
-      right: 22px;
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text-white);
-      font-size: 24px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    .modal-window { background: var(--bg-modal); border: 1px solid var(--border); border-radius: 24px; max-width: 1020px; width: 100%; max-height: 85vh; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 34px; position: relative; box-shadow: 0 25px 70px rgba(0,0,0,0.3); animation: fadeIn 0.25s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .modal-close { position: absolute; top: 20px; right: 22px; width: 40px; height: 40px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-white); font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .modal-close:hover { border-color: var(--lime); color: var(--lime); }
+    .modal-cat-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .modal-tab-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-white); padding: 10px 18px; border-radius: 12px; font-family: 'Unbounded', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    .modal-tab-btn.active { background: var(--lime); color: var(--btn-text); border-color: var(--lime); box-shadow: 0 0 18px var(--lime-glow); }
 
-    .modal-cat-tabs {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 26px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-    .modal-tab-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text-white);
-      padding: 10px 18px;
-      border-radius: 12px;
-      font-family: 'Unbounded', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .modal-tab-btn.active {
-      background: var(--lime);
-      color: var(--btn-text);
-      border-color: var(--lime);
-      box-shadow: 0 0 18px var(--lime-glow);
-    }
-
-    .admin-row {
-      display: grid;
-      grid-template-columns: 120px 150px 150px 1fr 1fr;
-      gap: 10px;
-      align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .admin-input {
-      width: 100%;
-      padding: 10px 12px;
-      background: var(--admin-input-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      color: var(--text-white);
-      font-size: 13px;
-    }
+    .admin-input { width: 100%; padding: 10px 12px; background: var(--admin-input-bg); border: 1px solid var(--border); border-radius: 10px; color: var(--text-white); font-size: 13px; }
     .admin-input:focus { border-color: var(--lime); outline: none; }
+    .admin-offer-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
+    .admin-offer-grid { display: grid; grid-template-columns: 100px 1.5fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .admin-offer-grid-bottom { display: grid; grid-template-columns: 1.5fr 1fr 40px; gap: 10px; }
+    .btn-delete { background: rgba(239, 68, 68, 0.1); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; font-size: 16px; }
+    .btn-delete:hover { background: #EF4444; color: #fff; }
 
     /* ================= АДАПТИВ ================= */
     @media (max-width: 992px) {
       .nav-center, .nav-right { display: none; }
       .mobile-header-actions { display: flex; }
-      
-      .slide {
-        grid-template-columns: 1fr;
-        justify-content: center;
-        text-align: center;
-        padding: 40px;
-      }
+      .slide { grid-template-columns: 1fr; justify-content: center; text-align: center; padding: 40px; }
       .slide-content { max-width: none; }
       .slide-visual { max-width: 400px; width: 100%; margin: 0 auto; min-width: 0; }
-      
       .steps-grid, .why-grid { grid-template-columns: repeat(2, 1fr); }
       .cat-hub-grid[data-cols="3"], .cat-hub-grid[data-cols="4"] { grid-template-columns: repeat(2, 1fr); }
-      .admin-row { grid-template-columns: 1fr; }
+      .admin-offer-grid, .admin-offer-grid-bottom { grid-template-columns: 1fr; }
     }
     
     @media (max-width: 640px) {
       section, #categories-hub { scroll-margin-top: 90px; }
-
       .slider-content-area { min-height: 420px; } 
-      .slide { 
-        padding: 30px 20px 20px; 
-        gap: 24px; 
-        text-align: left; 
-      }
+      .slide { padding: 30px 20px 20px; gap: 24px; text-align: left; }
       .slide.active { display: grid; }
-      
       .slide-tag { margin-bottom: 12px; }
       .slide p { margin-bottom: 20px; font-size: 14px; }
       .slide-visual { text-align: left; padding: 24px; width: 100%; max-width: none; min-width: 0; }
-      
       .rko-grid, .steps-grid, .why-grid { grid-template-columns: 1fr; gap: 16px; }
       .cat-hub-grid[data-cols="3"], .cat-hub-grid[data-cols="4"] { grid-template-columns: 1fr; }
       .btn-primary { width: 100%; padding: 14px 20px; }
-      
       .modal-window { padding: 24px 16px; }
       .modal-cat-tabs { gap: 6px; }
       .modal-tab-btn { padding: 8px 12px; font-size: 11px; flex: 1; text-align: center; }
       .footer-box { padding: 24px 16px; }
-      
       .review-card { flex: 0 0 280px; } 
       .review-arrow { display: none; } 
     }
@@ -1013,7 +327,7 @@
       </div>
 
       <div class="mobile-header-actions">
-        <!-- Кнопка Telegram на мобильных телефонах -->
+        <!-- Кнопка Telegram на мобильных -->
         <a id="headerTgLinkMob" href="#" target="_blank" rel="nofollow" class="soc-icon" style="width: 38px; height: 38px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; color: var(--text-white); text-decoration: none;" title="Telegram">
           <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.74 7.58-3.27 3.61-1.51 4.35-1.77 4.84-1.78.11 0 .35.03.5.16.13.1.17.24.18.34.02.08.02.24.01.38z"/></svg>
         </a>
@@ -1079,7 +393,7 @@
     </div>
   </section>
 
-  <!-- ================= ЭТАПЫ (КОНСУЛЬТАЦИЯ) ================= -->
+  <!-- ================= ЭТАПЫ ================= -->
   <section id="steps">
     <div class="container">
       <div class="section-header">
@@ -1125,25 +439,25 @@
         <h3 class="cat-hub-title">Каталог финансовых продуктов (нажмите для выбора):</h3>
         <div class="cat-hub-grid" id="mainCatHub" data-cols="4">
           <div class="cat-hub-card" onclick="openCategoryCatalog('debit')">
-            <div class="cat-hub-icon">💳</div>
+            <div class="cat-hub-icon" id="icon-debit">💳</div>
             <div class="cat-hub-name">Дебетовые карты</div>
             <div class="cat-hub-desc">Бесплатное обслуживание, повышенный кэшбэк и процент на остаток</div>
             <span class="cat-hub-open">Открыть каталог →</span>
           </div>
           <div class="cat-hub-card" onclick="openCategoryCatalog('credit')">
-            <div class="cat-hub-icon">💎</div>
+            <div class="cat-hub-icon" id="icon-credit">💎</div>
             <div class="cat-hub-name">Кредитные карты</div>
             <div class="cat-hub-desc">Длительный льготный период и быстрое решение по паспорту</div>
             <span class="cat-hub-open">Открыть каталог →</span>
           </div>
           <div class="cat-hub-card" onclick="openCategoryCatalog('rko')">
-            <div class="cat-hub-icon">🏦</div>
+            <div class="cat-hub-icon" id="icon-rko">🏦</div>
             <div class="cat-hub-name">Расчетные счета</div>
             <div class="cat-hub-desc">Счета для бизнеса, эквайринг и бесплатная бухгалтерия от банков</div>
             <span class="cat-hub-open">Открыть каталог →</span>
           </div>
           <div class="cat-hub-card" id="mfoHubCard" onclick="openCategoryCatalog('mfo')">
-            <div class="cat-hub-icon">⚡</div>
+            <div class="cat-hub-icon" id="icon-mfo">⚡</div>
             <div class="cat-hub-name">Микрофинансовые организации</div>
             <div class="cat-hub-desc">Моментальное зачисление онлайн за 5 минут, первый займ без переплат</div>
             <span class="cat-hub-open">Открыть каталог →</span>
@@ -1153,7 +467,7 @@
     </div>
   </section>
 
-  <!-- ================= ПОЧЕМУ МЫ (ПЛЮС ПРАВДА О БЕСПЛАТНОСТИ) ================= -->
+  <!-- ================= ПОЧЕМУ МЫ ================= -->
   <section id="why">
     <div class="container">
       <div class="section-header">
@@ -1202,7 +516,7 @@
     </div>
   </section>
 
-  <!-- ================= FAQ (ЧАСТЫЕ ВОПРОСЫ) ================= -->
+  <!-- ================= FAQ ================= -->
   <section id="faq">
     <div class="container">
       <div class="section-header">
@@ -1267,13 +581,12 @@
     </div>
   </div>
 
-  <!-- ================= ПОПАП ОСТАВИТЬ ОТЗЫВ (ПО СЕКРЕТНОЙ ССЫЛКЕ) ================= -->
+  <!-- ================= ПОПАП ОТЗЫВА (ПО СЕКРЕТНОЙ ССЫЛКЕ) ================= -->
   <div class="modal-backdrop" id="leaveReviewModal" onclick="if(event.target===this) closeModal('leaveReviewModal')">
     <div class="modal-window" style="max-width: 500px;">
       <button type="button" class="modal-close" onclick="closeModal('leaveReviewModal')">×</button>
       <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 6px; color: var(--lime);">Оставить отзыв</h3>
       <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 20px;">Заполните форму, и она будет отправлена нам в Telegram для публикации на сайте.</p>
-      
       <div style="display: flex; flex-direction: column; gap: 14px;">
         <input type="text" id="revFormName" class="admin-input" placeholder="Ваше Имя (как отобразить на сайте)">
         <select id="revFormRate" class="admin-input">
@@ -1286,16 +599,43 @@
     </div>
   </div>
 
-  <!-- ================= ПОПАП ПОЛИТИКИ ================= -->
+  <!-- ================= НОВАЯ ОФЕРТА ================= -->
   <div class="modal-backdrop" id="privacyModal" onclick="if(event.target===this) closeModal('privacyModal')">
-    <div class="modal-window" style="max-width: 760px;">
+    <div class="modal-window" style="max-width: 860px;">
       <button type="button" class="modal-close" onclick="closeModal('privacyModal')">×</button>
-      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 16px; color: var(--lime);">Пользовательское соглашение</h3>
+      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 16px; color: var(--lime);">Пользовательское соглашение (оферта)</h3>
       <div style="font-size: 13px; color: var(--text-gray); line-height: 1.65; max-height: 60vh; overflow-y: auto; padding-right: 10px;">
-        <p><b>1. Общие положения</b><br>Настоящий документ определяет условия использования информационного сервиса GILT (далее — «Сервис») и политику в отношении обработки данных в соответствии с требованиями законодательства РФ.</p><br>
-        <p><b>2. Статус Сервиса и ограничение ответственности</b><br>Сервис предоставляет консультационные услуги и каталог ссылок на сайты банков-партнеров. Заполнение анкет и передача паспортных данных осуществляются Пользователем добровольно на защищенных ресурсах самих банков. Мы не несем ответственности за отказы банков в обслуживании.</p><br>
-        <p><b>3. Обработка персональных данных</b><br>В рамках работы Сервиса <b>не производится</b> автоматизированный сбор персональных данных (ФИО, паспорта) через формы на сайте. Все общение происходит в защищенных сторонних мессенджерах (Telegram) по инициативе самого Пользователя.</p><br>
-        <p><b>4. Использование файлов Cookie</b><br>Для корректной работы Сервис может использовать технические файлы cookie (сохранение темы оформления). Пользователь может заблокировать их в настройках браузера.</p>
+        <p>Редакция от <span id="ofertaDateDisplay" style="color:var(--text-white); font-weight:600;"></span></p><br>
+        
+        <p><b>1. Общие положения</b></p>
+        <p>1.1. Соглашение регулирует использование сайта giltrko.ru (далее — Сайт), владелец и администратор которого <span id="ofertaFioDisplay" style="color:var(--text-white); font-weight:600;"></span>, ИНН <span id="ofertaInnDisplay" style="color:var(--text-white); font-weight:600;"></span>, ОГРНИП <span id="ofertaOgrnipDisplay" style="color:var(--text-white); font-weight:600;"></span> (далее — Администратор).</p>
+        <p>1.2. Соглашение является публичной офертой по ст. 437 ГК РФ. Пользователь принимает его условия в полном объёме с момента, когда начинает пользоваться Сайтом. Если пользователь с условиями не согласен, он должен прекратить использование Сайта.</p><br>
+
+        <p><b>2. Статус Сайта</b></p>
+        <p>2.1. Сайт является информационным каталогом (витриной) и носит рекламный характер. На нём собраны сведения о финансовых продуктах третьих лиц: кредитах, займах МФО, кредитных и дебетовых картах, расчётно-кассовом обслуживании, вкладах и других услугах (далее — Офферы).</p>
+        <p>2.2. Администратор не является банком, микрофинансовой организацией, кредитным брокером или оператором финансовой платформы. Он не выдаёт кредиты и займы, не принимает и не передаёт заявки, не заключает договоры от имени финансовых организаций и не оказывает финансовых услуг.</p>
+        <p>2.3. Размещение Оффера на Сайте не является публичной офертой финансовой организации, индивидуальной рекомендацией или гарантией одобрения.</p><br>
+
+        <p><b>3. Информация на Сайте</b></p>
+        <p>3.1. Условия продуктов (ставки, ПСК, сроки, тарифы, требования к клиенту) размещаются на основании данных партнёров. Актуальные и полные условия определяет только сама финансовая организация на своём официальном сайте.</p>
+        <p>3.2. Администратор получает вознаграждение от партнёров и рекламных сетей за размещение Офферов и переходы по ним. Для пользователя Сайт бесплатен.</p>
+        <p>3.3. Рекламные материалы на Сайте маркируются в соответствии с ФЗ «О рекламе». На Сайте размещаются только Офферы организаций, сведения о которых внесены в реестры Банка России.</p><br>
+
+        <p><b>4. Переход на сайты партнёров</b></p>
+        <p>4.1. При нажатии на кнопку в Оффере пользователь переходит на сайт финансовой организации. Заявка оформляется там, а договор заключается напрямую между пользователем и этой организацией.</p>
+        <p>4.2. За содержание сайтов партнёров, решение по заявке, исполнение договора и обработку данных на стороне партнёра отвечает партнёр.</p><br>
+
+        <p><b>5. Ограничение ответственности</b></p>
+        <p>5.1. Сайт предоставляется «как есть». Администратор не отвечает за возможные неточности в условиях Офферов, отказ в выдаче продукта и последствия решений, которые пользователь принял на основе информации с Сайта.</p>
+        <p>5.2. Перед оформлением любого продукта пользователю следует изучить все условия договора и оценить свои финансовые возможности и риски.</p><br>
+
+        <p><b>6. Персональные данные и cookie</b></p>
+        <p>6.1. Сайт не собирает анкеты на кредиты и займы. Технические данные (cookie, IP-адрес, данные метрических систем) обрабатываются в соответствии с ФЗ № 152-ФЗ.</p><br>
+
+        <p><b>7. Заключительные положения</b></p>
+        <p>7.1. Администратор вправе менять Соглашение в одностороннем порядке. Новая редакция вступает в силу с момента публикации на Сайте.</p>
+        <p>7.2. Отношения сторон регулируются законодательством РФ. Споры рассматриваются по месту нахождения Администратора, при этом право потребителя на выбор подсудности сохраняется.</p>
+        <p>7.3. Контакты Администратора: <span id="ofertaMailDisplay" style="color:var(--text-white); font-weight:600;"></span>, <span id="ofertaAddressDisplay" style="color:var(--text-white); font-weight:600;"></span>.</p>
       </div>
     </div>
   </div>
@@ -1305,35 +645,44 @@
     <div class="modal-window">
       <button type="button" class="modal-close" onclick="closeModal('adminModal')">×</button>
       <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 6px; color: var(--lime);">🔒 Закрытая панель GILT</h3>
-      <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 18px;">
-        Управление контактами, юр. данными, отзывами, карточками и публикацией на GitHub.
-      </p>
+      <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 18px;">Управление контактами, юр. данными, отзывами, карточками и публикацией.</p>
 
-      <!-- Юридические данные и настройки -->
+      <!-- Юридические данные и контакты -->
+      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">Контакты и Оферта:</div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; background: var(--admin-input-bg); border: 1px solid var(--border); padding: 16px; border-radius: 14px; margin-bottom: 18px;">
         <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">Telegram (ссылка):</label><input type="text" id="admTg" class="admin-input"></div>
         <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">Почта (email):</label><input type="text" id="admMail" class="admin-input"></div>
-        
         <div style="display:flex; flex-direction:column; gap:4px;">
-          <label style="font-size: 11px; color: var(--lime); font-weight: 700;">Переключатели (Отображать на сайте):</label>
+          <label style="font-size: 11px; color: var(--lime); font-weight: 700;">Переключатели на сайте:</label>
           <label style="font-size: 13px;"><input type="checkbox" id="admShowMfo" style="cursor:pointer;"> Блок МФО</label>
-          <label style="font-size: 13px;"><input type="checkbox" id="admShowLegal" style="cursor:pointer;"> Юр. Информацию (ИНН/ФИО)</label>
-          <label style="font-size: 13px;"><input type="checkbox" id="admShowInitialReviews" style="cursor:pointer;"> 3 Базовых демо-отзыва</label>
+          <label style="font-size: 13px;"><input type="checkbox" id="admShowLegal" style="cursor:pointer;"> Юр. Информацию (Подвал)</label>
+          <label style="font-size: 13px;"><input type="checkbox" id="admShowInitialReviews" style="cursor:pointer;"> Демо-отзывы</label>
         </div>
-
-        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">Твое ФИО / Статус (для подвала):</label><input type="text" id="admFio" class="admin-input" placeholder="ИП Иванов И.И."></div>
-        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">Твой ИНН (для Яндекса):</label><input type="text" id="admInn" class="admin-input" placeholder="123456789012"></div>
+        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">ФИО / Статус (для оферты):</label><input type="text" id="admFio" class="admin-input" placeholder="ИП Иванов И.И."></div>
+        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">ИНН:</label><input type="text" id="admInn" class="admin-input"></div>
+        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">ОГРНИП:</label><input type="text" id="admOgrnip" class="admin-input"></div>
+        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">Адрес / Город:</label><input type="text" id="admAddress" class="admin-input"></div>
+        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">Дата Оферты:</label><input type="text" id="admOfertaDate" class="admin-input"></div>
         <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">GitHub Token:</label><input type="password" id="admGhToken" class="admin-input"></div>
       </div>
 
+      <!-- Иконки Категорий -->
+      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">Иконки Категорий (вставьте эмодзи или URL картинки):</div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px;">
+        <input type="text" id="iconDebit" class="admin-input" placeholder="Дебетовые (💳)">
+        <input type="text" id="iconCredit" class="admin-input" placeholder="Кредитные (💎)">
+        <input type="text" id="iconRko" class="admin-input" placeholder="РКО (🏦)">
+        <input type="text" id="iconMfo" class="admin-input" placeholder="МФО (⚡)">
+      </div>
+
       <!-- Отзывы -->
-      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">Управление клиентскими отзывами (Базовые отзывы скрыты из редактора):</div>
+      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">Пользовательские отзывы:</div>
       <div style="max-height: 180px; overflow-y: auto; padding-right: 6px; margin-bottom: 18px;" id="adminReviewsList"></div>
       <button type="button" class="btn-primary" style="background: transparent; border: 1px solid var(--border); color: var(--text-white); box-shadow: none; padding: 10px 16px; margin-bottom: 20px; font-size:11px;" onclick="addNewReviewRow()">+ Добавить отзыв от клиента</button>
 
       <!-- Карточки Банков -->
-      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">Список предложений банков:</div>
-      <div style="max-height: 250px; overflow-y: auto; padding-right: 6px; margin-bottom: 18px;" id="adminLinksList"></div>
+      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">Предложения (Внимание: для кредиток и МФО предупреждение 1 марта выводится автоматически):</div>
+      <div style="max-height: 350px; overflow-y: auto; padding-right: 6px; margin-bottom: 18px;" id="adminLinksList"></div>
 
       <!-- Кнопки сохранения -->
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -1349,7 +698,6 @@
   <script>
     const OWNER_PIN = "825113878GILT";
 
-    // Обработка скролла ПРИ ПОЛНОЙ ЗАГРУЗКЕ СТРАНИЦЫ
     window.addEventListener('load', () => {
       setTimeout(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -1361,11 +709,9 @@
       if (localStorage.getItem('gilt_owner_unlocked') === 'true') {
         document.getElementById('secretAdminBtn').style.display = 'inline-flex';
       }
-      
       if (window.location.search.includes('review=')) {
         setTimeout(() => openModal('leaveReviewModal'), 500);
       }
-
       renderCards();
     });
 
@@ -1394,12 +740,8 @@
       const name = document.getElementById('revFormName').value.trim() || 'Аноним';
       const text = document.getElementById('revFormText').value.trim() || 'Без текста';
       const rate = document.getElementById('revFormRate').value;
-      
       let tgUser = "haveahatred";
-      if (contacts.tg && contacts.tg.includes('t.me/')) {
-        tgUser = contacts.tg.split('t.me/')[1].replace('/', '');
-      }
-
+      if (contacts.tg && contacts.tg.includes('t.me/')) { tgUser = contacts.tg.split('t.me/')[1].replace('/', ''); }
       const msg = `🌟 НОВЫЙ ОТЗЫВ С САЙТА 🌟%0AИмя: ${name}%0AОценка: ${rate} звезд%0AТекст: ${text}`;
       window.open(`https://t.me/${tgUser}?text=${msg}`, '_blank');
       closeModal('leaveReviewModal');
@@ -1410,329 +752,74 @@
     const SITE_CONTACTS = {
       "tg": "https://t.me/haveahatred",
       "mail": "drejkartem@gmail.com",
-      "fio": "Куликов Артём Александрович",
+      "fio": "ИП Куликов Артём Александрович",
       "inn": "2501007431021",
+      "ogrnip": "326410000018982",
+      "address": "г. Хабаровск",
+      "ofertaDate": "06.11.2026",
       "showMfo": true,
       "showLegal": true,
-      "showInitialReviews": true,
-      "csv": ""
-};
+      "showInitialReviews": true
+    };
     // (END_CONTACTS_JSON)
+
+    // (START_CAT_ICONS_JSON)
+    const SITE_CAT_ICONS = {
+      "debit": "💳",
+      "credit": "💎",
+      "rko": "🏦",
+      "mfo": "⚡"
+    };
+    // (END_CAT_ICONS_JSON)
 
     // (START_REVIEWS_JSON)
     const SITE_REVIEWS = [
-      {
-            "name": "Иван Сторожев",
-            "text": "Помогли оформить ИП и выбрать счёт.",
-            "rate": 5
-      },
-      {
-            "name": "Anya",
-            "text": "спасибо за консультацию!)",
-            "rate": 5
-      },
-      {
-            "name": "Максон",
-            "text": "Помогли оформить расчётный счет",
-            "rate": 5
-      },
-      {
-            "name": "Елена",
-            "text": "Все отлично!",
-            "rate": 5
-      }
-];
+      { "name": "Иван Сторожев", "text": "Помогли оформить ИП и выбрать счёт.", "rate": 5, "isInitial": true },
+      { "name": "Anya", "text": "спасибо за консультацию!)", "rate": 5, "isInitial": true },
+      { "name": "Максон", "text": "Помогли оформить расчётный счет", "rate": 5, "isInitial": true },
+      { "name": "Елена", "text": "Все отлично!", "rate": 5, "isInitial": true }
+    ];
     // (END_REVIEWS_JSON)
 
     // (START_ITEMS_JSON)
     const DEFAULT_ITEMS = [
-      {
-            "id": "tbank_rko",
-            "cat": "rko",
-            "badge": "ПЕРВЫЙ ВАРИАНТ",
-            "shortLogo": "Т-БАНК",
-            "img": "",
-            "color": "linear-gradient(135deg, #FFDD2D 0%, #F59E0B 100%)",
-            "textColor": "#000",
-            "title": "Открыть счет в ТБанке (ПЕРВЫЙ ВАРИАНТ)",
-            "price": "Обслуживание 0/месяц р.",
-            "btn": "Заказать",
-            "url": "https://www.tbank.ru/business/registration-ip/"
-      },
-      {
-            "id": "alfa_rko",
-            "cat": "rko",
-            "badge": "ВТОРОЙ ВАРИАНТ",
-            "shortLogo": "АЛЬФА-БАНК",
-            "img": "",
-            "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)",
-            "textColor": "#fff",
-            "title": "Открыть счет в Альфе (ВТОРОЙ ВАРИАНТ)",
-            "price": "Обслуживание 0/месяц р.",
-            "btn": "Заказать",
-            "url": "https://trk.ppdu.ru/click/aGbkLIo0?erid=2SDnjeyjBZq&sub1=site&siteId=20402"
-      },
-      {
-            "id": "tbank_black",
-            "cat": "debit",
-            "badge": "ДЕБЕТОВАЯ КАРТА",
-            "shortLogo": "Т-БАНК BLACK",
-            "img": "",
-            "color": "linear-gradient(135deg, #FFDD2D 0%, #CA8A04 100%)",
-            "textColor": "#000",
-            "title": "Дебетовая карта Т-Банк Black",
-            "price": "Кэшбэк до 30% рублями • 0 ₽",
-            "btn": "Оформить карту",
-            "url": "#"
-      },
-      {
-            "id": "alfa_debit",
-            "cat": "debit",
-            "badge": "ДЕБЕТОВАЯ КАРТА",
-            "shortLogo": "АЛЬФА-КАРТА",
-            "img": "",
-            "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)",
-            "textColor": "#fff",
-            "title": "Альфа-Карта с суперкэшбэком",
-            "price": "Обслуживание 0 ₽ навсегда",
-            "btn": "Оформить карту",
-            "url": "#"
-      },
-      {
-            "id": "vtb_debit",
-            "cat": "debit",
-            "badge": "ДЕБЕТОВАЯ КАРТА",
-            "shortLogo": "ВТБ КАРТА",
-            "img": "",
-            "color": "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)",
-            "textColor": "#fff",
-            "title": "Карта для жизни ВТБ",
-            "price": "Кэшбэк рублями • 0 ₽",
-            "btn": "Оформить карту",
-            "url": "#"
-      },
-      {
-            "id": "tbank_plat",
-            "cat": "credit",
-            "badge": "КРЕДИТНАЯ КАРТА",
-            "shortLogo": "Т-БАНК PLATINUM",
-            "img": "",
-            "color": "linear-gradient(135deg, #334155 0%, #0F172A 100%)",
-            "textColor": "#CCFF00",
-            "title": "Кредитная карта Т-Банк Платинум",
-            "price": "До 1 000 000 ₽ • беспроцентный период",
-            "btn": "Оформить карту",
-            "url": "#"
-      },
-      {
-            "id": "alfa_credit",
-            "cat": "credit",
-            "badge": "КРЕДИТНАЯ КАРТА",
-            "shortLogo": "АЛЬФА КРЕДИТКА",
-            "img": "",
-            "color": "linear-gradient(135deg, #DC2626 0%, #7F1D1D 100%)",
-            "textColor": "#fff",
-            "title": "Кредитная карта Альфа-Банк",
-            "price": "Льготный период • снятие наличных",
-            "btn": "Оформить карту",
-            "url": "#"
-      },
-      {
-            "id": "sber_credit",
-            "cat": "credit",
-            "badge": "КРЕДИТНАЯ КАРТА",
-            "shortLogo": "СБЕРКАРТА",
-            "img": "",
-            "color": "linear-gradient(135deg, #16A34A 0%, #065F46 100%)",
-            "textColor": "#fff",
-            "title": "Кредитная СберКарта",
-            "price": "120 дней без % • 0 ₽ обслуживание",
-            "btn": "Оформить карту",
-            "url": "#"
-      },
-      {
-            "id": "zaimer",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "ЗАЙМЕР",
-            "img": "",
-            "color": "linear-gradient(135deg, #10B981 0%, #047857 100%)",
-            "textColor": "#fff",
-            "title": "Займер",
-            "price": "Обслуживание 0 - 7900 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "webbankir",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "WEBBANKIR",
-            "img": "",
-            "color": "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)",
-            "textColor": "#fff",
-            "title": "WebBankir (Веб-Банкир)",
-            "price": "Обслуживание 0 - 500 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "srochno",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "СРОЧНОДЕНЬГИ",
-            "img": "",
-            "color": "linear-gradient(135deg, #84CC16 0%, #4D7C0F 100%)",
-            "textColor": "#fff",
-            "title": "СрочноДеньги",
-            "price": "Обслуживание 0 - 9900 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "credit7",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "CREDIT 7",
-            "img": "",
-            "color": "linear-gradient(135deg, #6366F1 0%, #4338CA 100%)",
-            "textColor": "#fff",
-            "title": "Credit7 (Кредит7)",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "maxcredit",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "MAX.CREDIT",
-            "img": "",
-            "color": "linear-gradient(135deg, #EC4899 0%, #BE185D 100%)",
-            "textColor": "#fff",
-            "title": "Макс Кредит (Max.Credit)",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "umnal",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "УМНЫЕ НАЛИЧНЫЕ",
-            "img": "",
-            "color": "linear-gradient(135deg, #8B5CF6 0%, #5B21B6 100%)",
-            "textColor": "#fff",
-            "title": "Умные Наличные",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "belka",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "БЕЛКА КРЕДИТ",
-            "img": "",
-            "color": "linear-gradient(135deg, #F97316 0%, #C2410C 100%)",
-            "textColor": "#fff",
-            "title": "Белка Кредит",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "oneclick",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "ONE CLICK MONEY",
-            "img": "",
-            "color": "linear-gradient(135deg, #14B8A6 0%, #0F766E 100%)",
-            "textColor": "#fff",
-            "title": "One Click Money",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "dengisrazu",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "ДЕНЬГИ СРАЗУ",
-            "img": "",
-            "color": "linear-gradient(135deg, #EAB308 0%, #A16207 100%)",
-            "textColor": "#fff",
-            "title": "Деньги Сразу",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "moneyman",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "MONEY MAN",
-            "img": "",
-            "color": "linear-gradient(135deg, #22C55E 0%, #15803D 100%)",
-            "textColor": "#fff",
-            "title": "Money Man",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "adengi",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "А-ДЕНЬГИ",
-            "img": "",
-            "color": "linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)",
-            "textColor": "#fff",
-            "title": "А-Деньги",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "migcredit",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "МИГ КРЕДИТ",
-            "img": "",
-            "color": "linear-gradient(135deg, #06B6D4 0%, #0E7490 100%)",
-            "textColor": "#fff",
-            "title": "Миг Кредит",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      },
-      {
-            "id": "turbozaim",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "ТУРБОЗАЙМ",
-            "img": "",
-            "color": "linear-gradient(135deg, #3B82F6 0%, #1E3A8A 100%)",
-            "textColor": "#fff",
-            "title": "ТУРБОЗАЙМ",
-            "price": "Обслуживание 0-4990 р.",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
-      }
-];
+      { "id": "tbank_rko", "cat": "rko", "badge": "ПЕРВЫЙ ВАРИАНТ", "shortLogo": "Т-БАНК", "img": "", "color": "linear-gradient(135deg, #FFDD2D 0%, #F59E0B 100%)", "textColor": "#000", "title": "Открыть счет в ТБанке", "price": "Обслуживание 0/месяц р.", "psk": "", "btn": "Заказать", "url": "https://www.tbank.ru/business/registration-ip/" },
+      { "id": "alfa_rko", "cat": "rko", "badge": "ВТОРОЙ ВАРИАНТ", "shortLogo": "АЛЬФА-БАНК", "img": "", "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)", "textColor": "#fff", "title": "Открыть счет в Альфе", "price": "Обслуживание 0/месяц р.", "psk": "", "btn": "Заказать", "url": "https://trk.ppdu.ru/click/aGbkLIo0?erid=2SDnjeyjBZq&sub1=site&siteId=20402" },
+      { "id": "tbank_black", "cat": "debit", "badge": "ДЕБЕТОВАЯ КАРТА", "shortLogo": "Т-БАНК BLACK", "img": "", "color": "linear-gradient(135deg, #FFDD2D 0%, #CA8A04 100%)", "textColor": "#000", "title": "Т-Банк Black", "price": "Кэшбэк до 30% • 0 ₽", "psk": "", "btn": "Оформить карту", "url": "#" },
+      { "id": "tbank_plat", "cat": "credit", "badge": "КРЕДИТНАЯ КАРТА", "shortLogo": "Т-БАНК PLATINUM", "img": "", "color": "linear-gradient(135deg, #334155 0%, #0F172A 100%)", "textColor": "#CCFF00", "title": "Т-Банк Платинум", "price": "До 1 000 000 ₽", "psk": "11.900% - 39.900%", "btn": "Оформить карту", "url": "#" },
+      { "id": "zaimer", "cat": "mfo", "badge": "МФО", "shortLogo": "ЗАЙМЕР", "img": "", "color": "linear-gradient(135deg, #10B981 0%, #047857 100%)", "textColor": "#fff", "title": "Займер", "price": "Обслуживание 0 - 7900 р.", "psk": "0.000% - 292.000%", "btn": "ПОЛУЧИТЬ", "url": "" }
+    ];
     // (END_ITEMS_JSON)
 
     let items = JSON.parse(localStorage.getItem('gilt_v2_items')) || [...DEFAULT_ITEMS];
     let savedContacts = JSON.parse(localStorage.getItem('gilt_v2_contacts')) || {};
     let contacts = { ...SITE_CONTACTS, ...savedContacts };
+    let savedIcons = JSON.parse(localStorage.getItem('gilt_v2_icons')) || {};
+    let catIcons = { ...SITE_CAT_ICONS, ...savedIcons };
     let reviewsList = JSON.parse(localStorage.getItem('gilt_v2_reviews')) || [...SITE_REVIEWS];
 
+    function applyIconToHub(id, val) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (val && (val.startsWith('http') || val.startsWith('./'))) {
+        el.innerHTML = `<img src="${val}" alt="icon">`;
+      } else {
+        el.innerText = val || '';
+      }
+    }
+
     function renderCards() {
-      // 1. Блок РКО (на главной)
+      // 1. Иконки категорий
+      applyIconToHub('icon-debit', catIcons.debit);
+      applyIconToHub('icon-credit', catIcons.credit);
+      applyIconToHub('icon-rko', catIcons.rko);
+      applyIconToHub('icon-mfo', catIcons.mfo);
+
+      // 2. Блок РКО (на главной)
       const ipHtml = items.filter(i => i.cat === 'rko').slice(0, 2).map(cardTemplate).join('');
       document.getElementById('ipContainer').innerHTML = ipHtml;
 
-      // 2. Юридические данные и контакты
+      // 3. Контакты и Оферта
       document.getElementById('headerTgLink').href = contacts.tg;
       document.getElementById('headerTgLinkMob').href = contacts.tg;
       document.getElementById('footerTgBtn').href = contacts.tg;
@@ -1746,12 +833,18 @@
       } else {
         legalBlock.style.display = 'none';
       }
+      
+      document.getElementById('ofertaDateDisplay').innerText = contacts.ofertaDate || '';
+      document.getElementById('ofertaFioDisplay').innerText = contacts.fio || '';
+      document.getElementById('ofertaInnDisplay').innerText = contacts.inn || '';
+      document.getElementById('ofertaOgrnipDisplay').innerText = contacts.ogrnip || '';
+      document.getElementById('ofertaMailDisplay').innerText = contacts.mail || '';
+      document.getElementById('ofertaAddressDisplay').innerText = contacts.address || '';
 
-      // 3. Умное скрытие МФО
+      // 4. Скрытие МФО
       const hubGrid = document.getElementById('mainCatHub');
       const mfoCard = document.getElementById('mfoHubCard');
       const mtabMfo = document.getElementById('mtab-mfo');
-      
       if (contacts.showMfo === false) {
         hubGrid.setAttribute('data-cols', '3');
         mfoCard.style.display = 'none';
@@ -1762,10 +855,9 @@
         mtabMfo.style.display = 'inline-block';
       }
 
-      // 4. Отрисовка Отзывов (с учетом фильтра)
+      // 5. Отзывы
       const visibleReviews = reviewsList.filter(r => !r.isInitial || contacts.showInitialReviews !== false);
       const reviewsSection = document.getElementById('reviews');
-      
       if (visibleReviews.length > 0) {
         reviewsSection.style.display = 'block';
         document.getElementById('reviewsContainer').innerHTML = visibleReviews.map(r => `
@@ -1786,6 +878,10 @@
 
     function cardTemplate(item) {
       const imgTag = item.img ? `<img src="${item.img}" alt="${item.title}" class="card-custom-img">` : '';
+      const pskTag = item.psk ? `<div class="card-psk">ПСК: ${item.psk}</div>` : '';
+      const legalWarning = (item.cat === 'credit' || item.cat === 'mfo') ? 
+        `<div class="card-legal-warning">Оценивайте свои финансовые возможности и риски. Изучите все условия кредита (займа).</div>` : '';
+
       return `
         <div class="product-card">
           <a href="${item.url}" target="_blank" rel="nofollow noopener" style="text-decoration: none; color: inherit;" onclick="ym(113984418, 'reachGoal', 'CLICK_CARD_${item.id.toUpperCase()}')">
@@ -1799,8 +895,12 @@
             <div>
               <div class="card-name">${item.title}</div>
               <div class="card-sub">${item.price}</div>
+              ${pskTag}
             </div>
-            <a href="${item.url}" target="_blank" rel="nofollow noopener" class="card-btn" onclick="ym(113984418, 'reachGoal', 'CLICK_BTN_${item.id.toUpperCase()}')">${item.btn || 'Оформить'}</a>
+            <div>
+              ${legalWarning}
+              <a href="${item.url}" target="_blank" rel="nofollow noopener" class="card-btn" onclick="ym(113984418, 'reachGoal', 'CLICK_BTN_${item.id.toUpperCase()}')">${item.btn || 'Оформить'}</a>
+            </div>
           </div>
         </div>
       `;
@@ -1826,17 +926,12 @@
       openModal('catalogModal');
     }
 
-    let currentSlide = 0;
-    const totalSlides = 2;
-
+    let currentSlide = 0; const totalSlides = 2;
     function changeSlide(idx) {
       currentSlide = idx;
-      document.querySelectorAll('.slide').forEach((s, i) => {
-        if (i === idx) s.classList.add('active'); else s.classList.remove('active');
-      });
+      document.querySelectorAll('.slide').forEach((s, i) => { if (i === idx) s.classList.add('active'); else s.classList.remove('active'); });
       document.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
     }
-    
     function nextSlide() { changeSlide((currentSlide + 1) % totalSlides); }
     function prevSlide() { changeSlide((currentSlide - 1 + totalSlides) % totalSlides); }
 
@@ -1845,7 +940,7 @@
     function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
     function unlockAdminPanel() {
-      const pin = prompt("Введите PIN-код владельца сайта GILT:");
+      const pin = prompt("Введите PIN-код:");
       if (pin === OWNER_PIN) {
         localStorage.setItem('gilt_owner_unlocked', 'true');
         document.getElementById('secretAdminBtn').style.display = 'inline-flex';
@@ -1869,7 +964,6 @@
     }
 
     function renderAdminInputs() {
-      // Контакты и настройки
       document.getElementById('admTg').value = contacts.tg || '';
       document.getElementById('admMail').value = contacts.mail || '';
       document.getElementById('admShowMfo').checked = contacts.showMfo !== false;
@@ -1877,52 +971,71 @@
       document.getElementById('admShowInitialReviews').checked = contacts.showInitialReviews !== false;
       document.getElementById('admFio').value = contacts.fio || '';
       document.getElementById('admInn').value = contacts.inn || '';
+      document.getElementById('admOgrnip').value = contacts.ogrnip || '';
+      document.getElementById('admAddress').value = contacts.address || '';
+      document.getElementById('admOfertaDate').value = contacts.ofertaDate || '';
       document.getElementById('admGhToken').value = localStorage.getItem('gilt_gh_token') || '';
 
-      // Карточки Банков (с полем Описание)
+      document.getElementById('iconDebit').value = catIcons.debit || '';
+      document.getElementById('iconCredit').value = catIcons.credit || '';
+      document.getElementById('iconRko').value = catIcons.rko || '';
+      document.getElementById('iconMfo').value = catIcons.mfo || '';
+
       document.getElementById('adminLinksList').innerHTML = items.map((item, idx) => `
-        <div class="admin-row">
-          <select class="admin-input" data-field="cat" data-idx="${idx}">
-            <option value="debit" ${item.cat==='debit'?'selected':''}>Дебетовые</option>
-            <option value="credit" ${item.cat==='credit'?'selected':''}>Кредитные</option>
-            <option value="rko" ${item.cat==='rko'?'selected':''}>Счета</option>
-            <option value="mfo" ${item.cat==='mfo'?'selected':''}>МФО</option>
-          </select>
-          <input type="text" class="admin-input" data-field="title" data-idx="${idx}" value="${item.title}" placeholder="Название банка">
-          <input type="text" class="admin-input" data-field="price" data-idx="${idx}" value="${item.price}" placeholder="Описание (напр. Бесплатно)">
-          <input type="url" class="admin-input" data-field="img" data-idx="${idx}" value="${item.img || ''}" placeholder="Картинка (URL)">
-          <input type="url" class="admin-input" data-field="url" data-idx="${idx}" value="${item.url}" placeholder="Твоя реф. ссылка">
+        <div class="admin-offer-box">
+          <div class="admin-offer-grid">
+            <select class="admin-input" data-field="cat" data-idx="${idx}">
+              <option value="debit" ${item.cat==='debit'?'selected':''}>Дебетовые</option>
+              <option value="credit" ${item.cat==='credit'?'selected':''}>Кредитные</option>
+              <option value="rko" ${item.cat==='rko'?'selected':''}>Счета</option>
+              <option value="mfo" ${item.cat==='mfo'?'selected':''}>МФО</option>
+            </select>
+            <input type="text" class="admin-input" data-field="title" data-idx="${idx}" value="${item.title}" placeholder="Название банка">
+            <input type="text" class="admin-input" data-field="price" data-idx="${idx}" value="${item.price}" placeholder="Условия (напр. Бесплатно)">
+            <input type="text" class="admin-input" data-field="psk" data-idx="${idx}" value="${item.psk || ''}" placeholder="ПСК (для МФО/Кредиток)">
+          </div>
+          <div class="admin-offer-grid-bottom">
+            <input type="url" class="admin-input" data-field="img" data-idx="${idx}" value="${item.img || ''}" placeholder="Картинка (URL)">
+            <input type="url" class="admin-input" data-field="url" data-idx="${idx}" value="${item.url}" placeholder="Твоя реф. ссылка">
+            <div class="btn-delete" title="Удалить" onclick="deleteOffer(${idx})">🗑️</div>
+          </div>
         </div>
       `).join('');
 
-      // Отзывы (только пользовательские)
       const customReviews = reviewsList.map((rev, idx) => {
         if (rev.isInitial) return ''; 
         return `
-          <div style="display:grid; grid-template-columns: 120px 60px 1fr; gap:10px; margin-bottom:10px;">
+          <div style="display:grid; grid-template-columns: 120px 60px 1fr 40px; gap:10px; margin-bottom:10px;">
             <input type="text" class="admin-input" data-rev-field="name" data-idx="${idx}" value="${rev.name}" placeholder="Имя">
             <input type="number" class="admin-input" data-rev-field="rate" data-idx="${idx}" value="${rev.rate}" min="1" max="5" placeholder="5">
             <input type="text" class="admin-input" data-rev-field="text" data-idx="${idx}" value="${rev.text}" placeholder="Текст отзыва">
+            <div class="btn-delete" onclick="deleteReview(${idx})">🗑️</div>
           </div>
         `;
       }).join('');
-      
       document.getElementById('adminReviewsList').innerHTML = customReviews || '<div style="font-size:12px; color:#666;">Пока нет добавленных клиентских отзывов.</div>';
     }
 
     function collectAdminData() {
-      contacts.tg = document.getElementById('admTg').value.trim() || SITE_CONTACTS.tg;
-      contacts.mail = document.getElementById('admMail').value.trim() || SITE_CONTACTS.mail;
-      contacts.fio = document.getElementById('admFio').value.trim() || '';
-      contacts.inn = document.getElementById('admInn').value.trim() || '';
+      contacts.tg = document.getElementById('admTg').value.trim();
+      contacts.mail = document.getElementById('admMail').value.trim();
+      contacts.fio = document.getElementById('admFio').value.trim();
+      contacts.inn = document.getElementById('admInn').value.trim();
+      contacts.ogrnip = document.getElementById('admOgrnip').value.trim();
+      contacts.address = document.getElementById('admAddress').value.trim();
+      contacts.ofertaDate = document.getElementById('admOfertaDate').value.trim();
       contacts.showMfo = document.getElementById('admShowMfo').checked;
       contacts.showLegal = document.getElementById('admShowLegal').checked;
       contacts.showInitialReviews = document.getElementById('admShowInitialReviews').checked;
 
+      catIcons.debit = document.getElementById('iconDebit').value.trim();
+      catIcons.credit = document.getElementById('iconCredit').value.trim();
+      catIcons.rko = document.getElementById('iconRko').value.trim();
+      catIcons.mfo = document.getElementById('iconMfo').value.trim();
+
       const ghToken = document.getElementById('admGhToken').value.trim();
       if (ghToken) localStorage.setItem('gilt_gh_token', ghToken);
 
-      // Карточки
       document.querySelectorAll('#adminLinksList [data-idx]').forEach(el => {
         const idx = parseInt(el.dataset.idx, 10);
         if (items[idx]) {
@@ -1931,7 +1044,6 @@
         }
       });
       
-      // Отзывы
       document.querySelectorAll('#adminReviewsList [data-idx]').forEach(el => {
         const idx = parseInt(el.dataset.idx, 10);
         if (reviewsList[idx]) {
@@ -1943,13 +1055,30 @@
 
       localStorage.setItem('gilt_v2_items', JSON.stringify(items));
       localStorage.setItem('gilt_v2_contacts', JSON.stringify(contacts));
+      localStorage.setItem('gilt_v2_icons', JSON.stringify(catIcons));
       localStorage.setItem('gilt_v2_reviews', JSON.stringify(reviewsList));
+    }
+
+    function deleteOffer(idx) {
+      if(confirm('Точно удалить этот продукт?')) {
+        collectAdminData();
+        items.splice(idx, 1);
+        renderAdminInputs();
+      }
+    }
+
+    function deleteReview(idx) {
+      if(confirm('Удалить отзыв?')) {
+        collectAdminData();
+        reviewsList.splice(idx, 1);
+        renderAdminInputs();
+      }
     }
 
     function saveAdminSettings() {
       collectAdminData();
       renderCards();
-      alert('Настройки сохранены! Нажмите "Опубликовать на GitHub" чтобы обновить сайт в интернете.');
+      alert('Настройки сохранены! Для обновления в интернете залейте файл через терминал.');
     }
 
     function addNewOfferRow() {
@@ -1957,14 +1086,14 @@
       items.unshift({
         id: "custom_" + Date.now(), cat: "rko", badge: "НОВОЕ", shortLogo: "БАНК", img: "",
         color: "linear-gradient(135deg, #1E293B 0%, #0F172A 100%)", textColor: "#CCFF00",
-        title: "Новый расчетный счет", price: "Бесплатное обслуживание", btn: "Оформить", url: "https://"
+        title: "Новый продукт", price: "Бесплатное обслуживание", psk: "", btn: "Оформить", url: "https://"
       });
       renderAdminInputs();
     }
 
     function addNewReviewRow() {
       collectAdminData();
-      reviewsList.push({ name: "Новый Клиент", text: "Скопируйте сюда текст отзыва из Telegram.", rate: 5 });
+      reviewsList.push({ name: "Новый Клиент", text: "Вставьте текст...", rate: 5 });
       renderAdminInputs();
     }
 
@@ -1974,11 +1103,7 @@
       const token = document.getElementById('admGhToken').value.trim();
       const statusEl = document.getElementById('ghStatusMsg');
 
-      if (!token) {
-        statusEl.innerText = "⚠️ Введи GitHub Personal Token в поле выше!";
-        return;
-      }
-
+      if (!token) { statusEl.innerText = "⚠️ Введи GitHub Token!"; return; }
       statusEl.innerText = "⏳ Отправляю обновления на GitHub...";
       const repo = "ayanoflow/gilt-site";
       const path = "index.html";
@@ -1987,30 +1112,24 @@
         const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
           headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github.v3+json" }
         });
-        if (!getRes.ok) throw new Error("Проверь правильность GitHub Token");
+        if (!getRes.ok) throw new Error("Проверь токен");
         const fileData = await getRes.json();
         const currentHtml = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
 
         let updatedHtml = currentHtml
           .replace(/\/\/ \(START_CONTACTS_JSON\)[\s\S]*?\/\/ \(END_CONTACTS_JSON\)/, `// (START_CONTACTS_JSON)\n    const SITE_CONTACTS = ${JSON.stringify(contacts, null, 6)};\n    // (END_CONTACTS_JSON)`)
+          .replace(/\/\/ \(START_CAT_ICONS_JSON\)[\s\S]*?\/\/ \(END_CAT_ICONS_JSON\)/, `// (START_CAT_ICONS_JSON)\n    const SITE_CAT_ICONS = ${JSON.stringify(catIcons, null, 6)};\n    // (END_CAT_ICONS_JSON)`)
           .replace(/\/\/ \(START_REVIEWS_JSON\)[\s\S]*?\/\/ \(END_REVIEWS_JSON\)/, `// (START_REVIEWS_JSON)\n    const SITE_REVIEWS = ${JSON.stringify(reviewsList, null, 6)};\n    // (END_REVIEWS_JSON)`)
           .replace(/\/\/ \(START_ITEMS_JSON\)[\s\S]*?\/\/ \(END_ITEMS_JSON\)/, `// (START_ITEMS_JSON)\n    const DEFAULT_ITEMS = ${JSON.stringify(items, null, 6)};\n    // (END_ITEMS_JSON)`);
 
         const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
           method: "PUT",
-          headers: {
-            "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github.v3+json", "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            message: "Обновление GILT: Консультация, Отзывы, Настройки",
-            content: btoa(unescape(encodeURIComponent(updatedHtml))),
-            sha: fileData.sha
-          })
+          headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github.v3+json", "Content-Type": "application/json" },
+          body: JSON.stringify({ message: "Update via Admin", content: btoa(unescape(encodeURIComponent(updatedHtml))), sha: fileData.sha })
         });
-
-        if (!putRes.ok) throw new Error("Не удалось сохранить на GitHub");
-        statusEl.innerText = "✅ Успешно отправлено! GitHub Pages обновит сайт в течение 1-5 минут. Подождите и очистите кэш (Ctrl+F5).";
-      } catch (err) { statusEl.innerText = "❌ Ошибка: " + err.message + ". Попробуйте использовать терминал (Git Bash) для заливки кода."; }
+        if (!putRes.ok) throw new Error("Ошибка записи");
+        statusEl.innerText = "✅ Успешно отправлено!";
+      } catch (err) { statusEl.innerText = "❌ Ошибка: " + err.message; }
     }
   </script>
 </body>
