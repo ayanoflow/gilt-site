@@ -6,8 +6,8 @@
   <title>GILT — Помощь в открытии ИП, расчетных счетов и подбор карт</title>
   <meta name="description" content="Бесплатная консультация по регистрации бизнеса, подбору ОКВЭД и банковских продуктов.">
   
-  <link rel="icon" type="image/png" href="./logo.png?v=3">
-  <link rel="shortcut icon" type="image/png" href="./logo.png?v=3">
+  <link rel="icon" type="image/png" href="./logo.png?v=4">
+  <link rel="shortcut icon" type="image/png" href="./logo.png?v=4">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,10 +52,12 @@
       
       --lime: #CCFF00;
       --lime-hover: #b8e600;
-      --lime-glow: rgba(204, 255, 0, 0.25);
+      --lime-glow: rgba(204, 255, 0, 0.22);
+      --lime-soft: rgba(204, 255, 0, 0.1);
       
       --text-white: #F8FAFC;
       --text-gray: #94A3B8;
+      --text-muted: #64748B;
       --btn-text: #090D14;
       --radius: 20px;
       
@@ -68,6 +70,7 @@
       --cat-hub-grad: linear-gradient(145deg, #151D2B 0%, #0E141F 100%);
       --cat-hub-hover: linear-gradient(145deg, #1A2436 0%, #111827 100%);
       --hero-visual-bg: rgba(255, 255, 255, 0.03);
+      --legal-box-bg: rgba(255, 255, 255, 0.03);
     }
 
     /* ================= СВЕТЛАЯ ТЕМА ================= */
@@ -80,20 +83,23 @@
       --lime: #FF6B00;
       --lime-hover: #E65C00;
       --lime-glow: rgba(255, 107, 0, 0.15);
+      --lime-soft: rgba(255, 107, 0, 0.08);
       
       --text-white: #0F172A;
       --text-gray: #475569;
+      --text-muted: #64748B;
       --btn-text: #FFFFFF;
       
-      --bg-hero-grad: #FFFFFF;
+      --bg-hero-grad: linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 100%);
       --bg-header: rgba(255, 255, 255, 0.92);
       --bg-header-mob: rgba(255, 255, 255, 0.98);
       --bg-footer: #F8FAFC;
       --bg-modal: #FFFFFF;
-      --admin-input-bg: #F1F5F9;
+      --admin-input-bg: #FFFFFF;
       --cat-hub-grad: #FFFFFF;
       --cat-hub-hover: #F8FAFC;
       --hero-visual-bg: #F8FAFC;
+      --legal-box-bg: #F1F5F9;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -110,50 +116,147 @@
       width: 100%;
       max-width: 100vw;
       -webkit-tap-highlight-color: transparent;
-      transition: background-color 0.4s ease, color 0.4s ease;
+      transition: background-color 0.35s ease, color 0.35s ease;
     }
 
     .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
-    section, #categories-hub { scroll-margin-top: 100px; }
+    section, #categories-hub { scroll-margin-top: 96px; }
 
     /* ================= ШАПКА ================= */
-    .header { position: sticky; top: 0; z-index: 100; background: var(--bg-header); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); transition: background 0.4s ease, border-color 0.4s ease; }
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-header);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
     .header-inner { display: flex; justify-content: space-between; align-items: center; height: 78px; gap: 16px; }
     .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; user-select: none; cursor: pointer; }
-    .logo img { width: 38px; height: 38px; object-fit: contain; flex-shrink: 0; display: block; }
+    .logo img { width: 38px; height: 38px; object-fit: contain; flex-shrink: 0; display: block; border-radius: 8px; }
     .logo-divider { width: 2px; height: 24px; background: var(--border); border-radius: 2px; }
     .logo-text { font-family: 'Unbounded', sans-serif; font-size: 22px; font-weight: 800; color: var(--text-white); letter-spacing: 0.5px; transition: color 0.3s; }
     .logo:hover .logo-text { color: var(--lime); }
-    .nav-center, .nav-right { display: flex; align-items: center; gap: 26px; list-style: none; }
+    
+    .nav-center, .nav-right { display: flex; align-items: center; gap: 24px; list-style: none; }
     .nav-center a, .nav-right a.nav-link { color: var(--text-white); text-decoration: none; font-size: 14px; font-weight: 600; opacity: 0.88; transition: 0.2s; cursor: pointer; }
     .nav-center a:hover, .nav-right a.nav-link:hover { color: var(--lime); opacity: 1; }
+    
     .socials { display: flex; align-items: center; gap: 10px; }
-    .soc-icon, .theme-toggle { width: 38px; height: 38px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; color: var(--text-white); text-decoration: none; transition: 0.2s; cursor: pointer; outline: none; }
+    .soc-icon, .theme-toggle {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-white);
+      text-decoration: none;
+      transition: 0.2s;
+      cursor: pointer;
+      outline: none;
+    }
     .soc-icon:hover, .theme-toggle:hover { border-color: var(--lime); color: var(--lime); transform: translateY(-2px); }
     .soc-icon svg, .theme-toggle svg { width: 18px; height: 18px; fill: currentColor; }
     #secretAdminBtn { display: none; border-color: var(--lime); color: var(--lime); }
+    
     .mobile-header-actions { display: none; align-items: center; gap: 10px; }
     .burger { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-white); border-radius: 10px; padding: 8px 12px; font-size: 20px; cursor: pointer; outline: none; }
     
-    .mobile-nav { position: absolute; top: 78px; left: 0; right: 0; width: 100%; background: var(--bg-header-mob); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); display: flex; flex-direction: column; padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease; z-index: 99; }
+    .mobile-nav {
+      position: absolute;
+      top: 78px;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: var(--bg-header-mob);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      z-index: 99;
+    }
     .mobile-nav.open { max-height: 500px; padding: 10px 20px 20px; }
-    .mobile-nav a { color: var(--text-white); text-decoration: none; font-weight: 600; font-size: 16px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .mobile-nav a { color: var(--text-white); text-decoration: none; font-weight: 600; font-size: 16px; padding: 13px 0; border-bottom: 1px solid var(--border); }
 
     /* ================= ПЕРВЫЙ ЭКРАН ================= */
-    .hero-section { padding: 40px 0 60px; }
-    .hero-slider-wrap { background: var(--bg-hero-grad); border: 1px solid var(--border); border-radius: 26px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08); transition: background 0.4s ease; overflow: hidden; display: flex; flex-direction: column; }
+    .hero-section { padding: 36px 0 56px; }
+    .hero-slider-wrap {
+      background: var(--bg-hero-grad);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+      transition: background 0.35s ease;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
     .slider-content-area { position: relative; width: 100%; min-height: 340px; }
-    .slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; pointer-events: none; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; padding: 60px; transition: opacity 0.35s ease, visibility 0.35s ease; }
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+      padding: 56px 60px;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
     .slide.active { position: relative; opacity: 1; visibility: visible; pointer-events: auto; }
     .slide-content { max-width: 580px; }
-    .slide-tag { display: inline-block; background: var(--lime-glow); color: var(--lime); border: 1px solid var(--lime-glow); padding: 6px 16px; border-radius: 100px; font-family: 'Unbounded', sans-serif; font-size: 12px; font-weight: 700; margin-bottom: 20px; }
-    .slide h1, .slide h2 { font-family: 'Unbounded', sans-serif; font-size: clamp(22px, 3vw, 36px); line-height: 1.22; margin-bottom: 20px; color: var(--text-white); }
-    .slide p { color: var(--text-gray); font-size: 16px; line-height: 1.65; margin-bottom: 30px; }
-    .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--lime); color: var(--btn-text); font-family: 'Unbounded', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; padding: 16px 32px; border-radius: 14px; text-decoration: none; border: none; cursor: pointer; box-shadow: 0 0 25px var(--lime-glow); transition: 0.2s; }
-    .btn-primary:hover { background: var(--lime-hover); transform: translateY(-2px); box-shadow: 0 6px 32px var(--lime-glow); }
+    .slide-tag {
+      display: inline-block;
+      background: var(--lime-soft);
+      color: var(--lime);
+      border: 1px solid var(--lime-glow);
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: 0.4px;
+    }
+    .slide h1, .slide h2 { font-family: 'Unbounded', sans-serif; font-size: clamp(22px, 3vw, 35px); line-height: 1.22; margin-bottom: 18px; color: var(--text-white); }
+    .slide p { color: var(--text-gray); font-size: 16px; line-height: 1.65; margin-bottom: 28px; }
+    
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--lime);
+      color: var(--btn-text);
+      font-family: 'Unbounded', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 16px 30px;
+      border-radius: 14px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 22px var(--lime-glow);
+      transition: 0.2s;
+    }
+    .btn-primary:hover { background: var(--lime-hover); transform: translateY(-2px); box-shadow: 0 8px 30px var(--lime-glow); }
+    
     .slide-visual { background: var(--hero-visual-bg); border: 1px solid var(--border); border-radius: 22px; padding: 34px; text-align: center; min-width: 250px; }
     .visual-big { font-family: 'Unbounded', sans-serif; font-size: 46px; font-weight: 800; color: var(--lime); line-height: 1.1; margin-bottom: 10px; }
-    .visual-big.time { font-size: 32px; }
+    .visual-big.time { font-size: 30px; }
+    
     .slider-controls { display: flex; justify-content: center; align-items: center; gap: 12px; padding: 0 0 26px 0; }
     .slider-dot { width: 36px; height: 6px; border-radius: 10px; background: var(--border); border: none; cursor: pointer; transition: 0.2s; }
     .slider-dot.active { background: var(--lime); width: 56px; }
@@ -161,53 +264,148 @@
     .slider-arrow:hover { border-color: var(--lime); color: var(--lime); }
 
     /* ================= СЕКЦИИ ================= */
-    section { padding: 50px 0; }
-    .section-header { text-align: center; max-width: 760px; margin: 0 auto 40px; }
-    .section-title { font-family: 'Unbounded', sans-serif; font-size: clamp(22px, 2.8vw, 34px); margin-bottom: 10px; color: var(--text-white); }
+    section { padding: 48px 0; }
+    .section-header { text-align: center; max-width: 760px; margin: 0 auto 38px; }
+    .section-title { font-family: 'Unbounded', sans-serif; font-size: clamp(22px, 2.8vw, 33px); margin-bottom: 10px; color: var(--text-white); }
     .section-sub { color: var(--text-gray); font-size: 16px; }
 
     /* ================= ЭТАПЫ ================= */
-    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-bottom: 40px; }
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-bottom: 20px; }
     .step-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; transition: 0.25s; }
-    .step-item:hover { border-color: var(--lime); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-    .step-circle { width: 48px; height: 48px; border-radius: 14px; background: var(--lime-glow); border: 1px solid var(--lime-glow); color: var(--lime); font-family: 'Unbounded', sans-serif; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+    .step-item:hover { border-color: var(--lime); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+    .step-circle { width: 48px; height: 48px; border-radius: 14px; background: var(--lime-soft); border: 1px solid var(--lime-glow); color: var(--lime); font-family: 'Unbounded', sans-serif; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
     .step-item h3 { font-family: 'Unbounded', sans-serif; font-size: 17px; margin-bottom: 10px; }
     .step-item p { color: var(--text-gray); font-size: 14px; line-height: 1.55; }
 
-    /* ================= КАТАЛОГ ================= */
-    .rko-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; max-width: 920px; margin: 0 auto 60px; }
-    .cat-hub-title { text-align: center; font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 30px; color: var(--text-white); }
-    .cat-hub-grid { display: grid; gap: 20px; max-width: 1060px; margin: 0 auto 40px; }
+    /* ================= КАТАЛОГ И КАРТОЧКИ ================= */
+    .rko-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; max-width: 920px; margin: 0 auto 56px; align-items: stretch; }
+    .cat-hub-title { text-align: center; font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 28px; color: var(--text-white); }
+    .cat-hub-grid { display: grid; gap: 20px; max-width: 1060px; margin: 0 auto 20px; }
     .cat-hub-grid[data-cols="4"] { grid-template-columns: repeat(4, 1fr); }
     .cat-hub-grid[data-cols="3"] { grid-template-columns: repeat(3, 1fr); max-width: 900px; }
     .cat-hub-card { background: var(--cat-hub-grad); border: 1px solid var(--border); border-radius: 22px; padding: 28px 20px; text-align: center; cursor: pointer; transition: all 0.25s ease; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 14px; }
     .cat-hub-card:hover { border-color: var(--lime); transform: translateY(-6px); box-shadow: 0 12px 35px var(--lime-glow); background: var(--cat-hub-hover); }
-    .cat-hub-icon { width: 68px; height: 68px; border-radius: 18px; background: var(--lime-glow); border: 1px solid var(--lime-glow); display: flex; align-items: center; justify-content: center; font-size: 32px; color: var(--lime); overflow: hidden;}
+    .cat-hub-icon { width: 68px; height: 68px; border-radius: 18px; background: var(--lime-soft); border: 1px solid var(--lime-glow); display: flex; align-items: center; justify-content: center; font-size: 32px; color: var(--lime); overflow: hidden; flex-shrink: 0; }
     .cat-hub-icon img { width: 100%; height: 100%; object-fit: cover; }
     .cat-hub-name { font-family: 'Unbounded', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-white); }
-    .cat-hub-desc { font-size: 13px; color: var(--text-gray); line-height: 1.4; }
-    .cat-hub-open { display: inline-block; margin-top: 4px; padding: 8px 16px; border-radius: 10px; background: var(--lime-glow); color: var(--lime); font-family: 'Unbounded', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+    .cat-hub-desc { font-size: 13px; color: var(--text-gray); line-height: 1.45; }
+    .cat-hub-open { display: inline-block; margin-top: 4px; padding: 8px 16px; border-radius: 10px; background: var(--lime-soft); color: var(--lime); font-family: 'Unbounded', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; }
 
-    /* КАРТОЧКИ В МОДАЛКЕ */
-    .modal-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(265px, 1fr)); gap: 22px; padding-bottom: 30px; }
-    .product-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: 0.25s; position: relative;}
-    .product-card:hover { background: var(--bg-card-hover); border-color: var(--lime); transform: translateY(-5px); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08); }
-    .card-thumb { height: 150px; position: relative; display: flex; align-items: center; justify-content: center; padding: 20px; border-bottom: 1px solid var(--border); overflow: hidden; background-size: cover; background-position: center; }
+    /* КАРТОЧКИ ПРОДУКТОВ (ВМЕЩАЮТ ЛЮБОЙ ТЕКСТ) */
+    .modal-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(275px, 1fr)); gap: 22px; padding-bottom: 30px; align-items: stretch; }
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: 0.25s;
+      position: relative;
+      height: 100%;
+    }
+    .product-card:hover { background: var(--bg-card-hover); border-color: var(--lime); transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1); }
+    .card-thumb { height: 146px; position: relative; display: flex; align-items: center; justify-content: center; padding: 20px; border-bottom: 1px solid var(--border); overflow: hidden; background-size: cover; background-position: center; }
     .card-thumb img.card-custom-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-    .card-thumb-title { font-family: 'Unbounded', sans-serif; font-size: 21px; font-weight: 800; text-align: center; z-index: 2; text-shadow: 0 4px 16px rgba(0,0,0,0.65); color: #fff; }
-    .card-thumb-badge { position: absolute; top: 12px; right: 12px; z-index: 3; background: rgba(9, 13, 20, 0.82); border: 1px solid rgba(255,255,255,0.15); color: var(--lime); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 8px; backdrop-filter: blur(6px); }
-    .card-body { padding: 22px; display: flex; flex-direction: column; flex: 1; justify-content: space-between; }
-    .card-name { font-family: 'Unbounded', sans-serif; font-size: 16px; line-height: 1.35; margin-bottom: 8px; color: var(--text-white); }
-    .card-sub { font-size: 14px; color: var(--lime); font-weight: 600; margin-bottom: 6px; }
-    .card-psk { font-size: 12px; color: var(--text-gray); margin-bottom: 16px; }
-    .card-legal-warning { font-size: 10px; color: #64748b; margin-bottom: 12px; line-height: 1.4; text-align: center; }
-    .card-btn { display: block; width: 100%; text-align: center; background: var(--lime); color: var(--btn-text); font-family: 'Unbounded', sans-serif; font-size: 13px; font-weight: 700; padding: 14px 18px; border-radius: 12px; text-decoration: none; text-transform: uppercase; transition: 0.2s; }
-    .card-btn:hover { background: var(--lime-hover); box-shadow: 0 0 20px var(--lime-glow); }
+    .card-thumb-title { font-family: 'Unbounded', sans-serif; font-size: 20px; font-weight: 800; text-align: center; z-index: 2; text-shadow: 0 4px 16px rgba(0,0,0,0.45); word-break: break-word; line-height: 1.25; }
+    .card-thumb-badge { position: absolute; top: 12px; right: 12px; z-index: 3; background: rgba(9, 13, 20, 0.84); border: 1px solid rgba(255,255,255,0.15); color: #CCFF00; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 8px; backdrop-filter: blur(6px); letter-spacing: 0.3px; }
+    
+    .card-body { padding: 20px; display: flex; flex-direction: column; flex: 1; justify-content: space-between; gap: 14px; }
+    .card-top-info { display: flex; flex-direction: column; gap: 6px; }
+    .card-name { font-family: 'Unbounded', sans-serif; font-size: 15px; line-height: 1.35; color: var(--text-white); word-wrap: break-word; }
+    .card-sub { font-size: 13.5px; color: var(--lime); font-weight: 600; line-height: 1.45; white-space: pre-line; word-wrap: break-word; }
+    
+    .card-psk-badge {
+      display: inline-block;
+      align-self: flex-start;
+      background: var(--legal-box-bg);
+      border: 1px solid var(--border);
+      color: var(--text-gray);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 9px;
+      border-radius: 8px;
+      margin-top: 2px;
+      line-height: 1.35;
+    }
+
+    /* Умный спойлер для длинных юридических текстов банка */
+    .card-legal-details {
+      margin-top: 4px;
+      background: var(--legal-box-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 7px 10px;
+      font-size: 11px;
+      color: var(--text-gray);
+    }
+    .card-legal-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text-gray);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+    }
+    .card-legal-details summary::-webkit-details-marker { display: none; }
+    .card-legal-details summary::after { content: '▾'; font-size: 12px; color: var(--lime); transition: transform 0.2s; }
+    .card-legal-details[open] summary::after { transform: rotate(180deg); }
+    .card-legal-details-body {
+      margin-top: 7px;
+      padding-top: 7px;
+      border-top: 1px dashed var(--border);
+      font-size: 10.5px;
+      line-height: 1.45;
+      color: var(--text-gray);
+      white-space: pre-line;
+      word-break: break-word;
+      max-height: 130px;
+      overflow-y: auto;
+    }
+    .card-legal-short {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-top: 2px;
+      word-break: break-word;
+    }
+
+    /* Обязательное предупреждение с 1 марта 2025 */
+    .card-legal-warning {
+      font-size: 10px;
+      color: var(--text-gray);
+      background: var(--legal-box-bg);
+      border-left: 2px solid var(--lime);
+      padding: 6px 8px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      line-height: 1.35;
+      text-align: left;
+    }
+    .card-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--lime);
+      color: var(--btn-text);
+      font-family: 'Unbounded', sans-serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 14px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: 0.2s;
+    }
+    .card-btn:hover { background: var(--lime-hover); box-shadow: 0 4px 20px var(--lime-glow); }
 
     /* ================= ПОЧЕМУ МЫ ================= */
     .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .why-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; display: flex; gap: 18px; align-items: flex-start; }
-    .why-check { width: 42px; height: 42px; min-width: 42px; border-radius: 12px; background: var(--lime-glow); border: 1px solid var(--lime-glow); color: var(--lime); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; }
+    .why-check { width: 42px; height: 42px; min-width: 42px; border-radius: 12px; background: var(--lime-soft); border: 1px solid var(--lime-glow); color: var(--lime); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; }
     .why-card h3 { font-family: 'Unbounded', sans-serif; font-size: 16px; margin-bottom: 8px; }
     .why-card p { font-size: 14px; color: var(--text-gray); line-height: 1.55; }
 
@@ -220,8 +418,8 @@
     .review-header { display: flex; justify-content: space-between; align-items: center; }
     .review-name { font-family: 'Unbounded', sans-serif; font-size: 15px; font-weight: 700; color: var(--text-white); }
     .review-stars { color: #F59E0B; font-size: 16px; letter-spacing: 2px; }
-    .review-text { color: var(--text-gray); font-size: 14px; line-height: 1.6; }
-    .review-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-white); font-size: 22px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: 0.2s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    .review-text { color: var(--text-gray); font-size: 14px; line-height: 1.6; word-break: break-word; }
+    .review-arrow { position: absolute; top: 45%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-white); font-size: 22px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: 0.2s; box-shadow: 0 4px 15px rgba(0,0,0,0.25); }
     .review-arrow:hover { border-color: var(--lime); color: var(--lime); }
     .review-arrow.left { left: -22px; }
     .review-arrow.right { right: -22px; }
@@ -230,36 +428,81 @@
     .faq-list { display: flex; flex-direction: column; gap: 16px; max-width: 800px; margin: 0 auto; }
     .faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: border-color 0.3s; }
     .faq-item:hover { border-color: var(--lime); }
-    .faq-q { padding: 24px; font-family: 'Unbounded', sans-serif; font-size: 15px; font-weight: 700; color: var(--text-white); display: flex; justify-content: space-between; align-items: center; }
-    .faq-q::after { content: '+'; font-size: 24px; color: var(--lime); transition: transform 0.3s; }
+    .faq-q { padding: 22px 24px; font-family: 'Unbounded', sans-serif; font-size: 15px; font-weight: 700; color: var(--text-white); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .faq-q::after { content: '+'; font-size: 24px; color: var(--lime); transition: transform 0.3s; flex-shrink: 0; }
     .faq-item.active .faq-q::after { transform: rotate(45deg); }
-    .faq-a { padding: 0 24px; max-height: 0; overflow: hidden; color: var(--text-gray); font-size: 14px; line-height: 1.6; transition: max-height 0.4s ease, padding 0.4s ease; }
-    .faq-item.active .faq-a { padding: 0 24px 24px; max-height: 300px; }
+    .faq-a { padding: 0 24px; max-height: 0; overflow: hidden; color: var(--text-gray); font-size: 14px; line-height: 1.6; transition: max-height 0.35s ease, padding 0.35s ease; }
+    .faq-item.active .faq-a { padding: 0 24px 24px; max-height: 360px; }
 
     /* ================= ПОДВАЛ ================= */
-    .footer { border-top: 1px solid var(--border); padding: 56px 0 44px; margin-top: 50px; background: var(--bg-footer); }
+    .footer { border-top: 1px solid var(--border); padding: 56px 0 44px; margin-top: 40px; background: var(--bg-footer); }
     .footer-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; }
-    .footer-title { font-family: 'Unbounded', sans-serif; font-size: 20px; color: var(--lime); margin-bottom: 14px; }
-    .footer-contacts { display: flex; gap: 16px; flex-wrap: wrap; margin: 20px 0 26px; }
-    .disclaimer { font-size: 11px; color: var(--text-gray); line-height: 1.65; border-top: 1px solid var(--border); padding-top: 20px; }
+    .footer-title { font-family: 'Unbounded', sans-serif; font-size: 20px; color: var(--lime); margin-bottom: 12px; }
+    .footer-contacts { display: flex; gap: 14px; flex-wrap: wrap; margin: 20px 0 26px; }
+    .disclaimer { font-size: 11.5px; color: var(--text-gray); line-height: 1.65; border-top: 1px solid var(--border); padding-top: 20px; }
+    .disclaimer a { color: var(--lime); text-decoration: underline; cursor: pointer; }
+
+    /* ================= ПЛАШКА COOKIE (152-ФЗ) ================= */
+    .cookie-banner {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(150%);
+      width: calc(100% - 32px);
+      max-width: 880px;
+      background: var(--bg-header-mob);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--lime);
+      border-radius: 20px;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      z-index: 950;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cookie-banner.show { transform: translateX(-50%) translateY(0); }
+    .cookie-text { font-size: 12.5px; color: var(--text-white); line-height: 1.5; }
+    .cookie-text a { color: var(--lime); text-decoration: underline; cursor: pointer; font-weight: 600; }
+    .cookie-btn {
+      background: var(--lime);
+      color: var(--btn-text);
+      font-family: 'Unbounded', sans-serif;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 12px 22px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      text-transform: uppercase;
+      transition: 0.2s;
+      flex-shrink: 0;
+    }
+    .cookie-btn:hover { background: var(--lime-hover); transform: scale(1.03); }
 
     /* ================= МОДАЛКИ И АДМИНКА ================= */
     .modal-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.84); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 999; display: none; align-items: center; justify-content: center; padding: 16px; }
     .modal-backdrop.open { display: flex; }
-    .modal-window { background: var(--bg-modal); border: 1px solid var(--border); border-radius: 24px; max-width: 1020px; width: 100%; max-height: 85vh; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 34px; position: relative; box-shadow: 0 25px 70px rgba(0,0,0,0.3); animation: fadeIn 0.25s ease; }
+    .modal-window { background: var(--bg-modal); border: 1px solid var(--border); border-radius: 24px; max-width: 1040px; width: 100%; max-height: 88vh; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: 34px; position: relative; box-shadow: 0 25px 70px rgba(0,0,0,0.4); animation: fadeIn 0.25s ease; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     .modal-close { position: absolute; top: 20px; right: 22px; width: 40px; height: 40px; border-radius: 12px; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-white); font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .modal-close:hover { border-color: var(--lime); color: var(--lime); }
-    .modal-cat-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .modal-cat-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
     .modal-tab-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-white); padding: 10px 18px; border-radius: 12px; font-family: 'Unbounded', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; }
     .modal-tab-btn.active { background: var(--lime); color: var(--btn-text); border-color: var(--lime); box-shadow: 0 0 18px var(--lime-glow); }
 
-    .admin-input { width: 100%; padding: 10px 12px; background: var(--admin-input-bg); border: 1px solid var(--border); border-radius: 10px; color: var(--text-white); font-size: 13px; }
+    .admin-input { width: 100%; padding: 9px 12px; background: var(--admin-input-bg); border: 1px solid var(--border); border-radius: 10px; color: var(--text-white); font-size: 12.5px; font-family: inherit; }
     .admin-input:focus { border-color: var(--lime); outline: none; }
-    .admin-offer-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
-    .admin-offer-grid { display: grid; grid-template-columns: 100px 1.5fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-    .admin-offer-grid-bottom { display: grid; grid-template-columns: 1.5fr 1fr 40px; gap: 10px; }
-    .btn-delete { background: rgba(239, 68, 68, 0.1); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; font-size: 16px; }
+    .admin-label { display: block; font-size: 10.5px; color: var(--text-gray); margin-bottom: 4px; font-weight: 600; }
+    .admin-offer-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; margin-bottom: 14px; }
+    .admin-offer-row1 { display: grid; grid-template-columns: 120px 1fr 1.4fr 110px; gap: 10px; margin-bottom: 10px; }
+    .admin-offer-row2 { display: grid; grid-template-columns: 1.2fr 1fr 110px 1fr; gap: 10px; margin-bottom: 10px; }
+    .admin-offer-row3 { display: grid; grid-template-columns: 1.2fr 1.2fr 42px; gap: 10px; align-items: end; }
+    .btn-delete { height: 38px; background: rgba(239, 68, 68, 0.12); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; font-size: 16px; }
     .btn-delete:hover { background: #EF4444; color: #fff; }
 
     /* ================= АДАПТИВ ================= */
@@ -271,26 +514,28 @@
       .slide-visual { max-width: 400px; width: 100%; margin: 0 auto; min-width: 0; }
       .steps-grid, .why-grid { grid-template-columns: repeat(2, 1fr); }
       .cat-hub-grid[data-cols="3"], .cat-hub-grid[data-cols="4"] { grid-template-columns: repeat(2, 1fr); }
-      .admin-offer-grid, .admin-offer-grid-bottom { grid-template-columns: 1fr; }
+      .admin-offer-row1, .admin-offer-row2, .admin-offer-row3 { grid-template-columns: 1fr; }
     }
     
     @media (max-width: 640px) {
-      section, #categories-hub { scroll-margin-top: 90px; }
+      section, #categories-hub { scroll-margin-top: 86px; }
       .slider-content-area { min-height: 420px; } 
-      .slide { padding: 30px 20px 20px; gap: 24px; text-align: left; }
+      .slide { padding: 28px 20px 20px; gap: 22px; text-align: left; }
       .slide.active { display: grid; }
       .slide-tag { margin-bottom: 12px; }
       .slide p { margin-bottom: 20px; font-size: 14px; }
-      .slide-visual { text-align: left; padding: 24px; width: 100%; max-width: none; min-width: 0; }
+      .slide-visual { text-align: left; padding: 22px; width: 100%; max-width: none; min-width: 0; }
       .rko-grid, .steps-grid, .why-grid { grid-template-columns: 1fr; gap: 16px; }
       .cat-hub-grid[data-cols="3"], .cat-hub-grid[data-cols="4"] { grid-template-columns: 1fr; }
       .btn-primary { width: 100%; padding: 14px 20px; }
-      .modal-window { padding: 24px 16px; }
+      .modal-window { padding: 22px 16px; }
       .modal-cat-tabs { gap: 6px; }
-      .modal-tab-btn { padding: 8px 12px; font-size: 11px; flex: 1; text-align: center; }
+      .modal-tab-btn { padding: 8px 10px; font-size: 11px; flex: 1; text-align: center; }
       .footer-box { padding: 24px 16px; }
-      .review-card { flex: 0 0 280px; } 
-      .review-arrow { display: none; } 
+      .review-card { flex: 0 0 285px; } 
+      .review-arrow { display: none; }
+      .cookie-banner { flex-direction: column; align-items: stretch; text-align: left; padding: 16px; bottom: 12px; gap: 12px; }
+      .cookie-btn { width: 100%; text-align: center; padding: 13px; }
     }
   </style>
 </head>
@@ -300,7 +545,7 @@
   <header class="header">
     <div class="container header-inner">
       <div class="logo" onclick="handleLogoTap()" title="Наверх">
-        <img src="./logo.png?v=3" alt="GILT Logo">
+        <img src="./logo.png?v=4" alt="GILT Logo">
         <div class="logo-divider"></div>
         <span class="logo-text">GILT</span>
       </div>
@@ -312,14 +557,14 @@
       </ul>
 
       <div class="nav-right">
-        <a href="#" onclick="openModal('privacyModal'); return false;" class="nav-link">Правовая информация</a>
+        <a href="#" onclick="openModal('privacyModal'); return false;" class="nav-link">Оферта и Политика</a>
         <a href="#contacts" class="nav-link">Контакты</a>
         <div class="socials">
           <button class="theme-toggle" id="themeToggleBtnDesk" onclick="toggleTheme()" title="Сменить тему">
             <svg class="icon-moon" style="display:none;" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
             <svg class="icon-sun" style="display:none;" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM2 13h2a1 1 0 0 0 0-2H2a1 1 0 0 0 0 2zm18 0h2a1 1 0 0 0 0-2h-2a1 1 0 0 0 0 2zM11 2v2a1 1 0 0 0 2 0V2a1 1 0 0 0-2 0zm0 18v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-2 0zM5.99 4.58a1 1 0 1 0-1.41 1.41l1.06 1.06a1 1 0 1 0 1.41-1.41L5.99 4.58zm12.37 12.37a1 1 0 1 0-1.41 1.41l1.06 1.06a1 1 0 1 0 1.41-1.41l-1.06-1.06zM7.05 18.36a1 1 0 1 0-1.41-1.41l-1.06 1.06a1 1 0 1 0 1.41 1.41l1.06-1.06zm12.37-12.37a1 1 0 1 0-1.41-1.41L16.95 5.64a1 1 0 1 0 1.41 1.41l1.06-1.06z"/></svg>
           </button>
-          <a id="headerTgLink" href="#" target="_blank" rel="nofollow" class="soc-icon" title="Telegram">
+          <a id="headerTgLink" href="#" target="_blank" rel="nofollow noopener" class="soc-icon" title="Написать в Telegram">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.74 7.58-3.27 3.61-1.51 4.35-1.77 4.84-1.78.11 0 .35.03.5.16.13.1.17.24.18.34.02.08.02.24.01.38z"/></svg>
           </a>
           <button type="button" id="secretAdminBtn" onclick="openModal('adminModal')" class="soc-icon" title="Настройки">⚙️</button>
@@ -327,11 +572,9 @@
       </div>
 
       <div class="mobile-header-actions">
-        <!-- Кнопка Telegram на мобильных -->
-        <a id="headerTgLinkMob" href="#" target="_blank" rel="nofollow" class="soc-icon" style="width: 38px; height: 38px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; color: var(--text-white); text-decoration: none;" title="Telegram">
-          <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.74 7.58-3.27 3.61-1.51 4.35-1.77 4.84-1.78.11 0 .35.03.5.16.13.1.17.24.18.34.02.08.02.24.01.38z"/></svg>
+        <a id="headerTgLinkMob" href="#" target="_blank" rel="nofollow noopener" class="soc-icon" title="Telegram">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.74 7.58-3.27 3.61-1.51 4.35-1.77 4.84-1.78.11 0 .35.03.5.16.13.1.17.24.18.34.02.08.02.24.01.38z"/></svg>
         </a>
-        
         <button class="theme-toggle" id="themeToggleBtnMob" onclick="toggleTheme()" title="Сменить тему">
           <svg class="icon-moon" style="display:none;" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
           <svg class="icon-sun" style="display:none;" viewBox="0 0 24 24"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM2 13h2a1 1 0 0 0 0-2H2a1 1 0 0 0 0 2zm18 0h2a1 1 0 0 0 0-2h-2a1 1 0 0 0 0 2zM11 2v2a1 1 0 0 0 2 0V2a1 1 0 0 0-2 0zm0 18v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-2 0zM5.99 4.58a1 1 0 1 0-1.41 1.41l1.06 1.06a1 1 0 1 0 1.41-1.41L5.99 4.58zm12.37 12.37a1 1 0 1 0-1.41 1.41l1.06 1.06a1 1 0 1 0 1.41-1.41l-1.06-1.06zM7.05 18.36a1 1 0 1 0-1.41-1.41l-1.06 1.06a1 1 0 1 0 1.41 1.41l1.06-1.06zm12.37-12.37a1 1 0 1 0-1.41-1.41L16.95 5.64a1 1 0 1 0 1.41 1.41l1.06-1.06z"/></svg>
@@ -344,7 +587,7 @@
       <a href="#steps" onclick="toggleMobileNav()">Как это работает</a>
       <a href="#rko" onclick="toggleMobileNav()">Регистрация ИП</a>
       <a href="#faq" onclick="toggleMobileNav()">Вопросы</a>
-      <a href="#" onclick="toggleMobileNav(); openModal('privacyModal'); return false;">Правовая информация</a>
+      <a href="#" onclick="toggleMobileNav(); openModal('privacyModal'); return false;">Оферта и Политика</a>
       <a href="#contacts" onclick="toggleMobileNav()">Контакты</a>
     </div>
   </header>
@@ -376,7 +619,7 @@
               <a href="#rko" class="btn-primary">ВЫБРАТЬ БАНК ↓</a>
             </div>
             <div class="slide-visual">
-              <div class="visual-big time">01:00-17:00</div>
+              <div class="visual-big time">01:00–17:00</div>
               <div style="font-weight: 700; font-size: 18px; margin-bottom: 8px;">На связи по МСК</div>
               <p style="font-size: 14px; margin-bottom: 0;">(или с 08:00 до 00:00 по Хабаровскому времени). Готовы ответить на любые вопросы.</p>
             </div>
@@ -419,7 +662,7 @@
         <div class="step-item">
           <div class="step-circle">4</div>
           <h3>Готово</h3>
-          <p>Через 3-4 рабочих дня ФНС пришлет документы об открытии ИП, а банк активирует расчетный счет.</p>
+          <p>Через 3–4 рабочих дня ФНС пришлет документы об открытии ИП, а банк активирует расчетный счет.</p>
         </div>
       </div>
     </div>
@@ -478,7 +721,7 @@
           <div class="why-check">✓</div>
           <div>
             <h3>Почему это бесплатно?</h3>
-            <p>Мы не берем с вас денег. Нашу консультацию оплачивают банки-партнеры за привлечение клиентов. Это честно и прозрачно.</p>
+            <p>Мы не берем с вас денег. Нашу информационную поддержку оплачивают банки-партнеры. Это честно и прозрачно.</p>
           </div>
         </div>
         <div class="why-card">
@@ -508,9 +751,7 @@
       </div>
       <div class="reviews-section-inner">
         <button class="review-arrow left" onclick="scrollReviews(-1)">‹</button>
-        <div class="reviews-wrapper" id="reviewsContainer">
-          <!-- Отзывы генерируются через JS -->
-        </div>
+        <div class="reviews-wrapper" id="reviewsContainer"></div>
         <button class="review-arrow right" onclick="scrollReviews(1)">›</button>
       </div>
     </div>
@@ -537,7 +778,7 @@
         </div>
         <div class="faq-item" onclick="this.classList.toggle('active')">
           <div class="faq-q">А если мне не одобрят регистрацию?</div>
-          <div class="faq-a">Отказы случаются крайне редко (обычно из-за ошибок в данных или если вы уже являетесь банкротом). Если мы заметим риски на этапе консультации, мы обязательно вас предупредим.</div>
+          <div class="faq-a">Отказы случаются крайне редко (обычно из-за опечаток в данных или действующего банкротства). Если мы заметим риски на этапе консультации, мы обязательно вас предупредим.</div>
         </div>
       </div>
     </div>
@@ -548,27 +789,35 @@
     <div class="container">
       <div class="footer-box">
         <div class="footer-title">GILT — Связь и правовая информация</div>
-        <p style="font-size: 15px;">Мы всегда на связи в мессенджерах и готовы помочь вам сделать первый шаг в бизнесе.</p>
+        <p style="font-size: 15px;">Мы на связи в мессенджерах и готовы помочь вам сделать первый шаг в бизнесе.</p>
         <div class="footer-contacts">
-          <a id="footerTgBtn" href="#" target="_blank" rel="nofollow" class="btn-primary">Написать в Telegram</a>
+          <a id="footerTgBtn" href="#" target="_blank" rel="nofollow noopener" class="btn-primary">Написать в Telegram</a>
           <a id="footerMailBtn" href="#" class="btn-primary" style="background: transparent; color: var(--text-white); border: 1px solid var(--border); box-shadow: none;">Написать на почту</a>
         </div>
         <div class="disclaimer">
-          <b>Правовой статус сервиса:</b> Сайт носит исключительно информационно-справочный характер. Мы оказываем консультационные услуги по регистрации бизнеса и подбору банковских тарифов. Мы не являемся банком, не выдаем кредиты, не ведем счета и не гарантируем одобрение банковских продуктов.<br><br>
+          <b>Правовой статус сервиса:</b> Сайт giltrko.ru носит информационно-справочный и рекламный характер (витрина). Мы не являемся банком, МФО, кредитным брокером или оператором финансовой платформы, не выдаем кредиты и займы, не принимаем заявки и не гарантируем одобрение финансовых продуктов. Оценивайте свои финансовые возможности и риски. Изучите все условия кредита (займа) на официальном сайте выбранной организации.<br><br>
           <div id="legalInfoBlock">
-            <b>Юридическая информация:</b> Услуги оказываются в рамках партнерских программ банков. Рекламодатель: <span id="legalFioDisplay"></span>, ИНН: <span id="legalInnDisplay"></span>. Все товарные знаки и логотипы, представленные на сайте, принадлежат их законным правообладателям и используются в информационных целях.<br><br>
+            <b>Сведения об администраторе витрины:</b> <span id="legalFioDisplay"></span>, ИНН: <span id="legalInnDisplay"></span>, ОГРНИП: <span id="legalOgrnipDisplay"></span>. Все товарные знаки и логотипы принадлежат их законным правообладателям.<br><br>
           </div>
-          <b>Согласие на обработку:</b> Оставляя заявку (переходя в мессенджер), вы подтверждаете свое согласие с условиями Пользовательского соглашения. Мы не собираем и не храним ваши паспортные данные на серверах данного сайта.
+          <b>Документы и персональные данные:</b> Продолжая использовать сайт, вы принимаете условия <a onclick="openModal('privacyModal')">Пользовательского соглашения (оферты) и Политики обработки данных (Cookie)</a>. Анкеты на финансовые продукты на данном сайте не собираются.
         </div>
       </div>
     </div>
   </footer>
 
+  <!-- ================= ПЛАШКА COOKIE (152-ФЗ) ================= -->
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-text">
+      🍪 Мы используем технические файлы cookie и сервис Яндекс.Метрика для анализа работы сайта. Продолжая пользоваться сайтом, вы соглашаетесь с <a onclick="openModal('privacyModal')">Политикой обработки данных и Офертой</a>. Если вы не согласны, пожалуйста, покиньте сайт или отключите cookie в настройках браузера.
+    </div>
+    <button type="button" class="cookie-btn" onclick="acceptCookies()">Хорошо, понятно</button>
+  </div>
+
   <!-- ================= МОДАЛКА КАТАЛОГА ================= -->
   <div class="modal-backdrop" id="catalogModal" onclick="if(event.target===this) closeModal('catalogModal')">
     <div class="modal-window">
       <button type="button" class="modal-close" onclick="closeModal('catalogModal')">×</button>
-      <h3 id="catalogModalTitle" style="font-family: 'Unbounded', sans-serif; font-size: 24px; margin-bottom: 6px; color: var(--lime);">Каталог предложений</h3>
+      <h3 id="catalogModalTitle" style="font-family: 'Unbounded', sans-serif; font-size: 23px; margin-bottom: 6px; color: var(--lime);">Каталог предложений</h3>
       <p id="catalogModalSub" style="font-size: 14px; color: var(--text-gray); margin-bottom: 20px;">Выберите подходящий банк или организацию и нажмите кнопку оформления</p>
 
       <div class="modal-cat-tabs" id="catalogTabsContainer">
@@ -599,12 +848,12 @@
     </div>
   </div>
 
-  <!-- ================= НОВАЯ ОФЕРТА ================= -->
+  <!-- ================= ОФЕРТА И ПОЛИТИКА ================= -->
   <div class="modal-backdrop" id="privacyModal" onclick="if(event.target===this) closeModal('privacyModal')">
     <div class="modal-window" style="max-width: 860px;">
       <button type="button" class="modal-close" onclick="closeModal('privacyModal')">×</button>
-      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 16px; color: var(--lime);">Пользовательское соглашение (оферта)</h3>
-      <div style="font-size: 13px; color: var(--text-gray); line-height: 1.65; max-height: 60vh; overflow-y: auto; padding-right: 10px;">
+      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 19px; margin-bottom: 16px; color: var(--lime); padding-right: 36px;">Пользовательское соглашение (оферта) и Политика обработки данных</h3>
+      <div style="font-size: 13px; color: var(--text-gray); line-height: 1.65; max-height: 64vh; overflow-y: auto; padding-right: 10px;">
         <p>Редакция от <span id="ofertaDateDisplay" style="color:var(--text-white); font-weight:600;"></span></p><br>
         
         <p><b>1. Общие положения</b></p>
@@ -629,8 +878,10 @@
         <p>5.1. Сайт предоставляется «как есть». Администратор не отвечает за возможные неточности в условиях Офферов, отказ в выдаче продукта и последствия решений, которые пользователь принял на основе информации с Сайта.</p>
         <p>5.2. Перед оформлением любого продукта пользователю следует изучить все условия договора и оценить свои финансовые возможности и риски.</p><br>
 
-        <p><b>6. Персональные данные и cookie</b></p>
-        <p>6.1. Сайт не собирает анкеты на кредиты и займы. Технические данные (cookie, IP-адрес, данные метрических систем) обрабатываются в соответствии с ФЗ № 152-ФЗ.</p><br>
+        <p><b>6. Персональные данные и Политика использования cookie (152-ФЗ)</b></p>
+        <p>6.1. Сайт не собирает анкеты на кредиты, займы или регистрацию бизнеса, а также не хранит паспортные данные пользователей. Переход в мессенджер Telegram осуществляется исключительно по инициативе пользователя.</p>
+        <p>6.2. На Сайте используется сервис веб-аналитики Яндекс.Метрика (ООО «Яндекс»), который с помощью технических файлов cookie собирает обезличенные метаданные о посещении (IP-адрес, тип браузера, источник перехода, действия на страницах) в целях улучшения работы Сайта и анализа рекламных кампаний.</p>
+        <p>6.3. Пользователь вправе в любой момент заблокировать или удалить файлы cookie в настройках своего браузера либо прекратить использование Сайта.</p><br>
 
         <p><b>7. Заключительные положения</b></p>
         <p>7.1. Администратор вправе менять Соглашение в одностороннем порядке. Новая редакция вступает в силу с момента публикации на Сайте.</p>
@@ -644,53 +895,56 @@
   <div class="modal-backdrop" id="adminModal">
     <div class="modal-window">
       <button type="button" class="modal-close" onclick="closeModal('adminModal')">×</button>
-      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 6px; color: var(--lime);">🔒 Закрытая панель GILT</h3>
-      <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 18px;">Управление контактами, юр. данными, отзывами, карточками и публикацией.</p>
+      <h3 style="font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 6px; color: var(--lime);">🔒 Закрытая панель управления GILT</h3>
+      <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 18px;">Полный контроль над офферами, юридическими текстами банков, офертой и публикацией на GitHub.</p>
 
       <!-- Юридические данные и контакты -->
-      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">Контакты и Оферта:</div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; background: var(--admin-input-bg); border: 1px solid var(--border); padding: 16px; border-radius: 14px; margin-bottom: 18px;">
-        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">Telegram (ссылка):</label><input type="text" id="admTg" class="admin-input"></div>
-        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">Почта (email):</label><input type="text" id="admMail" class="admin-input"></div>
-        <div style="display:flex; flex-direction:column; gap:4px;">
-          <label style="font-size: 11px; color: var(--lime); font-weight: 700;">Переключатели на сайте:</label>
-          <label style="font-size: 13px;"><input type="checkbox" id="admShowMfo" style="cursor:pointer;"> Блок МФО</label>
-          <label style="font-size: 13px;"><input type="checkbox" id="admShowLegal" style="cursor:pointer;"> Юр. Информацию (Подвал)</label>
-          <label style="font-size: 13px;"><input type="checkbox" id="admShowInitialReviews" style="cursor:pointer;"> Демо-отзывы</label>
+      <div style="font-size: 12px; color: var(--text-white); margin-bottom: 8px; font-weight: 700;">1. Контакты и реквизиты Оферты:</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; background: var(--bg-card); border: 1px solid var(--border); padding: 16px; border-radius: 14px; margin-bottom: 18px;">
+        <div><label class="admin-label">Telegram (ссылка):</label><input type="text" id="admTg" class="admin-input"></div>
+        <div><label class="admin-label">Почта (email):</label><input type="text" id="admMail" class="admin-input"></div>
+        <div style="display:flex; flex-direction:column; gap:5px; justify-content:center;">
+          <label class="admin-label">Переключатели блоков:</label>
+          <label style="font-size: 12.5px; cursor:pointer;"><input type="checkbox" id="admShowMfo"> Показывать МФО</label>
+          <label style="font-size: 12.5px; cursor:pointer;"><input type="checkbox" id="admShowLegal"> Показывать ИНН/ФИО в подвале</label>
+          <label style="font-size: 12.5px; cursor:pointer;"><input type="checkbox" id="admShowInitialReviews"> Показывать базовые отзывы</label>
         </div>
-        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">ФИО / Статус (для оферты):</label><input type="text" id="admFio" class="admin-input" placeholder="ИП Иванов И.И."></div>
-        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">ИНН:</label><input type="text" id="admInn" class="admin-input"></div>
-        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">ОГРНИП:</label><input type="text" id="admOgrnip" class="admin-input"></div>
-        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">Адрес / Город:</label><input type="text" id="admAddress" class="admin-input"></div>
-        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">Дата Оферты:</label><input type="text" id="admOfertaDate" class="admin-input"></div>
-        <div><label style="font-size: 11px; color: var(--lime); font-weight: 700;">GitHub Token:</label><input type="password" id="admGhToken" class="admin-input"></div>
+        <div><label class="admin-label">ФИО / Статус ИП:</label><input type="text" id="admFio" class="admin-input"></div>
+        <div><label class="admin-label">ИНН:</label><input type="text" id="admInn" class="admin-input"></div>
+        <div><label class="admin-label">ОГРНИП:</label><input type="text" id="admOgrnip" class="admin-input"></div>
+        <div><label class="admin-label">Адрес / Город:</label><input type="text" id="admAddress" class="admin-input"></div>
+        <div><label class="admin-label">Дата редакции Оферты:</label><input type="text" id="admOfertaDate" class="admin-input"></div>
+        <div><label class="admin-label">GitHub Token (для публикации):</label><input type="password" id="admGhToken" class="admin-input" placeholder="ghp_..."></div>
       </div>
 
       <!-- Иконки Категорий -->
-      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">Иконки Категорий (вставьте эмодзи или URL картинки):</div>
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px;">
-        <input type="text" id="iconDebit" class="admin-input" placeholder="Дебетовые (💳)">
-        <input type="text" id="iconCredit" class="admin-input" placeholder="Кредитные (💎)">
-        <input type="text" id="iconRko" class="admin-input" placeholder="РКО (🏦)">
-        <input type="text" id="iconMfo" class="admin-input" placeholder="МФО (⚡)">
+      <div style="font-size: 12px; color: var(--text-white); margin-bottom: 8px; font-weight: 700;">2. Иконки разделов каталога (эмодзи или URL картинки):</div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 20px;">
+        <div><label class="admin-label">Дебетовые карты:</label><input type="text" id="iconDebit" class="admin-input" placeholder="💳 или https://..."></div>
+        <div><label class="admin-label">Кредитные карты:</label><input type="text" id="iconCredit" class="admin-input" placeholder="💎 или https://..."></div>
+        <div><label class="admin-label">Расчетные счета:</label><input type="text" id="iconRko" class="admin-input" placeholder="🏦 или https://..."></div>
+        <div><label class="admin-label">МФО:</label><input type="text" id="iconMfo" class="admin-input" placeholder="⚡ или https://..."></div>
       </div>
 
       <!-- Отзывы -->
-      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">Пользовательские отзывы:</div>
-      <div style="max-height: 180px; overflow-y: auto; padding-right: 6px; margin-bottom: 18px;" id="adminReviewsList"></div>
-      <button type="button" class="btn-primary" style="background: transparent; border: 1px solid var(--border); color: var(--text-white); box-shadow: none; padding: 10px 16px; margin-bottom: 20px; font-size:11px;" onclick="addNewReviewRow()">+ Добавить отзыв от клиента</button>
+      <div style="font-size: 12px; color: var(--text-white); margin-bottom: 8px; font-weight: 700;">3. Клиентские отзывы:</div>
+      <div style="max-height: 180px; overflow-y: auto; padding-right: 6px; margin-bottom: 12px;" id="adminReviewsList"></div>
+      <button type="button" class="btn-primary" style="background: transparent; border: 1px solid var(--border); color: var(--text-white); box-shadow: none; padding: 10px 16px; margin-bottom: 22px; font-size:11px;" onclick="addNewReviewRow()">+ Добавить отзыв клиента</button>
 
       <!-- Карточки Банков -->
-      <div style="font-size: 12px; color: var(--text-gray); margin-bottom: 8px; font-weight: 600;">Предложения (Внимание: для кредиток и МФО предупреждение 1 марта выводится автоматически):</div>
-      <div style="max-height: 350px; overflow-y: auto; padding-right: 6px; margin-bottom: 18px;" id="adminLinksList"></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom: 10px;">
+        <div style="font-size: 12px; color: var(--text-white); font-weight: 700;">4. Предложения банков и МФО (любой объем текста вмещается автоматически):</div>
+        <button type="button" class="btn-primary" style="padding: 9px 16px; font-size: 11px;" onclick="addNewOfferRow()">+ Добавить новый продукт</button>
+      </div>
+      <div style="max-height: 400px; overflow-y: auto; padding-right: 6px; margin-bottom: 20px;" id="adminLinksList"></div>
 
       <!-- Кнопки сохранения -->
-      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <button type="button" class="btn-primary" onclick="saveAdminSettings()">💾 Сохранить локально</button>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+        <button type="button" class="btn-primary" onclick="saveAdminSettings()">💾 Сохранить в браузере</button>
         <button type="button" class="btn-primary" style="background: #10B981; color: #fff; box-shadow: none;" onclick="pushToGitHubDirect()">🚀 Опубликовать на GitHub</button>
-        <button type="button" class="btn-primary" style="background: transparent; border: 1px solid var(--border); color: var(--text-white); box-shadow: none;" onclick="addNewOfferRow()">+ Добавить банк</button>
+        <button type="button" class="btn-primary" style="background: transparent; border: 1px solid var(--border); color: var(--text-gray); box-shadow: none; font-size: 11px; padding: 12px 16px;" onclick="resetLocalCache()">🔄 Сбросить кэш браузера</button>
       </div>
-      <div id="ghStatusMsg" style="margin-top: 12px; font-size: 13px; color: var(--lime);"></div>
+      <div id="ghStatusMsg" style="margin-top: 12px; font-size: 13px; color: var(--lime); font-weight: 600;"></div>
     </div>
   </div>
 
@@ -698,22 +952,39 @@
   <script>
     const OWNER_PIN = "825113878GILT";
 
+    // Защита от кавычек и спецсимволов при рендеринге HTML
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // Принудительный скролл наверх при открытии
     window.addEventListener('load', () => {
       setTimeout(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-      }, 100);
+      }, 60);
     });
 
-    window.addEventListener('DOMContentLoaded', () => {
-      updateThemeIcon(document.documentElement.getAttribute('data-theme'));
-      if (localStorage.getItem('gilt_owner_unlocked') === 'true') {
-        document.getElementById('secretAdminBtn').style.display = 'inline-flex';
+    // Логика плашки Cookie
+    function checkCookiesBanner() {
+      if (!localStorage.getItem('gilt_cookie_accepted')) {
+        setTimeout(() => {
+          const banner = document.getElementById('cookieBanner');
+          if (banner) banner.classList.add('show');
+        }, 700);
       }
-      if (window.location.search.includes('review=')) {
-        setTimeout(() => openModal('leaveReviewModal'), 500);
-      }
-      renderCards();
-    });
+    }
+
+    function acceptCookies() {
+      localStorage.setItem('gilt_cookie_accepted', 'true');
+      const banner = document.getElementById('cookieBanner');
+      if (banner) banner.classList.remove('show');
+    }
 
     function updateThemeIcon(theme) {
       document.querySelectorAll('.icon-moon').forEach(el => el.style.display = theme === 'light' ? 'block' : 'none');
@@ -742,10 +1013,9 @@
       const rate = document.getElementById('revFormRate').value;
       let tgUser = "haveahatred";
       if (contacts.tg && contacts.tg.includes('t.me/')) { tgUser = contacts.tg.split('t.me/')[1].replace('/', ''); }
-      const msg = `🌟 НОВЫЙ ОТЗЫВ С САЙТА 🌟%0AИмя: ${name}%0AОценка: ${rate} звезд%0AТекст: ${text}`;
+      const msg = `🌟 НОВЫЙ ОТЗЫВ С САЙТА 🌟%0AИмя: ${encodeURIComponent(name)}%0AОценка: ${rate} звезд%0AТекст: ${encodeURIComponent(text)}`;
       window.open(`https://t.me/${tgUser}?text=${msg}`, '_blank');
       closeModal('leaveReviewModal');
-      alert("Сообщение сформировано! Отправьте его в открывшемся чате Telegram.");
     }
 
     // (START_CONTACTS_JSON)
@@ -760,7 +1030,7 @@
       "showMfo": true,
       "showLegal": true,
       "showInitialReviews": true
-};
+    };
     // (END_CONTACTS_JSON)
 
     // (START_CAT_ICONS_JSON)
@@ -769,139 +1039,375 @@
       "credit": "💎",
       "rko": "🏦",
       "mfo": "⚡"
-};
+    };
     // (END_CAT_ICONS_JSON)
 
     // (START_REVIEWS_JSON)
     const SITE_REVIEWS = [
-      {
-            "name": "Иван Сторожев",
-            "text": "Помогли оформить ИП и выбрать счёт.",
-            "rate": 5,
-            "isInitial": true
-      },
-      {
-            "name": "Anya",
-            "text": "спасибо за консультацию!)",
-            "rate": 5,
-            "isInitial": true
-      },
-      {
-            "name": "Максон",
-            "text": "Помогли оформить расчётный счет",
-            "rate": 5,
-            "isInitial": true
-      },
-      {
-            "name": "Елена",
-            "text": "Все отлично!",
-            "rate": 5,
-            "isInitial": true
-      }
-];
+      { "name": "Иван Сторожев", "text": "Помогли оформить ИП и выбрать счёт.", "rate": 5, "isInitial": true },
+      { "name": "Anya", "text": "спасибо за консультацию!)", "rate": 5, "isInitial": true },
+      { "name": "Максон", "text": "Помогли оформить расчётный счет", "rate": 5, "isInitial": true },
+      { "name": "Елена", "text": "Все отлично!", "rate": 5, "isInitial": true }
+    ];
     // (END_REVIEWS_JSON)
 
     // (START_ITEMS_JSON)
     const DEFAULT_ITEMS = [
       {
-            "id": "custom_1793952491672",
-            "cat": "credit",
-            "badge": "НОВОЕ",
-            "shortLogo": "БАНК",
-            "img": "",
-            "color": "linear-gradient(135deg, #1E293B 0%, #0F172A 100%)",
-            "textColor": "#CCFF00",
-            "title": "Альфа Деньги - Кредитный Лимит",
-            "price": "первые 21 день пользования — бесплатно",
-            "psk": "",
-            "btn": "Оформить",
-            "url": "https://"
+        "id": "tbank_rko",
+        "cat": "rko",
+        "badge": "ПЕРВЫЙ ВАРИАНТ",
+        "shortLogo": "Т-БАНК",
+        "img": "",
+        "color": "linear-gradient(135deg, #FFDD2D 0%, #F59E0B 100%)",
+        "textColor": "#000",
+        "title": "Открыть счет в Т-Банке (АО «ТБанк»)",
+        "price": "Обслуживание от 0 ₽/мес.",
+        "psk": "",
+        "legal": "Реклама. АО «ТБанк», ИНН 7710140679, лицензия ЦБ РФ № 2673.",
+        "btn": "Заказать",
+        "url": "https://www.tbank.ru/business/registration-ip/"
       },
       {
-            "id": "tbank_rko",
-            "cat": "rko",
-            "badge": "ПЕРВЫЙ ВАРИАНТ",
-            "shortLogo": "Т-БАНК",
-            "img": "",
-            "color": "linear-gradient(135deg, #FFDD2D 0%, #F59E0B 100%)",
-            "textColor": "#000",
-            "title": "Открыть счет в ТБанке",
-            "price": "Обслуживание 0/месяц р.",
-            "psk": "",
-            "btn": "Заказать",
-            "url": "https://www.tbank.ru/business/registration-ip/"
+        "id": "alfa_rko",
+        "cat": "rko",
+        "badge": "ВТОРОЙ ВАРИАНТ",
+        "shortLogo": "АЛЬФА-БАНК",
+        "img": "",
+        "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)",
+        "textColor": "#fff",
+        "title": "Открыть счет в Альфа-Банке (АО «Альфа-Банк»)",
+        "price": "Обслуживание от 0 ₽/мес.",
+        "psk": "",
+        "legal": "Реклама. АО «Альфа-Банк», ИНН 7728168971, ген. лицензия ЦБ РФ № 1326.",
+        "btn": "Заказать",
+        "url": "https://trk.ppdu.ru/click/aGbkLIo0?erid=2SDnjeyjBZq&sub1=site&siteId=20402"
       },
       {
-            "id": "alfa_rko",
-            "cat": "rko",
-            "badge": "ВТОРОЙ ВАРИАНТ",
-            "shortLogo": "АЛЬФА-БАНК",
-            "img": "",
-            "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)",
-            "textColor": "#fff",
-            "title": "Открыть счет в Альфе",
-            "price": "Обслуживание 0/месяц р.",
-            "psk": "",
-            "btn": "Заказать",
-            "url": "https://trk.ppdu.ru/click/aGbkLIo0?erid=2SDnjeyjBZq&sub1=site&siteId=20402"
+        "id": "tbank_black",
+        "cat": "debit",
+        "badge": "ДЕБЕТОВАЯ КАРТА",
+        "shortLogo": "Т-БАНК BLACK",
+        "img": "",
+        "color": "linear-gradient(135deg, #FFDD2D 0%, #CA8A04 100%)",
+        "textColor": "#000",
+        "title": "Дебетовая карта Т-Банк Black",
+        "price": "Кэшбэк до 30% рублями • от 0 ₽",
+        "psk": "",
+        "legal": "АО «ТБанк», ИНН 7710140679, лицензия ЦБ РФ № 2673.",
+        "btn": "Оформить карту",
+        "url": "#"
       },
       {
-            "id": "tbank_black",
-            "cat": "debit",
-            "badge": "ДЕБЕТОВАЯ КАРТА",
-            "shortLogo": "Т-БАНК BLACK",
-            "img": "",
-            "color": "linear-gradient(135deg, #FFDD2D 0%, #CA8A04 100%)",
-            "textColor": "#000",
-            "title": "Т-Банк Black",
-            "price": "Кэшбэк до 30% • 0 ₽",
-            "psk": "",
-            "btn": "Оформить карту",
-            "url": "#"
+        "id": "alfa_debit",
+        "cat": "debit",
+        "badge": "ДЕБЕТОВАЯ КАРТА",
+        "shortLogo": "АЛЬФА-КАРТА",
+        "img": "",
+        "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)",
+        "textColor": "#fff",
+        "title": "Альфа-Карта с суперкэшбэком",
+        "price": "Обслуживание 0 ₽",
+        "psk": "",
+        "legal": "АО «Альфа-Банк», ИНН 7728168971, ген. лицензия ЦБ РФ № 1326.",
+        "btn": "Оформить карту",
+        "url": "#"
       },
       {
-            "id": "tbank_plat",
-            "cat": "credit",
-            "badge": "КРЕДИТНАЯ КАРТА",
-            "shortLogo": "Т-БАНК PLATINUM",
-            "img": "",
-            "color": "linear-gradient(135deg, #334155 0%, #0F172A 100%)",
-            "textColor": "#CCFF00",
-            "title": "Т-Банк Платинум",
-            "price": "До 1 000 000 ₽",
-            "psk": "11.900% - 39.900%",
-            "btn": "Оформить карту",
-            "url": "#"
+        "id": "vtb_debit",
+        "cat": "debit",
+        "badge": "ДЕБЕТОВАЯ КАРТА",
+        "shortLogo": "ВТБ КАРТА",
+        "img": "",
+        "color": "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)",
+        "textColor": "#fff",
+        "title": "Карта для жизни ВТБ (Банк ВТБ ПАО)",
+        "price": "Кэшбэк рублями • 0 ₽",
+        "psk": "",
+        "legal": "Банк ВТБ (ПАО), ИНН 7702070139, ген. лицензия ЦБ РФ № 1000.",
+        "btn": "Оформить карту",
+        "url": "#"
       },
       {
-            "id": "zaimer",
-            "cat": "mfo",
-            "badge": "МФО",
-            "shortLogo": "ЗАЙМЕР",
-            "img": "",
-            "color": "linear-gradient(135deg, #10B981 0%, #047857 100%)",
-            "textColor": "#fff",
-            "title": "Займер",
-            "price": "Обслуживание 0 - 7900 р.",
-            "psk": "0.000% - 292.000%",
-            "btn": "ПОЛУЧИТЬ",
-            "url": ""
+        "id": "tbank_plat",
+        "cat": "credit",
+        "badge": "КРЕДИТНАЯ КАРТА",
+        "shortLogo": "Т-БАНК PLATINUM",
+        "img": "",
+        "color": "linear-gradient(135deg, #334155 0%, #0F172A 100%)",
+        "textColor": "#CCFF00",
+        "title": "Кредитная карта Т-Банк Платинум",
+        "price": "Лимит до 1 000 000 ₽ • беспроцентный период",
+        "psk": "11,888% – 39,900%",
+        "legal": "АО «ТБанк», ИНН 7710140679, лицензия ЦБ РФ № 2673.",
+        "btn": "Оформить карту",
+        "url": "#"
+      },
+      {
+        "id": "alfa_credit",
+        "cat": "credit",
+        "badge": "КРЕДИТНАЯ КАРТА",
+        "shortLogo": "АЛЬФА КРЕДИТКА",
+        "img": "",
+        "color": "linear-gradient(135deg, #DC2626 0%, #7F1D1D 100%)",
+        "textColor": "#fff",
+        "title": "Кредитная карта Альфа-Банк",
+        "price": "Льготный период • снятие наличных",
+        "psk": "11,990% – 69,990%",
+        "legal": "АО «Альфа-Банк», ИНН 7728168971, ген. лицензия ЦБ РФ № 1326.",
+        "btn": "Оформить карту",
+        "url": "#"
+      },
+      {
+        "id": "sber_credit",
+        "cat": "credit",
+        "badge": "КРЕДИТНАЯ КАРТА",
+        "shortLogo": "СБЕРКАРТА",
+        "img": "",
+        "color": "linear-gradient(135deg, #16A34A 0%, #065F46 100%)",
+        "textColor": "#fff",
+        "title": "Кредитная СберКарта (ПАО Сбербанк)",
+        "price": "120 дней без % • 0 ₽ обслуживание",
+        "psk": "24,794% – 38,895%",
+        "legal": "ПАО Сбербанк, ИНН 7707083893, ген. лицензия ЦБ РФ № 1481.",
+        "btn": "Оформить карту",
+        "url": "#"
+      },
+      {
+        "id": "zaimer",
+        "cat": "mfo",
+        "badge": "МФО",
+        "shortLogo": "ЗАЙМЕР",
+        "img": "",
+        "color": "linear-gradient(135deg, #10B981 0%, #047857 100%)",
+        "textColor": "#fff",
+        "title": "Займер (ПАО МФК «Займер»)",
+        "price": "До 30 000 ₽ • онлайн на карту",
+        "psk": "0,000% – 292,000%",
+        "legal": "ПАО МФК «Займер», ИНН 4205271785, рег. номер в реестре МФО ЦБ РФ 651303532004088.",
+        "btn": "ПОЛУЧИТЬ",
+        "url": ""
+      },
+      {
+        "id": "webbankir",
+        "cat": "mfo",
+        "badge": "МФО",
+        "shortLogo": "WEBBANKIR",
+        "img": "",
+        "color": "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)",
+        "textColor": "#fff",
+        "title": "WebBankir (ООО МФК «ВЭББАНКИР»)",
+        "price": "До 30 000 ₽ • первый займ под 0%",
+        "psk": "0,000% – 292,000%",
+        "legal": "ООО МФК «ВЭББАНКИР», ИНН 7733812126, рег. номер ЦБ РФ 2120177002077.",
+        "btn": "ПОЛУЧИТЬ",
+        "url": ""
+      },
+      {
+        "id": "srochno",
+        "cat": "mfo",
+        "badge": "МФО",
+        "shortLogo": "СРОЧНОДЕНЬГИ",
+        "img": "",
+        "color": "linear-gradient(135deg, #84CC16 0%, #4D7C0F 100%)",
+        "textColor": "#fff",
+        "title": "СрочноДеньги (ООО МФК «Срочноденьги»)",
+        "price": "До 30 000 ₽ • решение за 5 минут",
+        "psk": "0,000% – 292,000%",
+        "legal": "ООО МФК «Срочноденьги», ИНН 5260271530, рег. номер ЦБ РФ 2110552000304.",
+        "btn": "ПОЛУЧИТЬ",
+        "url": ""
+      },
+      {
+        "id": "credit7",
+        "cat": "mfo",
+        "badge": "МФО",
+        "shortLogo": "CREDIT 7",
+        "img": "",
+        "color": "linear-gradient(135deg, #6366F1 0%, #4338CA 100%)",
+        "textColor": "#fff",
+        "title": "Credit7 (ООО МКК «Каппадокия»)",
+        "price": "До 30 000 ₽ • без переплат новым клиентам",
+        "psk": "0,000% – 292,000%",
+        "legal": "ООО МКК «Каппадокия», ИНН 7459007268, рег. номер ЦБ РФ 1903475009492.",
+        "btn": "ПОЛУЧИТЬ",
+        "url": ""
+      },
+      {
+        "id": "maxcredit",
+        "cat": "mfo",
+        "badge": "МФО",
+        "shortLogo": "MAX.CREDIT",
+        "img": "",
+        "color": "linear-gradient(135deg, #EC4899 0%, #BE185D 100%)",
+        "textColor": "#fff",
+        "title": "Max.Credit (ООО МКК «Траст Альянс»)",
+        "price": "До 30 000 ₽ • круглосуточно",
+        "psk": "0,000% – 292,000%",
+        "legal": "ООО МКК «Траст Альянс», ИНН 7725352740, рег. номер ЦБ РФ 1703045008212.",
+        "btn": "ПОЛУЧИТЬ",
+        "url": ""
+      },
+      {
+        "id": "umnal",
+        "cat": "mfo",
+        "badge": "МФО",
+        "shortLogo": "УМНЫЕ НАЛИЧНЫЕ",
+        "img": "",
+        "color": "linear-gradient(135deg, #8B5CF6 0%, #5B21B6 100%)",
+        "textColor": "#fff",
+        "title": "Умные Наличные (ООО МКК «Умные Наличные»)",
+        "price": "До 30 000 ₽ • по паспорту",
+        "psk": "292,000% – 292,000%",
+        "legal": "ООО МКК «Умные Наличные», ИНН 7811643760, рег. номер ЦБ РФ 1703140008360.",
+        "btn": "ПОЛУЧИТЬ",
+        "url": ""
+      },
+      {
+        "id": "belka",
+        "cat": "mfo",
+        "badge": "МФО",
+        "shortLogo": "БЕЛКА КРЕДИТ",
+        "img": "",
+        "color": "linear-gradient(135deg, #F97316 0%, #C2410C 100%)",
+        "textColor": "#fff",
+        "title": "Белка Кредит (ООО МКК «КапиталЪ-НТ»)",
+        "price": "До 30 000 ₽ • первый займ 0%",
+        "psk": "0,000% – 292,000%",
+        "legal": "ООО МКК «КапиталЪ-НТ», ИНН 6623107264, рег. номер ЦБ РФ 651403465006105.",
+        "btn": "ПОЛУЧИТЬ",
+        "url": ""
+      },
+      {
+        "id": "oneclick",
+        "cat": "mfo",
+        "badge": "МФО",
+        "shortLogo": "ONE CLICK MONEY",
+        "img": "",
+        "color": "linear-gradient(135deg, #14B8A6 0%, #0F766E 100%)",
+        "textColor": "#fff",
+        "title": "One Click Money (АО «МКК УФ»)",
+        "price": "До 30 000 ₽ • быстрое одобрение",
+        "psk": "0,000% – 292,000%",
+        "legal": "АО «МКК Универсальное Финансирование», ИНН 6162070630, рег. номер ЦБ РФ 651503760007126.",
+        "btn": "ПОЛУЧИТЬ",
+        "url": ""
+      },
+      {
+        "id": "dengisrazu",
+        "cat": "mfo",
+        "badge": "МФО",
+        "shortLogo": "ДЕНЬГИ СРАЗУ",
+        "img": "",
+        "color": "linear-gradient(135deg, #EAB308 0%, #A16207 100%)",
+        "textColor": "#fff",
+        "title": "Деньги Сразу (ООО МФК «Новое Финансирование»)",
+        "price": "До 30 000 ₽ • на любую карту",
+        "psk": "0,000% – 292,000%",
+        "legal": "ООО МФК «Новое Финансирование», ИНН 6164046257, рег. номер ЦБ РФ 1603760007796.",
+        "btn": "ПОЛУЧИТЬ",
+        "url": ""
+      },
+      {
+        "id": "moneyman",
+        "cat": "mfo",
+        "badge": "МФО",
+        "shortLogo": "MONEY MAN",
+        "img": "",
+        "color": "linear-gradient(135deg, #22C55E 0%, #15803D 100%)",
+        "textColor": "#fff",
+        "title": "MoneyMan (ООО МФК «Мани Мен»)",
+        "price": "До 30 000 ₽ • онлайн 24/7",
+        "psk": "0,000% – 292,000%",
+        "legal": "ООО МФК «Мани Мен», ИНН 7704784072, рег. номер ЦБ РФ 2110177000478.",
+        "btn": "ПОЛУЧИТЬ",
+        "url": ""
+      },
+      {
+        "id": "adengi",
+        "cat": "mfo",
+        "badge": "МФО",
+        "shortLogo": "А-ДЕНЬГИ",
+        "img": "",
+        "color": "linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)",
+        "textColor": "#fff",
+        "title": "А Деньги (ООО МФК «А Деньги»)",
+        "price": "До 30 000 ₽ • от проекта Альфа-Групп",
+        "psk": "0,000% – 292,000%",
+        "legal": "ООО МФК «А Деньги», ИНН 7708400979, рег. номер ЦБ РФ 2203045009815.",
+        "btn": "ПОЛУЧИТЬ",
+        "url": ""
+      },
+      {
+        "id": "migcredit",
+        "cat": "mfo",
+        "badge": "МФО",
+        "shortLogo": "МИГ КРЕДИТ",
+        "img": "",
+        "color": "linear-gradient(135deg, #06B6D4 0%, #0E7490 100%)",
+        "textColor": "#fff",
+        "title": "МигКредит (ООО МФК «МигКредит»)",
+        "price": "До 30 000 ₽ • быстрый перевод",
+        "psk": "0,000% – 292,000%",
+        "legal": "ООО МФК «МигКредит», ИНН 7715825027, рег. номер ЦБ РФ 2110177000037.",
+        "btn": "ПОЛУЧИТЬ",
+        "url": ""
+      },
+      {
+        "id": "turbozaim",
+        "cat": "mfo",
+        "badge": "МФО",
+        "shortLogo": "ТУРБОЗАЙМ",
+        "img": "",
+        "color": "linear-gradient(135deg, #3B82F6 0%, #1E3A8A 100%)",
+        "textColor": "#fff",
+        "title": "Турбозайм (ООО МФК «Турбозайм»)",
+        "price": "До 30 000 ₽ • моментальное решение",
+        "psk": "0,000% – 292,000%",
+        "legal": "ООО МФК «Турбозайм», ИНН 7702820127, рег. номер ЦБ РФ 651303045003973.",
+        "btn": "ПОЛУЧИТЬ",
+        "url": ""
       }
-];
+    ];
     // (END_ITEMS_JSON)
 
-    let items = JSON.parse(localStorage.getItem('gilt_v2_items')) || [...DEFAULT_ITEMS];
-    let savedContacts = JSON.parse(localStorage.getItem('gilt_v2_contacts')) || {};
+    // Умное объединение данных из кэша браузера и обновленного кода
+    function loadMergedItems() {
+      const savedRaw = localStorage.getItem('gilt_v3_items');
+      if (!savedRaw) return [...DEFAULT_ITEMS];
+      try {
+        const saved = JSON.parse(savedRaw);
+        if (!Array.isArray(saved) || saved.length === 0) return [...DEFAULT_ITEMS];
+        return saved;
+      } catch (e) {
+        return [...DEFAULT_ITEMS];
+      }
+    }
+
+    let items = loadMergedItems();
+    let savedContacts = JSON.parse(localStorage.getItem('gilt_v3_contacts') || '{}');
     let contacts = { ...SITE_CONTACTS, ...savedContacts };
-    let savedIcons = JSON.parse(localStorage.getItem('gilt_v2_icons')) || {};
+    let savedIcons = JSON.parse(localStorage.getItem('gilt_v3_icons') || '{}');
     let catIcons = { ...SITE_CAT_ICONS, ...savedIcons };
-    let reviewsList = JSON.parse(localStorage.getItem('gilt_v2_reviews')) || [...SITE_REVIEWS];
+    let reviewsList = JSON.parse(localStorage.getItem('gilt_v3_reviews') || 'null') || [...SITE_REVIEWS];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      updateThemeIcon(document.documentElement.getAttribute('data-theme'));
+      if (localStorage.getItem('gilt_owner_unlocked') === 'true') {
+        document.getElementById('secretAdminBtn').style.display = 'inline-flex';
+      }
+      if (window.location.search.includes('review=')) {
+        setTimeout(() => openModal('leaveReviewModal'), 500);
+      }
+      checkCookiesBanner();
+      renderCards();
+    });
 
     function applyIconToHub(id, val) {
       const el = document.getElementById(id);
       if (!el) return;
-      if (val && (val.startsWith('http') || val.startsWith('./'))) {
-        el.innerHTML = `<img src="${val}" alt="icon">`;
+      if (val && (val.startsWith('http') || val.startsWith('./') || val.startsWith('data:'))) {
+        el.innerHTML = `<img src="${escapeHtml(val)}" alt="icon">`;
       } else {
         el.innerText = val || '';
       }
@@ -929,6 +1435,7 @@
         legalBlock.style.display = 'block';
         document.getElementById('legalFioDisplay').innerText = contacts.fio || 'Укажите в админке';
         document.getElementById('legalInnDisplay').innerText = contacts.inn || 'Укажите в админке';
+        document.getElementById('legalOgrnipDisplay').innerText = contacts.ogrnip || 'Укажите в админке';
       } else {
         legalBlock.style.display = 'none';
       }
@@ -959,15 +1466,18 @@
       const reviewsSection = document.getElementById('reviews');
       if (visibleReviews.length > 0) {
         reviewsSection.style.display = 'block';
-        document.getElementById('reviewsContainer').innerHTML = visibleReviews.map(r => `
-          <div class="review-card">
-            <div class="review-header">
-              <div class="review-name">${r.name}</div>
-              <div class="review-stars">${'★'.repeat(r.rate)}${'☆'.repeat(5-r.rate)}</div>
+        document.getElementById('reviewsContainer').innerHTML = visibleReviews.map(r => {
+          const rateNum = Math.min(5, Math.max(1, parseInt(r.rate) || 5));
+          return `
+            <div class="review-card">
+              <div class="review-header">
+                <div class="review-name">${escapeHtml(r.name)}</div>
+                <div class="review-stars">${'★'.repeat(rateNum)}${'☆'.repeat(5 - rateNum)}</div>
+              </div>
+              <div class="review-text">«${escapeHtml(r.text)}»</div>
             </div>
-            <div class="review-text">«${r.text}»</div>
-          </div>
-        `).join('');
+          `;
+        }).join('');
       } else {
         reviewsSection.style.display = 'none';
       }
@@ -976,29 +1486,57 @@
     }
 
     function cardTemplate(item) {
-      const imgTag = item.img ? `<img src="${item.img}" alt="${item.title}" class="card-custom-img">` : '';
-      const pskTag = item.psk ? `<div class="card-psk">ПСК: ${item.psk}</div>` : '';
+      const safeTitle = escapeHtml(item.title);
+      const safeCoverText = escapeHtml(item.shortLogo || item.title);
+      const safeBadge = escapeHtml(item.badge || 'ПАРТНЕР');
+      const safePrice = escapeHtml(item.price || '');
+      const safePsk = escapeHtml(item.psk || '');
+      const safeLegal = escapeHtml(item.legal || '');
+      const safeBtn = escapeHtml(item.btn || 'Оформить');
+      const safeUrl = escapeHtml(item.url || '#');
+      const goalId = String(item.id || 'ITEM').replace(/[^a-zA-Z0-9_]/g, '').toUpperCase();
+
+      const imgTag = item.img ? `<img src="${escapeHtml(item.img)}" alt="${safeTitle}" class="card-custom-img">` : '';
+      const pskTag = safePsk ? `<div class="card-psk-badge">ПСК: ${safePsk}</div>` : '';
+
+      // Если юридический текст длинный (> 65 символов или многострочный) — прячем в аккуратный спойлер
+      let legalBlockHtml = '';
+      if (safeLegal) {
+        if (safeLegal.length > 68 || safeLegal.includes('\n')) {
+          legalBlockHtml = `
+            <details class="card-legal-details">
+              <summary>Реклама и условия банка</summary>
+              <div class="card-legal-details-body">${safeLegal}</div>
+            </details>
+          `;
+        } else {
+          legalBlockHtml = `<div class="card-legal-short">${safeLegal}</div>`;
+        }
+      }
+
+      // Предупреждение с 1 марта 2025 для кредитных карт и МФО
       const legalWarning = (item.cat === 'credit' || item.cat === 'mfo') ? 
         `<div class="card-legal-warning">Оценивайте свои финансовые возможности и риски. Изучите все условия кредита (займа).</div>` : '';
 
       return `
         <div class="product-card">
-          <a href="${item.url}" target="_blank" rel="nofollow noopener" style="text-decoration: none; color: inherit;" onclick="ym(113984418, 'reachGoal', 'CLICK_CARD_${item.id.toUpperCase()}')">
+          <a href="${safeUrl}" target="_blank" rel="nofollow noopener" style="text-decoration: none; color: inherit;" onclick="if(typeof ym==='function') ym(113984418, 'reachGoal', 'CLICK_CARD_${goalId}')">
             <div class="card-thumb" style="background: ${item.color || 'linear-gradient(135deg, #1E293B, #0F172A)'}; color: ${item.textColor || '#fff'};">
               ${imgTag}
-              <span class="card-thumb-badge">${item.badge || 'ПАРТНЕР'}</span>
-              ${!item.img ? `<div class="card-thumb-title">${item.shortLogo || item.title}</div>` : ''}
+              <span class="card-thumb-badge">${safeBadge}</span>
+              ${!item.img ? `<div class="card-thumb-title">${safeCoverText}</div>` : ''}
             </div>
           </a>
           <div class="card-body">
-            <div>
-              <div class="card-name">${item.title}</div>
-              <div class="card-sub">${item.price}</div>
+            <div class="card-top-info">
+              <div class="card-name">${safeTitle}</div>
+              <div class="card-sub">${safePrice}</div>
               ${pskTag}
+              ${legalBlockHtml}
             </div>
             <div>
               ${legalWarning}
-              <a href="${item.url}" target="_blank" rel="nofollow noopener" class="card-btn" onclick="ym(113984418, 'reachGoal', 'CLICK_BTN_${item.id.toUpperCase()}')">${item.btn || 'Оформить'}</a>
+              <a href="${safeUrl}" target="_blank" rel="nofollow noopener" class="card-btn" onclick="if(typeof ym==='function') ym(113984418, 'reachGoal', 'CLICK_BTN_${goalId}')">${safeBtn}</a>
             </div>
           </div>
         </div>
@@ -1039,7 +1577,7 @@
     function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
     function unlockAdminPanel() {
-      const pin = prompt("Введите PIN-код:");
+      const pin = prompt("Введите PIN-код владельца GILT:");
       if (pin === OWNER_PIN) {
         localStorage.setItem('gilt_owner_unlocked', 'true');
         document.getElementById('secretAdminBtn').style.display = 'inline-flex';
@@ -1082,21 +1620,59 @@
 
       document.getElementById('adminLinksList').innerHTML = items.map((item, idx) => `
         <div class="admin-offer-box">
-          <div class="admin-offer-grid">
-            <select class="admin-input" data-field="cat" data-idx="${idx}">
-              <option value="debit" ${item.cat==='debit'?'selected':''}>Дебетовые</option>
-              <option value="credit" ${item.cat==='credit'?'selected':''}>Кредитные</option>
-              <option value="rko" ${item.cat==='rko'?'selected':''}>Счета</option>
-              <option value="mfo" ${item.cat==='mfo'?'selected':''}>МФО</option>
-            </select>
-            <input type="text" class="admin-input" data-field="title" data-idx="${idx}" value="${item.title}" placeholder="Название банка">
-            <input type="text" class="admin-input" data-field="price" data-idx="${idx}" value="${item.price}" placeholder="Условия (напр. Бесплатно)">
-            <input type="text" class="admin-input" data-field="psk" data-idx="${idx}" value="${item.psk || ''}" placeholder="ПСК (для МФО/Кредиток)">
+          <div class="admin-offer-row1">
+            <div>
+              <label class="admin-label">Категория:</label>
+              <select class="admin-input" data-field="cat" data-idx="${idx}">
+                <option value="debit" ${item.cat==='debit'?'selected':''}>Дебетовые</option>
+                <option value="credit" ${item.cat==='credit'?'selected':''}>Кредитные</option>
+                <option value="rko" ${item.cat==='rko'?'selected':''}>Счета (РКО)</option>
+                <option value="mfo" ${item.cat==='mfo'?'selected':''}>МФО</option>
+              </select>
+            </div>
+            <div>
+              <label class="admin-label">Текст на обложке (крупно):</label>
+              <input type="text" class="admin-input" data-field="shortLogo" data-idx="${idx}" value="${escapeHtml(item.shortLogo || '')}" placeholder="Напр. АЛЬФА-БАНК">
+            </div>
+            <div>
+              <label class="admin-label">Заголовок карточки:</label>
+              <input type="text" class="admin-input" data-field="title" data-idx="${idx}" value="${escapeHtml(item.title || '')}" placeholder="Название продукта">
+            </div>
+            <div>
+              <label class="admin-label">Бейдж в углу:</label>
+              <input type="text" class="admin-input" data-field="badge" data-idx="${idx}" value="${escapeHtml(item.badge || '')}" placeholder="ТОП / МФО">
+            </div>
           </div>
-          <div class="admin-offer-grid-bottom">
-            <input type="url" class="admin-input" data-field="img" data-idx="${idx}" value="${item.img || ''}" placeholder="Картинка (URL)">
-            <input type="url" class="admin-input" data-field="url" data-idx="${idx}" value="${item.url}" placeholder="Твоя реф. ссылка">
-            <div class="btn-delete" title="Удалить" onclick="deleteOffer(${idx})">🗑️</div>
+
+          <div class="admin-offer-row2">
+            <div>
+              <label class="admin-label">Условия / Описание:</label>
+              <input type="text" class="admin-input" data-field="price" data-idx="${idx}" value="${escapeHtml(item.price || '')}" placeholder="Обслуживание 0 ₽">
+            </div>
+            <div>
+              <label class="admin-label">Диапазон ПСК (если есть):</label>
+              <input type="text" class="admin-input" data-field="psk" data-idx="${idx}" value="${escapeHtml(item.psk || '')}" placeholder="11,900% – 39,900%">
+            </div>
+            <div>
+              <label class="admin-label">Текст кнопки:</label>
+              <input type="text" class="admin-input" data-field="btn" data-idx="${idx}" value="${escapeHtml(item.btn || 'Оформить')}" placeholder="Оформить">
+            </div>
+            <div>
+              <label class="admin-label">Картинка обложки (URL, необяз.):</label>
+              <input type="url" class="admin-input" data-field="img" data-idx="${idx}" value="${escapeHtml(item.img || '')}" placeholder="https://...">
+            </div>
+          </div>
+
+          <div class="admin-offer-row3">
+            <div>
+              <label class="admin-label">Юр. лицо банка, лицензия, ИНН, erid (вместится любой объем):</label>
+              <textarea class="admin-input" rows="2" data-field="legal" data-idx="${idx}" placeholder="АО «Альфа-Банк», ИНН 7728168971, ген. лицензия ЦБ РФ № 1326...">${escapeHtml(item.legal || '')}</textarea>
+            </div>
+            <div>
+              <label class="admin-label">Партнерская (реферальная) ссылка:</label>
+              <input type="url" class="admin-input" data-field="url" data-idx="${idx}" value="${escapeHtml(item.url || '')}" placeholder="https://...">
+            </div>
+            <div class="btn-delete" title="Удалить карточку" onclick="deleteOffer(${idx})">🗑️</div>
           </div>
         </div>
       `).join('');
@@ -1104,20 +1680,20 @@
       const customReviews = reviewsList.map((rev, idx) => {
         if (rev.isInitial) return ''; 
         return `
-          <div style="display:grid; grid-template-columns: 120px 60px 1fr 40px; gap:10px; margin-bottom:10px;">
-            <input type="text" class="admin-input" data-rev-field="name" data-idx="${idx}" value="${rev.name}" placeholder="Имя">
-            <input type="number" class="admin-input" data-rev-field="rate" data-idx="${idx}" value="${rev.rate}" min="1" max="5" placeholder="5">
-            <input type="text" class="admin-input" data-rev-field="text" data-idx="${idx}" value="${rev.text}" placeholder="Текст отзыва">
+          <div style="display:grid; grid-template-columns: 140px 70px 1fr 42px; gap:10px; margin-bottom:10px; align-items:center;">
+            <input type="text" class="admin-input" data-rev-field="name" data-idx="${idx}" value="${escapeHtml(rev.name)}" placeholder="Имя">
+            <input type="number" class="admin-input" data-rev-field="rate" data-idx="${idx}" value="${escapeHtml(rev.rate)}" min="1" max="5" placeholder="5">
+            <input type="text" class="admin-input" data-rev-field="text" data-idx="${idx}" value="${escapeHtml(rev.text)}" placeholder="Текст отзыва">
             <div class="btn-delete" onclick="deleteReview(${idx})">🗑️</div>
           </div>
         `;
       }).join('');
-      document.getElementById('adminReviewsList').innerHTML = customReviews || '<div style="font-size:12px; color:#666;">Пока нет добавленных клиентских отзывов.</div>';
+      document.getElementById('adminReviewsList').innerHTML = customReviews || '<div style="font-size:12px; color:var(--text-gray);">Пока нет добавленных клиентских отзывов.</div>';
     }
 
     function collectAdminData() {
-      contacts.tg = document.getElementById('admTg').value.trim();
-      contacts.mail = document.getElementById('admMail').value.trim();
+      contacts.tg = document.getElementById('admTg').value.trim() || SITE_CONTACTS.tg;
+      contacts.mail = document.getElementById('admMail').value.trim() || SITE_CONTACTS.mail;
       contacts.fio = document.getElementById('admFio').value.trim();
       contacts.inn = document.getElementById('admInn').value.trim();
       contacts.ogrnip = document.getElementById('admOgrnip').value.trim();
@@ -1127,10 +1703,10 @@
       contacts.showLegal = document.getElementById('admShowLegal').checked;
       contacts.showInitialReviews = document.getElementById('admShowInitialReviews').checked;
 
-      catIcons.debit = document.getElementById('iconDebit').value.trim();
-      catIcons.credit = document.getElementById('iconCredit').value.trim();
-      catIcons.rko = document.getElementById('iconRko').value.trim();
-      catIcons.mfo = document.getElementById('iconMfo').value.trim();
+      catIcons.debit = document.getElementById('iconDebit').value.trim() || '💳';
+      catIcons.credit = document.getElementById('iconCredit').value.trim() || '💎';
+      catIcons.rko = document.getElementById('iconRko').value.trim() || '🏦';
+      catIcons.mfo = document.getElementById('iconMfo').value.trim() || '⚡';
 
       const ghToken = document.getElementById('admGhToken').value.trim();
       if (ghToken) localStorage.setItem('gilt_gh_token', ghToken);
@@ -1139,7 +1715,6 @@
         const idx = parseInt(el.dataset.idx, 10);
         if (items[idx]) {
           items[idx][el.dataset.field] = el.value.trim();
-          if (el.dataset.field === 'title' && !items[idx].shortLogo) items[idx].shortLogo = el.value.trim().toUpperCase();
         }
       });
       
@@ -1147,52 +1722,74 @@
         const idx = parseInt(el.dataset.idx, 10);
         if (reviewsList[idx]) {
           let val = el.value.trim();
-          if(el.dataset.revField === 'rate') val = parseInt(val) || 5;
+          if (el.dataset.revField === 'rate') val = parseInt(val, 10) || 5;
           reviewsList[idx][el.dataset.revField] = val;
         }
       });
 
-      localStorage.setItem('gilt_v2_items', JSON.stringify(items));
-      localStorage.setItem('gilt_v2_contacts', JSON.stringify(contacts));
-      localStorage.setItem('gilt_v2_icons', JSON.stringify(catIcons));
-      localStorage.setItem('gilt_v2_reviews', JSON.stringify(reviewsList));
+      localStorage.setItem('gilt_v3_items', JSON.stringify(items));
+      localStorage.setItem('gilt_v3_contacts', JSON.stringify(contacts));
+      localStorage.setItem('gilt_v3_icons', JSON.stringify(catIcons));
+      localStorage.setItem('gilt_v3_reviews', JSON.stringify(reviewsList));
     }
 
     function deleteOffer(idx) {
-      if(confirm('Точно удалить этот продукт?')) {
+      if (confirm('Точно удалить этот продукт?')) {
         collectAdminData();
         items.splice(idx, 1);
-        renderAdminInputs();
+        localStorage.setItem('gilt_v3_items', JSON.stringify(items));
+        renderCards();
       }
     }
 
     function deleteReview(idx) {
-      if(confirm('Удалить отзыв?')) {
+      if (confirm('Удалить этот отзыв?')) {
         collectAdminData();
         reviewsList.splice(idx, 1);
-        renderAdminInputs();
+        localStorage.setItem('gilt_v3_reviews', JSON.stringify(reviewsList));
+        renderCards();
+      }
+    }
+
+    function resetLocalCache() {
+      if (confirm('Сбросить локальный кэш браузера и загрузить исходные карточки из кода файла?')) {
+        localStorage.removeItem('gilt_v3_items');
+        localStorage.removeItem('gilt_v3_contacts');
+        localStorage.removeItem('gilt_v3_icons');
+        localStorage.removeItem('gilt_v3_reviews');
+        location.reload();
       }
     }
 
     function saveAdminSettings() {
       collectAdminData();
       renderCards();
-      alert('Настройки сохранены! Для обновления в интернете залейте файл через терминал.');
+      document.getElementById('ghStatusMsg').innerText = "✅ Сохранено в браузере! Нажмите «Опубликовать на GitHub», чтобы изменения увидели все посетители.";
     }
 
     function addNewOfferRow() {
       collectAdminData();
       items.unshift({
-        id: "custom_" + Date.now(), cat: "rko", badge: "НОВОЕ", shortLogo: "БАНК", img: "",
-        color: "linear-gradient(135deg, #1E293B 0%, #0F172A 100%)", textColor: "#CCFF00",
-        title: "Новый продукт", price: "Бесплатное обслуживание", psk: "", btn: "Оформить", url: "https://"
+        id: "custom_" + Date.now(),
+        cat: "credit",
+        badge: "НОВОЕ",
+        shortLogo: "НАЗВАНИЕ БАНКА",
+        img: "",
+        color: "linear-gradient(135deg, #1E293B 0%, #0F172A 100%)",
+        textColor: "#CCFF00",
+        title: "Новый банковский продукт",
+        price: "Бесплатное обслуживание",
+        psk: "",
+        legal: "",
+        btn: "Оформить",
+        url: "https://"
       });
       renderAdminInputs();
     }
 
     function addNewReviewRow() {
       collectAdminData();
-      reviewsList.push({ name: "Новый Клиент", text: "Вставьте текст...", rate: 5 });
+      reviewsList.push({ name: "Новый Клиент", text: "Отличный сервис, помогли быстро!", rate: 5 });
       renderAdminInputs();
     }
 
@@ -1202,7 +1799,7 @@
       const token = document.getElementById('admGhToken').value.trim();
       const statusEl = document.getElementById('ghStatusMsg');
 
-      if (!token) { statusEl.innerText = "⚠️ Введи GitHub Token!"; return; }
+      if (!token) { statusEl.innerText = "⚠️ Введите GitHub Token в поле выше!"; return; }
       statusEl.innerText = "⏳ Отправляю обновления на GitHub...";
       const repo = "ayanoflow/gilt-site";
       const path = "index.html";
@@ -1211,7 +1808,7 @@
         const getRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
           headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github.v3+json" }
         });
-        if (!getRes.ok) throw new Error("Проверь токен");
+        if (!getRes.ok) throw new Error("Не удалось получить файл с GitHub (проверьте права токена repo)");
         const fileData = await getRes.json();
         const currentHtml = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
 
@@ -1224,11 +1821,17 @@
         const putRes = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
           method: "PUT",
           headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github.v3+json", "Content-Type": "application/json" },
-          body: JSON.stringify({ message: "Update via Admin", content: btoa(unescape(encodeURIComponent(updatedHtml))), sha: fileData.sha })
+          body: JSON.stringify({
+            message: "Обновление GILT через админ-панель",
+            content: btoa(unescape(encodeURIComponent(updatedHtml))),
+            sha: fileData.sha
+          })
         });
-        if (!putRes.ok) throw new Error("Ошибка записи");
-        statusEl.innerText = "✅ Успешно отправлено!";
-      } catch (err) { statusEl.innerText = "❌ Ошибка: " + err.message; }
+        if (!putRes.ok) throw new Error("Ошибка записи в GitHub");
+        statusEl.innerText = "✅ Успешно опубликовано! Сайт обновится на домене giltrko.ru в течение 1–3 минут.";
+      } catch (err) {
+        statusEl.innerText = "❌ Ошибка: " + err.message;
+      }
     }
   </script>
 </body>
