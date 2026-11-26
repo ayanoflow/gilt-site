@@ -278,7 +278,10 @@
     .step-item p { color: var(--text-gray); font-size: 14px; line-height: 1.55; }
 
     /* ================= КАТАЛОГ И КАРТОЧКИ ================= */
-    .rko-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; max-width: 920px; margin: 0 auto 56px; align-items: stretch; }
+    /* ВАЖНО: flex-wrap и justify-content: center позволяют 1 карточке стоять по центру */
+    .rko-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; max-width: 920px; margin: 0 auto 56px; }
+    .rko-grid > .product-card { flex: 1 1 calc(50% - 14px); max-width: calc(50% - 14px); min-width: 275px; }
+    
     .cat-hub-title { text-align: center; font-family: 'Unbounded', sans-serif; font-size: 20px; margin-bottom: 28px; color: var(--text-white); }
     
     .cat-hub-grid { display: grid; gap: 18px; max-width: 1060px; margin: 0 auto 20px; grid-template-columns: repeat(5, 1fr); }
@@ -302,7 +305,6 @@
       justify-content: space-between;
       transition: 0.25s;
       position: relative;
-      height: 100%;
     }
     .product-card:hover { background: var(--bg-card-hover); border-color: var(--lime); transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1); }
     .card-thumb { height: 146px; position: relative; display: flex; align-items: center; justify-content: center; padding: 20px; border-bottom: 1px solid var(--border); overflow: hidden; background-size: cover; background-position: center; }
@@ -454,7 +456,8 @@
       .slide-tag { margin-bottom: 12px; }
       .slide p { margin-bottom: 20px; font-size: 14px; }
       .slide-visual { text-align: left; padding: 22px; width: 100%; max-width: none; min-width: 0; }
-      .rko-grid, .steps-grid, .why-grid { grid-template-columns: 1fr; gap: 16px; }
+      .rko-grid > .product-card { flex: 1 1 100%; max-width: 100%; }
+      .steps-grid, .why-grid { grid-template-columns: 1fr; gap: 16px; }
       .cat-hub-grid { grid-template-columns: repeat(2, 1fr) !important; }
       .btn-primary { width: 100%; padding: 14px 20px; }
       .modal-window { padding: 22px 16px; }
@@ -985,18 +988,19 @@
     // (START_ITEMS_JSON)
     const DEFAULT_ITEMS = [
       // === КАТЕГОРИЯ: ЗАЯВКА НА ИП (НА ГЛАВНУЮ СТРАНИЦУ В ТГ) ===
-      { "id": "vtb_ip", "cat": "ip", "badge": "ПЕРВЫЙ ВАРИАНТ", "shortLogo": "ВТБ", "img": "", "color": "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)", "textColor": "#fff", "title": "Регистрация ИП в ВТБ", "price": "Бесплатно и дистанционно", "psk": "", "legal": "Услуга оказывается при поддержке Банка ВТБ (ПАО).", "btn": "Написать в Telegram", "url": "https://t.me/m/lXosni42ZTIy" },
-      { "id": "ozon_ip", "cat": "ip", "badge": "ВТОРОЙ ВАРИАНТ", "shortLogo": "OZON БАНК", "img": "", "color": "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)", "textColor": "#fff", "title": "Регистрация ИП в Ozon Банке", "price": "Бесплатно и без визита в ФНС", "psk": "", "legal": "Услуга оказывается при поддержке ООО «ОЗОН Банк».", "btn": "Написать в Telegram", "url": "https://t.me/m/0y4PiU0kMDEy" },
+      { "id": "tbank_ip", "cat": "ip", "badge": "ВТОРОЙ ВАРИАНТ", "shortLogo": "Т-БАНК", "img": "", "color": "linear-gradient(135deg, #FFDD2D 0%, #F59E0B 100%)", "textColor": "#000", "title": "Открыть счет в Т-Банке", "price": "Обслуживание от 0 ₽/мес.", "psk": "", "legal": "Реклама. АО «ТБанк», ИНН 7710140679, лицензия ЦБ РФ № 2673.", "btn": "ЗАКАЗАТЬ", "url": "https://www.tbank.ru/business/registration-ip/" },
+      { "id": "alfa_ip", "cat": "ip", "badge": "ПЕРВЫЙ ВАРИАНТ", "shortLogo": "АЛЬФА-БАНК", "img": "https://brobank.ru/wp-content/uploads/2017/08/credit_alfabank.png", "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)", "textColor": "#fff", "title": "Открыть счет в Альфа-банке", "price": "Обслуживание от 0 ₽/мес.", "psk": "", "legal": "Реклама. АО «АЛЬФА-БАНК», ИНН 7728168971, лицензия ЦБ РФ № 1326.", "btn": "ЗАКАЗАТЬ", "url": "https://banks-market.com/offer/532/7280" },
       
       // === КАТЕГОРИЯ: РЕГБИЗ (ИП + СЧЕТ ОНЛАЙН) ===
       { "id": "alfa_regbiz", "cat": "regbiz", "badge": "ИП + СЧЕТ", "shortLogo": "АЛЬФА-БАНК", "img": "", "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)", "textColor": "#fff", "title": "Регистрация бизнеса Альфа-Банк", "price": "Открытие счета ИП. \nНе подходит для самозанятых (НПД)", "psk": "", "legal": "АО «Альфа-Банк», ИНН 7728168971, ген. лицензия ЦБ РФ № 1326.", "btn": "Оформить", "url": "#" },
       { "id": "ozon_regbiz", "cat": "regbiz", "badge": "ИП + СЧЕТ", "shortLogo": "OZON БАНК", "img": "", "color": "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)", "textColor": "#fff", "title": "Регистрация бизнеса Ozon Банк", "price": "УСН / ОСНО. \nНе подходит для самозанятых (НПД)", "psk": "", "legal": "ООО «ОЗОН Банк», ИНН 9704040339, лицензия ЦБ РФ № 3542.", "btn": "Оформить", "url": "#" },
 
       // === КАТЕГОРИЯ: РКО (ДЛЯ ДЕЙСТВУЮЩЕГО БИЗНЕСА) ===
-      { "id": "alfa_rko", "cat": "rko", "badge": "УНИВЕРСАЛЬНЫЙ", "shortLogo": "АЛЬФА-БАНК", "img": "", "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)", "textColor": "#fff", "title": "Альфа-Банк РКО (Короткая заявка)", "price": "Подходит всем • Обслуживание от 0 ₽", "psk": "", "legal": "Реклама. АО «АЛЬФА-БАНК», ИНН 7728168971, лицензия ЦБ РФ № 1326.", "btn": "Открыть счет", "url": "#" },
-      { "id": "sber_rko", "cat": "rko", "badge": "РКО", "shortLogo": "СБЕРБАНК", "img": "", "color": "linear-gradient(135deg, #16A34A 0%, #065F46 100%)", "textColor": "#fff", "title": "Открыть счет в Сбербанке", "price": "Обслуживание от 0 ₽/мес.", "psk": "", "legal": "Реклама. ПАО «Сбербанк», ИНН 7707083893, лицензия ЦБ РФ № 1481.", "btn": "Оформить счет", "url": "#" },
-      { "id": "vtb_rko", "cat": "rko", "badge": "НАПИСАТЬ МНЕ", "shortLogo": "ВТБ", "img": "", "color": "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)", "textColor": "#fff", "title": "Расчетный счет ВТБ", "price": "Свяжитесь со мной для открытия счета", "psk": "", "legal": "Банк ВТБ (ПАО), ИНН 7702070139, ген. лицензия ЦБ РФ № 1000.", "btn": "Написать в Telegram", "url": "https://t.me/haveahatred" },
-      { "id": "psb_rko", "cat": "rko", "badge": "ПОПУЛЯРНОЕ", "shortLogo": "ПСБ", "img": "", "color": "linear-gradient(135deg, #F97316 0%, #C2410C 100%)", "textColor": "#fff", "title": "Расчетный счет ПСБ", "price": "Открытие и обслуживание • Госбанк", "psk": "", "legal": "ПАО «Промсвязьбанк», ИНН 7744000912, ген. лицензия ЦБ РФ № 3251.", "btn": "Оформить", "url": "#" },
+      { "id": "alfa_rko", "cat": "rko", "badge": "УНИВЕРСАЛЬНЫЙ", "shortLogo": "АЛЬФА-БАНК", "img": "", "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)", "textColor": "#fff", "title": "Альфа-Банк РКО (Короткая заявка)", "price": "Подходит всем • Обслуживание от 0 ₽", "psk": "", "legal": "Реклама. АО «АЛЬФА-БАНК», ИНН 7728168971, лицензия ЦБ РФ № 1326.", "btn": "Открыть счет", "url": "https://trk.ppdu.ru/click/aGbkLIo0?erid=2SDnjeyjBZq&sub1=site&siteId=20402" },
+      { "id": "sber_rko", "cat": "rko", "badge": "РКО", "shortLogo": "СБЕРБАНК", "img": "", "color": "linear-gradient(135deg, #16A34A 0%, #065F46 100%)", "textColor": "#fff", "title": "Открыть счет в Сбербанке", "price": "Обслуживание от 0 ₽/мес.", "psk": "", "legal": "Реклама. ПАО «Сбербанк», ИНН 7707083893, лицензия ЦБ РФ № 1481.", "btn": "Оформить счет", "url": "https://www.sberbank.com/ru/s_m_business/referral/join?utm_source=0S7P7MAPW5MNM" },
+      { "id": "vtb_rko", "cat": "rko", "badge": "ПОПУЛЯРНОЕ", "shortLogo": "ВТБ", "img": "", "color": "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)", "textColor": "#fff", "title": "Регистрация ИП / Расчетный счет ВТБ", "price": "Бесплатно и дистанционно", "psk": "", "legal": "Услуга оказывается при поддержке Банка ВТБ (ПАО), ИНН 7702070139.", "btn": "Написать в Telegram", "url": "https://t.me/m/lXosni42ZTIy" },
+      { "id": "ozon_rko", "cat": "rko", "badge": "ПОПУЛЯРНОЕ", "shortLogo": "OZON БАНК", "img": "", "color": "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)", "textColor": "#fff", "title": "Регистрация ИП в Ozon Банке", "price": "Бесплатно и без визита в ФНС", "psk": "", "legal": "Услуга оказывается при поддержке ООО «ОЗОН Банк», ИНН 9704040339.", "btn": "Написать в Telegram", "url": "https://t.me/m/0y4PiU0kMDEy" },
+      { "id": "psb_rko", "cat": "rko", "badge": "БИЗНЕС ОТ 12 МЕС", "shortLogo": "ПСБ", "img": "", "color": "linear-gradient(135deg, #F97316 0%, #C2410C 100%)", "textColor": "#fff", "title": "Расчетный счет ПСБ", "price": "Специальные условия для бизнеса от года", "psk": "", "legal": "ПАО «Промсвязьбанк», ИНН 7744000912, ген. лицензия ЦБ РФ № 3251.", "btn": "Оформить", "url": "#" },
       { "id": "ubrir_rko", "cat": "rko", "badge": "ОТКРЫТИЕ СЧЕТА", "shortLogo": "УБРиР", "img": "", "color": "linear-gradient(135deg, #EC4899 0%, #BE185D 100%)", "textColor": "#fff", "title": "УБРиР РКО", "price": "Платные и бесплатные тарифы для бизнеса", "psk": "", "legal": "ПАО КБ «УБРиР», ИНН 6608008004, ген. лицензия ЦБ РФ № 429.", "btn": "Открыть счет", "url": "#" },
       { "id": "uralsib_rko", "cat": "rko", "badge": "ТАРИФ СТАРТ", "shortLogo": "УРАЛСИБ", "img": "", "color": "linear-gradient(135deg, #8B5CF6 0%, #5B21B6 100%)", "textColor": "#fff", "title": "Активация счета для ИП", "price": "Быстрое открытие • Тариф «Старт»", "psk": "", "legal": "ПАО «БАНК УРАЛСИБ», ИНН 0274062111, ген. лицензия ЦБ РФ № 30.", "btn": "Открыть счет", "url": "#" },
       { "id": "wb_rko", "cat": "rko", "badge": "ДЛЯ СЕЛЛЕРОВ", "shortLogo": "WB БАНК", "img": "", "color": "linear-gradient(135deg, #D946EF 0%, #A21CAF 100%)", "textColor": "#fff", "title": "WB Банк — Счет для бизнеса", "price": "Идеально для работы на маркетплейсе", "psk": "", "legal": "ООО «Вайлдберриз Банк», ИНН 7705128032, лицензия ЦБ РФ № 1084.", "btn": "Открыть счет", "url": "#" },
@@ -1004,9 +1008,9 @@
       // === КАТЕГОРИЯ: ДЕБЕТОВЫЕ КАРТЫ ===
       { "id": "ozon_debit", "cat": "debit", "badge": "СКИДКИ НА OZON", "shortLogo": "OZON БАНК", "img": "", "color": "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)", "textColor": "#fff", "title": "Ozon Карта", "price": "Скидки до 30% на Ozon, кэшбэк до 25% везде", "psk": "", "legal": "ООО «ОЗОН Банк», ИНН 9704040339, лицензия ЦБ РФ № 3542.", "btn": "Оформить", "url": "#" },
       { "id": "alfa_debit", "cat": "debit", "badge": "ТОП ВЫБОР", "shortLogo": "АЛЬФА-КАРТА", "img": "", "color": "linear-gradient(135deg, #EF3124 0%, #991B1B 100%)", "textColor": "#fff", "title": "Альфа-Карта", "price": "Кэшбэк в категориях • Бесплатно", "psk": "", "legal": "АО «Альфа-Банк», ИНН 7728168971, ген. лицензия ЦБ РФ № 1326.", "btn": "Оформить", "url": "#" },
-      { "id": "otp_debit", "cat": "debit", "badge": "ВЫГОДНО", "shortLogo": "ОТП КАРТА", "img": "", "color": "linear-gradient(135deg, #1E293B 0%, #0F172A 100%)", "textColor": "#CCFF00", "title": "ОТП Карта", "price": "Кэшбэк в популярных категориях", "psk": "", "legal": "АО «ОТП Банк», ИНН 7708001614, лицензия ЦБ РФ № 2766.", "btn": "Оформить", "url": "#" },
-      { "id": "tbank_debit", "cat": "debit", "badge": "КЭШБЭК РУБЛЯМИ", "shortLogo": "Т-БАНК BLACK", "img": "", "color": "linear-gradient(135deg, #FFDD2D 0%, #F59E0B 100%)", "textColor": "#000", "title": "Т-Банк Black", "price": "Кэшбэк рублями • Бесплатное обслуживание", "psk": "", "legal": "АО «ТБанк», ИНН 7710140679, лицензия ЦБ РФ № 2673.", "btn": "Оформить", "url": "#" },
-      { "id": "vtb_debit", "cat": "debit", "badge": "ДО 14.7% НА ОСТАТОК", "shortLogo": "ВТБ КАРТА", "img": "", "color": "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)", "textColor": "#fff", "title": "Карта для жизни ВТБ (МИР)", "price": "Высокий процент на остаток • Кэшбэк 25%", "psk": "", "legal": "Банк ВТБ (ПАО), ИНН 7702070139, ген. лицензия ЦБ РФ № 1000.", "btn": "Оформить", "url": "#" },
+      { "id": "otp_debit", "cat": "debit", "badge": "ВЫГОДНО", "shortLogo": "ОТП КАРТА", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_ndR02UPsHlW5EHUwRzyPHPhzZ8vjnNL7ZpCtwk3_mg&s=10", "color": "linear-gradient(135deg, #1E293B 0%, #0F172A 100%)", "textColor": "#CCFF00", "title": "Дебетовая ОТП Карта", "price": "Бесплатное обслуживание", "psk": "", "legal": "АО «ОТП Банк», ИНН 7708001614, лицензия ЦБ РФ № 2766.", "btn": "Оформить", "url": "https://go.leadgid.ru/aff_c?aff_id=156387&offer_id=6626&p=11954&erid=2W5zFFwAUp9&aff_sub=site" },
+      { "id": "tbank_debit", "cat": "debit", "badge": "КЭШБЭК РУБЛЯМИ", "shortLogo": "Т-БАНК BLACK", "img": "", "color": "linear-gradient(135deg, #FFDD2D 0%, #CA8A04 100%)", "textColor": "#000", "title": "Т-Банк Black", "price": "Кэшбэк рублями • Бесплатное обслуживание", "psk": "", "legal": "АО «ТБанк», ИНН 7710140679, лицензия ЦБ РФ № 2673.", "btn": "Оформить", "url": "#" },
+      { "id": "vtb_debit", "cat": "debit", "badge": "ДО 14.7% НА ОСТАТОК", "shortLogo": "ВТБ КАРТА", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv-fE3H4zCEWOrVCzVHw9bk-Tn3fVVU4waFg_JudbxLg&s=10", "color": "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)", "textColor": "#fff", "title": "Карта для жизни ВТБ (МИР)", "price": "Высокий процент на остаток • Кэшбэк", "psk": "", "legal": "Банк ВТБ (ПАО), ИНН 7702070139, ген. лицензия ЦБ РФ № 1000.", "btn": "Оформить", "url": "#" },
       { "id": "vtb_sticker", "cat": "debit", "badge": "СТИКЕР", "shortLogo": "СТИКЕР ВТБ", "img": "", "color": "linear-gradient(135deg, #2563EB 0%, #1E3A8A 100%)", "textColor": "#fff", "title": "Платежный стикер ВТБ", "price": "Безопасная оплата смартфоном", "psk": "", "legal": "Банк ВТБ (ПАО), ИНН 7702070139, ген. лицензия ЦБ РФ № 1000.", "btn": "Заказать стикер", "url": "#" },
       { "id": "fora_debit", "cat": "debit", "badge": "КЭШБЭК", "shortLogo": "ФОРА-БАНК", "img": "", "color": "linear-gradient(135deg, #EF4444 0%, #991B1B 100%)", "textColor": "#fff", "title": "Карта «Все включено» Фора-Банк", "price": "Кэшбэк до 40% у партнеров, 5% в сезон", "psk": "", "legal": "АКБ «ФОРА-БАНК» (АО), ИНН 7702066465, ген. лицензия ЦБ РФ № 1885.", "btn": "Оформить", "url": "#" },
       { "id": "mts_debit", "cat": "debit", "badge": "НА СВЯЗЬ", "shortLogo": "МТС ДЕНЬГИ", "img": "", "color": "linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)", "textColor": "#fff", "title": "Дебетовая карта МТС Деньги", "price": "30% кэшбэка за оплату связи МТС", "psk": "", "legal": "ПАО «МТС-Банк», ИНН 7702045051, лицензия Банка России № 2268.", "btn": "Оформить", "url": "#" },
@@ -1026,6 +1030,8 @@
       { "id": "zenit_credit", "cat": "credit", "badge": "КРЕДИТНАЯ КАРТА", "shortLogo": "ЗЕНИТ", "img": "", "color": "linear-gradient(135deg, #0D9488 0%, #0F766E 100%)", "textColor": "#fff", "title": "Кредитная карта Банк ЗЕНИТ", "price": "Выгодные условия обслуживания", "psk": "15,000% – 39,900%", "legal": "ПАО Банк ЗЕНИТ, ИНН 7729405872, ген. лицензия ЦБ РФ № 3255.", "btn": "Оформить карту", "url": "#" },
       { "id": "rs_credit", "cat": "credit", "badge": "КРЕДИТНАЯ КАРТА", "shortLogo": "РУССКИЙ СТАНДАРТ", "img": "", "color": "linear-gradient(135deg, #64748B 0%, #334155 100%)", "textColor": "#fff", "title": "Карта Русский Стандарт", "price": "Быстрое решение по паспорту", "psk": "19,900% – 49,900%", "legal": "АО «Банк Русский Стандарт», ИНН 7707056547, ген. лицензия ЦБ РФ № 2289.", "btn": "Оформить карту", "url": "#" },
       { "id": "ozon_credit", "cat": "credit", "badge": "КРЕДИТНАЯ КАРТА", "shortLogo": "OZON БАНК", "img": "", "color": "linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)", "textColor": "#fff", "title": "Кредитная Ozon Карта", "price": "Бесплатное обслуживание и лимит", "psk": "14,900% – 39,900%", "legal": "ООО «ОЗОН Банк», ИНН 9704040339, лицензия ЦБ РФ № 3542.", "btn": "Оформить карту", "url": "#" },
+      { "id": "alfa_credit", "cat": "credit", "badge": "КРЕДИТНАЯ КАРТА", "shortLogo": "АЛЬФА КРЕДИТКА", "img": "", "color": "linear-gradient(135deg, #DC2626 0%, #7F1D1D 100%)", "textColor": "#fff", "title": "Кредитная карта Альфа-Банк", "price": "Льготный период • снятие наличных", "psk": "11,990% – 69,990%", "legal": "АО «Альфа-Банк», ИНН 7728168971, ген. лицензия ЦБ РФ № 1326.", "btn": "Оформить карту", "url": "#" },
+      { "id": "sber_credit", "cat": "credit", "badge": "КРЕДИТНАЯ КАРТА", "shortLogo": "СБЕРКАРТА", "img": "", "color": "linear-gradient(135deg, #16A34A 0%, #065F46 100%)", "textColor": "#fff", "title": "Кредитная СберКарта (ПАО Сбербанк)", "price": "120 дней без % • 0 ₽ обслуживание", "psk": "24,794% – 38,895%", "legal": "ПАО Сбербанк, ИНН 7707083893, ген. лицензия ЦБ РФ № 1481.", "btn": "Оформить карту", "url": "#" },
 
       // === КАТЕГОРИЯ: МФО (ЗАЙМЫ) ===
       { "id": "moneyman", "cat": "mfo", "badge": "ПЕРВЫЙ БЕЗ %", "shortLogo": "MONEYMAN", "img": "", "color": "linear-gradient(135deg, #22C55E 0%, #15803D 100%)", "textColor": "#fff", "title": "MoneyMan", "price": "Онлайн на карту за 5 минут", "psk": "0,000% – 292,000%", "legal": "ООО МФК «Мани Мен», ИНН 7704784072.", "btn": "ПОЛУЧИТЬ", "url": "#" },
@@ -1102,7 +1108,7 @@
       applyIconToHub('icon-credit', catIcons.credit);
       applyIconToHub('icon-mfo', catIcons.mfo);
 
-      // ГЛАВНАЯ СТРАНИЦА - ТОЛЬКО КАТЕГОРИЯ IP (Заявки в ТГ)
+      // ГЛАВНАЯ СТРАНИЦА - ТОЛЬКО КАТЕГОРИЯ IP (Т-Банк и Альфа)
       const ipItems = items.filter(i => i.cat === 'ip');
       document.getElementById('ipContainer').innerHTML = ipItems.map(cardTemplate).join('');
 
@@ -1190,7 +1196,7 @@
         if (safeLegal.length > 68 || safeLegal.includes('\n')) {
           legalBlockHtml = `
             <details class="card-legal-details">
-              <summary>Реклама и условия банка</summary>
+              <summary>Реклама и условия</summary>
               <div class="card-legal-details-body">${safeLegal}</div>
             </details>
           `;
@@ -1233,7 +1239,7 @@
 
     function openCategoryCatalog(cat) {
       const titles = {
-        rko: { t: "🏦 Расчетные счета", s: "Счета для действующего бизнеса. Выберите ваш тариф" },
+        rko: { t: "🏦 Расчетные счета", s: "Счета для действующего бизнеса. Выберите ваш банк" },
         regbiz: { t: "💼 Регистрация бизнеса", s: "Открытие ИП (УСН/ОСНО) и расчетного счета полностью онлайн" },
         debit: { t: "💳 Дебетовые карты", s: "Бесплатные карты с кэшбэком для личных нужд" },
         credit: { t: "💎 Кредитные карты", s: "Длительный льготный период и быстрое решение" },
@@ -1513,7 +1519,7 @@
           method: "PUT",
           headers: { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github.v3+json", "Content-Type": "application/json" },
           body: JSON.stringify({
-            message: "Обновление GILT через админ-панель (Загружена база 50+ офферов)",
+            message: "Обновление GILT через админ-панель (Финальная база)",
             content: btoa(unescape(encodeURIComponent(updatedHtml))),
             sha: fileData.sha
           })
